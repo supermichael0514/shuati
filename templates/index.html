@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PDF 题库练习系统 · Web V2</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div>
+        <h1>PDF 题库练习系统</h1>
+        <p>Web V2 · 四级筛选 + 页面内 PDF 预览</p>
+      </div>
+    </header>
+
+    <form class="filters card" method="get">
+      <div class="grid">
+        <label>
+          <span>科目</span>
+          <select name="subject" onchange="this.form.submit()">
+            {% for v in subjects %}
+            <option value="{{ v }}" {% if v == subject %}selected{% endif %}>{{ v }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>
+          <span>章节</span>
+          <select name="chapter" onchange="this.form.submit()">
+            {% for v in chapters %}
+            <option value="{{ v }}" {% if v == chapter %}selected{% endif %}>{{ v }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>
+          <span>主题</span>
+          <select name="topic" onchange="this.form.submit()">
+            {% for v in topics %}
+            <option value="{{ v }}" {% if v == topic %}selected{% endif %}>{{ v }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>
+          <span>年份</span>
+          <select name="year" onchange="this.form.submit()">
+            {% for v in years %}
+            <option value="{{ v }}" {% if v == year %}selected{% endif %}>{{ v }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label class="check"><input type="checkbox" name="only_unfinished" value="1" {% if only_unfinished %}checked{% endif %}> 只看未完成</label>
+        <label class="check"><input type="checkbox" name="only_favorite" value="1" {% if only_favorite %}checked{% endif %}> 只看收藏</label>
+
+        <input type="hidden" name="mode" value="{{ mode }}">
+        {% if selected %}<input type="hidden" name="selected_id" value="{{ selected.id }}">{% endif %}
+        <div class="actions">
+          <button type="submit">应用筛选</button>
+          <a class="secondary" href="{{ url_for('index') }}">清空</a>
+        </div>
+      </div>
+    </form>
+
+    <main class="layout">
+      <aside class="left card">
+        <div class="left-head">
+          <h2>题目列表</h2>
+          <span>{{ records|length }} 题</span>
+        </div>
+
+        <div class="record-list">
+          {% for item in records %}
+          <a class="record {% if selected and item.id == selected.id %}active{% endif %}"
+             href="{{ url_for('index',
+                subject=subject, chapter=chapter, topic=topic, year=year,
+                only_unfinished='1' if only_unfinished else '',
+                only_favorite='1' if only_favorite else '',
+                mode=mode, selected_id=item.id) }}">
+            <div class="record-title">{{ item.title or item.id }}</div>
+            <div class="record-meta">{{ item.subject }} / {{ item.chapter }} / {{ item.topic }} / {{ item.year }}</div>
+            <div class="record-flags">
+              {% if item.done %}<span class="tag done">已完成</span>{% endif %}
+              {% if item.favorite %}<span class="tag fav">已收藏</span>{% endif %}
+              {% if item.source %}<span class="tag">{{ item.source }}</span>{% endif %}
+            </div>
+          </a>
+          {% endfor %}
+          {% if not records %}
+          <div class="empty">当前筛选下没有题目。</div>
+          {% endif %}
+        </div>
+      </aside>
+
+      <section class="center">
+        <div class="viewer-toolbar card">
+          <div class="mode-tabs">
+            {% for key, label in [('question','看题目'),('answer','看答案'),('syllabus','看考纲')] %}
+            <a class="{% if mode == key %}active{% endif %}"
+               href="{{ url_for('index',
+                  subject=subject, chapter=chapter, topic=topic, year=year,
+                  only_unfinished='1' if only_unfinished else '',
+                  only_favorite='1' if only_favorite else '',
+                  selected_id=selected.id if selected else '',
+                  mode=key) }}">{{ label }}</a>
+            {% endfor %}
+          </div>
+          {% if selected %}
+          <div class="state-buttons">
+            <button type="button" onclick="toggleState('{{ selected.id }}','done')">{{ '取消完成' if selected.done else '标记完成' }}</button>
+            <button type="button" onclick="toggleState('{{ selected.id }}','favorite')">{{ '取消收藏' if selected.favorite else '加入收藏' }}</button>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="viewer card">
+          {% if selected %}
+          <div class="info">
+            <div class="title">{{ selected.title or selected.id }}</div>
+            <div class="meta">
+              {{ selected.subject }} / {{ selected.chapter }} / {{ selected.topic }} / {{ selected.year }}
+              {% if selected.source %} · 来源：{{ selected.source }}{% endif %}
+            </div>
+          </div>
+          <iframe
+            src="{{ pdf_url }}#page={{ pdf_page }}"
+            class="pdf-frame"
+            title="PDF Viewer">
+          </iframe>
+          {% else %}
+          <div class="empty big">请选择左侧题目</div>
+          {% endif %}
+        </div>
+      </section>
+
+      <aside class="right card">
+        <h2>备注</h2>
+        {% if selected %}
+        <form method="post" action="{{ url_for('save_note_route', qid=selected.id) }}" class="note-form">
+          <textarea name="note" placeholder="在这里记录做题备注、易错点、教学提醒...">{{ selected.note }}</textarea>
+          <button type="submit">保存备注</button>
+        </form>
+        {% else %}
+        <div class="empty">当前没有选中题目。</div>
+        {% endif %}
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    async function toggleState(qid, field) {
+      await fetch(`/toggle/${qid}/${field}`, {method: 'POST'});
+      window.location.reload();
+    }
+  </script>
+</body>
+</html>

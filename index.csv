@@ -1,0 +1,917 @@
+id,subject,chapter,topic,year,title,question_pdf,question_page,question_end_page,answer_pdf,answer_page,answer_end_page,syllabus_pdf,syllabus_page,syllabus_end_page,order,source
+s21_11_1a,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,May/June 2021,,s21/9618_s21_qp_11.pdf,2,2,s21/9618_s21_ms_11.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+s21_11_1b,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,May/June 2021,,s21/9618_s21_qp_11.pdf,2,2,s21/9618_s21_ms_11.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+s21_11_1c,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2021,,s21/9618_s21_qp_11.pdf,3,3,s21/9618_s21_ms_11.pdf,3,3,9618_y26_sy.pdf,14,14,,Past Paper
+s21_11_1d,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2021,,s21/9618_s21_qp_11.pdf,4,4,s21/9618_s21_ms_11.pdf,4,4,9618_y26_sy.pdf,25,25,,Past Paper
+s21_11_2,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,May/June 2021,,s21/9618_s21_qp_11.pdf,5,5,s21/9618_s21_ms_11.pdf,4,4,9618_y26_sy.pdf,23,23,,Past Paper
+s21_11_3a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,May/June 2021,,s21/9618_s21_qp_11.pdf,6,6,s21/9618_s21_ms_11.pdf,5,5,9618_y26_sy.pdf,19,19,,Past Paper
+s21_11_3b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,May/June 2021,,s21/9618_s21_qp_11.pdf,7,9,s21/9618_s21_ms_11.pdf,5,5,9618_y26_sy.pdf,20,21,,Past Paper
+s21_11_3c,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2021,,s21/9618_s21_qp_11.pdf,10,10,s21/9618_s21_ms_11.pdf,6,6,9618_y26_sy.pdf,22,22,,Past Paper
+s21_11_4,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2021,,s21/9618_s21_qp_11.pdf,11,12,s21/9618_s21_ms_11.pdf,6,7,9618_y26_sy.pdf,16,17,,Past Paper
+s21_11_5,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2021,,s21/9618_s21_qp_11.pdf,13,13,s21/9618_s21_ms_11.pdf,8,8,9618_y26_sy.pdf,17,17,,Past Paper
+s21_11_6,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2021,,s21/9618_s21_qp_11.pdf,14,14,s21/9618_s21_ms_11.pdf,8,8,9618_y26_sy.pdf,24,24,,Past Paper
+s21_11_7ab,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2021,,s21/9618_s21_qp_11.pdf,15,15,s21/9618_s21_ms_11.pdf,9,9,9618_y26_sy.pdf,25,25,,Past Paper
+s21_11_7c,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,May/June 2021,,s21/9618_s21_qp_11.pdf,16,16,s21/9618_s21_ms_11.pdf,9,9,9618_y26_sy.pdf,26,26,,Past Paper
+s21_11_8,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2021,,s21/9618_s21_qp_11.pdf,16,16,s21/9618_s21_ms_11.pdf,10,10,9618_y26_sy.pdf,18,18,,Past Paper
+s21_12_1ab,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2021,,s21/9618_s21_qp_12.pdf,2,2,s21/9618_s21_ms_12.pdf,3,3,9618_y26_sy.pdf,25,25,,Past Paper
+s21_12_1c,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2021,,s21/9618_s21_qp_12.pdf,3,3,s21/9618_s21_ms_12.pdf,3,3,9618_y26_sy.pdf,26,27,,Past Paper
+s21_12_2,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2021,,s21/9618_s21_qp_12.pdf,4,4,s21/9618_s21_ms_12.pdf,4,4,9618_y26_sy.pdf,25,25,,Past Paper
+s21_12_3,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2021,,s21/9618_s21_qp_12.pdf,5,5,s21/9618_s21_ms_12.pdf,5,5,9618_y26_sy.pdf,18,18,,Past Paper
+s21_12_4a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,May/June 2021,,s21/9618_s21_qp_12.pdf,6,7,s21/9618_s21_ms_12.pdf,6,6,9618_y26_sy.pdf,20,21,,Past Paper
+s21_12_4b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2021,,s21/9618_s21_qp_12.pdf,8,8,s21/9618_s21_ms_12.pdf,6,7,9618_y26_sy.pdf,22,22,,Past Paper
+s21_12_5ab,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2021,,s21/9618_s21_qp_12.pdf,9,9,s21/9618_s21_ms_12.pdf,7,7,9618_y26_sy.pdf,17,17,,Past Paper
+s21_12_5cd,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2021,,s21/9618_s21_qp_12.pdf,10,11,s21/9618_s21_ms_12.pdf,7,8,9618_y26_sy.pdf,16,17,,Past Paper
+s21_12_6,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2021,,s21/9618_s21_qp_12.pdf,12,12,s21/9618_s21_ms_12.pdf,8,9,9618_y26_sy.pdf,14,14,,Past Paper
+s21_12_7,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,May/June 2021,,s21/9618_s21_qp_12.pdf,13,13,s21/9618_s21_ms_12.pdf,9,9,9618_y26_sy.pdf,23,23,,Past Paper
+s21_12_8,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2021,,s21/9618_s21_qp_12.pdf,14,14,s21/9618_s21_ms_12.pdf,9,10,9618_y26_sy.pdf,24,24,,Past Paper
+w21_11_1,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2021,,w21/9618_w21_qp_11.pdf,2,2,w21/9618_w21_ms_11.pdf,3,3,9618_y26_sy.pdf,14,14,,Past Paper
+w21_11_2ab,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,October/November 2021,,w21/9618_w21_qp_11.pdf,3,3,w21/9618_w21_ms_11.pdf,4,4,9618_y26_sy.pdf,24,24,,Past Paper
+w21_11_2c,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,October/November 2021,,w21/9618_w21_qp_11.pdf,3,3,w21/9618_w21_ms_11.pdf,4,4,9618_y26_sy.pdf,24,24,,Past Paper
+w21_11_3,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2021,,w21/9618_w21_qp_11.pdf,4,5,w21/9618_w21_ms_11.pdf,4,5,9618_y26_sy.pdf,18,19,,Past Paper
+w21_11_4abc,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2021,,w21/9618_w21_qp_11.pdf,6,6,w21/9618_w21_ms_11.pdf,6,6,9618_y26_sy.pdf,25,25,,Past Paper
+w21_11_4d,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,October/November 2021,,w21/9618_w21_qp_11.pdf,7,7,w21/9618_w21_ms_11.pdf,7,7,9618_y26_sy.pdf,23,23,,Past Paper
+w21_11_5ab,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2021,,w21/9618_w21_qp_11.pdf,8,8,w21/9618_w21_ms_11.pdf,7,7,9618_y26_sy.pdf,25,25,,Past Paper
+w21_11_5c,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2021,,w21/9618_w21_qp_11.pdf,9,9,w21/9618_w21_ms_11.pdf,7,7,9618_y26_sy.pdf,26,27,,Past Paper
+w21_11_6a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2021,,w21/9618_w21_qp_11.pdf,11,11,w21/9618_w21_ms_11.pdf,8,8,9618_y26_sy.pdf,19,19,,Past Paper
+w21_11_6b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,October/November 2021,,w21/9618_w21_qp_11.pdf,12,13,w21/9618_w21_ms_11.pdf,8,8,9618_y26_sy.pdf,22,22,,Past Paper
+w21_11_7a,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2021,,w21/9618_w21_qp_11.pdf,14,14,w21/9618_w21_ms_11.pdf,8,8,9618_y26_sy.pdf,15,15,,Past Paper
+w21_11_7b,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,October/November 2021,,w21/9618_w21_qp_11.pdf,14,14,w21/9618_w21_ms_11.pdf,8,8,9618_y26_sy.pdf,15,15,,Past Paper
+w21_11_8,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2021,,w21/9618_w21_qp_11.pdf,16,16,w21/9618_w21_ms_11.pdf,9,9,9618_y26_sy.pdf,16,17,,Past Paper
+w21_12_1,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,October/November 2021,,w21/9618_w21_qp_12.pdf,2,2,w21/9618_w21_ms_12.pdf,3,3,9618_y26_sy.pdf,24,24,,Past Paper
+w21_12_2,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2021,,w21/9618_w21_qp_12.pdf,3,3,w21/9618_w21_ms_12.pdf,3,4,9618_y26_sy.pdf,18,19,,Past Paper
+w21_12_3a,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2021,,w21/9618_w21_qp_12.pdf,4,4,w21/9618_w21_ms_12.pdf,4,4,9618_y26_sy.pdf,17,17,,Past Paper
+w21_12_3b,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2021,,w21/9618_w21_qp_12.pdf,4,4,w21/9618_w21_ms_12.pdf,4,4,9618_y26_sy.pdf,16,17,,Past Paper
+w21_12_4,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2021,,w21/9618_w21_qp_12.pdf,6,7,w21/9618_w21_ms_12.pdf,5,5,9618_y26_sy.pdf,14,14,,Past Paper
+w21_12_5ab,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2021,,w21/9618_w21_qp_12.pdf,8,8,w21/9618_w21_ms_12.pdf,5,6,9618_y26_sy.pdf,15,15,,Past Paper
+w21_12_5b,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,October/November 2021,,w21/9618_w21_qp_12.pdf,9,9,w21/9618_w21_ms_12.pdf,6,6,9618_y26_sy.pdf,15,15,,Past Paper
+w21_12_6a,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2021,,w21/9618_w21_qp_12.pdf,10,10,w21/9618_w21_ms_12.pdf,6,7,9618_y26_sy.pdf,25,25,,Past Paper
+w21_12_6b,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,October/November 2021,,w21/9618_w21_qp_12.pdf,11,11,w21/9618_w21_ms_12.pdf,7,7,9618_y26_sy.pdf,26,26,,Past Paper
+w21_12_6c,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2021,,w21/9618_w21_qp_12.pdf,11,11,w21/9618_w21_ms_12.pdf,7,7,9618_y26_sy.pdf,26,27,,Past Paper
+w21_12_7a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2021,,w21/9618_w21_qp_12.pdf,12,12,w21/9618_w21_ms_12.pdf,8,8,9618_y26_sy.pdf,19,19,,Past Paper
+w21_12_7bc,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,October/November 2021,,w21/9618_w21_qp_12.pdf,12,12,w21/9618_w21_ms_12.pdf,8,8,9618_y26_sy.pdf,23,23,,Past Paper
+w21_12_8a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2021,,w21/9618_w21_qp_12.pdf,13,13,w21/9618_w21_ms_12.pdf,9,9,9618_y26_sy.pdf,19,19,,Past Paper
+w21_12_8b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2021,,w21/9618_w21_qp_12.pdf,14,16,w21/9618_w21_ms_12.pdf,9,10,9618_y26_sy.pdf,20,21,,Past Paper
+s22_11_1,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2022,,s22/9618_s22_qp_11.pdf,2,2,s22/9618_s22_ms_11.pdf,3,3,9618_y26_sy.pdf,14,14,,Past Paper
+s22_11_2ab,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2022,,s22/9618_s22_qp_11.pdf,3,4,s22/9618_s22_ms_11.pdf,3,4,9618_y26_sy.pdf,17,17,,Past Paper
+s22_11_2c,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2022,,s22/9618_s22_qp_11.pdf,5,5,s22/9618_s22_ms_11.pdf,4,4,9618_y26_sy.pdf,18,19,,Past Paper
+s22_11_3,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2022,,s22/9618_s22_qp_11.pdf,6,6,s22/9618_s22_ms_11.pdf,5,5,9618_y26_sy.pdf,24,24,,Past Paper
+s22_11_4ab,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2022,,s22/9618_s22_qp_11.pdf,7,7,s22/9618_s22_ms_11.pdf,5,5,9618_y26_sy.pdf,25,25,,Past Paper
+s22_11_4c,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2022,,s22/9618_s22_qp_11.pdf,8,8,s22/9618_s22_ms_11.pdf,6,6,9618_y26_sy.pdf,26,27,,Past Paper
+s22_11_4d,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,May/June 2022,,s22/9618_s22_qp_11.pdf,9,9,s22/9618_s22_ms_11.pdf,6,6,9618_y26_sy.pdf,24,24,,Past Paper
+s22_11_5a,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,May/June 2022,,s22/9618_s22_qp_11.pdf,10,10,s22/9618_s22_ms_11.pdf,7,7,9618_y26_sy.pdf,23,23,,Past Paper
+s22_11_5b,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2022,,s22/9618_s22_qp_11.pdf,10,10,s22/9618_s22_ms_11.pdf,7,7,9618_y26_sy.pdf,25,25,,Past Paper
+s22_11_5c,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,May/June 2022,,s22/9618_s22_qp_11.pdf,11,11,s22/9618_s22_ms_11.pdf,7,7,9618_y26_sy.pdf,23,23,,Past Paper
+s22_11_6ab,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,May/June 2022,,s22/9618_s22_qp_11.pdf,12,13,s22/9618_s22_ms_11.pdf,8,8,9618_y26_sy.pdf,19,19,,Past Paper
+s22_11_6c,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2022,,s22/9618_s22_qp_11.pdf,14,15,s22/9618_s22_ms_11.pdf,8,8,9618_y26_sy.pdf,22,22,,Past Paper
+s22_12_1abc,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,May/June 2022,,s22/9618_s22_qp_12.pdf,2,3,s22/9618_s22_ms_12.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+s22_12_1d,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,May/June 2022,,s22/9618_s22_qp_12.pdf,3,3,s22/9618_s22_ms_12.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+s22_12_2,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2022,,s22/9618_s22_qp_12.pdf,4,4,s22/9618_s22_ms_12.pdf,4,4,9618_y26_sy.pdf,17,17,,Past Paper
+s22_12_3abd,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2022,,s22/9618_s22_qp_12.pdf,5,6,s22/9618_s22_ms_12.pdf,4,4,9618_y26_sy.pdf,22,22,,Past Paper
+s22_12_3ce,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2022,,s22/9618_s22_qp_12.pdf,5,5,s22/9618_s22_ms_12.pdf,4,5,9618_y26_sy.pdf,14,14,,Past Paper
+s22_12_4,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2022,,s22/9618_s22_qp_12.pdf,7,7,s22/9618_s22_ms_12.pdf,5,5,9618_y26_sy.pdf,24,24,,Past Paper
+s22_12_5ab,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2022,,s22/9618_s22_qp_12.pdf,8,8,s22/9618_s22_ms_12.pdf,6,6,9618_y26_sy.pdf,25,25,,Past Paper
+s22_12_5cd,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2022,,s22/9618_s22_qp_12.pdf,9,9,s22/9618_s22_ms_12.pdf,6,6,9618_y26_sy.pdf,26,27,,Past Paper
+s22_12_5e,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,May/June 2022,,s22/9618_s22_qp_12.pdf,10,10,s22/9618_s22_ms_12.pdf,7,7,9618_y26_sy.pdf,26,26,,Past Paper
+s22_12_6,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,May/June 2022,,s22/9618_s22_qp_12.pdf,11,11,s22/9618_s22_ms_12.pdf,7,7,9618_y26_sy.pdf,23,23,,Past Paper
+s22_12_7,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2022,,s22/9618_s22_qp_12.pdf,12,12,s22/9618_s22_ms_12.pdf,8,8,9618_y26_sy.pdf,18,19,,Past Paper
+s22_12_8,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2022,,s22/9618_s22_qp_12.pdf,12,12,s22/9618_s22_ms_12.pdf,8,8,9618_y26_sy.pdf,25,25,,Past Paper
+s22_12_9,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2022,,s22/9618_s22_qp_12.pdf,13,14,s22/9618_s22_ms_12.pdf,9,9,9618_y26_sy.pdf,16,17,,Past Paper
+s22_13_1,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2022,,s22/9618_s22_qp_13.pdf,2,3,s22/9618_s22_ms_13.pdf,3,3,9618_y26_sy.pdf,14,14,,Past Paper
+s22_13_1aiii,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,May/June 2022,,s22/9618_s22_qp_13.pdf,2,2,s22/9618_s22_ms_13.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+s22_13__2,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,May/June 2022,,s22/9618_s22_qp_13.pdf,4,4,s22/9618_s22_ms_13.pdf,4,4,9618_y26_sy.pdf,19,19,,Past Paper
+s22_13_3ab,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,May/June 2022,,s22/9618_s22_qp_13.pdf,6,7,s22/9618_s22_ms_13.pdf,4,5,9618_y26_sy.pdf,20,21,,Past Paper
+s22_13_3c,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2022,,s22/9618_s22_qp_13.pdf,8,8,s22/9618_s22_ms_13.pdf,5,5,9618_y26_sy.pdf,22,22,,Past Paper
+s22_13_4,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,May/June 2022,,s22/9618_s22_qp_13.pdf,9,9,s22/9618_s22_ms_13.pdf,6,6,9618_y26_sy.pdf,23,23,,Past Paper
+s22_13_5a,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2022,,s22/9618_s22_qp_13.pdf,10,10,s22/9618_s22_ms_13.pdf,7,7,9618_y26_sy.pdf,24,24,,Past Paper
+s22_13_5b,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,May/June 2022,,s22/9618_s22_qp_13.pdf,10,11,s22/9618_s22_ms_13.pdf,7,7,9618_y26_sy.pdf,24,24,,Past Paper
+s22_13_6ac,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2022,,s22/9618_s22_qp_13.pdf,12,13,s22/9618_s22_ms_13.pdf,8,8,9618_y26_sy.pdf,25,25,,Past Paper
+s22_13_6b,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2022,,s22/9618_s22_qp_13.pdf,12,13,s22/9618_s22_ms_13.pdf,8,8,9618_y26_sy.pdf,26,27,,Past Paper
+s22_13_7,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2022,,s22/9618_s22_qp_13.pdf,14,14,s22/9618_s22_ms_13.pdf,9,9,9618_y26_sy.pdf,18,19,,Past Paper
+s22_13_8,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2022,,s22/9618_s22_qp_13.pdf,15,15,s22/9618_s22_ms_13.pdf,9,10,9618_y26_sy.pdf,16,17,,Past Paper
+w22_11_1abc,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2022,,w22/9618_w22_qp_11.pdf,2,3,w22/9618_w22_ms_11.pdf,3,3,9618_y26_sy.pdf,14,14,,Past Paper
+w22_11_1d,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2022,,w22/9618_w22_qp_11.pdf,3,3,w22/9618_w22_ms_11.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+w22_11_2,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,October/November 2022,,w22/9618_w22_qp_11.pdf,4,4,w22/9618_w22_ms_11.pdf,4,4,9618_y26_sy.pdf,24,24,,Past Paper
+w22_11_3,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2022,,w22/9618_w22_qp_11.pdf,5,5,w22/9618_w22_ms_11.pdf,4,5,9618_y26_sy.pdf,18,19,,Past Paper
+w22_11_4abc,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2022,,w22/9618_w22_qp_11.pdf,6,7,w22/9618_w22_ms_11.pdf,5,6,9618_y26_sy.pdf,25,25,,Past Paper
+w22_11_4cd,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2022,,w22/9618_w22_qp_11.pdf,7,8,w22/9618_w22_ms_11.pdf,6,6,9618_y26_sy.pdf,26,27,,Past Paper
+w22_11_5,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2022,,w22/9618_w22_qp_11.pdf,10,11,w22/9618_w22_ms_11.pdf,6,7,9618_y26_sy.pdf,19,19,,Past Paper
+w22_11_6a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2022,,w22/9618_w22_qp_11.pdf,12,14,w22/9618_w22_ms_11.pdf,8,8,9618_y26_sy.pdf,20,21,,Past Paper
+w22_11_6b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,October/November 2022,,w22/9618_w22_qp_11.pdf,16,17,w22/9618_w22_ms_11.pdf,9,9,9618_y26_sy.pdf,22,22,,Past Paper
+w22_11_6c,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2022,,w22/9618_w22_qp_11.pdf,17,17,w22/9618_w22_ms_11.pdf,9,9,9618_y26_sy.pdf,20,21,,Past Paper
+w22_11_7ab,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,October/November 2022,,w22/9618_w22_qp_11.pdf,18,18,w22/9618_w22_ms_11.pdf,9,9,9618_y26_sy.pdf,23,23,,Past Paper
+w22_11_7c,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,October/November 2022,,w22/9618_w22_qp_11.pdf,18,18,w22/9618_w22_ms_11.pdf,10,10,9618_y26_sy.pdf,15,15,,Past Paper
+w22_11_7de,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2022,,w22/9618_w22_qp_11.pdf,18,18,w22/9618_w22_ms_11.pdf,10,10,9618_y26_sy.pdf,19,19,,Past Paper
+w22_11_8,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2022,,w22/9618_w22_qp_11.pdf,19,19,w22/9618_w22_ms_11.pdf,10,10,9618_y26_sy.pdf,16,17,,Past Paper
+w22_11_9,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2022,,w22/9618_w22_qp_11.pdf,19,19,w22/9618_w22_ms_11.pdf,10,11,9618_y26_sy.pdf,17,17,,Past Paper
+w22_12_1a,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,October/November 2022,,w22/9618_w22_qp_12.pdf,2,2,w22/9618_w22_ms_12.pdf,3,3,9618_y26_sy.pdf,23,23,,Past Paper
+w22_12_1b,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,October/November 2022,,w22/9618_w22_qp_12.pdf,2,2,w22/9618_w22_ms_12.pdf,3,3,9618_y26_sy.pdf,23,23,,Past Paper
+w22_12_2,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2022,,w22/9618_w22_qp_12.pdf,3,3,w22/9618_w22_ms_12.pdf,3,4,9618_y26_sy.pdf,14,14,,Past Paper
+w22_12_3ab,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2022,,w22/9618_w22_qp_12.pdf,4,5,w22/9618_w22_ms_12.pdf,4,4,9618_y26_sy.pdf,18,19,,Past Paper
+w22_12_3c,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2022,,w22/9618_w22_qp_12.pdf,5,5,w22/9618_w22_ms_12.pdf,4,4,9618_y26_sy.pdf,17,17,,Past Paper
+w22_12_4,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,October/November 2022,,w22/9618_w22_qp_12.pdf,6,6,w22/9618_w22_ms_12.pdf,5,5,9618_y26_sy.pdf,24,24,,Past Paper
+w22_12_5ac,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2022,,w22/9618_w22_qp_12.pdf,7,7,w22/9618_w22_ms_12.pdf,5,6,9618_y26_sy.pdf,25,25,,Past Paper
+w22_12_5b,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2022,,w22/9618_w22_qp_12.pdf,7,7,w22/9618_w22_ms_12.pdf,6,6,9618_y26_sy.pdf,26,27,,Past Paper
+w22_12_5d,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,October/November 2022,,w22/9618_w22_qp_12.pdf,8,8,w22/9618_w22_ms_12.pdf,6,6,9618_y26_sy.pdf,26,26,,Past Paper
+w22_12_6a,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,October/November 2022,,w22/9618_w22_qp_12.pdf,9,9,w22/9618_w22_ms_12.pdf,6,7,9618_y26_sy.pdf,24,24,,Past Paper
+w22_12_6b,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2022,,w22/9618_w22_qp_12.pdf,9,9,w22/9618_w22_ms_12.pdf,7,7,9618_y26_sy.pdf,15,15,,Past Paper
+w22_12_7a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2022,,w22/9618_w22_qp_12.pdf,10,11,w22/9618_w22_ms_12.pdf,8,8,9618_y26_sy.pdf,20,21,,Past Paper
+w22_12_7b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,October/November 2022,,w22/9618_w22_qp_12.pdf,12,13,w22/9618_w22_ms_12.pdf,8,9,9618_y26_sy.pdf,22,22,,Past Paper
+w22_12_7c,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2022,,w22/9618_w22_qp_12.pdf,14,14,w22/9618_w22_ms_12.pdf,9,9,9618_y26_sy.pdf,19,19,,Past Paper
+w22_12_8ab,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2022,,w22/9618_w22_qp_12.pdf,15,15,w22/9618_w22_ms_12.pdf,9,9,9618_y26_sy.pdf,15,15,,Past Paper
+w22_12_8c,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,October/November 2022,,w22/9618_w22_qp_12.pdf,16,16,w22/9618_w22_ms_12.pdf,9,10,9618_y26_sy.pdf,15,15,,Past Paper
+w22_12_9,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2022,,w22/9618_w22_qp_12.pdf,16,16,w22/9618_w22_ms_12.pdf,10,10,9618_y26_sy.pdf,25,25,,Past Paper
+w22_12_10,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2022,,w22/9618_w22_qp_12.pdf,17,17,w22/9618_w22_ms_12.pdf,10,10,9618_y26_sy.pdf,16,17,,Past Paper
+w22_13_1ab,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2022,,w22/9618_w22_qp_13.pdf,3,3,w22/9618_w22_ms_13.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+w22_13_1c,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2022,,w22/9618_w22_qp_13.pdf,3,3,w22/9618_w22_ms_13.pdf,3,3,9618_y26_sy.pdf,16,17,,Past Paper
+w22_13_2a,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2022,,w22/9618_w22_qp_13.pdf,4,4,w22/9618_w22_ms_13.pdf,4,4,9618_y26_sy.pdf,25,25,,Past Paper
+w22_13_2bf,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,October/November 2022,,w22/9618_w22_qp_13.pdf,4,5,w22/9618_w22_ms_13.pdf,4,4,9618_y26_sy.pdf,26,26,,Past Paper
+w22_13_2cd,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2022,,w22/9618_w22_qp_13.pdf,4,5,w22/9618_w22_ms_13.pdf,4,4,9618_y26_sy.pdf,26,27,,Past Paper
+w22_13_2e,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2022,,w22/9618_w22_qp_13.pdf,5,5,w22/9618_w22_ms_13.pdf,4,4,9618_y26_sy.pdf,15,15,,Past Paper
+w22_13_3,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,October/November 2022,,w22/9618_w22_qp_13.pdf,6,6,w22/9618_w22_ms_13.pdf,5,5,9618_y26_sy.pdf,23,23,,Past Paper
+w22_13_4,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2022,,w22/9618_w22_qp_13.pdf,7,7,w22/9618_w22_ms_13.pdf,5,6,9618_y26_sy.pdf,19,19,,Past Paper
+w22_13_5,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2022,,w22/9618_w22_qp_13.pdf,8,8,w22/9618_w22_ms_13.pdf,6,6,9618_y26_sy.pdf,18,19,,Past Paper
+w22_13_6a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2022,,w22/9618_w22_qp_13.pdf,10,12,w22/9618_w22_ms_13.pdf,7,7,9618_y26_sy.pdf,20,21,,Past Paper
+w22_13_6b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,October/November 2022,,w22/9618_w22_qp_13.pdf,12,13,w22/9618_w22_ms_13.pdf,8,8,9618_y26_sy.pdf,22,22,,Past Paper
+w22_13_6c,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2022,,w22/9618_w22_qp_13.pdf,13,13,w22/9618_w22_ms_13.pdf,8,8,9618_y26_sy.pdf,20,21,,Past Paper
+w22_13_7,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2022,,w22/9618_w22_qp_13.pdf,14,15,w22/9618_w22_ms_13.pdf,8,9,9618_y26_sy.pdf,16,17,,Past Paper
+w22_13_8,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2022,,w22/9618_w22_qp_13.pdf,16,16,w22/9618_w22_ms_13.pdf,9,9,9618_y26_sy.pdf,25,25,,Past Paper
+w22_13_9,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2022,,w22/9618_w22_qp_13.pdf,17,17,w22/9618_w22_ms_13.pdf,10,10,9618_y26_sy.pdf,14,14,,Past Paper
+w22_13_10,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2022,,w22/9618_w22_qp_13.pdf,18,18,w22/9618_w22_ms_13.pdf,10,10,9618_y26_sy.pdf,17,17,,Past Paper
+s23_11_1ab,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,May/June 2023,,s23/9618_s23_qp_11.pdf,2,3,s23/9618_s23_ms_11.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+s23_11_1c,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,May/June 2023,,s23/9618_s23_qp_11.pdf,3,3,s23/9618_s23_ms_11.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+s23_11_2a,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,May/June 2023,,s23/9618_s23_qp_11.pdf,4,4,s23/9618_s23_ms_11.pdf,4,4,9618_y26_sy.pdf,26,26,,Past Paper
+s23_11_2bi,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2023,,s23/9618_s23_qp_11.pdf,5,5,s23/9618_s23_ms_11.pdf,4,4,9618_y26_sy.pdf,25,25,,Past Paper
+s23_11_2biii,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2023,,s23/9618_s23_qp_11.pdf,6,7,s23/9618_s23_ms_11.pdf,5,5,9618_y26_sy.pdf,26,27,,Past Paper
+s23_11_3abc,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,May/June 2023,,s23/9618_s23_qp_11.pdf,8,8,s23/9618_s23_ms_11.pdf,5,6,9618_y26_sy.pdf,23,23,,Past Paper
+s23_11_3d,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2023,,s23/9618_s23_qp_11.pdf,8,9,s23/9618_s23_ms_11.pdf,6,6,9618_y26_sy.pdf,14,14,,Past Paper
+s23_11_4ab,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2023,,s23/9618_s23_qp_11.pdf,10,10,s23/9618_s23_ms_11.pdf,7,7,9618_y26_sy.pdf,17,17,,Past Paper
+s23_11_4c,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2023,,s23/9618_s23_qp_11.pdf,11,11,s23/9618_s23_ms_11.pdf,7,7,9618_y26_sy.pdf,25,25,,Past Paper
+s23_11_4d,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2023,,s23/9618_s23_qp_11.pdf,11,11,s23/9618_s23_ms_11.pdf,7,8,9618_y26_sy.pdf,16,17,,Past Paper
+s23_11_5,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2023,,s23/9618_s23_qp_11.pdf,12,12,s23/9618_s23_ms_11.pdf,8,8,9618_y26_sy.pdf,18,19,,Past Paper
+s23_11_6,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,May/June 2023,,s23/9618_s23_qp_11.pdf,13,13,s23/9618_s23_ms_11.pdf,9,9,9618_y26_sy.pdf,19,19,,Past Paper
+s23_12_1,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2023,,s23/9618_s23_qp_12.pdf,2,3,s23/9618_s23_ms_12.pdf,3,3,9618_y26_sy.pdf,16,17,,Past Paper
+s23_12_2a,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,May/June 2023,,s23/9618_s23_qp_12.pdf,5,5,s23/9618_s23_ms_12.pdf,4,4,9618_y26_sy.pdf,26,26,,Past Paper
+s23_12_2b,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2023,,s23/9618_s23_qp_12.pdf,5,5,s23/9618_s23_ms_12.pdf,4,4,9618_y26_sy.pdf,25,25,,Past Paper
+s23_12_2c,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2023,,s23/9618_s23_qp_12.pdf,6,7,s23/9618_s23_ms_12.pdf,4,5,9618_y26_sy.pdf,26,27,,Past Paper
+s23_12_3,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,May/June 2023,,s23/9618_s23_qp_12.pdf,8,8,s23/9618_s23_ms_12.pdf,6,6,9618_y26_sy.pdf,20,21,,Past Paper
+s23_12_4,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2023,,s23/9618_s23_qp_12.pdf,9,9,s23/9618_s23_ms_12.pdf,6,7,9618_y26_sy.pdf,14,14,,Past Paper
+s23_12_5abc,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,May/June 2023,,s23/9618_s23_qp_12.pdf,10,11,s23/9618_s23_ms_12.pdf,7,7,9618_y26_sy.pdf,19,19,,Past Paper
+s23_12_5d,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,May/June 2023,,s23/9618_s23_qp_12.pdf,11,11,s23/9618_s23_ms_12.pdf,8,8,9618_y26_sy.pdf,23,23,,Past Paper
+s23_12_6,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2023,,s23/9618_s23_qp_12.pdf,12,12,s23/9618_s23_ms_12.pdf,8,8,9618_y26_sy.pdf,18,19,,Past Paper
+s23_12_7a,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,May/June 2023,,s23/9618_s23_qp_12.pdf,13,13,s23/9618_s23_ms_12.pdf,9,9,9618_y26_sy.pdf,23,23,,Past Paper
+s23_12_7bc,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,May/June 2023,,s23/9618_s23_qp_12.pdf,13,14,s23/9618_s23_ms_12.pdf,9,10,9618_y26_sy.pdf,23,23,,Past Paper
+s23_12_7d,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2023,,s23/9618_s23_qp_12.pdf,14,14,s23/9618_s23_ms_12.pdf,10,10,9618_y26_sy.pdf,25,25,,Past Paper
+s23_13_1,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2023,,s23/9618_s23_qp_13.pdf,2,2,s23/9618_s23_ms_13.pdf,3,3,9618_y26_sy.pdf,18,19,,Past Paper
+s23_13_2,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2023,,s23/9618_s23_qp_13.pdf,3,4,s23/9618_s23_ms_13.pdf,3,4,9618_y26_sy.pdf,16,17,,Past Paper
+s23_13_3a,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2023,,s23/9618_s23_qp_13.pdf,5,5,s23/9618_s23_ms_13.pdf,5,5,9618_y26_sy.pdf,17,17,,Past Paper
+s23_13_3b,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2023,,s23/9618_s23_qp_13.pdf,5,5,s23/9618_s23_ms_13.pdf,5,5,9618_y26_sy.pdf,25,25,,Past Paper
+s23_13_3c,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,May/June 2023,,s23/9618_s23_qp_13.pdf,5,6,s23/9618_s23_ms_13.pdf,5,5,9618_y26_sy.pdf,15,15,,Past Paper
+s23_13_4ab,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2023,,s23/9618_s23_qp_13.pdf,7,7,s23/9618_s23_ms_13.pdf,6,6,9618_y26_sy.pdf,25,25,,Past Paper
+s23_13_4c,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2023,,s23/9618_s23_qp_13.pdf,8,8,s23/9618_s23_ms_13.pdf,6,6,9618_y26_sy.pdf,26,27,,Past Paper
+s23_13_4d,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,May/June 2023,,s23/9618_s23_qp_13.pdf,8,9,s23/9618_s23_ms_13.pdf,7,7,9618_y26_sy.pdf,24,24,,Past Paper
+s23_13_5a,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,May/June 2023,,s23/9618_s23_qp_13.pdf,10,10,s23/9618_s23_ms_13.pdf,7,7,9618_y26_sy.pdf,23,23,,Past Paper
+s23_13_5b,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2023,,s23/9618_s23_qp_13.pdf,10,10,s23/9618_s23_ms_13.pdf,8,8,9618_y26_sy.pdf,25,25,,Past Paper
+s23_13_6,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2023,,s23/9618_s23_qp_13.pdf,11,11,s23/9618_s23_ms_13.pdf,8,9,9618_y26_sy.pdf,24,24,,Past Paper
+s23_13_7a,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2023,,s23/9618_s23_qp_13.pdf,12,12,s23/9618_s23_ms_13.pdf,10,10,9618_y26_sy.pdf,14,14,,Past Paper
+s23_13_7bc,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,May/June 2023,,s23/9618_s23_qp_13.pdf,12,13,s23/9618_s23_ms_13.pdf,10,11,9618_y26_sy.pdf,19,19,,Past Paper
+w23_11_1ab,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2023,,w23/9618_w23_qp_11.pdf,3,3,w23/9618_w23_ms_11.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+w23_11_1c,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,October/November 2023,,w23/9618_w23_qp_11.pdf,3,3,w23/9618_w23_ms_11.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+w23_11_2,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2023,,w23/9618_w23_qp_11.pdf,4,5,w23/9618_w23_ms_11.pdf,4,5,9618_y26_sy.pdf,16,17,,Past Paper
+w23_11_3ab,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2023,,w23/9618_w23_qp_11.pdf,6,6,w23/9618_w23_ms_11.pdf,5,5,9618_y26_sy.pdf,25,25,,Past Paper
+w23_11_3c,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2023,,w23/9618_w23_qp_11.pdf,7,7,w23/9618_w23_ms_11.pdf,6,6,9618_y26_sy.pdf,26,27,,Past Paper
+w23_11_4,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2023,,w23/9618_w23_qp_11.pdf,8,8,w23/9618_w23_ms_11.pdf,6,7,9618_y26_sy.pdf,18,19,,Past Paper
+w23_11_5,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2023,,w23/9618_w23_qp_11.pdf,9,10,w23/9618_w23_ms_11.pdf,7,8,9618_y26_sy.pdf,19,19,,Past Paper
+w23_11_6,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,October/November 2023,,w23/9618_w23_qp_11.pdf,11,11,w23/9618_w23_ms_11.pdf,8,8,9618_y26_sy.pdf,23,23,,Past Paper
+w23_11_7,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2023,,w23/9618_w23_qp_11.pdf,12,12,w23/9618_w23_ms_11.pdf,9,9,9618_y26_sy.pdf,17,17,,Past Paper
+w23_11_8ab,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2023,,w23/9618_w23_qp_11.pdf,13,14,w23/9618_w23_ms_11.pdf,10,10,9618_y26_sy.pdf,20,21,,Past Paper
+w23_11_8c,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,October/November 2023,,w23/9618_w23_qp_11.pdf,14,15,w23/9618_w23_ms_11.pdf,10,10,9618_y26_sy.pdf,22,22,,Past Paper
+w23_11_9,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2023,,w23/9618_w23_qp_11.pdf,16,16,w23/9618_w23_ms_11.pdf,10,10,9618_y26_sy.pdf,17,17,,Past Paper
+w23_12_1,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2023,,w23/9618_w23_qp_12.pdf,2,2,w23/9618_w23_ms_12.pdf,3,3,9618_y26_sy.pdf,17,17,,Past Paper
+w23_12_2ac,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2023,,w23/9618_w23_qp_12.pdf,4,5,w23/9618_w23_ms_12.pdf,3,4,9618_y26_sy.pdf,25,25,,Past Paper
+w23_12_2b,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,October/November 2023,,w23/9618_w23_qp_12.pdf,4,4,w23/9618_w23_ms_12.pdf,4,4,9618_y26_sy.pdf,26,26,,Past Paper
+w23_12_3,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2023,,w23/9618_w23_qp_12.pdf,6,6,w23/9618_w23_ms_12.pdf,4,5,9618_y26_sy.pdf,14,14,,Past Paper
+w23_12_4,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2023,,w23/9618_w23_qp_12.pdf,7,7,w23/9618_w23_ms_12.pdf,5,5,9618_y26_sy.pdf,18,19,,Past Paper
+w23_12_5ac,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,October/November 2023,,w23/9618_w23_qp_12.pdf,8,8,w23/9618_w23_ms_12.pdf,5,6,9618_y26_sy.pdf,24,24,,Past Paper
+w23_12_5b,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,October/November 2023,,w23/9618_w23_qp_12.pdf,8,8,w23/9618_w23_ms_12.pdf,6,6,9618_y26_sy.pdf,24,24,,Past Paper
+w23_12_6a,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,October/November 2023,,w23/9618_w23_qp_12.pdf,9,9,w23/9618_w23_ms_12.pdf,6,6,9618_y26_sy.pdf,15,15,,Past Paper
+w23_12_6bc,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2023,,w23/9618_w23_qp_12.pdf,9,9,w23/9618_w23_ms_12.pdf,7,7,9618_y26_sy.pdf,15,15,,Past Paper
+w23_12_7,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2023,,w23/9618_w23_qp_12.pdf,10,12,w23/9618_w23_ms_12.pdf,7,9,9618_y26_sy.pdf,16,17,,Past Paper
+w23_12_8ab,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,October/November 2023,,w23/9618_w23_qp_12.pdf,13,13,w23/9618_w23_ms_12.pdf,9,9,9618_y26_sy.pdf,23,23,,Past Paper
+w23_12_8c,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2023,,w23/9618_w23_qp_12.pdf,13,13,w23/9618_w23_ms_12.pdf,10,10,9618_y26_sy.pdf,19,19,,Past Paper
+w23_12_9,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2023,,w23/9618_w23_qp_12.pdf,14,15,w23/9618_w23_ms_12.pdf,10,11,9618_y26_sy.pdf,20,21,,Past Paper
+w23_13_1,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2023,,w23/9618_w23_qp_13.pdf,2,2,w23/9618_w23_ms_13.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+w23_13_2,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2023,,w23/9618_w23_qp_13.pdf,3,3,w23/9618_w23_ms_13.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+w23_13_3a,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2023,,w23/9618_w23_qp_13.pdf,4,4,w23/9618_w23_ms_13.pdf,4,4,9618_y26_sy.pdf,16,17,,Past Paper
+w23_13_3aiii,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,October/November 2023,,w23/9618_w23_qp_13.pdf,4,4,w23/9618_w23_ms_13.pdf,4,4,9618_y26_sy.pdf,24,24,,Past Paper
+w23_13_3bi,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2023,,w23/9618_w23_qp_13.pdf,5,5,w23/9618_w23_ms_13.pdf,4,4,9618_y26_sy.pdf,25,25,,Past Paper
+w23_13_3bii,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2023,,w23/9618_w23_qp_13.pdf,5,5,w23/9618_w23_ms_13.pdf,5,5,9618_y26_sy.pdf,26,27,,Past Paper
+w23_13_3c,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,October/November 2023,,w23/9618_w23_qp_13.pdf,6,6,w23/9618_w23_ms_13.pdf,5,5,9618_y26_sy.pdf,24,24,,Past Paper
+w23_13_4,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2023,,w23/9618_w23_qp_13.pdf,7,7,w23/9618_w23_ms_13.pdf,5,5,9618_y26_sy.pdf,18,19,,Past Paper
+w23_13_5a,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,October/November 2023,,w23/9618_w23_qp_13.pdf,8,8,w23/9618_w23_ms_13.pdf,6,6,9618_y26_sy.pdf,23,23,,Past Paper
+w23_13_5b,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,October/November 2023,,w23/9618_w23_qp_13.pdf,8,8,w23/9618_w23_ms_13.pdf,6,6,9618_y26_sy.pdf,23,23,,Past Paper
+w23_13_6,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2023,,w23/9618_w23_qp_13.pdf,9,9,w23/9618_w23_ms_13.pdf,6,7,9618_y26_sy.pdf,25,25,,Past Paper
+w23_13_7abc,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2023,,w23/9618_w23_qp_13.pdf,10,10,w23/9618_w23_ms_13.pdf,7,7,9618_y26_sy.pdf,17,17,,Past Paper
+w23_13_7d,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2023,,w23/9618_w23_qp_13.pdf,11,11,w23/9618_w23_ms_13.pdf,8,8,9618_y26_sy.pdf,19,19,,Past Paper
+w23_13_8a,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,October/November 2023,,w23/9618_w23_qp_13.pdf,12,12,w23/9618_w23_ms_13.pdf,8,8,9618_y26_sy.pdf,24,24,,Past Paper
+w23_13_8bc,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,October/November 2023,,w23/9618_w23_qp_13.pdf,12,12,w23/9618_w23_ms_13.pdf,8,9,9618_y26_sy.pdf,24,24,,Past Paper
+w23_13_9,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2023,,w23/9618_w23_qp_13.pdf,13,15,w23/9618_w23_ms_13.pdf,9,10,9618_y26_sy.pdf,19,19,,Past Paper
+s24_11_1,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2024,,s24/9618_s24_qp_11.pdf,2,2,s24/9618_s24_ms_11.pdf,3,3,9618_y26_sy.pdf,18,19,,Past Paper
+s24_11_2abc,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2024,,s24/9618_s24_qp_11.pdf,3,4,s24/9618_s24_ms_11.pdf,3,4,9618_y26_sy.pdf,17,17,,Past Paper
+s24_11_2d,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,May/June 2024,,s24/9618_s24_qp_11.pdf,5,5,s24/9618_s24_ms_11.pdf,4,4,9618_y26_sy.pdf,15,15,,Past Paper
+s24_11_2e,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2024,,s24/9618_s24_qp_11.pdf,5,5,s24/9618_s24_ms_11.pdf,4,4,9618_y26_sy.pdf,16,17,,Past Paper
+s24_11_3,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,May/June 2024,,s24/9618_s24_qp_11.pdf,6,6,s24/9618_s24_ms_11.pdf,5,5,9618_y26_sy.pdf,23,23,,Past Paper
+s24_11_4a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,May/June 2024,,s24/9618_s24_qp_11.pdf,8,9,s24/9618_s24_ms_11.pdf,5,5,9618_y26_sy.pdf,20,21,,Past Paper
+s24_11_4b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2024,,s24/9618_s24_qp_11.pdf,10,10,s24/9618_s24_ms_11.pdf,5,5,9618_y26_sy.pdf,22,22,,Past Paper
+s24_11_5a,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2024,,s24/9618_s24_qp_11.pdf,11,11,s24/9618_s24_ms_11.pdf,6,6,9618_y26_sy.pdf,16,17,,Past Paper
+s24_11_5b,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,May/June 2024,,s24/9618_s24_qp_11.pdf,11,11,s24/9618_s24_ms_11.pdf,6,6,9618_y26_sy.pdf,24,24,,Past Paper
+s24_11_5ci,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2024,,s24/9618_s24_qp_11.pdf,12,12,s24/9618_s24_ms_11.pdf,6,6,9618_y26_sy.pdf,24,24,,Past Paper
+s24_11_5cii,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2024,,s24/9618_s24_qp_11.pdf,12,12,s24/9618_s24_ms_11.pdf,6,6,9618_y26_sy.pdf,25,25,,Past Paper
+s24_11_6a,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2024,,s24/9618_s24_qp_11.pdf,13,13,s24/9618_s24_ms_11.pdf,7,7,9618_y26_sy.pdf,25,25,,Past Paper
+s24_11_6b,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,May/June 2024,,s24/9618_s24_qp_11.pdf,13,13,s24/9618_s24_ms_11.pdf,7,7,9618_y26_sy.pdf,26,26,,Past Paper
+s24_11_6c,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2024,,s24/9618_s24_qp_11.pdf,14,14,s24/9618_s24_ms_11.pdf,7,7,9618_y26_sy.pdf,26,27,,Past Paper
+s24_11_7,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2024,,s24/9618_s24_qp_11.pdf,15,15,s24/9618_s24_ms_11.pdf,8,8,9618_y26_sy.pdf,14,14,,Past Paper
+s24_11_8,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2024,,s24/9618_s24_qp_11.pdf,16,16,s24/9618_s24_ms_11.pdf,8,8,9618_y26_sy.pdf,16,17,,Past Paper
+s24_12_1,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2024,,s24/9618_s24_qp_12.pdf,2,2,s24/9618_s24_ms_12.pdf,3,3,9618_y26_sy.pdf,18,19,,Past Paper
+s24_12_2abc,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2024,,s24/9618_s24_qp_12.pdf,3,3,s24/9618_s24_ms_12.pdf,4,4,9618_y26_sy.pdf,17,17,,Past Paper
+s24_12_2d,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,May/June 2024,,s24/9618_s24_qp_12.pdf,4,4,s24/9618_s24_ms_12.pdf,4,4,9618_y26_sy.pdf,15,15,,Past Paper
+s24_12_2diii,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,May/June 2024,,s24/9618_s24_qp_12.pdf,4,4,s24/9618_s24_ms_12.pdf,5,5,9618_y26_sy.pdf,15,15,,Past Paper
+s24_12_3a,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2024,,s24/9618_s24_qp_12.pdf,5,5,s24/9618_s24_ms_12.pdf,5,5,9618_y26_sy.pdf,24,24,,Past Paper
+s24_12_3bc,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2024,,s24/9618_s24_qp_12.pdf,6,6,s24/9618_s24_ms_12.pdf,6,6,9618_y26_sy.pdf,16,17,,Past Paper
+s24_12_4ad,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2024,,s24/9618_s24_qp_12.pdf,7,8,s24/9618_s24_ms_12.pdf,7,7,9618_y26_sy.pdf,25,25,,Past Paper
+s24_12_4bc,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2024,,s24/9618_s24_qp_12.pdf,7,8,s24/9618_s24_ms_12.pdf,7,7,9618_y26_sy.pdf,26,27,,Past Paper
+s24_12_5a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,May/June 2024,,s24/9618_s24_qp_12.pdf,10,11,s24/9618_s24_ms_12.pdf,8,8,9618_y26_sy.pdf,20,21,,Past Paper
+s24_12_5b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2024,,s24/9618_s24_qp_12.pdf,12,12,s24/9618_s24_ms_12.pdf,8,8,9618_y26_sy.pdf,22,22,,Past Paper
+s24_12_6,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,May/June 2024,,s24/9618_s24_qp_12.pdf,13,13,s24/9618_s24_ms_12.pdf,9,9,9618_y26_sy.pdf,23,23,,Past Paper
+s24_12_7,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2024,,s24/9618_s24_qp_12.pdf,14,14,s24/9618_s24_ms_12.pdf,10,10,9618_y26_sy.pdf,14,14,,Past Paper
+s24_12_8ab,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,May/June 2024,,s24/9618_s24_qp_12.pdf,15,15,s24/9618_s24_ms_12.pdf,11,11,9618_y26_sy.pdf,23,23,,Past Paper
+s24_12_8c,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,May/June 2024,,s24/9618_s24_qp_12.pdf,16,16,s24/9618_s24_ms_12.pdf,11,11,9618_y26_sy.pdf,23,23,,Past Paper
+s24_13_1,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2024,,s24/9618_s24_qp_13.pdf,2,2,s24/9618_s24_ms_13.pdf,3,3,9618_y26_sy.pdf,14,14,,Past Paper
+s24_13_2a,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,May/June 2024,,s24/9618_s24_qp_13.pdf,3,3,s24/9618_s24_ms_13.pdf,3,3,9618_y26_sy.pdf,15,15,,Past Paper
+s24_13_2bc,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,May/June 2024,,s24/9618_s24_qp_13.pdf,3,3,s24/9618_s24_ms_13.pdf,3,4,9618_y26_sy.pdf,15,15,,Past Paper
+s24_13_3a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,May/June 2024,,s24/9618_s24_qp_13.pdf,4,5,s24/9618_s24_ms_13.pdf,4,4,9618_y26_sy.pdf,20,21,,Past Paper
+s24_13_3b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2024,,s24/9618_s24_qp_13.pdf,6,7,s24/9618_s24_ms_13.pdf,4,4,9618_y26_sy.pdf,22,22,,Past Paper
+s24_13_4ad,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2024,,s24/9618_s24_qp_13.pdf,8,9,s24/9618_s24_ms_13.pdf,5,6,9618_y26_sy.pdf,25,25,,Past Paper
+s24_13_4bc,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2024,,s24/9618_s24_qp_13.pdf,8,9,s24/9618_s24_ms_13.pdf,5,5,9618_y26_sy.pdf,26,27,,Past Paper
+s24_13_5,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2024,,s24/9618_s24_qp_13.pdf,10,11,s24/9618_s24_ms_13.pdf,6,7,9618_y26_sy.pdf,16,17,,Past Paper
+s24_13_6,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2024,,s24/9618_s24_qp_13.pdf,12,12,s24/9618_s24_ms_13.pdf,7,7,9618_y26_sy.pdf,18,19,,Past Paper
+s24_13_7acd,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2024,,s24/9618_s24_qp_13.pdf,13,14,s24/9618_s24_ms_13.pdf,8,8,9618_y26_sy.pdf,17,17,,Past Paper
+s24_13_7b,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2024,,s24/9618_s24_qp_13.pdf,13,13,s24/9618_s24_ms_13.pdf,8,8,9618_y26_sy.pdf,25,25,,Past Paper
+s24_13_7e,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,May/June 2024,,s24/9618_s24_qp_13.pdf,15,15,s24/9618_s24_ms_13.pdf,8,9,9618_y26_sy.pdf,23,23,,Past Paper
+s24_13_7fi,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,May/June 2024,,s24/9618_s24_qp_13.pdf,16,16,s24/9618_s24_ms_13.pdf,9,9,9618_y26_sy.pdf,24,24,,Past Paper
+s24_13_7fii,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2024,,s24/9618_s24_qp_13.pdf,16,16,s24/9618_s24_ms_13.pdf,9,9,9618_y26_sy.pdf,24,24,,Past Paper
+w24_11_1,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2024,,w24/9618_w24_qp_11.pdf,2,3,w24/9618_w24_ms_11.pdf,3,3,9618_y26_sy.pdf,14,14,,Past Paper
+w24_11_2ac,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2024,,w24/9618_w24_qp_11.pdf,4,6,w24/9618_w24_ms_11.pdf,4,5,9618_y26_sy.pdf,25,25,,Past Paper
+w24_11_2b,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2024,,w24/9618_w24_qp_11.pdf,5,6,w24/9618_w24_ms_11.pdf,4,5,9618_y26_sy.pdf,26,27,,Past Paper
+w24_11_3ab,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2024,,w24/9618_w24_qp_11.pdf,7,7,w24/9618_w24_ms_11.pdf,5,6,9618_y26_sy.pdf,19,19,,Past Paper
+w24_11_3cd,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2024,,w24/9618_w24_qp_11.pdf,8,8,w24/9618_w24_ms_11.pdf,6,6,9618_y26_sy.pdf,17,17,,Past Paper
+w24_11_4ac,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,October/November 2024,,w24/9618_w24_qp_11.pdf,9,10,w24/9618_w24_ms_11.pdf,7,7,9618_y26_sy.pdf,23,23,,Past Paper
+w24_11_4b,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,October/November 2024,,w24/9618_w24_qp_11.pdf,9,9,w24/9618_w24_ms_11.pdf,7,7,9618_y26_sy.pdf,15,15,,Past Paper
+w24_11_4d,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,October/November 2024,,w24/9618_w24_qp_11.pdf,10,10,w24/9618_w24_ms_11.pdf,8,8,9618_y26_sy.pdf,23,23,,Past Paper
+w24_11_5,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2024,,w24/9618_w24_qp_11.pdf,11,12,w24/9618_w24_ms_11.pdf,8,8,9618_y26_sy.pdf,17,17,,Past Paper
+w24_11_6,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2024,,w24/9618_w24_qp_11.pdf,13,13,w24/9618_w24_ms_11.pdf,9,9,9618_y26_sy.pdf,25,25,,Past Paper
+w24_11_7,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2024,,w24/9618_w24_qp_11.pdf,13,13,w24/9618_w24_ms_11.pdf,9,9,9618_y26_sy.pdf,25,25,,Past Paper
+w24_11_8,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2024,,w24/9618_w24_qp_11.pdf,14,14,w24/9618_w24_ms_11.pdf,9,9,9618_y26_sy.pdf,19,19,,Past Paper
+w24_12_1,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2024,,w24/9618_w24_qp_12.pdf,2,2,w24/9618_w24_ms_12.pdf,3,3,9618_y26_sy.pdf,18,19,,Past Paper
+w24_12_2,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2024,,w24/9618_w24_qp_12.pdf,3,3,w24/9618_w24_ms_12.pdf,3,4,9618_y26_sy.pdf,17,17,,Past Paper
+w24_12_3ab,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2024,,w24/9618_w24_qp_12.pdf,4,5,w24/9618_w24_ms_12.pdf,4,4,9618_y26_sy.pdf,19,19,,Past Paper
+w24_12_3c,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,October/November 2024,,w24/9618_w24_qp_12.pdf,5,5,w24/9618_w24_ms_12.pdf,5,5,9618_y26_sy.pdf,23,23,,Past Paper
+w24_12_4a,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,October/November 2024,,w24/9618_w24_qp_12.pdf,6,6,w24/9618_w24_ms_12.pdf,5,5,9618_y26_sy.pdf,23,23,,Past Paper
+w24_12_4b,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,October/November 2024,,w24/9618_w24_qp_12.pdf,6,6,w24/9618_w24_ms_12.pdf,5,5,9618_y26_sy.pdf,23,23,,Past Paper
+w24_12_4c,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,October/November 2024,,w24/9618_w24_qp_12.pdf,6,6,w24/9618_w24_ms_12.pdf,5,5,9618_y26_sy.pdf,24,24,,Past Paper
+w24_12_5,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2024,,w24/9618_w24_qp_12.pdf,7,7,w24/9618_w24_ms_12.pdf,6,6,9618_y26_sy.pdf,25,25,,Past Paper
+w24_12_6ab,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2024,,w24/9618_w24_qp_12.pdf,8,8,w24/9618_w24_ms_12.pdf,7,7,9618_y26_sy.pdf,25,25,,Past Paper
+w24_12_6bii,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2024,,w24/9618_w24_qp_12.pdf,9,9,w24/9618_w24_ms_12.pdf,7,7,9618_y26_sy.pdf,26,27,,Past Paper
+w24_12_7,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2024,,w24/9618_w24_qp_12.pdf,10,10,w24/9618_w24_ms_12.pdf,8,8,9618_y26_sy.pdf,15,15,,Past Paper
+w24_12_8a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2024,,w24/9618_w24_qp_12.pdf,12,13,w24/9618_w24_ms_12.pdf,9,9,9618_y26_sy.pdf,20,21,,Past Paper
+w24_12_8b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,October/November 2024,,w24/9618_w24_qp_12.pdf,14,15,w24/9618_w24_ms_12.pdf,9,9,9618_y26_sy.pdf,22,22,,Past Paper
+w24_12_9,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2024,,w24/9618_w24_qp_12.pdf,16,16,w24/9618_w24_ms_12.pdf,10,10,9618_y26_sy.pdf,17,17,,Past Paper
+w24_13_1,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2024,,w24/9618_w24_qp_13.pdf,2,2,w24/9618_w24_ms_13.pdf,3,3,9618_y26_sy.pdf,18,19,,Past Paper
+w24_13_2,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2024,,w24/9618_w24_qp_13.pdf,3,3,w24/9618_w24_ms_13.pdf,3,3,9618_y26_sy.pdf,17,17,,Past Paper
+w24_13_3,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2024,,w24/9618_w24_qp_13.pdf,4,4,w24/9618_w24_ms_13.pdf,4,4,9618_y26_sy.pdf,17,17,,Past Paper
+w24_13_4a,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2024,,w24/9618_w24_qp_13.pdf,5,5,w24/9618_w24_ms_13.pdf,4,4,9618_y26_sy.pdf,25,25,,Past Paper
+w24_13_4bc,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2024,,w24/9618_w24_qp_13.pdf,5,7,w24/9618_w24_ms_13.pdf,4,5,9618_y26_sy.pdf,26,27,,Past Paper
+w24_13_4d,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2024,,w24/9618_w24_qp_13.pdf,7,7,w24/9618_w24_ms_13.pdf,5,5,9618_y26_sy.pdf,25,25,,Past Paper
+w24_13_4e,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,October/November 2024,,w24/9618_w24_qp_13.pdf,8,8,w24/9618_w24_ms_13.pdf,5,5,9618_y26_sy.pdf,26,26,,Past Paper
+w24_13_5,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2024,,w24/9618_w24_qp_13.pdf,9,9,w24/9618_w24_ms_13.pdf,5,6,9618_y26_sy.pdf,25,25,,Past Paper
+w24_13_6a,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2024,,w24/9618_w24_qp_13.pdf,10,10,w24/9618_w24_ms_13.pdf,6,6,9618_y26_sy.pdf,14,14,,Past Paper
+w24_13_6bc,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2024,,w24/9618_w24_qp_13.pdf,10,11,w24/9618_w24_ms_13.pdf,6,6,9618_y26_sy.pdf,15,15,,Past Paper
+w24_13_6cii,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,October/November 2024,,w24/9618_w24_qp_13.pdf,11,11,w24/9618_w24_ms_13.pdf,7,7,9618_y26_sy.pdf,15,15,,Past Paper
+w24_13_7a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2024,,w24/9618_w24_qp_13.pdf,12,13,w24/9618_w24_ms_13.pdf,7,7,9618_y26_sy.pdf,20,21,,Past Paper
+w24_13_7b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,October/November 2024,,w24/9618_w24_qp_13.pdf,14,14,w24/9618_w24_ms_13.pdf,7,7,9618_y26_sy.pdf,22,22,,Past Paper
+w24_13_8,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2024,,w24/9618_w24_qp_13.pdf,15,15,w24/9618_w24_ms_13.pdf,7,8,9618_y26_sy.pdf,14,14,,Past Paper
+w24_13_9,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2024,,w24/9618_w24_qp_13.pdf,16,17,w24/9618_w24_ms_13.pdf,8,9,9618_y26_sy.pdf,16,17,,Past Paper
+s25_11_1,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2025,,s25/9618_s25_qp_11.pdf,2,3,s25/9618_s25_ms_11.pdf,4,4,9618_y26_sy.pdf,18,19,,Past Paper
+s25_11_2ac,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2025,,s25/9618_s25_qp_11.pdf,4,5,s25/9618_s25_ms_11.pdf,5,5,9618_y26_sy.pdf,16,17,,Past Paper
+s25_11_2b,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,May/June 2025,,s25/9618_s25_qp_11.pdf,4,5,s25/9618_s25_ms_11.pdf,5,5,9618_y26_sy.pdf,15,15,,Past Paper
+s25_11_3a,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,May/June 2025,,s25/9618_s25_qp_11.pdf,6,6,s25/9618_s25_ms_11.pdf,6,6,9618_y26_sy.pdf,15,15,,Past Paper
+s25_11_3b,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2025,,s25/9618_s25_qp_11.pdf,6,6,s25/9618_s25_ms_11.pdf,6,6,9618_y26_sy.pdf,14,14,,Past Paper
+s25_11_4a,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2025,,s25/9618_s25_qp_11.pdf,7,7,s25/9618_s25_ms_11.pdf,7,7,9618_y26_sy.pdf,25,25,,Past Paper
+s25_11_4b,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2025,,s25/9618_s25_qp_11.pdf,7,7,s25/9618_s25_ms_11.pdf,7,7,9618_y26_sy.pdf,17,17,,Past Paper
+s25_11_5abcd,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2025,,s25/9618_s25_qp_11.pdf,8,9,s25/9618_s25_ms_11.pdf,8,8,9618_y26_sy.pdf,25,25,,Past Paper
+s25_11_5e,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2025,,s25/9618_s25_qp_11.pdf,9,9,s25/9618_s25_ms_11.pdf,9,9,9618_y26_sy.pdf,26,27,,Past Paper
+s25_11_6a,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,May/June 2025,,s25/9618_s25_qp_11.pdf,10,10,s25/9618_s25_ms_11.pdf,10,10,9618_y26_sy.pdf,17,17,,Past Paper
+s25_11_6aiii,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,May/June 2025,,s25/9618_s25_qp_11.pdf,11,11,s25/9618_s25_ms_11.pdf,10,10,9618_y26_sy.pdf,19,19,,Past Paper
+s25_11_6b,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,May/June 2025,,s25/9618_s25_qp_11.pdf,11,11,s25/9618_s25_ms_11.pdf,10,10,9618_y26_sy.pdf,23,23,,Past Paper
+s25_11_7ab,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2025,,s25/9618_s25_qp_11.pdf,12,12,s25/9618_s25_ms_11.pdf,11,11,9618_y26_sy.pdf,24,24,,Past Paper
+s25_11_7c,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,May/June 2025,,s25/9618_s25_qp_11.pdf,13,13,s25/9618_s25_ms_11.pdf,11,11,9618_y26_sy.pdf,24,24,,Past Paper
+s25_11_8a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,May/June 2025,,s25/9618_s25_qp_11.pdf,14,15,s25/9618_s25_ms_11.pdf,12,12,9618_y26_sy.pdf,20,21,,Past Paper
+s25_11_8b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2025,,s25/9618_s25_qp_11.pdf,16,17,s25/9618_s25_ms_11.pdf,12,12,9618_y26_sy.pdf,22,22,,Past Paper
+s25_12_1,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,May/June 2025,,s25/9618_s25_qp_12.pdf,2,3,s25/9618_s25_ms_12.pdf,4,4,9618_y26_sy.pdf,19,19,,Past Paper
+s25_12_2,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2025,,s25/9618_s25_qp_12.pdf,4,4,s25/9618_s25_ms_12.pdf,5,5,9618_y26_sy.pdf,14,14,,Past Paper
+s25_12_3,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2025,,s25/9618_s25_qp_12.pdf,5,6,s25/9618_s25_ms_12.pdf,6,6,9618_y26_sy.pdf,25,25,,Past Paper
+s25_12_4,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2025,,s25/9618_s25_qp_12.pdf,6,7,s25/9618_s25_ms_12.pdf,7,7,9618_y26_sy.pdf,18,19,,Past Paper
+s25_12_5ab,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2025,,s25/9618_s25_qp_12.pdf,8,8,s25/9618_s25_ms_12.pdf,8,8,9618_y26_sy.pdf,25,25,,Past Paper
+s25_12_5c,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,May/June 2025,,s25/9618_s25_qp_12.pdf,9,9,s25/9618_s25_ms_12.pdf,8,8,9618_y26_sy.pdf,26,26,,Past Paper
+s25_12_5d,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2025,,s25/9618_s25_qp_12.pdf,10,10,s25/9618_s25_ms_12.pdf,9,9,9618_y26_sy.pdf,26,27,,Past Paper
+s25_12_6,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2025,,s25/9618_s25_qp_12.pdf,11,12,s25/9618_s25_ms_12.pdf,10,11,9618_y26_sy.pdf,16,17,,Past Paper
+s25_12_7a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,May/June 2025,,s25/9618_s25_qp_12.pdf,14,15,s25/9618_s25_ms_12.pdf,12,12,9618_y26_sy.pdf,20,21,,Past Paper
+s25_12_7b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2025,,s25/9618_s25_qp_12.pdf,16,16,s25/9618_s25_ms_12.pdf,12,12,9618_y26_sy.pdf,22,22,,Past Paper
+s25_13_1ab,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,May/June 2025,,s25/9618_s25_qp_13.pdf,2,2,s25/9618_s25_ms_13.pdf,4,4,9618_y26_sy.pdf,15,15,,Past Paper
+s25_13_1c,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2025,,s25/9618_s25_qp_13.pdf,3,3,s25/9618_s25_ms_13.pdf,4,4,9618_y26_sy.pdf,14,14,,Past Paper
+s25_13_2,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,May/June 2025,,s25/9618_s25_qp_13.pdf,4,4,s25/9618_s25_ms_13.pdf,5,5,9618_y26_sy.pdf,19,19,,Past Paper
+s25_13_3a,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,May/June 2025,,s25/9618_s25_qp_13.pdf,6,6,s25/9618_s25_ms_13.pdf,6,6,9618_y26_sy.pdf,23,23,,Past Paper
+s25_13_3b,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,May/June 2025,,s25/9618_s25_qp_13.pdf,6,6,s25/9618_s25_ms_13.pdf,6,6,9618_y26_sy.pdf,24,24,,Past Paper
+s25_13_3c,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,May/June 2025,,s25/9618_s25_qp_13.pdf,7,7,s25/9618_s25_ms_13.pdf,7,7,9618_y26_sy.pdf,16,17,,Past Paper
+s25_13_3d,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,May/June 2025,,s25/9618_s25_qp_13.pdf,7,7,s25/9618_s25_ms_13.pdf,7,7,9618_y26_sy.pdf,25,25,,Past Paper
+s25_13_4,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,May/June 2025,,s25/9618_s25_qp_13.pdf,8,9,s25/9618_s25_ms_13.pdf,8,8,9618_y26_sy.pdf,18,19,,Past Paper
+s25_13_5a,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,May/June 2025,,s25/9618_s25_qp_13.pdf,10,12,s25/9618_s25_ms_13.pdf,9,9,9618_y26_sy.pdf,20,21,,Past Paper
+s25_13_5b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.3 Bit Manipulation,May/June 2025,,s25/9618_s25_qp_13.pdf,13,13,s25/9618_s25_ms_13.pdf,9,9,9618_y26_sy.pdf,22,22,,Past Paper
+s25_13_6a,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,May/June 2025,,s25/9618_s25_qp_13.pdf,14,14,s25/9618_s25_ms_13.pdf,10,10,9618_y26_sy.pdf,25,25,,Past Paper
+s25_13_6bc,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,May/June 2025,,s25/9618_s25_qp_13.pdf,15,15,s25/9618_s25_ms_13.pdf,10,11,9618_y26_sy.pdf,26,27,,Past Paper
+s25_13_6d,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,May/June 2025,,s25/9618_s25_qp_13.pdf,16,16,s25/9618_s25_ms_13.pdf,11,11,9618_y26_sy.pdf,26,26,,Past Paper
+s25_13_7,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,May/June 2025,,s25/9618_s25_qp_13.pdf,17,17,s25/9618_s25_ms_13.pdf,12,12,9618_y26_sy.pdf,14,14,,Past Paper
+w25_12_1,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,October/November 2025,,w25/9618_w25_qp_12.pdf,2,2,w25/9618_w25_ms_12.pdf,4,4,9618_y26_sy.pdf,24,24,,Past Paper
+w25_12_2,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2025,,w25/9618_w25_qp_12.pdf,2,3,w25/9618_w25_ms_12.pdf,4,5,9618_y26_sy.pdf,25,25,,Past Paper
+w25_12_3ab,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2025,,w25/9618_w25_qp_12.pdf,3,4,w25/9618_w25_ms_12.pdf,5,5,9618_y26_sy.pdf,20,21,,Past Paper
+w25_12_3c,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2025,,w25/9618_w25_qp_12.pdf,5,5,w25/9618_w25_ms_12.pdf,5,5,9618_y26_sy.pdf,19,19,,Past Paper
+w25_12_4a,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2025,,w25/9618_w25_qp_12.pdf,6,6,w25/9618_w25_ms_12.pdf,6,6,9618_y26_sy.pdf,25,25,,Past Paper
+w25_12_4bc,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2025,,w25/9618_w25_qp_12.pdf,6,6,w25/9618_w25_ms_12.pdf,6,6,9618_y26_sy.pdf,26,27,,Past Paper
+w25_12_4d,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,October/November 2025,,w25/9618_w25_qp_12.pdf,7,7,w25/9618_w25_ms_12.pdf,6,6,9618_y26_sy.pdf,26,26,,Past Paper
+w25_12_5abcd,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2025,,w25/9618_w25_qp_12.pdf,8,9,w25/9618_w25_ms_12.pdf,7,7,9618_y26_sy.pdf,16,17,,Past Paper
+w25_12_5e,Paper 1: Theory Fundamentals,6. Security and Integrity,6.1 Data Security,October/November 2025,,w25/9618_w25_qp_12.pdf,9,9,w25/9618_w25_ms_12.pdf,8,8,9618_y26_sy.pdf,24,24,,Past Paper
+w25_12_6a,Paper 1: Theory Fundamentals,1. Information Technology,1.3 Compression,October/November 2025,,w25/9618_w25_qp_12.pdf,10,10,w25/9618_w25_ms_12.pdf,8,8,9618_y26_sy.pdf,15,15,,Past Paper
+w25_12_6b,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2025,,w25/9618_w25_qp_12.pdf,10,10,w25/9618_w25_ms_12.pdf,8,8,9618_y26_sy.pdf,14,14,,Past Paper
+w25_12_6c,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,October/November 2025,,w25/9618_w25_qp_12.pdf,11,11,w25/9618_w25_ms_12.pdf,9,9,9618_y26_sy.pdf,24,24,,Past Paper
+w25_12_6d,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2025,,w25/9618_w25_qp_12.pdf,11,11,w25/9618_w25_ms_12.pdf,9,9,9618_y26_sy.pdf,15,15,,Past Paper
+w25_12_7,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2025,,w25/9618_w25_qp_12.pdf,12,12,w25/9618_w25_ms_12.pdf,9,9,9618_y26_sy.pdf,14,14,,Past Paper
+w25_12_8a,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2025,,w25/9618_w25_qp_12.pdf,13,13,w25/9618_w25_ms_12.pdf,10,10,9618_y26_sy.pdf,16,17,,Past Paper
+w25_12_8b,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2025,,w25/9618_w25_qp_12.pdf,13,13,w25/9618_w25_ms_12.pdf,10,10,9618_y26_sy.pdf,17,17,,Past Paper
+w25_12_9,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2025,,w25/9618_w25_qp_12.pdf,14,14,w25/9618_w25_ms_12.pdf,10,11,9618_y26_sy.pdf,18,19,,Past Paper
+w25_12_10a,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,October/November 2025,,w25/9618_w25_qp_12.pdf,15,15,w25/9618_w25_ms_12.pdf,11,11,9618_y26_sy.pdf,23,23,,Past Paper
+w25_12_10bc,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2025,,w25/9618_w25_qp_12.pdf,15,15,w25/9618_w25_ms_12.pdf,11,11,9618_y26_sy.pdf,25,25,,Past Paper
+w25_12_11,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2025,,w25/9618_w25_qp_12.pdf,16,16,w25/9618_w25_ms_12.pdf,11,11,9618_y26_sy.pdf,17,17,,Past Paper
+w25_13_1a,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2025,,w25/9618_w25_qp_13.pdf,2,2,w25/9618_w25_ms_13.pdf,4,4,9618_y26_sy.pdf,15,15,,Past Paper
+w25_13_1b,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2025,,w25/9618_w25_qp_13.pdf,2,2,w25/9618_w25_ms_13.pdf,4,4,9618_y26_sy.pdf,14,14,,Past Paper
+w25_13_2,Paper 1: Theory Fundamentals,1. Information Technology,1.1 Data Representation,October/November 2025,,w25/9618_w25_qp_13.pdf,3,3,w25/9618_w25_ms_13.pdf,5,5,9618_y26_sy.pdf,14,14,,Past Paper
+w25_13_3,Paper 1: Theory Fundamentals,3. Hardware,3.2 Logic Gate,October/November 2025,,w25/9618_w25_qp_13.pdf,4,4,w25/9618_w25_ms_13.pdf,6,6,9618_y26_sy.pdf,18,19,,Past Paper
+w25_13_4ab,Paper 1: Theory Fundamentals,2. Communication,2.1 Networks,October/November 2025,,w25/9618_w25_qp_13.pdf,5,5,w25/9618_w25_ms_13.pdf,6,7,9618_y26_sy.pdf,16,17,,Past Paper
+w25_13_4c,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2025,,w25/9618_w25_qp_13.pdf,5,5,w25/9618_w25_ms_13.pdf,7,7,9618_y26_sy.pdf,17,17,,Past Paper
+w25_13_5a,Paper 1: Theory Fundamentals,8. Database,8.1 Database Concepts,October/November 2025,,w25/9618_w25_qp_13.pdf,6,6,w25/9618_w25_ms_13.pdf,8,8,9618_y26_sy.pdf,25,25,,Past Paper
+w25_13_5bc,Paper 1: Theory Fundamentals,8. Database,8.3 DDL and DLL,October/November 2025,,w25/9618_w25_qp_13.pdf,7,7,w25/9618_w25_ms_13.pdf,8,9,9618_y26_sy.pdf,26,27,,Past Paper
+w25_13_5d,Paper 1: Theory Fundamentals,8. Database,8.2 DBMS,October/November 2025,,w25/9618_w25_qp_13.pdf,8,8,w25/9618_w25_ms_13.pdf,9,9,9618_y26_sy.pdf,26,26,,Past Paper
+w25_13_6ac,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.2 Assembly Language,October/November 2025,,w25/9618_w25_qp_13.pdf,10,11,w25/9618_w25_ms_13.pdf,10,10,9618_y26_sy.pdf,20,21,,Past Paper
+w25_13_6b,Paper 1: Theory Fundamentals,4. Processor Fundamentals,4.1 CPU Architecture,October/November 2025,,w25/9618_w25_qp_13.pdf,11,11,w25/9618_w25_ms_13.pdf,10,10,9618_y26_sy.pdf,19,19,,Past Paper
+w25_13_7a,Paper 1: Theory Fundamentals,7. Ethics and Ownership,7.1 Ethics and Ownership,October/November 2025,,w25/9618_w25_qp_13.pdf,12,12,w25/9618_w25_ms_13.pdf,11,11,9618_y26_sy.pdf,25,25,,Past Paper
+w25_13_7b,Paper 1: Theory Fundamentals,1. Information Technology,1.2 Multimedia,October/November 2025,,w25/9618_w25_qp_13.pdf,12,12,w25/9618_w25_ms_13.pdf,11,11,9618_y26_sy.pdf,15,15,,Past Paper
+w25_13_7c,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,October/November 2025,,w25/9618_w25_qp_13.pdf,12,12,w25/9618_w25_ms_13.pdf,11,11,9618_y26_sy.pdf,24,24,,Past Paper
+w25_13_7d,Paper 1: Theory Fundamentals,3. Hardware,3.1 Computer Components,October/November 2025,,w25/9618_w25_qp_13.pdf,13,13,w25/9618_w25_ms_13.pdf,12,12,9618_y26_sy.pdf,17,17,,Past Paper
+w25_13_7e,Paper 1: Theory Fundamentals,6. Security and Integrity,6.2 Data Integrity,October/November 2025,,w25/9618_w25_qp_13.pdf,14,14,w25/9618_w25_ms_13.pdf,12,12,9618_y26_sy.pdf,24,24,,Past Paper
+w25_13_8a,Paper 1: Theory Fundamentals,5. System Software,5.2 Language Translator,October/November 2025,,w25/9618_w25_qp_13.pdf,15,15,w25/9618_w25_ms_13.pdf,12,12,9618_y26_sy.pdf,23,23,,Past Paper
+w25_13_8bcd,Paper 1: Theory Fundamentals,5. System Software,5.1 Operating System,October/November 2025,,w25/9618_w25_qp_13.pdf,15,15,w25/9618_w25_ms_13.pdf,12,12,9618_y26_sy.pdf,23,23,,Past Paper
+s21_21_1a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2021,,s21/9618_s21_qp_21.pdf,2,2,s21/9618_s21_ms_21.pdf,3,3,9618_y26_sy.pdf,28,28,,Past Paper
+s21_21_1b,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2021,,s21/9618_s21_qp_21.pdf,2,2,s21/9618_s21_ms_21.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s21_21_1c,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2021,,s21/9618_s21_qp_21.pdf,3,3,s21/9618_s21_ms_21.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+s21_21_2a,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2021,,s21/9618_s21_qp_21.pdf,4,4,s21/9618_s21_ms_21.pdf,5,5,9618_y26_sy.pdf,30,30,,Past Paper
+s21_21_2b,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2021,,s21/9618_s21_qp_21.pdf,5,5,s21/9618_s21_ms_21.pdf,5,5,9618_y26_sy.pdf,30,30,,Past Paper
+s21_21_2c,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2021,,s21/9618_s21_qp_21.pdf,6,6,s21/9618_s21_ms_21.pdf,6,6,9618_y26_sy.pdf,27,28,,Past Paper
+s21_21_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,May/June 2021,,s21/9618_s21_qp_21.pdf,8,9,s21/9618_s21_ms_21.pdf,7,8,9618_y26_sy.pdf,28,28,,Past Paper
+s21_21_4a,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2021,,s21/9618_s21_qp_21.pdf,10,11,s21/9618_s21_ms_21.pdf,9,9,9618_y26_sy.pdf,31,31,,Past Paper
+s21_21_4b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2021,,s21/9618_s21_qp_21.pdf,12,12,s21/9618_s21_ms_21.pdf,10,10,9618_y26_sy.pdf,29,29,,Past Paper
+s21_21_4c,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2021,,s21/9618_s21_qp_21.pdf,10,12,s21/9618_s21_ms_21.pdf,10,10,9618_y26_sy.pdf,31,31,,Past Paper
+s21_21_5,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,May/June 2021,,s21/9618_s21_qp_21.pdf,14,15,s21/9618_s21_ms_21.pdf,11,11,9618_y26_sy.pdf,28,28,,Past Paper
+s21_21_6,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,May/June 2021,,s21/9618_s21_qp_21.pdf,16,16,s21/9618_s21_ms_21.pdf,11,12,9618_y26_sy.pdf,29,29,,Past Paper
+s21_22_1ai,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2021,,s21/9618_s21_qp_22.pdf,2,2,s21/9618_s21_ms_22.pdf,3,3,9618_y26_sy.pdf,28,28,,Past Paper
+s21_22_1aii,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2021,,s21/9618_s21_qp_22.pdf,2,2,s21/9618_s21_ms_22.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s21_22_1b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2021,,s21/9618_s21_qp_22.pdf,2,2,s21/9618_s21_ms_22.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s21_22_2a,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2021,,s21/9618_s21_qp_22.pdf,3,3,s21/9618_s21_ms_22.pdf,4,4,9618_y26_sy.pdf,30,30,,Past Paper
+s21_22_2b,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,May/June 2021,,s21/9618_s21_qp_22.pdf,4,4,s21/9618_s21_ms_22.pdf,4,4,9618_y26_sy.pdf,27,27,,Past Paper
+s21_22_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,May/June 2021,,s21/9618_s21_qp_22.pdf,5,5,s21/9618_s21_ms_22.pdf,4,5,9618_y26_sy.pdf,29,29,,Past Paper
+s21_22_4,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2021,,s21/9618_s21_qp_22.pdf,6,6,s21/9618_s21_ms_22.pdf,5,5,9618_y26_sy.pdf,27,28,,Past Paper
+s21_22_5a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,May/June 2021,,s21/9618_s21_qp_22.pdf,7,7,s21/9618_s21_ms_22.pdf,6,6,9618_y26_sy.pdf,28,28,,Past Paper
+s21_22_5b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2021,,s21/9618_s21_qp_22.pdf,8,8,s21/9618_s21_ms_22.pdf,6,6,9618_y26_sy.pdf,31,31,,Past Paper
+s21_22_6,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2021,,s21/9618_s21_qp_22.pdf,10,11,s21/9618_s21_ms_22.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+s21_22_7,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2021,,s21/9618_s21_qp_22.pdf,11,11,s21/9618_s21_ms_22.pdf,8,8,9618_y26_sy.pdf,31,31,,Past Paper
+w21_21_1a,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2021,,w21/9618_w21_qp_21.pdf,2,2,w21/9618_w21_ms_21.pdf,3,3,9618_y26_sy.pdf,31,31,,Past Paper
+w21_21_1b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2021,,w21/9618_w21_qp_21.pdf,2,2,w21/9618_w21_ms_21.pdf,3,3,9618_y26_sy.pdf,28,28,,Past Paper
+w21_21_1c,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,October/November 2021,,w21/9618_w21_qp_21.pdf,3,3,w21/9618_w21_ms_21.pdf,4,4,9618_y26_sy.pdf,27,27,,Past Paper
+w21_21_2,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2021,,w21/9618_w21_qp_21.pdf,5,7,w21/9618_w21_ms_21.pdf,4,5,9618_y26_sy.pdf,27,28,,Past Paper
+w21_21_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,October/November 2021,,w21/9618_w21_qp_21.pdf,8,10,w21/9618_w21_ms_21.pdf,5,6,9618_y26_sy.pdf,29,29,,Past Paper
+w21_21_4,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,October/November 2021,,w21/9618_w21_qp_21.pdf,11,11,w21/9618_w21_ms_21.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+w21_21_5,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,October/November 2021,,w21/9618_w21_qp_21.pdf,12,13,w21/9618_w21_ms_21.pdf,7,8,9618_y26_sy.pdf,28,28,,Past Paper
+w21_22_1a,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,October/November 2021,,w21/9618_w21_qp_22.pdf,2,2,w21/9618_w21_ms_22.pdf,3,3,9618_y26_sy.pdf,27,27,,Past Paper
+w21_22_1b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,October/November 2021,,w21/9618_w21_qp_22.pdf,2,2,w21/9618_w21_ms_22.pdf,3,3,9618_y26_sy.pdf,28,28,,Past Paper
+w21_22_1cd,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2021,,w21/9618_w21_qp_22.pdf,2,3,w21/9618_w21_ms_22.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+w21_22_2a,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2021,,w21/9618_w21_qp_22.pdf,4,5,w21/9618_w21_ms_22.pdf,4,4,9618_y26_sy.pdf,27,28,,Past Paper
+w21_22_2b,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,October/November 2021,,w21/9618_w21_qp_22.pdf,6,6,w21/9618_w21_ms_22.pdf,5,5,9618_y26_sy.pdf,30,30,,Past Paper
+w21_22_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2021,,w21/9618_w21_qp_22.pdf,8,9,w21/9618_w21_ms_22.pdf,5,6,9618_y26_sy.pdf,28,28,,Past Paper
+w21_22_4ab,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2021,,w21/9618_w21_qp_22.pdf,10,10,w21/9618_w21_ms_22.pdf,6,7,9618_y26_sy.pdf,29,29,,Past Paper
+w21_22_4c,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2021,,w21/9618_w21_qp_22.pdf,11,11,w21/9618_w21_ms_22.pdf,7,7,9618_y26_sy.pdf,29,29,,Past Paper
+w21_22_5,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,October/November 2021,,w21/9618_w21_qp_22.pdf,12,14,w21/9618_w21_ms_22.pdf,8,9,9618_y26_sy.pdf,28,28,,Past Paper
+s22_21_1a,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,May/June 2022,,s22/9618_s22_qp_21.pdf,2,2,s22/9618_s22_ms_21.pdf,3,3,9618_y26_sy.pdf,27,27,,Past Paper
+s22_21_1b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2022,,s22/9618_s22_qp_21.pdf,2,2,s22/9618_s22_ms_21.pdf,3,3,9618_y26_sy.pdf,28,28,,Past Paper
+s22_21_1c,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2022,,s22/9618_s22_qp_21.pdf,2,2,s22/9618_s22_ms_21.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s22_21_2,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2022,,s22/9618_s22_qp_21.pdf,3,3,s22/9618_s22_ms_21.pdf,3,4,9618_y26_sy.pdf,30,30,,Past Paper
+s22_21_3,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2022,,s22/9618_s22_qp_21.pdf,4,4,s22/9618_s22_ms_21.pdf,4,4,9618_y26_sy.pdf,30,30,,Past Paper
+s22_21_4,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,May/June 2022,,s22/9618_s22_qp_21.pdf,6,7,s22/9618_s22_ms_21.pdf,4,5,9618_y26_sy.pdf,29,29,,Past Paper
+s22_21_5,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2022,,s22/9618_s22_qp_21.pdf,8,8,s22/9618_s22_ms_21.pdf,5,5,9618_y26_sy.pdf,27,28,,Past Paper
+s22_21_6,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2022,,s22/9618_s22_qp_21.pdf,9,10,s22/9618_s22_ms_21.pdf,6,7,9618_y26_sy.pdf,29,29,,Past Paper
+s22_21_7a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2022,,s22/9618_s22_qp_21.pdf,11,12,s22/9618_s22_ms_21.pdf,8,8,9618_y26_sy.pdf,30,30,,Past Paper
+s22_21_7b,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2022,,s22/9618_s22_qp_21.pdf,13,13,s22/9618_s22_ms_21.pdf,9,9,9618_y26_sy.pdf,27,28,,Past Paper
+s22_22_1b,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,May/June 2022,,s22/9618_s22_qp_22.pdf,2,2,s22/9618_s22_ms_22.pdf,3,3,9618_y26_sy.pdf,30,30,,Past Paper
+s22_22_1cd,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2022,,s22/9618_s22_qp_22.pdf,2,2,s22/9618_s22_ms_22.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s22_22_2,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2022,,s22/9618_s22_qp_22.pdf,3,3,s22/9618_s22_ms_22.pdf,4,4,9618_y26_sy.pdf,27,28,,Past Paper
+s22_22_3a,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2022,,s22/9618_s22_qp_22.pdf,4,5,s22/9618_s22_ms_22.pdf,5,5,9618_y26_sy.pdf,30,30,,Past Paper
+s22_22_3b,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,May/June 2022,,s22/9618_s22_qp_22.pdf,5,5,s22/9618_s22_ms_22.pdf,5,5,9618_y26_sy.pdf,27,27,,Past Paper
+s22_22_4a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,May/June 2022,,s22/9618_s22_qp_22.pdf,6,6,s22/9618_s22_ms_22.pdf,6,7,9618_y26_sy.pdf,28,28,,Past Paper
+s22_22_4b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2022,,s22/9618_s22_qp_22.pdf,6,7,s22/9618_s22_ms_22.pdf,8,8,9618_y26_sy.pdf,31,31,,Past Paper
+s22_22_5a,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2022,,s22/9618_s22_qp_22.pdf,8,8,s22/9618_s22_ms_22.pdf,9,9,9618_y26_sy.pdf,29,29,,Past Paper
+s22_22_5bc,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2022,,s22/9618_s22_qp_22.pdf,8,9,s22/9618_s22_ms_22.pdf,9,9,9618_y26_sy.pdf,31,31,,Past Paper
+s22_22_6,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2022,,s22/9618_s22_qp_22.pdf,10,11,s22/9618_s22_ms_22.pdf,10,10,9618_y26_sy.pdf,29,29,,Past Paper
+s22_22_7a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2022,,s22/9618_s22_qp_22.pdf,12,12,s22/9618_s22_ms_22.pdf,11,11,9618_y26_sy.pdf,30,30,,Past Paper
+s22_22_7b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2022,,s22/9618_s22_qp_22.pdf,12,12,s22/9618_s22_ms_22.pdf,11,11,9618_y26_sy.pdf,31,31,,Past Paper
+s22_23_1a,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2022,,s22/9618_s22_qp_23.pdf,2,2,s22/9618_s22_ms_23.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s22_23_1b,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2022,,s22/9618_s22_qp_23.pdf,2,2,s22/9618_s22_ms_23.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s22_23_2,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2022,,s22/9618_s22_qp_23.pdf,3,3,s22/9618_s22_ms_23.pdf,4,4,9618_y26_sy.pdf,31,31,,Past Paper
+s22_23_3,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2022,,s22/9618_s22_qp_23.pdf,4,4,s22/9618_s22_ms_23.pdf,4,4,9618_y26_sy.pdf,30,30,,Past Paper
+s22_23_4,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2022,,s22/9618_s22_qp_23.pdf,5,5,s22/9618_s22_ms_23.pdf,5,5,9618_y26_sy.pdf,31,31,,Past Paper
+s22_23_5,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2022,,s22/9618_s22_qp_23.pdf,6,7,s22/9618_s22_ms_23.pdf,5,6,9618_y26_sy.pdf,28,28,,Past Paper
+s22_23_6a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2022,,s22/9618_s22_qp_23.pdf,8,8,s22/9618_s22_ms_23.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+s22_23_6b,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2022,,s22/9618_s22_qp_23.pdf,9,9,s22/9618_s22_ms_23.pdf,8,8,9618_y26_sy.pdf,27,28,,Past Paper
+s22_23_7,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2022,,s22/9618_s22_qp_23.pdf,10,11,s22/9618_s22_ms_23.pdf,8,9,9618_y26_sy.pdf,31,31,,Past Paper
+s22_23_8,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,May/June 2022,,s22/9618_s22_qp_23.pdf,12,12,s22/9618_s22_ms_23.pdf,9,9,9618_y26_sy.pdf,30,30,,Past Paper
+w22_21_1b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,October/November 2022,,w22/9618_w22_qp_21.pdf,2,3,w22/9618_w22_ms_21.pdf,3,3,9618_y26_sy.pdf,28,28,,Past Paper
+w22_21_1c,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2022,,w22/9618_w22_qp_21.pdf,3,3,w22/9618_w22_ms_21.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+w22_21_2,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,October/November 2022,,w22/9618_w22_qp_21.pdf,4,4,w22/9618_w22_ms_21.pdf,4,4,9618_y26_sy.pdf,27,27,,Past Paper
+w22_21_3,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2022,,w22/9618_w22_qp_21.pdf,5,5,w22/9618_w22_ms_21.pdf,4,4,9618_y26_sy.pdf,27,28,,Past Paper
+w22_21_4,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,October/November 2022,,w22/9618_w22_qp_21.pdf,6,7,w22/9618_w22_ms_21.pdf,5,5,9618_y26_sy.pdf,29,29,,Past Paper
+w22_21_5,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2022,,w22/9618_w22_qp_21.pdf,8,8,w22/9618_w22_ms_21.pdf,6,6,9618_y26_sy.pdf,30,30,,Past Paper
+w22_21_6,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2022,,w22/9618_w22_qp_21.pdf,10,11,w22/9618_w22_ms_21.pdf,6,7,9618_y26_sy.pdf,31,31,,Past Paper
+w22_21_7a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2022,,w22/9618_w22_qp_21.pdf,12,13,w22/9618_w22_ms_21.pdf,8,8,9618_y26_sy.pdf,30,30,,Past Paper
+w22_21_7b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2022,,w22/9618_w22_qp_21.pdf,13,13,w22/9618_w22_ms_21.pdf,9,9,9618_y26_sy.pdf,31,31,,Past Paper
+w22_22_1a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2022,,w22/9618_w22_qp_22.pdf,2,2,w22/9618_w22_ms_22.pdf,3,3,9618_y26_sy.pdf,30,30,,Past Paper
+w22_22_1b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2022,,w22/9618_w22_qp_22.pdf,2,2,w22/9618_w22_ms_22.pdf,3,3,9618_y26_sy.pdf,31,31,,Past Paper
+w22_22_1c,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2022,,w22/9618_w22_qp_22.pdf,3,3,w22/9618_w22_ms_22.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+w22_22_2a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,October/November 2022,,w22/9618_w22_qp_22.pdf,3,4,w22/9618_w22_ms_22.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+w22_22_2b,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,October/November 2022,,w22/9618_w22_qp_22.pdf,4,4,w22/9618_w22_ms_22.pdf,4,4,9618_y26_sy.pdf,30,30,,Past Paper
+w22_22_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,October/November 2022,,w22/9618_w22_qp_22.pdf,5,6,w22/9618_w22_ms_22.pdf,5,6,9618_y26_sy.pdf,29,29,,Past Paper
+w22_22_4,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2022,,w22/9618_w22_qp_22.pdf,8,9,w22/9618_w22_ms_22.pdf,7,8,9618_y26_sy.pdf,27,28,,Past Paper
+w22_22_5,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2022,,w22/9618_w22_qp_22.pdf,10,10,w22/9618_w22_ms_22.pdf,8,8,9618_y26_sy.pdf,31,31,,Past Paper
+w22_22_6a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2022,,w22/9618_w22_qp_22.pdf,12,13,w22/9618_w22_ms_22.pdf,10,10,9618_y26_sy.pdf,30,30,,Past Paper
+w22_22_6b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2022,,w22/9618_w22_qp_22.pdf,14,14,w22/9618_w22_ms_22.pdf,10,10,9618_y26_sy.pdf,31,31,,Past Paper
+w22_23_1a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2022,,w22/9618_w22_qp_23.pdf,2,2,w22/9618_w22_ms_23.pdf,3,3,9618_y26_sy.pdf,28,28,,Past Paper
+w22_23_1bc,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,October/November 2022,,w22/9618_w22_qp_23.pdf,2,3,w22/9618_w22_ms_23.pdf,3,3,9618_y26_sy.pdf,30,30,,Past Paper
+w22_23_1d,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2022,,w22/9618_w22_qp_23.pdf,3,3,w22/9618_w22_ms_23.pdf,4,4,9618_y26_sy.pdf,31,31,,Past Paper
+w22_23_2,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,October/November 2022,,w22/9618_w22_qp_23.pdf,4,4,w22/9618_w22_ms_23.pdf,4,4,9618_y26_sy.pdf,27,27,,Past Paper
+w22_23_3,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2022,,w22/9618_w22_qp_23.pdf,5,5,w22/9618_w22_ms_23.pdf,4,4,9618_y26_sy.pdf,27,28,,Past Paper
+w22_23_4,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,October/November 2022,,w22/9618_w22_qp_23.pdf,6,6,w22/9618_w22_ms_23.pdf,4,5,9618_y26_sy.pdf,29,29,,Past Paper
+w22_23_5a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2022,,w22/9618_w22_qp_23.pdf,7,7,w22/9618_w22_ms_23.pdf,5,5,9618_y26_sy.pdf,30,30,,Past Paper
+w22_23_5b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2022,,w22/9618_w22_qp_23.pdf,8,8,w22/9618_w22_ms_23.pdf,5,5,9618_y26_sy.pdf,28,28,,Past Paper
+w22_23_5biid,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2022,,w22/9618_w22_qp_23.pdf,8,9,w22/9618_w22_ms_23.pdf,6,6,9618_y26_sy.pdf,31,31,,Past Paper
+w22_23_5c,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2022,,w22/9618_w22_qp_23.pdf,9,9,w22/9618_w22_ms_23.pdf,6,6,9618_y26_sy.pdf,29,29,,Past Paper
+w22_23_6a,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2022,,w22/9618_w22_qp_23.pdf,10,10,w22/9618_w22_ms_23.pdf,6,6,9618_y26_sy.pdf,31,31,,Past Paper
+w22_23_6b,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2022,,w22/9618_w22_qp_23.pdf,10,11,w22/9618_w22_ms_23.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+s23_21_1b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2023,,s23/9618_s23_qp_21.pdf,2,2,s23/9618_s23_ms_21.pdf,3,3,9618_y26_sy.pdf,31,31,,Past Paper
+s23_21_1c,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2023,,s23/9618_s23_qp_21.pdf,3,3,s23/9618_s23_ms_21.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s23_21_2a,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2023,,s23/9618_s23_qp_21.pdf,4,4,s23/9618_s23_ms_21.pdf,4,4,9618_y26_sy.pdf,27,28,,Past Paper
+s23_21_2b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2023,,s23/9618_s23_qp_21.pdf,5,5,s23/9618_s23_ms_21.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+s23_21_3a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2023,,s23/9618_s23_qp_21.pdf,6,6,s23/9618_s23_ms_21.pdf,5,5,9618_y26_sy.pdf,28,28,,Past Paper
+s23_21_3b,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2023,,s23/9618_s23_qp_21.pdf,7,7,s23/9618_s23_ms_21.pdf,5,5,9618_y26_sy.pdf,27,28,,Past Paper
+s23_21_4,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2023,,s23/9618_s23_qp_21.pdf,8,8,s23/9618_s23_ms_21.pdf,6,6,9618_y26_sy.pdf,30,30,,Past Paper
+s23_21_5a,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,May/June 2023,,s23/9618_s23_qp_21.pdf,9,9,s23/9618_s23_ms_21.pdf,6,6,9618_y26_sy.pdf,30,30,,Past Paper
+s23_21_5b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2023,,s23/9618_s23_qp_21.pdf,9,9,s23/9618_s23_ms_21.pdf,7,7,9618_y26_sy.pdf,31,31,,Past Paper
+s23_21_6,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2023,,s23/9618_s23_qp_21.pdf,10,11,s23/9618_s23_ms_21.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+s23_21_7a,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,May/June 2023,,s23/9618_s23_qp_21.pdf,12,12,s23/9618_s23_ms_21.pdf,8,8,9618_y26_sy.pdf,27,27,,Past Paper
+s23_21_7b,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2023,,s23/9618_s23_qp_21.pdf,13,13,s23/9618_s23_ms_21.pdf,8,8,9618_y26_sy.pdf,30,30,,Past Paper
+s23_22_1ab,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2023,,s23/9618_s23_qp_22.pdf,2,2,s23/9618_s23_ms_22.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s23_22_1c,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2023,,s23/9618_s23_qp_22.pdf,2,2,s23/9618_s23_ms_22.pdf,3,3,9618_y26_sy.pdf,28,28,,Past Paper
+s23_22_2ab,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2023,,s23/9618_s23_qp_22.pdf,3,3,s23/9618_s23_ms_22.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s23_22_2c,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2023,,s23/9618_s23_qp_22.pdf,3,3,s23/9618_s23_ms_22.pdf,4,4,9618_y26_sy.pdf,27,28,,Past Paper
+s23_22_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,May/June 2023,,s23/9618_s23_qp_22.pdf,4,5,s23/9618_s23_ms_22.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+s23_22_4,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2023,,s23/9618_s23_qp_22.pdf,6,6,s23/9618_s23_ms_22.pdf,5,5,9618_y26_sy.pdf,30,30,,Past Paper
+s23_22_5,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2023,,s23/9618_s23_qp_22.pdf,8,9,s23/9618_s23_ms_22.pdf,5,6,9618_y26_sy.pdf,31,31,,Past Paper
+s23_22_6,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2023,,s23/9618_s23_qp_22.pdf,10,12,s23/9618_s23_ms_22.pdf,7,8,9618_y26_sy.pdf,30,30,,Past Paper
+s23_22_7a,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,May/June 2023,,s23/9618_s23_qp_22.pdf,14,14,s23/9618_s23_ms_22.pdf,9,9,9618_y26_sy.pdf,27,27,,Past Paper
+s23_22_7b,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2023,,s23/9618_s23_qp_22.pdf,15,15,s23/9618_s23_ms_22.pdf,10,10,9618_y26_sy.pdf,30,30,,Past Paper
+s23_23_1a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,May/June 2023,,s23/9618_s23_qp_23.pdf,2,2,s23/9618_s23_ms_23.pdf,3,3,9618_y26_sy.pdf,28,28,,Past Paper
+s23_23_1b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2023,,s23/9618_s23_qp_23.pdf,2,2,s23/9618_s23_ms_23.pdf,3,3,9618_y26_sy.pdf,31,31,,Past Paper
+s23_23_1c,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2023,,s23/9618_s23_qp_23.pdf,2,2,s23/9618_s23_ms_23.pdf,3,3,9618_y26_sy.pdf,28,28,,Past Paper
+s23_23_1d,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2023,,s23/9618_s23_qp_23.pdf,3,3,s23/9618_s23_ms_23.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s23_23_2,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2023,,s23/9618_s23_qp_23.pdf,4,4,s23/9618_s23_ms_23.pdf,3,3,9618_y26_sy.pdf,29,29,,Past Paper
+s23_23_3a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,May/June 2023,,s23/9618_s23_qp_23.pdf,6,7,s23/9618_s23_ms_23.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+s23_23_3b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,May/June 2023,,s23/9618_s23_qp_23.pdf,7,7,s23/9618_s23_ms_23.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+s23_23_4,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2023,,s23/9618_s23_qp_23.pdf,8,8,s23/9618_s23_ms_23.pdf,5,5,9618_y26_sy.pdf,30,30,,Past Paper
+s23_23_5,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2023,,s23/9618_s23_qp_23.pdf,9,9,s23/9618_s23_ms_23.pdf,5,5,9618_y26_sy.pdf,31,31,,Past Paper
+s23_23_6,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2023,,s23/9618_s23_qp_23.pdf,10,11,s23/9618_s23_ms_23.pdf,6,6,9618_y26_sy.pdf,30,30,,Past Paper
+s23_23_7a,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,May/June 2023,,s23/9618_s23_qp_23.pdf,12,12,s23/9618_s23_ms_23.pdf,6,7,9618_y26_sy.pdf,27,27,,Past Paper
+s23_23_7b,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2023,,s23/9618_s23_qp_23.pdf,13,13,s23/9618_s23_ms_23.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+w23_21_1abc,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2023,,w23/9618_w23_qp_21.pdf,2,2,w23/9618_w23_ms_21.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+w23_21_1d,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2023,,w23/9618_w23_qp_21.pdf,3,3,w23/9618_w23_ms_21.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+w23_21_2a,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2023,,w23/9618_w23_qp_21.pdf,3,3,w23/9618_w23_ms_21.pdf,5,5,9618_y26_sy.pdf,27,28,,Past Paper
+w23_21_2b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2023,,w23/9618_w23_qp_21.pdf,3,3,w23/9618_w23_ms_21.pdf,5,5,9618_y26_sy.pdf,29,29,,Past Paper
+w23_21_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,October/November 2023,,w23/9618_w23_qp_21.pdf,4,5,w23/9618_w23_ms_21.pdf,5,5,9618_y26_sy.pdf,29,29,,Past Paper
+w23_21_4,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,October/November 2023,,w23/9618_w23_qp_21.pdf,6,7,w23/9618_w23_ms_21.pdf,6,6,9618_y26_sy.pdf,28,28,,Past Paper
+w23_21_5,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2023,,w23/9618_w23_qp_21.pdf,8,9,w23/9618_w23_ms_21.pdf,7,7,9618_y26_sy.pdf,31,31,,Past Paper
+w23_21_6,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2023,,w23/9618_w23_qp_21.pdf,10,11,w23/9618_w23_ms_21.pdf,7,8,9618_y26_sy.pdf,30,30,,Past Paper
+w23_21_7,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,October/November 2023,,w23/9618_w23_qp_21.pdf,12,12,w23/9618_w23_ms_21.pdf,8,8,9618_y26_sy.pdf,30,30,,Past Paper
+w23_22_1a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2023,,w23/9618_w23_qp_22.pdf,2,2,w23/9618_w23_ms_22.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+w23_22_1b,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2023,,w23/9618_w23_qp_22.pdf,2,2,w23/9618_w23_ms_22.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+w23_22_1c,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2023,,w23/9618_w23_qp_22.pdf,3,3,w23/9618_w23_ms_22.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+w23_22_2a,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2023,,w23/9618_w23_qp_22.pdf,4,4,w23/9618_w23_ms_22.pdf,5,5,9618_y26_sy.pdf,27,28,,Past Paper
+w23_22_2b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2023,,w23/9618_w23_qp_22.pdf,5,5,w23/9618_w23_ms_22.pdf,5,5,9618_y26_sy.pdf,29,29,,Past Paper
+w23_22_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,October/November 2023,,w23/9618_w23_qp_22.pdf,6,7,w23/9618_w23_ms_22.pdf,6,6,9618_y26_sy.pdf,29,29,,Past Paper
+w23_22_4a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2023,,w23/9618_w23_qp_22.pdf,8,8,w23/9618_w23_ms_22.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+w23_22_4b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2023,,w23/9618_w23_qp_22.pdf,9,9,w23/9618_w23_ms_22.pdf,7,7,9618_y26_sy.pdf,31,31,,Past Paper
+w23_22_5,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2023,,w23/9618_w23_qp_22.pdf,10,11,w23/9618_w23_ms_22.pdf,8,8,9618_y26_sy.pdf,31,31,,Past Paper
+w23_22_6,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,October/November 2023,,w23/9618_w23_qp_22.pdf,12,13,w23/9618_w23_ms_22.pdf,9,9,9618_y26_sy.pdf,28,28,,Past Paper
+w23_22_7,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,October/November 2023,,w23/9618_w23_qp_22.pdf,14,14,w23/9618_w23_ms_22.pdf,10,10,9618_y26_sy.pdf,30,30,,Past Paper
+w23_23_1a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2023,,w23/9618_w23_qp_23.pdf,2,2,w23/9618_w23_ms_23.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+w23_23_1bc,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2023,,w23/9618_w23_qp_23.pdf,2,3,w23/9618_w23_ms_23.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+w23_23_1d,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2023,,w23/9618_w23_qp_23.pdf,3,3,w23/9618_w23_ms_23.pdf,4,4,9618_y26_sy.pdf,31,31,,Past Paper
+w23_23_2a,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2023,,w23/9618_w23_qp_23.pdf,4,4,w23/9618_w23_ms_23.pdf,5,5,9618_y26_sy.pdf,27,28,,Past Paper
+w23_23_2bc,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,October/November 2023,,w23/9618_w23_qp_23.pdf,5,5,w23/9618_w23_ms_23.pdf,5,5,9618_y26_sy.pdf,28,28,,Past Paper
+w23_23_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,October/November 2023,,w23/9618_w23_qp_23.pdf,6,7,w23/9618_w23_ms_23.pdf,6,6,9618_y26_sy.pdf,29,29,,Past Paper
+w23_23_4,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2023,,w23/9618_w23_qp_23.pdf,8,9,w23/9618_w23_ms_23.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+w23_23_5,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2023,,w23/9618_w23_qp_23.pdf,10,11,w23/9618_w23_ms_23.pdf,8,8,9618_y26_sy.pdf,31,31,,Past Paper
+w23_23_6,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2023,,w23/9618_w23_qp_23.pdf,12,13,w23/9618_w23_ms_23.pdf,9,9,9618_y26_sy.pdf,30,30,,Past Paper
+w23_23_7,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,October/November 2023,,w23/9618_w23_qp_23.pdf,14,15,w23/9618_w23_ms_23.pdf,9,9,9618_y26_sy.pdf,30,30,,Past Paper
+w23_23_7bi,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2023,,w23/9618_w23_qp_23.pdf,15,15,w23/9618_w23_ms_23.pdf,9,9,9618_y26_sy.pdf,28,28,,Past Paper
+s24_21_1a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2024,,s24/9618_s24_qp_21.pdf,2,2,s24/9618_s24_ms_21.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+s24_21_1bc,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2024,,s24/9618_s24_qp_21.pdf,2,3,s24/9618_s24_ms_21.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+s24_21_2,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2024,,s24/9618_s24_qp_21.pdf,4,5,s24/9618_s24_ms_21.pdf,5,5,9618_y26_sy.pdf,27,28,,Past Paper
+s24_21_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,May/June 2024,,s24/9618_s24_qp_21.pdf,6,7,s24/9618_s24_ms_21.pdf,6,6,9618_y26_sy.pdf,29,29,,Past Paper
+s24_21_4,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2024,,s24/9618_s24_qp_21.pdf,8,8,s24/9618_s24_ms_21.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+s24_21_5a,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2024,,s24/9618_s24_qp_21.pdf,10,11,s24/9618_s24_ms_21.pdf,8,8,9618_y26_sy.pdf,31,31,,Past Paper
+s24_21_5b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2024,,s24/9618_s24_qp_21.pdf,11,11,s24/9618_s24_ms_21.pdf,8,8,9618_y26_sy.pdf,29,29,,Past Paper
+s24_21_6a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2024,,s24/9618_s24_qp_21.pdf,12,13,s24/9618_s24_ms_21.pdf,9,9,9618_y26_sy.pdf,30,30,,Past Paper
+s24_21_6b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2024,,s24/9618_s24_qp_21.pdf,14,14,s24/9618_s24_ms_21.pdf,9,9,9618_y26_sy.pdf,31,31,,Past Paper
+s24_21_7a,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,May/June 2024,,s24/9618_s24_qp_21.pdf,16,16,s24/9618_s24_ms_21.pdf,9,10,9618_y26_sy.pdf,27,27,,Past Paper
+s24_21_7b,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2024,,s24/9618_s24_qp_21.pdf,17,17,s24/9618_s24_ms_21.pdf,10,10,9618_y26_sy.pdf,30,30,,Past Paper
+s24_22_1a,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2024,,s24/9618_s24_qp_22.pdf,2,2,s24/9618_s24_ms_22.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+s24_22_1bc,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2024,,s24/9618_s24_qp_22.pdf,2,3,s24/9618_s24_ms_22.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+s24_22_2a,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2024,,s24/9618_s24_qp_22.pdf,4,5,s24/9618_s24_ms_22.pdf,5,5,9618_y26_sy.pdf,27,28,,Past Paper
+s24_22_2b,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2024,,s24/9618_s24_qp_22.pdf,6,6,s24/9618_s24_ms_22.pdf,6,6,9618_y26_sy.pdf,29,29,,Past Paper
+s24_22_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2024,,s24/9618_s24_qp_22.pdf,7,7,s24/9618_s24_ms_22.pdf,6,7,9618_y26_sy.pdf,28,28,,Past Paper
+s24_22_4,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2024,,s24/9618_s24_qp_22.pdf,8,9,s24/9618_s24_ms_22.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+s24_22_5,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2024,,s24/9618_s24_qp_22.pdf,10,11,s24/9618_s24_ms_22.pdf,8,8,9618_y26_sy.pdf,31,31,,Past Paper
+s24_22_6a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2024,,s24/9618_s24_qp_22.pdf,12,13,s24/9618_s24_ms_22.pdf,9,9,9618_y26_sy.pdf,30,30,,Past Paper
+s24_22_6b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2024,,s24/9618_s24_qp_22.pdf,14,14,s24/9618_s24_ms_22.pdf,9,9,9618_y26_sy.pdf,31,31,,Past Paper
+s24_22_7a,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,May/June 2024,,s24/9618_s24_qp_22.pdf,16,16,s24/9618_s24_ms_22.pdf,10,10,9618_y26_sy.pdf,27,27,,Past Paper
+s24_22_7b,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2024,,s24/9618_s24_qp_22.pdf,17,17,s24/9618_s24_ms_22.pdf,10,10,9618_y26_sy.pdf,30,30,,Past Paper
+s24_23_1a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2024,,s24/9618_s24_qp_23.pdf,2,2,s24/9618_s24_ms_23.pdf,4,4,9618_y26_sy.pdf,30,30,,Past Paper
+s24_23_1b,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2024,,s24/9618_s24_qp_23.pdf,3,3,s24/9618_s24_ms_23.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+s24_23_2a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,May/June 2024,,s24/9618_s24_qp_23.pdf,4,4,s24/9618_s24_ms_23.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+s24_23_2b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2024,,s24/9618_s24_qp_23.pdf,4,4,s24/9618_s24_ms_23.pdf,5,5,9618_y26_sy.pdf,29,29,,Past Paper
+s24_23_3a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2024,,s24/9618_s24_qp_23.pdf,6,6,s24/9618_s24_ms_23.pdf,5,5,9618_y26_sy.pdf,28,28,,Past Paper
+s24_23_3b,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2024,,s24/9618_s24_qp_23.pdf,6,7,s24/9618_s24_ms_23.pdf,6,6,9618_y26_sy.pdf,27,28,,Past Paper
+s24_23_4a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2024,,s24/9618_s24_qp_23.pdf,8,8,s24/9618_s24_ms_23.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+s24_23_4b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,May/June 2024,,s24/9618_s24_qp_23.pdf,9,9,s24/9618_s24_ms_23.pdf,7,7,9618_y26_sy.pdf,28,28,,Past Paper
+s24_23_5a,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2024,,s24/9618_s24_qp_23.pdf,10,10,s24/9618_s24_ms_23.pdf,8,8,9618_y26_sy.pdf,29,29,,Past Paper
+s24_23_5b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2024,,s24/9618_s24_qp_23.pdf,10,10,s24/9618_s24_ms_23.pdf,8,8,9618_y26_sy.pdf,31,31,,Past Paper
+s24_23_6,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2024,,s24/9618_s24_qp_23.pdf,12,14,s24/9618_s24_ms_23.pdf,9,10,9618_y26_sy.pdf,30,30,,Past Paper
+s24_23_7,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2024,,s24/9618_s24_qp_23.pdf,16,17,s24/9618_s24_ms_23.pdf,11,11,9618_y26_sy.pdf,30,30,,Past Paper
+w24_21_1ab,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2024,,w24/9618_w24_qp_21.pdf,2,2,w24/9618_w24_ms_21.pdf,4,4,9618_y26_sy.pdf,31,31,,Past Paper
+w24_21_1c,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2024,,w24/9618_w24_qp_21.pdf,3,3,w24/9618_w24_ms_21.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+w24_21_2,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2024,,w24/9618_w24_qp_21.pdf,4,4,w24/9618_w24_ms_21.pdf,5,5,9618_y26_sy.pdf,30,30,,Past Paper
+w24_21_3,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2024,,w24/9618_w24_qp_21.pdf,6,6,w24/9618_w24_ms_21.pdf,5,6,9618_y26_sy.pdf,27,28,,Past Paper
+w24_21_4ab,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2024,,w24/9618_w24_qp_21.pdf,8,8,w24/9618_w24_ms_21.pdf,7,7,9618_y26_sy.pdf,31,31,,Past Paper
+w24_21_4c,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2024,,w24/9618_w24_qp_21.pdf,9,9,w24/9618_w24_ms_21.pdf,8,8,9618_y26_sy.pdf,28,28,,Past Paper
+w24_21_5a,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,October/November 2024,,w24/9618_w24_qp_21.pdf,10,10,w24/9618_w24_ms_21.pdf,9,9,9618_y26_sy.pdf,30,30,,Past Paper
+w24_21_5b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2024,,w24/9618_w24_qp_21.pdf,10,10,w24/9618_w24_ms_21.pdf,9,9,9618_y26_sy.pdf,31,31,,Past Paper
+w24_21_6a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,October/November 2024,,w24/9618_w24_qp_21.pdf,12,12,w24/9618_w24_ms_21.pdf,9,9,9618_y26_sy.pdf,28,28,,Past Paper
+w24_21_6b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2024,,w24/9618_w24_qp_21.pdf,12,13,w24/9618_w24_ms_21.pdf,10,10,9618_y26_sy.pdf,29,29,,Past Paper
+w24_21_7,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,October/November 2024,,w24/9618_w24_qp_21.pdf,14,14,w24/9618_w24_ms_21.pdf,11,11,9618_y26_sy.pdf,30,30,,Past Paper
+w24_22_1a,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2024,,w24/9618_w24_qp_22.pdf,2,2,w24/9618_w24_ms_22.pdf,4,4,9618_y26_sy.pdf,31,31,,Past Paper
+w24_22_1d,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2024,,w24/9618_w24_qp_22.pdf,2,2,w24/9618_w24_ms_22.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+w24_22_2,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2024,,w24/9618_w24_qp_22.pdf,4,5,w24/9618_w24_ms_22.pdf,5,6,9618_y26_sy.pdf,30,30,,Past Paper
+w24_22_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,October/November 2024,,w24/9618_w24_qp_22.pdf,6,6,w24/9618_w24_ms_22.pdf,6,6,9618_y26_sy.pdf,29,29,,Past Paper
+w24_22_4,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2024,,w24/9618_w24_qp_22.pdf,8,9,w24/9618_w24_ms_22.pdf,7,7,9618_y26_sy.pdf,30,30,,Past Paper
+w24_22_5a,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2024,,w24/9618_w24_qp_22.pdf,10,10,w24/9618_w24_ms_22.pdf,8,8,9618_y26_sy.pdf,31,31,,Past Paper
+w24_22_5bc,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2024,,w24/9618_w24_qp_22.pdf,11,11,w24/9618_w24_ms_22.pdf,8,8,9618_y26_sy.pdf,29,29,,Past Paper
+w24_22_6a,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2024,,w24/9618_w24_qp_22.pdf,12,13,w24/9618_w24_ms_22.pdf,9,9,9618_y26_sy.pdf,29,29,,Past Paper
+w24_22_6b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2024,,w24/9618_w24_qp_22.pdf,12,14,w24/9618_w24_ms_22.pdf,9,9,9618_y26_sy.pdf,31,31,,Past Paper
+w24_22_7ab,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,October/November 2024,,w24/9618_w24_qp_22.pdf,15,15,w24/9618_w24_ms_22.pdf,10,10,9618_y26_sy.pdf,27,27,,Past Paper
+w24_22_7c,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,October/November 2024,,w24/9618_w24_qp_22.pdf,15,15,w24/9618_w24_ms_22.pdf,10,10,9618_y26_sy.pdf,30,30,,Past Paper
+w24_22_7d,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,October/November 2024,,w24/9618_w24_qp_22.pdf,16,16,w24/9618_w24_ms_22.pdf,10,10,9618_y26_sy.pdf,30,30,,Past Paper
+w24_23_1a,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2024,,w24/9618_w24_qp_23.pdf,2,2,w24/9618_w24_ms_23.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+w24_23_1b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2024,,w24/9618_w24_qp_23.pdf,2,2,w24/9618_w24_ms_23.pdf,4,4,9618_y26_sy.pdf,28,28,,Past Paper
+w24_23_1c,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2024,,w24/9618_w24_qp_23.pdf,2,2,w24/9618_w24_ms_23.pdf,4,4,9618_y26_sy.pdf,29,29,,Past Paper
+w24_23_2a,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2024,,w24/9618_w24_qp_23.pdf,3,3,w24/9618_w24_ms_23.pdf,5,5,9618_y26_sy.pdf,27,28,,Past Paper
+w24_23_2b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2024,,w24/9618_w24_qp_23.pdf,3,3,w24/9618_w24_ms_23.pdf,5,5,9618_y26_sy.pdf,29,29,,Past Paper
+w24_23_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,October/November 2024,,w24/9618_w24_qp_23.pdf,4,6,w24/9618_w24_ms_23.pdf,5,7,9618_y26_sy.pdf,29,29,,Past Paper
+w24_23_4a,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2024,,w24/9618_w24_qp_23.pdf,8,8,w24/9618_w24_ms_23.pdf,7,7,9618_y26_sy.pdf,29,29,,Past Paper
+w24_23_4b,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2024,,w24/9618_w24_qp_23.pdf,8,9,w24/9618_w24_ms_23.pdf,7,8,9618_y26_sy.pdf,30,30,,Past Paper
+w24_23_5a,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,October/November 2024,,w24/9618_w24_qp_23.pdf,10,10,w24/9618_w24_ms_23.pdf,9,9,9618_y26_sy.pdf,30,30,,Past Paper
+w24_23_5b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2024,,w24/9618_w24_qp_23.pdf,10,10,w24/9618_w24_ms_23.pdf,9,9,9618_y26_sy.pdf,31,31,,Past Paper
+w24_23_6,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2024,,w24/9618_w24_qp_23.pdf,11,11,w24/9618_w24_ms_23.pdf,10,11,9618_y26_sy.pdf,30,30,,Past Paper
+w24_23_7a,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,October/November 2024,,w24/9618_w24_qp_23.pdf,12,12,w24/9618_w24_ms_23.pdf,11,11,9618_y26_sy.pdf,30,30,,Past Paper
+w24_23_7b,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,October/November 2024,,w24/9618_w24_qp_23.pdf,12,12,w24/9618_w24_ms_23.pdf,12,12,9618_y26_sy.pdf,27,27,,Past Paper
+s25_21_1a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2025,,s25/9618_s25_qp_21.pdf,2,2,s25/9618_s25_ms_21.pdf,6,6,9618_y26_sy.pdf,28,28,,Past Paper
+s25_21_1b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2025,,s25/9618_s25_qp_21.pdf,2,2,s25/9618_s25_ms_21.pdf,6,6,9618_y26_sy.pdf,29,29,,Past Paper
+s25_21_1c,Paper 2: Fundamental Programming,9. Algorithm,9.1 Thinking Skills,May/June 2025,,s25/9618_s25_qp_21.pdf,3,3,s25/9618_s25_ms_21.pdf,6,6,9618_y26_sy.pdf,27,27,,Past Paper
+s25_21_2,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2025,,s25/9618_s25_qp_21.pdf,4,6,s25/9618_s25_ms_21.pdf,7,7,9618_y26_sy.pdf,31,31,,Past Paper
+s25_21_3,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2025,,s25/9618_s25_qp_21.pdf,7,7,s25/9618_s25_ms_21.pdf,8,8,9618_y26_sy.pdf,29,29,,Past Paper
+s25_21_4a,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2025,,s25/9618_s25_qp_21.pdf,8,8,s25/9618_s25_ms_21.pdf,9,9,9618_y26_sy.pdf,29,29,,Past Paper
+s25_21_4b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2025,,s25/9618_s25_qp_21.pdf,8,9,s25/9618_s25_ms_21.pdf,9,9,9618_y26_sy.pdf,31,31,,Past Paper
+s25_21_5,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,May/June 2025,,s25/9618_s25_qp_21.pdf,10,11,s25/9618_s25_ms_21.pdf,10,10,9618_y26_sy.pdf,29,29,,Past Paper
+s25_21_6a,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2025,,s25/9618_s25_qp_21.pdf,12,12,s25/9618_s25_ms_21.pdf,10,10,9618_y26_sy.pdf,31,31,,Past Paper
+s25_21_6b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,May/June 2025,,s25/9618_s25_qp_21.pdf,12,13,s25/9618_s25_ms_21.pdf,11,11,9618_y26_sy.pdf,28,28,,Past Paper
+s25_22_1a,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,May/June 2025,,s25/9618_s25_qp_22.pdf,2,2,s25/9618_s25_ms_22.pdf,6,6,9618_y26_sy.pdf,30,30,,Past Paper
+s25_22_1b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2025,,s25/9618_s25_qp_22.pdf,2,2,s25/9618_s25_ms_22.pdf,6,6,9618_y26_sy.pdf,31,31,,Past Paper
+s25_22_1c,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2025,,s25/9618_s25_qp_22.pdf,3,3,s25/9618_s25_ms_22.pdf,6,6,9618_y26_sy.pdf,28,28,,Past Paper
+s25_22_1d,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,May/June 2025,,s25/9618_s25_qp_22.pdf,3,3,s25/9618_s25_ms_22.pdf,6,7,9618_y26_sy.pdf,28,28,,Past Paper
+s25_22_2a,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2025,,s25/9618_s25_qp_22.pdf,4,4,s25/9618_s25_ms_22.pdf,8,8,9618_y26_sy.pdf,27,28,,Past Paper
+s25_22_2b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2025,,s25/9618_s25_qp_22.pdf,4,5,s25/9618_s25_ms_22.pdf,8,8,9618_y26_sy.pdf,31,31,,Past Paper
+s25_22_3,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,May/June 2025,,s25/9618_s25_qp_22.pdf,6,6,s25/9618_s25_ms_22.pdf,9,9,9618_y26_sy.pdf,29,29,,Past Paper
+s25_22_4,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,May/June 2025,,s25/9618_s25_qp_22.pdf,7,7,s25/9618_s25_ms_22.pdf,10,10,9618_y26_sy.pdf,27,28,,Past Paper
+s25_22_5a,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2025,,s25/9618_s25_qp_22.pdf,9,9,s25/9618_s25_ms_22.pdf,11,11,9618_y26_sy.pdf,30,30,,Past Paper
+s25_22_5b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,May/June 2025,,s25/9618_s25_qp_22.pdf,10,11,s25/9618_s25_ms_22.pdf,12,13,9618_y26_sy.pdf,28,28,,Past Paper
+s25_22_6,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,May/June 2025,,s25/9618_s25_qp_22.pdf,12,13,s25/9618_s25_ms_22.pdf,14,15,9618_y26_sy.pdf,29,29,,Past Paper
+s25_23_1a,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2025,,s25/9618_s25_qp_23.pdf,2,2,s25/9618_s25_ms_23.pdf,6,6,9618_y26_sy.pdf,30,30,,Past Paper
+s25_23_1b,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2025,,s25/9618_s25_qp_23.pdf,2,2,s25/9618_s25_ms_23.pdf,6,6,9618_y26_sy.pdf,29,29,,Past Paper
+s25_23_1c,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,May/June 2025,,s25/9618_s25_qp_23.pdf,3,3,s25/9618_s25_ms_23.pdf,7,7,9618_y26_sy.pdf,28,28,,Past Paper
+s25_23_2,Paper 2: Fundamental Programming,10. Data Types and Structures,10.4 ADT,May/June 2025,,s25/9618_s25_qp_23.pdf,4,6,s25/9618_s25_ms_23.pdf,7,8,9618_y26_sy.pdf,29,29,,Past Paper
+s25_23_3,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,May/June 2025,,s25/9618_s25_qp_23.pdf,7,7,s25/9618_s25_ms_23.pdf,9,9,9618_y26_sy.pdf,29,29,,Past Paper
+s25_23_4a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,May/June 2025,,s25/9618_s25_qp_23.pdf,8,8,s25/9618_s25_ms_23.pdf,9,9,9618_y26_sy.pdf,28,28,,Past Paper
+s25_23_4b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,May/June 2025,,s25/9618_s25_qp_23.pdf,9,9,s25/9618_s25_ms_23.pdf,10,10,9618_y26_sy.pdf,31,31,,Past Paper
+s25_23_5,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,May/June 2025,,s25/9618_s25_qp_23.pdf,10,11,s25/9618_s25_ms_23.pdf,10,10,9618_y26_sy.pdf,30,30,,Past Paper
+s25_23_6,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,May/June 2025,,s25/9618_s25_qp_23.pdf,12,13,s25/9618_s25_ms_23.pdf,11,11,9618_y26_sy.pdf,30,30,,Past Paper
+w25_21_1a,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2025,,w25/9618_w25_qp_21.pdf,2,2,w25/9618_w25_ms_21.pdf,6,6,9618_y26_sy.pdf,29,29,,Past Paper
+w25_21_1b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2025,,w25/9618_w25_qp_21.pdf,2,2,w25/9618_w25_ms_21.pdf,6,6,9618_y26_sy.pdf,31,31,,Past Paper
+w25_21_2,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2025,,w25/9618_w25_qp_21.pdf,4,4,w25/9618_w25_ms_21.pdf,7,8,9618_y26_sy.pdf,27,28,,Past Paper
+w25_21_3a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2025,,w25/9618_w25_qp_21.pdf,5,5,w25/9618_w25_ms_21.pdf,9,9,9618_y26_sy.pdf,28,28,,Past Paper
+w25_21_3b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,October/November 2025,,w25/9618_w25_qp_21.pdf,5,5,w25/9618_w25_ms_21.pdf,9,9,9618_y26_sy.pdf,28,28,,Past Paper
+w25_21_4a,Paper 2: Fundamental Programming,10. Data Types and Structures,10.2 Arrays,October/November 2025,,w25/9618_w25_qp_21.pdf,6,6,w25/9618_w25_ms_21.pdf,10,11,9618_y26_sy.pdf,28,28,,Past Paper
+w25_21_4b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,October/November 2025,,w25/9618_w25_qp_21.pdf,7,7,w25/9618_w25_ms_21.pdf,12,12,9618_y26_sy.pdf,28,28,,Past Paper
+w25_21_5,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2025,,w25/9618_w25_qp_21.pdf,8,9,w25/9618_w25_ms_21.pdf,12,12,9618_y26_sy.pdf,27,28,,Past Paper
+w25_21_6a,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2025,,w25/9618_w25_qp_21.pdf,10,10,w25/9618_w25_ms_21.pdf,12,12,9618_y26_sy.pdf,31,31,,Past Paper
+w25_21_6b,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2025,,w25/9618_w25_qp_21.pdf,10,11,w25/9618_w25_ms_21.pdf,13,14,9618_y26_sy.pdf,30,30,,Past Paper
+w25_21_7,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,October/November 2025,,w25/9618_w25_qp_21.pdf,12,13,w25/9618_w25_ms_21.pdf,15,16,9618_y26_sy.pdf,30,30,,Past Paper
+w25_22_1a,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2025,,w25/9618_w25_qp_22.pdf,2,2,w25/9618_w25_ms_22.pdf,5,5,9618_y26_sy.pdf,29,29,,Past Paper
+w25_22_1b,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2025,,w25/9618_w25_qp_22.pdf,2,2,w25/9618_w25_ms_22.pdf,5,5,9618_y26_sy.pdf,28,28,,Past Paper
+w25_22_1c,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2025,,w25/9618_w25_qp_22.pdf,2,2,w25/9618_w25_ms_22.pdf,5,5,9618_y26_sy.pdf,29,29,,Past Paper
+w25_22_2,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2025,,w25/9618_w25_qp_22.pdf,3,3,w25/9618_w25_ms_22.pdf,6,7,9618_y26_sy.pdf,27,28,,Past Paper
+w25_22_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.3 Files,October/November 2025,,w25/9618_w25_qp_22.pdf,4,5,w25/9618_w25_ms_22.pdf,8,8,9618_y26_sy.pdf,28,28,,Past Paper
+w25_22_4ab,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2025,,w25/9618_w25_qp_22.pdf,6,7,w25/9618_w25_ms_22.pdf,9,9,9618_y26_sy.pdf,30,30,,Past Paper
+w25_22_4c,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2025,,w25/9618_w25_qp_22.pdf,7,7,w25/9618_w25_ms_22.pdf,9,9,9618_y26_sy.pdf,27,28,,Past Paper
+w25_22_5a,Paper 2: Fundamental Programming,12. Software Development,12.1 PDLC,October/November 2025,,w25/9618_w25_qp_22.pdf,8,8,w25/9618_w25_ms_22.pdf,10,10,9618_y26_sy.pdf,30,30,,Past Paper
+w25_22_5b,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2025,,w25/9618_w25_qp_22.pdf,8,8,w25/9618_w25_ms_22.pdf,10,10,9618_y26_sy.pdf,31,31,,Past Paper
+w25_22_6,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2025,,w25/9618_w25_qp_22.pdf,10,11,w25/9618_w25_ms_22.pdf,11,11,9618_y26_sy.pdf,30,30,,Past Paper
+w25_22_7,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,October/November 2025,,w25/9618_w25_qp_22.pdf,12,12,w25/9618_w25_ms_22.pdf,12,12,9618_y26_sy.pdf,30,30,,Past Paper
+w25_23_1ab,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2025,,w25/9618_w25_qp_23.pdf,2,2,w25/9618_w25_ms_23.pdf,6,6,9618_y26_sy.pdf,30,30,,Past Paper
+w25_23_1c,Paper 2: Fundamental Programming,11. Programming,11.1 Programming Basics,October/November 2025,,w25/9618_w25_qp_23.pdf,3,3,w25/9618_w25_ms_23.pdf,6,6,9618_y26_sy.pdf,29,29,,Past Paper
+w25_23_2a,Paper 2: Fundamental Programming,9. Algorithm,9.2 Algorithms,October/November 2025,,w25/9618_w25_qp_23.pdf,4,4,w25/9618_w25_ms_23.pdf,7,7,9618_y26_sy.pdf,27,28,,Past Paper
+w25_23_2b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2025,,w25/9618_w25_qp_23.pdf,4,4,w25/9618_w25_ms_23.pdf,7,7,9618_y26_sy.pdf,29,29,,Past Paper
+w25_23_3,Paper 2: Fundamental Programming,10. Data Types and Structures,10.1 Data Types,October/November 2025,,w25/9618_w25_qp_23.pdf,6,6,w25/9618_w25_ms_23.pdf,7,7,9618_y26_sy.pdf,28,28,,Past Paper
+w25_23_4,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2025,,w25/9618_w25_qp_23.pdf,8,8,w25/9618_w25_ms_23.pdf,8,10,9618_y26_sy.pdf,30,30,,Past Paper
+w25_23_5a,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2025,,w25/9618_w25_qp_23.pdf,10,11,w25/9618_w25_ms_23.pdf,11,11,9618_y26_sy.pdf,31,31,,Past Paper
+w25_23_5b,Paper 2: Fundamental Programming,11. Programming,11.2 Constructs,October/November 2025,,w25/9618_w25_qp_23.pdf,12,12,w25/9618_w25_ms_23.pdf,11,11,9618_y26_sy.pdf,29,29,,Past Paper
+w25_23_6a,Paper 2: Fundamental Programming,12. Software Development,12.3 Testing and Maintenance,October/November 2025,,w25/9618_w25_qp_23.pdf,14,14,w25/9618_w25_ms_23.pdf,11,11,9618_y26_sy.pdf,31,31,,Past Paper
+w25_23_6b,Paper 2: Fundamental Programming,11. Programming,11.3 Structured Programming,October/November 2025,,w25/9618_w25_qp_23.pdf,14,15,w25/9618_w25_ms_23.pdf,12,13,9618_y26_sy.pdf,30,30,,Past Paper
+w25_23_7,Paper 2: Fundamental Programming,12. Software Development,12.2 Program Design,October/November 2025,,w25/9618_w25_qp_23.pdf,16,17,w25/9618_w25_ms_23.pdf,14,15,9618_y26_sy.pdf,30,30,,Past Paper
+s21_31_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,May/June 2021,,s21/9618_s21_qp_31.pdf,2,3,s21/9618_s21_ms_31.pdf,3,4,9618_y26_sy.pdf,33,33,,Past Paper
+s21_31_2,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,May/June 2021,,s21/9618_s21_qp_31.pdf,4,4,s21/9618_s21_ms_31.pdf,4,4,9618_y26_sy.pdf,32,32,,Past Paper
+s21_31_3a,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,May/June 2021,,s21/9618_s21_qp_31.pdf,5,5,s21/9618_s21_ms_31.pdf,5,5,9618_y26_sy.pdf,35,35,,Past Paper
+s21_31_3b,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2021,,s21/9618_s21_qp_31.pdf,5,5,s21/9618_s21_ms_31.pdf,5,5,9618_y26_sy.pdf,35,35,,Past Paper
+s21_31_4,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2021,,s21/9618_s21_qp_31.pdf,6,6,s21/9618_s21_ms_31.pdf,5,6,9618_y26_sy.pdf,35,35,,Past Paper
+s21_31_5,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,May/June 2021,,s21/9618_s21_qp_31.pdf,7,8,s21/9618_s21_ms_31.pdf,6,7,9618_y26_sy.pdf,36,36,,Past Paper
+s21_31_6,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,May/June 2021,,s21/9618_s21_qp_31.pdf,8,8,s21/9618_s21_ms_31.pdf,7,7,9618_y26_sy.pdf,33,33,,Past Paper
+s21_31_7,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,May/June 2021,,s21/9618_s21_qp_31.pdf,9,9,s21/9618_s21_ms_31.pdf,8,8,9618_y26_sy.pdf,34,34,,Past Paper
+s21_31_8,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,May/June 2021,,s21/9618_s21_qp_31.pdf,10,11,s21/9618_s21_ms_31.pdf,8,9,9618_y26_sy.pdf,37,37,,Past Paper
+s21_31_9,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2021,,s21/9618_s21_qp_31.pdf,12,12,s21/9618_s21_ms_31.pdf,9,10,9618_y26_sy.pdf,38,38,,Past Paper
+w21_31_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,October/November 2021,,w21/9618_w21_qp_31.pdf,2,2,w21/9618_w21_ms_31.pdf,3,3,9618_y26_sy.pdf,33,33,,Past Paper
+w21_31_2,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,October/November 2021,,w21/9618_w21_qp_31.pdf,3,3,w21/9618_w21_ms_31.pdf,4,4,9618_y26_sy.pdf,38,38,,Past Paper
+w21_31_3,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,October/November 2021,,w21/9618_w21_qp_31.pdf,3,3,w21/9618_w21_ms_31.pdf,4,4,9618_y26_sy.pdf,32,32,,Past Paper
+w21_31_4,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2021,,w21/9618_w21_qp_31.pdf,4,5,w21/9618_w21_ms_31.pdf,5,5,9618_y26_sy.pdf,35,35,,Past Paper
+w21_31_5,Paper 3: Advanced Theory,13. Data Representation,13.2 File Organization,October/November 2021,,w21/9618_w21_qp_31.pdf,6,6,w21/9618_w21_ms_31.pdf,5,5,9618_y26_sy.pdf,32,32,,Past Paper
+w21_31_6,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,October/November 2021,,w21/9618_w21_qp_31.pdf,7,7,w21/9618_w21_ms_31.pdf,6,6,9618_y26_sy.pdf,33,33,,Past Paper
+w21_31_7,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,October/November 2021,,w21/9618_w21_qp_31.pdf,8,9,w21/9618_w21_ms_31.pdf,7,7,9618_y26_sy.pdf,34,34,,Past Paper
+w21_31_8,Paper 3: Advanced Theory,17. Security,17.1 Encryption,October/November 2021,,w21/9618_w21_qp_31.pdf,10,10,w21/9618_w21_ms_31.pdf,8,8,9618_y26_sy.pdf,36,36,,Past Paper
+w21_31_9,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,October/November 2021,,w21/9618_w21_qp_31.pdf,11,12,w21/9618_w21_ms_31.pdf,8,9,9618_y26_sy.pdf,36,36,,Past Paper
+w21_31_10a,Paper 3: Advanced Theory,19. Problem-solving,19.2 Recursion,October/November 2021,,w21/9618_w21_qp_31.pdf,13,13,w21/9618_w21_ms_31.pdf,10,10,9618_y26_sy.pdf,37,37,,Past Paper
+w21_31_10b,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,October/November 2021,,w21/9618_w21_qp_31.pdf,13,13,w21/9618_w21_ms_31.pdf,10,10,9618_y26_sy.pdf,37,37,,Past Paper
+s22_31_1,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,May/June 2022,,s22/9618_s22_qp_31.pdf,2,3,s22/9618_s22_ms_31.pdf,4,4,9618_y26_sy.pdf,32,32,,Past Paper
+s22_31_2,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2022,,s22/9618_s22_qp_31.pdf,4,5,s22/9618_s22_ms_31.pdf,4,4,9618_y26_sy.pdf,38,38,,Past Paper
+s22_31_3,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,May/June 2022,,s22/9618_s22_qp_31.pdf,6,6,s22/9618_s22_ms_31.pdf,5,5,9618_y26_sy.pdf,33,33,,Past Paper
+s22_31_4,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,May/June 2022,,s22/9618_s22_qp_31.pdf,7,7,s22/9618_s22_ms_31.pdf,6,6,9618_y26_sy.pdf,34,34,,Past Paper
+s22_31_5,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2022,,s22/9618_s22_qp_31.pdf,8,9,s22/9618_s22_ms_31.pdf,7,7,9618_y26_sy.pdf,35,35,,Past Paper
+s22_31_6,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,May/June 2022,,s22/9618_s22_qp_31.pdf,9,9,s22/9618_s22_ms_31.pdf,8,8,9618_y26_sy.pdf,34,34,,Past Paper
+s22_31_7,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2022,,s22/9618_s22_qp_31.pdf,10,11,s22/9618_s22_ms_31.pdf,9,10,9618_y26_sy.pdf,38,38,,Past Paper
+s22_31_8,Paper 3: Advanced Theory,17. Security,17.1 Encryption,May/June 2022,,s22/9618_s22_qp_31.pdf,12,12,s22/9618_s22_ms_31.pdf,10,10,9618_y26_sy.pdf,36,36,,Past Paper
+s22_31_9,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2022,,s22/9618_s22_qp_31.pdf,14,15,s22/9618_s22_ms_31.pdf,11,11,9618_y26_sy.pdf,38,38,,Past Paper
+s22_32_1ab,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,May/June 2022,,s22/9618_s22_qp_32.pdf,2,2,s22/9618_s22_ms_32.pdf,4,4,9618_y26_sy.pdf,32,32,,Past Paper
+s22_32_1c,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2022,,s22/9618_s22_qp_32.pdf,3,3,s22/9618_s22_ms_32.pdf,4,4,9618_y26_sy.pdf,38,38,,Past Paper
+s22_32_2,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2022,,s22/9618_s22_qp_32.pdf,4,4,s22/9618_s22_ms_32.pdf,4,4,9618_y26_sy.pdf,38,38,,Past Paper
+s22_32_3,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,May/June 2022,,s22/9618_s22_qp_32.pdf,5,5,s22/9618_s22_ms_32.pdf,5,5,9618_y26_sy.pdf,33,33,,Past Paper
+s22_32_4,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2022,,s22/9618_s22_qp_32.pdf,6,7,s22/9618_s22_ms_32.pdf,5,6,9618_y26_sy.pdf,35,35,,Past Paper
+s22_32_5,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,May/June 2022,,s22/9618_s22_qp_32.pdf,8,8,s22/9618_s22_ms_32.pdf,7,7,9618_y26_sy.pdf,34,34,,Past Paper
+s22_32_6,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,May/June 2022,,s22/9618_s22_qp_32.pdf,9,9,s22/9618_s22_ms_32.pdf,7,7,9618_y26_sy.pdf,34,34,,Past Paper
+s22_32_7,Paper 3: Advanced Theory,17. Security,17.1 Encryption,May/June 2022,,s22/9618_s22_qp_32.pdf,10,10,s22/9618_s22_ms_32.pdf,8,8,9618_y26_sy.pdf,36,36,,Past Paper
+s22_32_8,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,May/June 2022,,s22/9618_s22_qp_32.pdf,11,12,s22/9618_s22_ms_32.pdf,8,9,9618_y26_sy.pdf,37,37,,Past Paper
+s22_32_9,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,May/June 2022,,s22/9618_s22_qp_32.pdf,12,12,s22/9618_s22_ms_32.pdf,9,9,9618_y26_sy.pdf,38,38,,Past Paper
+w22_31_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,October/November 2022,,w22/9618_w22_qp_31.pdf,2,3,w22/9618_w22_ms_31.pdf,4,4,9618_y26_sy.pdf,33,33,,Past Paper
+w22_31_2,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,October/November 2022,,w22/9618_w22_qp_31.pdf,3,3,w22/9618_w22_ms_31.pdf,5,5,9618_y26_sy.pdf,33,33,,Past Paper
+w22_31_3,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,October/November 2022,,w22/9618_w22_qp_31.pdf,4,5,w22/9618_w22_ms_31.pdf,5,6,9618_y26_sy.pdf,32,32,,Past Paper
+w22_31_4,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2022,,w22/9618_w22_qp_31.pdf,5,5,w22/9618_w22_ms_31.pdf,7,7,9618_y26_sy.pdf,35,35,,Past Paper
+w22_31_5,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2022,,w22/9618_w22_qp_31.pdf,6,6,w22/9618_w22_ms_31.pdf,7,7,9618_y26_sy.pdf,35,35,,Past Paper
+w22_31_6,Paper 3: Advanced Theory,17. Security,17.1 Encryption,October/November 2022,,w22/9618_w22_qp_31.pdf,6,7,w22/9618_w22_ms_31.pdf,8,8,9618_y26_sy.pdf,36,36,,Past Paper
+w22_31_7,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,October/November 2022,,w22/9618_w22_qp_31.pdf,7,7,w22/9618_w22_ms_31.pdf,9,10,9618_y26_sy.pdf,34,34,,Past Paper
+w22_31_8,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,October/November 2022,,w22/9618_w22_qp_31.pdf,8,8,w22/9618_w22_ms_31.pdf,10,10,9618_y26_sy.pdf,35,35,,Past Paper
+w22_31_9,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,October/November 2022,,w22/9618_w22_qp_31.pdf,8,8,w22/9618_w22_ms_31.pdf,11,11,9618_y26_sy.pdf,36,36,,Past Paper
+w22_31_10,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,October/November 2022,,w22/9618_w22_qp_31.pdf,9,9,w22/9618_w22_ms_31.pdf,11,12,9618_y26_sy.pdf,34,34,,Past Paper
+w22_31_11,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,October/November 2022,,w22/9618_w22_qp_31.pdf,10,10,w22/9618_w22_ms_31.pdf,12,13,9618_y26_sy.pdf,38,38,,Past Paper
+w22_31_12,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,October/November 2022,,w22/9618_w22_qp_31.pdf,11,11,w22/9618_w22_ms_31.pdf,14,15,9618_y26_sy.pdf,37,37,,Past Paper
+w22_32_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,October/November 2022,,w22/9618_w22_qp_32.pdf,2,2,w22/9618_w22_ms_32.pdf,4,4,9618_y26_sy.pdf,33,33,,Past Paper
+w22_32_2,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2022,,w22/9618_w22_qp_32.pdf,3,3,w22/9618_w22_ms_32.pdf,4,5,9618_y26_sy.pdf,35,35,,Past Paper
+w22_32_3,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,October/November 2022,,w22/9618_w22_qp_32.pdf,3,3,w22/9618_w22_ms_32.pdf,5,5,9618_y26_sy.pdf,33,33,,Past Paper
+w22_32_4,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,October/November 2022,,w22/9618_w22_qp_32.pdf,4,5,w22/9618_w22_ms_32.pdf,6,7,9618_y26_sy.pdf,32,32,,Past Paper
+w22_32_5,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,October/November 2022,,w22/9618_w22_qp_32.pdf,5,5,w22/9618_w22_ms_32.pdf,8,8,9618_y26_sy.pdf,34,34,,Past Paper
+w22_32_6,Paper 3: Advanced Theory,17. Security,17.1 Encryption,October/November 2022,,w22/9618_w22_qp_32.pdf,6,6,w22/9618_w22_ms_32.pdf,8,9,9618_y26_sy.pdf,36,36,,Past Paper
+w22_32_7,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,October/November 2022,,w22/9618_w22_qp_32.pdf,6,6,w22/9618_w22_ms_32.pdf,9,9,9618_y26_sy.pdf,36,36,,Past Paper
+w22_32_8,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,October/November 2022,,w22/9618_w22_qp_32.pdf,7,7,w22/9618_w22_ms_32.pdf,10,12,9618_y26_sy.pdf,34,34,,Past Paper
+w22_32_9,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,October/November 2022,,w22/9618_w22_qp_32.pdf,8,8,w22/9618_w22_ms_32.pdf,12,13,9618_y26_sy.pdf,35,35,,Past Paper
+w22_32_10,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,October/November 2022,,w22/9618_w22_qp_32.pdf,9,9,w22/9618_w22_ms_32.pdf,13,14,9618_y26_sy.pdf,38,38,,Past Paper
+w22_32_11,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,October/November 2022,,w22/9618_w22_qp_32.pdf,10,11,w22/9618_w22_ms_32.pdf,15,16,9618_y26_sy.pdf,37,37,,Past Paper
+s23_31_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,May/June 2023,,s23/9618_s23_qp_31.pdf,2,3,s23/9618_s23_ms_31.pdf,3,3,9618_y26_sy.pdf,33,33,,Past Paper
+s23_31_2,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,May/June 2023,,s23/9618_s23_qp_31.pdf,3,3,s23/9618_s23_ms_31.pdf,3,4,9618_y26_sy.pdf,36,36,,Past Paper
+s23_31_3,Paper 3: Advanced Theory,13. Data Representation,13.2 File Organization,May/June 2023,,s23/9618_s23_qp_31.pdf,4,4,s23/9618_s23_ms_31.pdf,4,4,9618_y26_sy.pdf,32,32,,Past Paper
+s23_31_4,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,May/June 2023,,s23/9618_s23_qp_31.pdf,5,5,s23/9618_s23_ms_31.pdf,4,4,9618_y26_sy.pdf,32,32,,Past Paper
+s23_31_5,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,May/June 2023,,s23/9618_s23_qp_31.pdf,5,5,s23/9618_s23_ms_31.pdf,5,5,9618_y26_sy.pdf,33,33,,Past Paper
+s23_31_6,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2023,,s23/9618_s23_qp_31.pdf,6,7,s23/9618_s23_ms_31.pdf,5,6,9618_y26_sy.pdf,35,35,,Past Paper
+s23_31_7,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,May/June 2023,,s23/9618_s23_qp_31.pdf,8,8,s23/9618_s23_ms_31.pdf,6,7,9618_y26_sy.pdf,34,34,,Past Paper
+s23_31_8,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,May/June 2023,,s23/9618_s23_qp_31.pdf,9,9,s23/9618_s23_ms_31.pdf,7,7,9618_y26_sy.pdf,34,34,,Past Paper
+s23_31_9,Paper 3: Advanced Theory,17. Security,17.1 Encryption,May/June 2023,,s23/9618_s23_qp_31.pdf,9,9,s23/9618_s23_ms_31.pdf,7,7,9618_y26_sy.pdf,36,36,,Past Paper
+s23_31_10,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,May/June 2023,,s23/9618_s23_qp_31.pdf,10,10,s23/9618_s23_ms_31.pdf,8,8,9618_y26_sy.pdf,38,38,,Past Paper
+s23_31_11,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,May/June 2023,,s23/9618_s23_qp_31.pdf,10,11,s23/9618_s23_ms_31.pdf,8,9,9618_y26_sy.pdf,37,37,,Past Paper
+s23_31_12,Paper 3: Advanced Theory,19. Problem-solving,19.2 Recursion,May/June 2023,,s23/9618_s23_qp_31.pdf,11,12,s23/9618_s23_ms_31.pdf,9,10,9618_y26_sy.pdf,37,37,,Past Paper
+s23_32_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,May/June 2023,,s23/9618_s23_qp_32.pdf,2,2,s23/9618_s23_ms_32.pdf,4,4,9618_y26_sy.pdf,33,33,,Past Paper
+s23_32_2,Paper 3: Advanced Theory,13. Data Representation,13.2 File Organization,May/June 2023,,s23/9618_s23_qp_32.pdf,3,3,s23/9618_s23_ms_32.pdf,4,4,9618_y26_sy.pdf,32,32,,Past Paper
+s23_32_3,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2023,,s23/9618_s23_qp_32.pdf,4,5,s23/9618_s23_ms_32.pdf,5,5,9618_y26_sy.pdf,35,35,,Past Paper
+s23_32_4,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2023,,s23/9618_s23_qp_32.pdf,6,6,s23/9618_s23_ms_32.pdf,6,6,9618_y26_sy.pdf,38,38,,Past Paper
+s23_32_5,Paper 3: Advanced Theory,17. Security,17.1 Encryption,May/June 2023,,s23/9618_s23_qp_32.pdf,6,6,s23/9618_s23_ms_32.pdf,6,6,9618_y26_sy.pdf,36,36,,Past Paper
+s23_32_6a,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,May/June 2023,,s23/9618_s23_qp_32.pdf,7,7,s23/9618_s23_ms_32.pdf,7,7,9618_y26_sy.pdf,32,32,,Past Paper
+s23_32_6b,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,May/June 2023,,s23/9618_s23_qp_32.pdf,7,7,s23/9618_s23_ms_32.pdf,7,7,9618_y26_sy.pdf,38,38,,Past Paper
+s23_32_7,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,May/June 2023,,s23/9618_s23_qp_32.pdf,8,8,s23/9618_s23_ms_32.pdf,7,8,9618_y26_sy.pdf,33,33,,Past Paper
+s23_32_8,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,May/June 2023,,s23/9618_s23_qp_32.pdf,9,9,s23/9618_s23_ms_32.pdf,8,9,9618_y26_sy.pdf,34,34,,Past Paper
+s23_32_9,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,May/June 2023,,s23/9618_s23_qp_32.pdf,10,11,s23/9618_s23_ms_32.pdf,9,10,9618_y26_sy.pdf,34,34,,Past Paper
+s23_32_10,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,May/June 2023,,s23/9618_s23_qp_32.pdf,11,12,s23/9618_s23_ms_32.pdf,10,11,9618_y26_sy.pdf,36,36,,Past Paper
+s23_32_11,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,May/June 2023,,s23/9618_s23_qp_32.pdf,13,14,s23/9618_s23_ms_32.pdf,12,12,9618_y26_sy.pdf,37,37,,Past Paper
+w23_31_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,October/November 2023,,w23/9618_w23_qp_31.pdf,2,2,w23/9618_w23_ms_31.pdf,3,3,9618_y26_sy.pdf,33,33,,Past Paper
+w23_31_2,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,October/November 2023,,w23/9618_w23_qp_31.pdf,3,3,w23/9618_w23_ms_31.pdf,3,3,9618_y26_sy.pdf,33,33,,Past Paper
+w23_31_3,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,October/November 2023,,w23/9618_w23_qp_31.pdf,3,3,w23/9618_w23_ms_31.pdf,4,4,9618_y26_sy.pdf,32,32,,Past Paper
+w23_31_4,Paper 3: Advanced Theory,13. Data Representation,13.2 File Organization,October/November 2023,,w23/9618_w23_qp_31.pdf,4,4,w23/9618_w23_ms_31.pdf,4,4,9618_y26_sy.pdf,32,32,,Past Paper
+w23_31_5,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,October/November 2023,,w23/9618_w23_qp_31.pdf,4,4,w23/9618_w23_ms_31.pdf,4,4,9618_y26_sy.pdf,34,34,,Past Paper
+w23_31_6,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,October/November 2023,,w23/9618_w23_qp_31.pdf,6,7,w23/9618_w23_ms_31.pdf,5,5,9618_y26_sy.pdf,34,34,,Past Paper
+w23_31_7,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,October/November 2023,,w23/9618_w23_qp_31.pdf,7,7,w23/9618_w23_ms_31.pdf,6,6,9618_y26_sy.pdf,35,35,,Past Paper
+w23_31_8,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,October/November 2023,,w23/9618_w23_qp_31.pdf,8,8,w23/9618_w23_ms_31.pdf,6,6,9618_y26_sy.pdf,38,38,,Past Paper
+w23_31_9,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2023,,w23/9618_w23_qp_31.pdf,9,9,w23/9618_w23_ms_31.pdf,7,7,9618_y26_sy.pdf,35,35,,Past Paper
+w23_31_10,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,October/November 2023,,w23/9618_w23_qp_31.pdf,10,11,w23/9618_w23_ms_31.pdf,8,8,9618_y26_sy.pdf,37,37,,Past Paper
+w23_31_11,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,October/November 2023,,w23/9618_w23_qp_31.pdf,12,13,w23/9618_w23_ms_31.pdf,8,9,9618_y26_sy.pdf,38,38,,Past Paper
+w23_31_12,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,October/November 2023,,w23/9618_w23_qp_31.pdf,14,14,w23/9618_w23_ms_31.pdf,9,9,9618_y26_sy.pdf,36,36,,Past Paper
+w23_32_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,October/November 2023,,w23/9618_w23_qp_32.pdf,2,2,w23/9618_w23_ms_32.pdf,3,3,9618_y26_sy.pdf,33,33,,Past Paper
+w23_32_2,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,October/November 2023,,w23/9618_w23_qp_32.pdf,3,3,w23/9618_w23_ms_32.pdf,3,3,9618_y26_sy.pdf,32,32,,Past Paper
+w23_32_3,Paper 3: Advanced Theory,13. Data Representation,13.2 File Organization,October/November 2023,,w23/9618_w23_qp_32.pdf,3,3,w23/9618_w23_ms_32.pdf,3,4,9618_y26_sy.pdf,32,32,,Past Paper
+w23_32_4,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,October/November 2023,,w23/9618_w23_qp_32.pdf,4,4,w23/9618_w23_ms_32.pdf,4,4,9618_y26_sy.pdf,33,33,,Past Paper
+w23_32_5,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,October/November 2023,,w23/9618_w23_qp_32.pdf,4,4,w23/9618_w23_ms_32.pdf,4,4,9618_y26_sy.pdf,35,35,,Past Paper
+w23_32_6,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2023,,w23/9618_w23_qp_32.pdf,5,5,w23/9618_w23_ms_32.pdf,5,5,9618_y26_sy.pdf,35,35,,Past Paper
+w23_32_7,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,October/November 2023,,w23/9618_w23_qp_32.pdf,6,6,w23/9618_w23_ms_32.pdf,5,6,9618_y26_sy.pdf,34,34,,Past Paper
+w23_32_8,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,October/November 2023,,w23/9618_w23_qp_32.pdf,7,7,w23/9618_w23_ms_32.pdf,6,6,9618_y26_sy.pdf,36,36,,Past Paper
+w23_32_9ab,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,October/November 2023,,w23/9618_w23_qp_32.pdf,8,9,w23/9618_w23_ms_32.pdf,6,7,9618_y26_sy.pdf,37,37,,Past Paper
+w23_32_9c,Paper 3: Advanced Theory,19. Problem-solving,19.2 Recursion,October/November 2023,,w23/9618_w23_qp_32.pdf,9,9,w23/9618_w23_ms_32.pdf,7,7,9618_y26_sy.pdf,37,37,,Past Paper
+w23_32_10,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,October/November 2023,,w23/9618_w23_qp_32.pdf,9,9,w23/9618_w23_ms_32.pdf,8,8,9618_y26_sy.pdf,34,34,,Past Paper
+w23_32_11,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,October/November 2023,,w23/9618_w23_qp_32.pdf,10,11,w23/9618_w23_ms_32.pdf,8,8,9618_y26_sy.pdf,38,38,,Past Paper
+w23_32_12,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,October/November 2023,,w23/9618_w23_qp_32.pdf,11,12,w23/9618_w23_ms_32.pdf,9,9,9618_y26_sy.pdf,38,38,,Past Paper
+s24_31_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,May/June 2024,,s24/9618_s24_qp_31.pdf,2,2,s24/9618_s24_ms_31.pdf,4,4,9618_y26_sy.pdf,33,33,,Past Paper
+s24_31_2,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,May/June 2024,,s24/9618_s24_qp_31.pdf,3,3,s24/9618_s24_ms_31.pdf,5,5,9618_y26_sy.pdf,33,33,,Past Paper
+s24_31_3,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,May/June 2024,,s24/9618_s24_qp_31.pdf,3,4,s24/9618_s24_ms_31.pdf,6,6,9618_y26_sy.pdf,32,32,,Past Paper
+s24_31_4,Paper 3: Advanced Theory,13. Data Representation,13.2 File Organization,May/June 2024,,s24/9618_s24_qp_31.pdf,4,4,s24/9618_s24_ms_31.pdf,7,7,9618_y26_sy.pdf,32,32,,Past Paper
+s24_31_5,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2024,,s24/9618_s24_qp_31.pdf,5,5,s24/9618_s24_ms_31.pdf,7,8,9618_y26_sy.pdf,35,35,,Past Paper
+s24_31_6,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,May/June 2024,,s24/9618_s24_qp_31.pdf,6,7,s24/9618_s24_ms_31.pdf,9,10,9618_y26_sy.pdf,34,34,,Past Paper
+s24_31_7,Paper 3: Advanced Theory,17. Security,17.1 Encryption,May/June 2024,,s24/9618_s24_qp_31.pdf,7,7,s24/9618_s24_ms_31.pdf,10,10,9618_y26_sy.pdf,36,36,,Past Paper
+s24_31_8,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2024,,s24/9618_s24_qp_31.pdf,8,9,s24/9618_s24_ms_31.pdf,11,11,9618_y26_sy.pdf,38,38,,Past Paper
+s24_31_9,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,May/June 2024,,s24/9618_s24_qp_31.pdf,9,9,s24/9618_s24_ms_31.pdf,11,11,9618_y26_sy.pdf,36,36,,Past Paper
+s24_31_10,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,May/June 2024,,s24/9618_s24_qp_31.pdf,10,11,s24/9618_s24_ms_31.pdf,12,13,9618_y26_sy.pdf,37,37,,Past Paper
+s24_31_11,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,May/June 2024,,s24/9618_s24_qp_31.pdf,11,11,s24/9618_s24_ms_31.pdf,14,14,9618_y26_sy.pdf,34,34,,Past Paper
+s24_32_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,May/June 2024,,s24/9618_s24_qp_32.pdf,2,2,s24/9618_s24_ms_32.pdf,4,4,9618_y26_sy.pdf,33,33,,Past Paper
+s24_32_2,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,May/June 2024,,s24/9618_s24_qp_32.pdf,3,3,s24/9618_s24_ms_32.pdf,4,4,9618_y26_sy.pdf,33,33,,Past Paper
+s24_32_3,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,May/June 2024,,s24/9618_s24_qp_32.pdf,4,4,s24/9618_s24_ms_32.pdf,5,5,9618_y26_sy.pdf,32,32,,Past Paper
+s24_32_4,Paper 3: Advanced Theory,17. Security,17.1 Encryption,May/June 2024,,s24/9618_s24_qp_32.pdf,5,5,s24/9618_s24_ms_32.pdf,5,5,9618_y26_sy.pdf,36,36,,Past Paper
+s24_32_5,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2024,,s24/9618_s24_qp_32.pdf,6,6,s24/9618_s24_ms_32.pdf,5,6,9618_y26_sy.pdf,35,35,,Past Paper
+s24_32_6,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,May/June 2024,,s24/9618_s24_qp_32.pdf,7,8,s24/9618_s24_ms_32.pdf,7,8,9618_y26_sy.pdf,34,34,,Past Paper
+s24_32_7,Paper 3: Advanced Theory,13. Data Representation,13.2 File Organization,May/June 2024,,s24/9618_s24_qp_32.pdf,8,8,s24/9618_s24_ms_32.pdf,8,9,9618_y26_sy.pdf,32,32,,Past Paper
+s24_32_8,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,May/June 2024,,s24/9618_s24_qp_32.pdf,9,9,s24/9618_s24_ms_32.pdf,10,11,9618_y26_sy.pdf,37,37,,Past Paper
+s24_32_9,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,May/June 2024,,s24/9618_s24_qp_32.pdf,10,10,s24/9618_s24_ms_32.pdf,12,12,9618_y26_sy.pdf,34,34,,Past Paper
+s24_32_10,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2024,,s24/9618_s24_qp_32.pdf,11,12,s24/9618_s24_ms_32.pdf,13,13,9618_y26_sy.pdf,38,38,,Past Paper
+s24_32_11,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,May/June 2024,,s24/9618_s24_qp_32.pdf,12,12,s24/9618_s24_ms_32.pdf,14,14,9618_y26_sy.pdf,36,36,,Past Paper
+w24_31_1,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,October/November 2024,,w24/9618_w24_qp_31.pdf,2,2,w24/9618_w24_ms_31.pdf,4,4,9618_y26_sy.pdf,33,33,,Past Paper
+w24_31_2,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,October/November 2024,,w24/9618_w24_qp_31.pdf,3,3,w24/9618_w24_ms_31.pdf,5,5,9618_y26_sy.pdf,34,34,,Past Paper
+w24_31_3,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,October/November 2024,,w24/9618_w24_qp_31.pdf,3,3,w24/9618_w24_ms_31.pdf,5,6,9618_y26_sy.pdf,33,33,,Past Paper
+w24_31_4,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,October/November 2024,,w24/9618_w24_qp_31.pdf,4,4,w24/9618_w24_ms_31.pdf,6,6,9618_y26_sy.pdf,33,33,,Past Paper
+w24_31_5,Paper 3: Advanced Theory,13. Data Representation,13.2 File Organization,October/November 2024,,w24/9618_w24_qp_31.pdf,4,4,w24/9618_w24_ms_31.pdf,7,7,9618_y26_sy.pdf,32,32,,Past Paper
+w24_31_6,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,October/November 2024,,w24/9618_w24_qp_31.pdf,5,5,w24/9618_w24_ms_31.pdf,7,8,9618_y26_sy.pdf,32,32,,Past Paper
+w24_31_7,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,October/November 2024,,w24/9618_w24_qp_31.pdf,6,7,w24/9618_w24_ms_31.pdf,8,10,9618_y26_sy.pdf,34,34,,Past Paper
+w24_31_8,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,October/November 2024,,w24/9618_w24_qp_31.pdf,8,8,w24/9618_w24_ms_31.pdf,10,11,9618_y26_sy.pdf,35,35,,Past Paper
+w24_31_9,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,October/November 2024,,w24/9618_w24_qp_31.pdf,9,9,w24/9618_w24_ms_31.pdf,12,12,9618_y26_sy.pdf,38,38,,Past Paper
+w24_31_10,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2024,,w24/9618_w24_qp_31.pdf,10,11,w24/9618_w24_ms_31.pdf,13,14,9618_y26_sy.pdf,35,35,,Past Paper
+w24_31_11,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,October/November 2024,,w24/9618_w24_qp_31.pdf,12,13,w24/9618_w24_ms_31.pdf,15,17,9618_y26_sy.pdf,37,37,,Past Paper
+w24_32_1,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,October/November 2024,,w24/9618_w24_qp_32.pdf,2,2,w24/9618_w24_ms_32.pdf,4,4,9618_y26_sy.pdf,33,33,,Past Paper
+w24_32_2,Paper 3: Advanced Theory,13. Data Representation,13.2 File Organization,October/November 2024,,w24/9618_w24_qp_32.pdf,2,2,w24/9618_w24_ms_32.pdf,5,5,9618_y26_sy.pdf,32,32,,Past Paper
+w24_32_3,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,October/November 2024,,w24/9618_w24_qp_32.pdf,3,3,w24/9618_w24_ms_32.pdf,5,5,9618_y26_sy.pdf,32,32,,Past Paper
+w24_32_4,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,October/November 2024,,w24/9618_w24_qp_32.pdf,4,4,w24/9618_w24_ms_32.pdf,6,6,9618_y26_sy.pdf,33,33,,Past Paper
+w24_32_5,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,October/November 2024,,w24/9618_w24_qp_32.pdf,5,5,w24/9618_w24_ms_32.pdf,7,7,9618_y26_sy.pdf,33,33,,Past Paper
+w24_32_6,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,October/November 2024,,w24/9618_w24_qp_32.pdf,6,7,w24/9618_w24_ms_32.pdf,8,9,9618_y26_sy.pdf,34,34,,Past Paper
+w24_32_7,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2024,,w24/9618_w24_qp_32.pdf,8,9,w24/9618_w24_ms_32.pdf,9,10,9618_y26_sy.pdf,35,35,,Past Paper
+w24_32_8,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,October/November 2024,,w24/9618_w24_qp_32.pdf,10,10,w24/9618_w24_ms_32.pdf,10,10,9618_y26_sy.pdf,34,34,,Past Paper
+w24_32_9,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,October/November 2024,,w24/9618_w24_qp_32.pdf,10,10,w24/9618_w24_ms_32.pdf,11,11,9618_y26_sy.pdf,35,35,,Past Paper
+w24_32_10,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,October/November 2024,,w24/9618_w24_qp_32.pdf,11,11,w24/9618_w24_ms_32.pdf,11,12,9618_y26_sy.pdf,38,38,,Past Paper
+w24_32_11,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,October/November 2024,,w24/9618_w24_qp_32.pdf,12,13,w24/9618_w24_ms_32.pdf,13,15,9618_y26_sy.pdf,37,37,,Past Paper
+s25_31_1,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,May/June 2025,,s25/9618_s25_qp_31.pdf,2,2,s25/9618_s25_ms_31.pdf,6,6,9618_y26_sy.pdf,32,32,,Past Paper
+s25_31_2,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,May/June 2025,,s25/9618_s25_qp_31.pdf,3,3,s25/9618_s25_ms_31.pdf,7,7,9618_y26_sy.pdf,33,33,,Past Paper
+s25_31_3a,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,May/June 2025,,s25/9618_s25_qp_31.pdf,4,4,s25/9618_s25_ms_31.pdf,8,8,9618_y26_sy.pdf,33,33,,Past Paper
+s25_31_3b,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,May/June 2025,,s25/9618_s25_qp_31.pdf,4,4,s25/9618_s25_ms_31.pdf,8,8,9618_y26_sy.pdf,33,33,,Past Paper
+s25_31_4a,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,May/June 2025,,s25/9618_s25_qp_31.pdf,5,5,s25/9618_s25_ms_31.pdf,9,9,9618_y26_sy.pdf,37,37,,Past Paper
+s25_31_4bc,Paper 3: Advanced Theory,19. Problem-solving,19.2 Recursion,May/June 2025,,s25/9618_s25_qp_31.pdf,5,6,s25/9618_s25_ms_31.pdf,10,10,9618_y26_sy.pdf,37,37,,Past Paper
+s25_31_5,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,May/June 2025,,s25/9618_s25_qp_31.pdf,6,7,s25/9618_s25_ms_31.pdf,10,11,9618_y26_sy.pdf,34,34,,Past Paper
+s25_31_6,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2025,,s25/9618_s25_qp_31.pdf,7,7,s25/9618_s25_ms_31.pdf,11,11,9618_y26_sy.pdf,35,35,,Past Paper
+s25_31_7,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2025,,s25/9618_s25_qp_31.pdf,8,9,s25/9618_s25_ms_31.pdf,12,12,9618_y26_sy.pdf,35,35,,Past Paper
+s25_31_8,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,May/June 2025,,s25/9618_s25_qp_31.pdf,10,10,s25/9618_s25_ms_31.pdf,12,12,9618_y26_sy.pdf,35,35,,Past Paper
+s25_31_9,Paper 3: Advanced Theory,17. Security,17.1 Encryption,May/June 2025,,s25/9618_s25_qp_31.pdf,10,10,s25/9618_s25_ms_31.pdf,13,13,9618_y26_sy.pdf,36,36,,Past Paper
+s25_31_10,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,May/June 2025,,s25/9618_s25_qp_31.pdf,11,11,s25/9618_s25_ms_31.pdf,13,13,9618_y26_sy.pdf,36,36,,Past Paper
+s25_31_11,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2025,,s25/9618_s25_qp_31.pdf,12,13,s25/9618_s25_ms_31.pdf,14,15,9618_y26_sy.pdf,38,38,,Past Paper
+s25_31_12,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,May/June 2025,,s25/9618_s25_qp_31.pdf,13,13,s25/9618_s25_ms_31.pdf,15,15,9618_y26_sy.pdf,38,38,,Past Paper
+s25_32_1,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,May/June 2025,,s25/9618_s25_qp_32.pdf,2,2,s25/9618_s25_ms_32.pdf,4,4,9618_y26_sy.pdf,32,32,,Past Paper
+s25_32_2,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,May/June 2025,,s25/9618_s25_qp_32.pdf,3,3,s25/9618_s25_ms_32.pdf,4,5,9618_y26_sy.pdf,33,33,,Past Paper
+s25_32_3,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,May/June 2025,,s25/9618_s25_qp_32.pdf,4,4,s25/9618_s25_ms_32.pdf,5,5,9618_y26_sy.pdf,33,33,,Past Paper
+s25_32_4,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,May/June 2025,,s25/9618_s25_qp_32.pdf,4,4,s25/9618_s25_ms_32.pdf,6,6,9618_y26_sy.pdf,33,33,,Past Paper
+s25_32_5,Paper 3: Advanced Theory,15. Hardware,15.1 Processors,May/June 2025,,s25/9618_s25_qp_32.pdf,5,5,s25/9618_s25_ms_32.pdf,6,6,9618_y26_sy.pdf,34,34,,Past Paper
+s25_32_6,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,May/June 2025,,s25/9618_s25_qp_32.pdf,5,5,s25/9618_s25_ms_32.pdf,7,7,9618_y26_sy.pdf,36,36,,Past Paper
+s25_32_7,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,May/June 2025,,s25/9618_s25_qp_32.pdf,6,7,s25/9618_s25_ms_32.pdf,8,9,9618_y26_sy.pdf,34,34,,Past Paper
+s25_32_8,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2025,,s25/9618_s25_qp_32.pdf,7,7,s25/9618_s25_ms_32.pdf,9,9,9618_y26_sy.pdf,35,35,,Past Paper
+s25_32_9,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2025,,s25/9618_s25_qp_32.pdf,8,9,s25/9618_s25_ms_32.pdf,9,10,9618_y26_sy.pdf,35,35,,Past Paper
+s25_32_10,Paper 3: Advanced Theory,17. Security,17.1 Encryption,May/June 2025,,s25/9618_s25_qp_32.pdf,9,9,s25/9618_s25_ms_32.pdf,10,10,9618_y26_sy.pdf,36,36,,Past Paper
+s25_32_11a,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,May/June 2025,,s25/9618_s25_qp_32.pdf,10,10,s25/9618_s25_ms_32.pdf,10,10,9618_y26_sy.pdf,37,37,,Past Paper
+s25_32_11b,Paper 3: Advanced Theory,19. Problem-solving,19.2 Recursion,May/June 2025,,s25/9618_s25_qp_32.pdf,11,11,s25/9618_s25_ms_32.pdf,11,11,9618_y26_sy.pdf,37,37,,Past Paper
+s25_32_12,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2025,,s25/9618_s25_qp_32.pdf,12,13,s25/9618_s25_ms_32.pdf,11,11,9618_y26_sy.pdf,38,38,,Past Paper
+s25_32_13,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,May/June 2025,,s25/9618_s25_qp_32.pdf,13,13,s25/9618_s25_ms_32.pdf,12,12,9618_y26_sy.pdf,38,38,,Past Paper
+s25_33_1,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,May/June 2025,,s25/9618_s25_qp_33.pdf,2,2,s25/9618_s25_ms_33.pdf,6,6,9618_y26_sy.pdf,32,32,,Past Paper
+s25_33_2,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,May/June 2025,,s25/9618_s25_qp_33.pdf,3,3,s25/9618_s25_ms_33.pdf,7,7,9618_y26_sy.pdf,33,33,,Past Paper
+s25_33_3,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,May/June 2025,,s25/9618_s25_qp_33.pdf,4,5,s25/9618_s25_ms_33.pdf,7,9,9618_y26_sy.pdf,34,34,,Past Paper
+s25_33_4a,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,May/June 2025,,s25/9618_s25_qp_33.pdf,6,6,s25/9618_s25_ms_33.pdf,9,9,9618_y26_sy.pdf,33,33,,Past Paper
+s25_33_4b,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,May/June 2025,,s25/9618_s25_qp_33.pdf,6,6,s25/9618_s25_ms_33.pdf,9,9,9618_y26_sy.pdf,33,33,,Past Paper
+s25_33_5,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,May/June 2025,,s25/9618_s25_qp_33.pdf,7,7,s25/9618_s25_ms_33.pdf,10,10,9618_y26_sy.pdf,38,38,,Past Paper
+s25_33_6,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,May/June 2025,,s25/9618_s25_qp_33.pdf,7,7,s25/9618_s25_ms_33.pdf,10,11,9618_y26_sy.pdf,35,35,,Past Paper
+s25_33_7,Paper 3: Advanced Theory,17. Security,17.1 Encryption,May/June 2025,,s25/9618_s25_qp_33.pdf,8,8,s25/9618_s25_ms_33.pdf,11,11,9618_y26_sy.pdf,36,36,,Past Paper
+s25_33_8,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2025,,s25/9618_s25_qp_33.pdf,8,8,s25/9618_s25_ms_33.pdf,11,11,9618_y26_sy.pdf,35,35,,Past Paper
+s25_33_9,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,May/June 2025,,s25/9618_s25_qp_33.pdf,10,11,s25/9618_s25_ms_33.pdf,12,12,9618_y26_sy.pdf,35,35,,Past Paper
+s25_33_10,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,May/June 2025,,s25/9618_s25_qp_33.pdf,12,12,s25/9618_s25_ms_33.pdf,13,13,9618_y26_sy.pdf,36,36,,Past Paper
+s25_33_11,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,May/June 2025,,s25/9618_s25_qp_33.pdf,13,13,s25/9618_s25_ms_33.pdf,14,14,9618_y26_sy.pdf,38,38,,Past Paper
+s25_33_12,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,May/June 2025,,s25/9618_s25_qp_33.pdf,14,15,s25/9618_s25_ms_33.pdf,15,15,9618_y26_sy.pdf,37,37,,Past Paper
+s25_33_13,Paper 3: Advanced Theory,19. Problem-solving,19.2 Recursion,May/June 2025,,s25/9618_s25_qp_33.pdf,16,16,s25/9618_s25_ms_33.pdf,16,16,9618_y26_sy.pdf,37,37,,Past Paper
+w25_31_1,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,October/November 2025,,w25/9618_w25_qp_31.pdf,2,2,w25/9618_w25_ms_31.pdf,6,6,9618_y26_sy.pdf,32,32,,Past Paper
+w25_31_2,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,October/November 2025,,w25/9618_w25_qp_31.pdf,3,3,w25/9618_w25_ms_31.pdf,6,7,9618_y26_sy.pdf,33,33,,Past Paper
+w25_31_3ab,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,October/November 2025,,w25/9618_w25_qp_31.pdf,4,4,w25/9618_w25_ms_31.pdf,7,8,9618_y26_sy.pdf,33,33,,Past Paper
+w25_31_3c,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,October/November 2025,,w25/9618_w25_qp_31.pdf,4,4,w25/9618_w25_ms_31.pdf,8,8,9618_y26_sy.pdf,33,33,,Past Paper
+w25_31_4,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,October/November 2025,,w25/9618_w25_qp_31.pdf,5,5,w25/9618_w25_ms_31.pdf,8,9,9618_y26_sy.pdf,35,35,,Past Paper
+w25_31_5,Paper 3: Advanced Theory,17. Security,17.1 Encryption,October/November 2025,,w25/9618_w25_qp_31.pdf,5,5,w25/9618_w25_ms_31.pdf,9,10,9618_y26_sy.pdf,36,36,,Past Paper
+w25_31_6,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,October/November 2025,,w25/9618_w25_qp_31.pdf,6,7,w25/9618_w25_ms_31.pdf,10,11,9618_y26_sy.pdf,34,34,,Past Paper
+w25_31_7,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,October/November 2025,,w25/9618_w25_qp_31.pdf,7,7,w25/9618_w25_ms_31.pdf,11,12,9618_y26_sy.pdf,36,36,,Past Paper
+w25_31_8,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2025,,w25/9618_w25_qp_31.pdf,8,8,w25/9618_w25_ms_31.pdf,12,13,9618_y26_sy.pdf,35,35,,Past Paper
+w25_31_9a,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,October/November 2025,,w25/9618_w25_qp_31.pdf,9,9,w25/9618_w25_ms_31.pdf,13,14,9618_y26_sy.pdf,37,37,,Past Paper
+w25_31_9b,Paper 3: Advanced Theory,19. Problem-solving,19.2 Recursion,October/November 2025,,w25/9618_w25_qp_31.pdf,10,10,w25/9618_w25_ms_31.pdf,14,14,9618_y26_sy.pdf,37,37,,Past Paper
+w25_31_10,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,October/November 2025,,w25/9618_w25_qp_31.pdf,10,10,w25/9618_w25_ms_31.pdf,14,14,9618_y26_sy.pdf,38,38,,Past Paper
+w25_31_11,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,October/November 2025,,w25/9618_w25_qp_31.pdf,11,11,w25/9618_w25_ms_31.pdf,15,15,9618_y26_sy.pdf,38,38,,Past Paper
+w25_32_1,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,October/November 2025,,w25/9618_w25_qp_32.pdf,2,2,w25/9618_w25_ms_32.pdf,6,6,9618_y26_sy.pdf,32,32,,Past Paper
+w25_32_2,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,October/November 2025,,w25/9618_w25_qp_32.pdf,3,3,w25/9618_w25_ms_32.pdf,7,7,9618_y26_sy.pdf,33,33,,Past Paper
+w25_32_3,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,October/November 2025,,w25/9618_w25_qp_32.pdf,4,4,w25/9618_w25_ms_32.pdf,8,8,9618_y26_sy.pdf,33,33,,Past Paper
+w25_32_4,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,October/November 2025,,w25/9618_w25_qp_32.pdf,4,4,w25/9618_w25_ms_32.pdf,9,10,9618_y26_sy.pdf,33,33,,Past Paper
+w25_32_5,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,October/November 2025,,w25/9618_w25_qp_32.pdf,5,5,w25/9618_w25_ms_32.pdf,10,10,9618_y26_sy.pdf,35,35,,Past Paper
+w25_32_6,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,October/November 2025,,w25/9618_w25_qp_32.pdf,6,7,w25/9618_w25_ms_32.pdf,11,12,9618_y26_sy.pdf,34,34,,Past Paper
+w25_32_7,Paper 3: Advanced Theory,17. Security,17.1 Encryption,October/November 2025,,w25/9618_w25_qp_32.pdf,7,7,w25/9618_w25_ms_32.pdf,13,13,9618_y26_sy.pdf,36,36,,Past Paper
+w25_32_8,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2025,,w25/9618_w25_qp_32.pdf,8,8,w25/9618_w25_ms_32.pdf,13,14,9618_y26_sy.pdf,35,35,,Past Paper
+w25_32_9,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,October/November 2025,,w25/9618_w25_qp_32.pdf,9,9,w25/9618_w25_ms_32.pdf,14,15,9618_y26_sy.pdf,36,36,,Past Paper
+w25_32_10,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,October/November 2025,,w25/9618_w25_qp_32.pdf,9,9,w25/9618_w25_ms_32.pdf,15,15,9618_y26_sy.pdf,38,38,,Past Paper
+w25_32_11,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,October/November 2025,,w25/9618_w25_qp_32.pdf,10,11,w25/9618_w25_ms_32.pdf,16,16,9618_y26_sy.pdf,38,38,,Past Paper
+w25_32_12a,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,October/November 2025,,w25/9618_w25_qp_32.pdf,12,12,w25/9618_w25_ms_32.pdf,17,17,9618_y26_sy.pdf,37,37,,Past Paper
+w25_32_12b,Paper 3: Advanced Theory,19. Problem-solving,19.2 Recursion,October/November 2025,,w25/9618_w25_qp_32.pdf,12,12,w25/9618_w25_ms_32.pdf,17,17,9618_y26_sy.pdf,37,37,,Past Paper
+w25_33_1,Paper 3: Advanced Theory,13. Data Representation,13.1 User-defined Data Type,October/November 2025,,w25/9618_w25_qp_33.pdf,2,2,w25/9618_w25_ms_33.pdf,6,6,9618_y26_sy.pdf,32,32,,Past Paper
+w25_33_2,Paper 3: Advanced Theory,13. Data Representation,13.3 Floating-point Numbers,October/November 2025,,w25/9618_w25_qp_33.pdf,3,3,w25/9618_w25_ms_33.pdf,7,7,9618_y26_sy.pdf,33,33,,Past Paper
+w25_33_3,Paper 3: Advanced Theory,14. Communication,14.2 Circuit/Packet Switching,October/November 2025,,w25/9618_w25_qp_33.pdf,3,3,w25/9618_w25_ms_33.pdf,7,7,9618_y26_sy.pdf,33,33,,Past Paper
+w25_33_4,Paper 3: Advanced Theory,14. Communication,14.1 Protocols,October/November 2025,,w25/9618_w25_qp_33.pdf,4,4,w25/9618_w25_ms_33.pdf,8,8,9618_y26_sy.pdf,33,33,,Past Paper
+w25_33_5,Paper 3: Advanced Theory,16. System Software,16.1 Purpose of OS,October/November 2025,,w25/9618_w25_qp_33.pdf,4,4,w25/9618_w25_ms_33.pdf,8,8,9618_y26_sy.pdf,35,35,,Past Paper
+w25_33_6,Paper 3: Advanced Theory,15. Hardware,15.2 Boolean Logic,October/November 2025,,w25/9618_w25_qp_33.pdf,5,5,w25/9618_w25_ms_33.pdf,9,10,9618_y26_sy.pdf,34,34,,Past Paper
+w25_33_7,Paper 3: Advanced Theory,16. System Software,16.2 Translation Software,October/November 2025,,w25/9618_w25_qp_33.pdf,6,6,w25/9618_w25_ms_33.pdf,10,11,9618_y26_sy.pdf,35,35,,Past Paper
+w25_33_8,Paper 3: Advanced Theory,18. Artificial Intelligence,18.1 Artificial Intelligence,October/November 2025,,w25/9618_w25_qp_33.pdf,7,7,w25/9618_w25_ms_33.pdf,12,12,9618_y26_sy.pdf,36,36,,Past Paper
+w25_33_9,Paper 3: Advanced Theory,17. Security,17.1 Encryption,October/November 2025,,w25/9618_w25_qp_33.pdf,8,8,w25/9618_w25_ms_33.pdf,12,12,9618_y26_sy.pdf,36,36,,Past Paper
+w25_33_10,Paper 3: Advanced Theory,19. Problem-solving,19.1 Algorithms,October/November 2025,,w25/9618_w25_qp_33.pdf,8,8,w25/9618_w25_ms_33.pdf,13,13,9618_y26_sy.pdf,37,37,,Past Paper
+w25_33_11,Paper 3: Advanced Theory,19. Problem-solving,19.2 Recursion,October/November 2025,,w25/9618_w25_qp_33.pdf,9,9,w25/9618_w25_ms_33.pdf,13,13,9618_y26_sy.pdf,37,37,,Past Paper
+w25_33_12,Paper 3: Advanced Theory,20. Further Programming,20.2 Exception,October/November 2025,,w25/9618_w25_qp_33.pdf,9,9,w25/9618_w25_ms_33.pdf,14,14,9618_y26_sy.pdf,38,38,,Past Paper
+w25_33_13,Paper 3: Advanced Theory,20. Further Programming,20.1 Programming Paradigms,October/November 2025,,w25/9618_w25_qp_33.pdf,10,11,w25/9618_w25_ms_33.pdf,15,16,9618_y26_sy.pdf,38,38,,Past Paper
