@@ -13,6 +13,12 @@
         <h1>PDF 题库练习系统</h1>
         <p>Web V2 · 四级筛选 + 页面内 PDF 预览</p>
       </div>
+      <div class="user-bar">
+        <span>当前用户：{{ current_user }}</span>
+        <form method="post" action="{{ url_for('logout') }}">
+          <button type="submit" class="secondary">退出登录</button>
+        </form>
+      </div>
     </header>
 
     <form class="filters card" method="get">
