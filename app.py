@@ -1,18 +1,82 @@
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory, jsonify
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    send_from_directory,
+    jsonify,
+    session,
+    flash,
+)
 import pandas as pd
 from pathlib import Path
 import json
 from datetime import datetime
+import sqlite3
+from functools import wraps
+from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 BASE_DIR = Path(__file__).resolve().parent
 INDEX_XLSX = BASE_DIR / "index.xlsx"
 INDEX_CSV = BASE_DIR / "index.csv"
 PDF_BASE = BASE_DIR / "pdfs"
 PROGRESS_FILE = BASE_DIR / "progress_web.json"
+DB_FILE = BASE_DIR / "app.db"
 
 FILTER_ALL = "全部"
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")
+
+
+def get_db_connection():
+    conn = sqlite3.connect(DB_FILE)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def init_db():
+    conn = get_db_connection()
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE NOT NULL,
+            password_hash TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        )
+        """
+    )
+    conn.commit()
+    conn.close()
+
+
+
+_db_inited = False
+
+
+@app.before_request
+def ensure_db_initialized():
+    global _db_inited
+    if not _db_inited:
+        init_db()
+        _db_inited = True
+
+def login_required(view_func):
+    @wraps(view_func)
+    def wrapped(*args, **kwargs):
+        if "user_id" not in session:
+            return redirect(url_for("login", next=request.url))
+        return view_func(*args, **kwargs)
+
+    return wrapped
+
+
+def current_username():
+    return session.get("username", "")
+
 
 def load_index():
     if INDEX_XLSX.exists():
@@ -23,10 +87,17 @@ def load_index():
         raise FileNotFoundError("请把 index.xlsx 或 index.csv 放到 web_v2 目录下。")
 
     required = [
-        "id", "subject", "chapter", "topic", "year",
-        "question_pdf", "question_page",
-        "answer_pdf", "answer_page",
-        "syllabus_pdf", "syllabus_page",
+        "id",
+        "subject",
+        "chapter",
+        "topic",
+        "year",
+        "question_pdf",
+        "question_page",
+        "answer_pdf",
+        "answer_page",
+        "syllabus_pdf",
+        "syllabus_page",
     ]
     missing = [c for c in required if c not in df.columns]
     if missing:
@@ -45,31 +116,72 @@ def load_index():
             df[col] = default
 
     text_cols = [
-        "id", "subject", "chapter", "topic", "year",
-        "question_pdf", "answer_pdf", "syllabus_pdf",
-        "title", "source"
+        "id",
+        "subject",
+        "chapter",
+        "topic",
+        "year",
+        "question_pdf",
+        "answer_pdf",
+        "syllabus_pdf",
+        "title",
+        "source",
     ]
     for col in text_cols:
         df[col] = df[col].fillna("").astype(str).str.strip()
 
     for col in [
-        "question_page", "answer_page", "syllabus_page",
-        "question_end_page", "answer_end_page", "syllabus_end_page", "order"
+        "question_page",
+        "answer_page",
+        "syllabus_page",
+        "question_end_page",
+        "answer_end_page",
+        "syllabus_end_page",
+        "order",
     ]:
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
-    return df.sort_values(["subject", "chapter", "topic", "year", "order", "id"]).reset_index(drop=True)
+    return df.sort_values(["subject", "chapter", "topic", "year", "order", "id"]).reset_index(
+        drop=True
+    )
 
-def load_progress():
+
+def load_progress_root():
     if not PROGRESS_FILE.exists():
         return {}
     try:
-        return json.loads(PROGRESS_FILE.read_text(encoding="utf-8"))
+        data = json.loads(PROGRESS_FILE.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
     except Exception:
         return {}
 
-def save_progress(data):
-    PROGRESS_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+def save_progress_root(data):
+    PROGRESS_FILE.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def load_progress(username):
+    root = load_progress_root()
+    if username in root and isinstance(root.get(username), dict):
+        return root[username]
+
+    # 兼容旧格式：顶层直接是 qid -> {...}
+    legacy_like = all(isinstance(v, dict) and ("done" in v or "favorite" in v or "note" in v) for v in root.values())
+    if legacy_like and root:
+        root = {username: root}
+        save_progress_root(root)
+        return root[username]
+
+    return {}
+
+
+def save_progress(username, user_data):
+    root = load_progress_root()
+    root[username] = user_data
+    save_progress_root(root)
+
 
 def get_progress_record(progress, qid):
     item = progress.get(qid, {})
@@ -79,19 +191,88 @@ def get_progress_record(progress, qid):
         "note": str(item.get("note", "")),
     }
 
+
 def merge_record(row, progress):
     record = row.to_dict()
     record.update(get_progress_record(progress, record["id"]))
     return record
 
+
 def unique_values(df, col):
-    vals = sorted(v for v in df[col].dropna().astype(str).str.strip().unique().tolist() if v != "")
+    vals = sorted(
+        v for v in df[col].dropna().astype(str).str.strip().unique().tolist() if v != ""
+    )
     return [FILTER_ALL] + vals
 
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        username = request.form.get("username", "").strip()
+        password = request.form.get("password", "")
+
+        if not username or not password:
+            flash("用户名和密码不能为空。")
+            return render_template("register.html")
+
+        conn = get_db_connection()
+        exists = conn.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone()
+        if exists:
+            conn.close()
+            flash("用户名已存在，请换一个。")
+            return render_template("register.html")
+
+        conn.execute(
+            "INSERT INTO users (username, password_hash, created_at) VALUES (?, ?, ?)",
+            (username, generate_password_hash(password), datetime.now().isoformat(timespec="seconds")),
+        )
+        conn.commit()
+        conn.close()
+        flash("注册成功，请登录。")
+        return redirect(url_for("login"))
+
+    return render_template("register.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username", "").strip()
+        password = request.form.get("password", "")
+
+        conn = get_db_connection()
+        user = conn.execute(
+            "SELECT id, username, password_hash FROM users WHERE username = ?", (username,)
+        ).fetchone()
+        conn.close()
+
+        if not user or not check_password_hash(user["password_hash"], password):
+            flash("用户名或密码错误。")
+            return render_template("login.html")
+
+        session.clear()
+        session["user_id"] = user["id"]
+        session["username"] = user["username"]
+        next_url = request.args.get("next") or request.form.get("next")
+        return redirect(next_url or url_for("index"))
+
+    if "user_id" in session:
+        return redirect(url_for("index"))
+    return render_template("login.html")
+
+
+@app.post("/logout")
+@login_required
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
+
+
 @app.route("/")
+@login_required
 def index():
     all_df = load_index()
-    progress = load_progress()
+    progress = load_progress(current_username())
 
     subject = request.args.get("subject", FILTER_ALL)
     chapter = request.args.get("chapter", FILTER_ALL)
@@ -128,7 +309,9 @@ def index():
 
     if records and not selected_id:
         selected_id = records[0]["id"]
-    selected = next((r for r in records if r["id"] == selected_id), records[0] if records else None)
+    selected = next(
+        (r for r in records if r["id"] == selected_id), records[0] if records else None
+    )
 
     pdf_url = None
     pdf_page = None
@@ -160,31 +343,43 @@ def index():
         chapters=unique_values(chapter_options_df, "chapter"),
         topics=unique_values(topic_options_df, "topic"),
         years=unique_values(year_options_df, "year"),
+        current_user=current_username(),
     )
 
+
 @app.route("/pdfs/<path:filename>")
+@login_required
 def serve_pdf(filename):
     return send_from_directory(PDF_BASE, filename)
 
+
 @app.post("/toggle/<qid>/<field>")
+@login_required
 def toggle(qid, field):
     if field not in {"done", "favorite"}:
         return jsonify({"ok": False, "error": "invalid field"}), 400
-    progress = load_progress()
+
+    username = current_username()
+    progress = load_progress(username)
     item = progress.setdefault(qid, {})
     item[field] = not bool(item.get(field, False))
     item["updated_at"] = datetime.now().isoformat(timespec="seconds")
-    save_progress(progress)
+    save_progress(username, progress)
     return jsonify({"ok": True, field: item[field]})
 
+
 @app.post("/note/<qid>")
+@login_required
 def save_note_route(qid):
-    progress = load_progress()
+    username = current_username()
+    progress = load_progress(username)
     item = progress.setdefault(qid, {})
     item["note"] = request.form.get("note", "")
     item["updated_at"] = datetime.now().isoformat(timespec="seconds")
-    save_progress(progress)
+    save_progress(username, progress)
     return redirect(request.referrer or url_for("index"))
 
+
 if __name__ == "__main__":
-    app.run(debug=True,use_reloader=False, port=8000)
+    init_db()
+    app.run(debug=True, use_reloader=False, port=8000)

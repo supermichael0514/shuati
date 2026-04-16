@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>登录 · PDF 题库练习系统</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="card auth-card">
+      <h1>登录</h1>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="flash">{{ messages[0] }}</div>
+      {% endif %}
+      {% endwith %}
+      <form method="post" class="auth-form">
+        <input type="hidden" name="next" value="{{ request.args.get('next','') }}">
+        <label>
+          <span>用户名</span>
+          <input name="username" autocomplete="username" required>
+        </label>
+        <label>
+          <span>密码</span>
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">登录</button>
+      </form>
+      <p class="auth-link">还没有账号？<a href="{{ url_for('register') }}">去注册</a></p>
+    </div>
+  </div>
+</body>
+</html>
