@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ game_name|upper }} · {{ 'Mini Games' if lang == 'en' else '玩一玩' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body">
+  <div class="portal-page">
+    <header class="portal-header card">
+      <div>
+        <p class="neon-label">{{ 'MINI GAME' if lang == 'en' else '小游戏' }}</p>
+        <h1>{% if game_name == '2048' %}2048{% elif game_name == 'sudoku' %}{{ 'Sudoku' if lang == 'en' else '数独' }}{% else %}{{ 'Tetris' if lang == 'en' else '俄罗斯方块' }}{% endif %}</h1>
+      </div>
+      <div class="portal-actions">
+        <a class="secondary" href="{{ url_for('games_home', lang=lang) }}">{{ 'Back to Games' if lang == 'en' else '返回游戏列表' }}</a>
+      </div>
+    </header>
+
+    <div class="game-layout">
+      <section class="card game-main">
+        <div class="game-toolbar">
+          <div>{{ 'Current Score' if lang == 'en' else '当前分数' }}: <strong id="score">0</strong></div>
+          <button id="restartBtn">{{ 'Restart' if lang == 'en' else '重新开始' }}</button>
+        </div>
+
+        {% if game_name == '2048' %}
+        <div id="board2048" class="board-2048"></div>
+        <p class="game-hint">{{ 'Use arrow keys to move.' if lang == 'en' else '使用方向键移动。' }}</p>
+        {% elif game_name == 'sudoku' %}
+        <div class="sudoku-panel">
+          <div>{{ 'Time' if lang == 'en' else '用时' }}: <strong id="sudokuTime">0</strong>s</div>
+          <button id="checkSudoku">{{ 'Check' if lang == 'en' else '检查答案' }}</button>
+        </div>
+        <div id="sudokuBoard" class="board-sudoku"></div>
+        {% else %}
+        <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+        <p class="game-hint">{{ 'Arrow keys: move/rotate, down to drop.' if lang == 'en' else '方向键移动，↑旋转，↓加速下落。' }}</p>
+        {% endif %}
+      </section>
+
+      <aside class="card leaderboard-panel">
+        <h2>{{ 'Leaderboard' if lang == 'en' else '排行榜' }}</h2>
+        <ol id="leaderboardList">
+          {% for row in leaderboard %}
+          <li><span>{{ row.username }}</span><strong>{{ row.best_score }}</strong></li>
+          {% else %}
+          <li class="empty">{{ 'No scores yet.' if lang == 'en' else '暂无成绩。' }}</li>
+          {% endfor %}
+        </ol>
+      </aside>
+    </div>
+  </div>
+
+<script>
+const GAME_NAME = "{{ game_name }}";
+const LANG = "{{ lang }}";
+const SCORE_LABEL = document.getElementById('score');
+const leaderboardList = document.getElementById('leaderboardList');
+
+async function submitScore(score){
+  const res = await fetch(`/api/games/${GAME_NAME}/score?lang=${LANG}`, {
+    method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({score})
+  });
+  if(!res.ok) return;
+  const data = await res.json();
+  if(data.ok && Array.isArray(data.leaderboard)){
+    renderLeaderboard(data.leaderboard);
+  }
+}
+
+function renderLeaderboard(items){
+  leaderboardList.innerHTML = '';
+  if(!items.length){
+    const li = document.createElement('li');
+    li.className = 'empty';
+    li.textContent = LANG === 'en' ? 'No scores yet.' : '暂无成绩。';
+    leaderboardList.appendChild(li);
+    return;
+  }
+  items.forEach((row)=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<span>${row.username}</span><strong>${row.best_score}</strong>`;
+    leaderboardList.appendChild(li);
+  });
+}
+
+if(GAME_NAME === '2048'){
+  const boardEl = document.getElementById('board2048');
+  const size = 4;
+  let grid = [];
+  let score = 0;
+
+  function reset(){
+    grid = Array.from({length:size}, ()=>Array(size).fill(0));
+    score = 0;
+    spawn(); spawn();
+    draw();
+  }
+
+  function spawn(){
+    const empty = [];
+    for(let r=0;r<size;r++) for(let c=0;c<size;c++) if(!grid[r][c]) empty.push([r,c]);
+    if(!empty.length) return;
+    const [r,c] = empty[Math.floor(Math.random()*empty.length)];
+    grid[r][c] = Math.random() < 0.9 ? 2 : 4;
+  }
+
+  function draw(){
+    boardEl.innerHTML = '';
+    SCORE_LABEL.textContent = score;
+    grid.flat().forEach(v=>{
+      const cell = document.createElement('div');
+      cell.className = 'cell-2048';
+      cell.textContent = v || '';
+      cell.dataset.value = v;
+      boardEl.appendChild(cell);
+    });
+  }
+
+  function slide(line){
+    const arr = line.filter(Boolean);
+    for(let i=0;i<arr.length-1;i++){
+      if(arr[i] === arr[i+1]){ arr[i] *= 2; score += arr[i]; arr[i+1] = 0; i++; }
+    }
+    const merged = arr.filter(Boolean);
+    while(merged.length < size) merged.push(0);
+    return merged;
+  }
+
+  function move(dir){
+    const before = JSON.stringify(grid);
+    for(let i=0;i<size;i++){
+      let line;
+      if(dir==='left' || dir==='right') line = grid[i].slice();
+      else line = [grid[0][i],grid[1][i],grid[2][i],grid[3][i]];
+      if(dir==='right' || dir==='down') line.reverse();
+      line = slide(line);
+      if(dir==='right' || dir==='down') line.reverse();
+      if(dir==='left' || dir==='right') grid[i] = line;
+      else for(let r=0;r<size;r++) grid[r][i] = line[r];
+    }
+    if(before !== JSON.stringify(grid)){
+      spawn(); draw();
+      if(!canMove()) submitScore(score);
+    }
+  }
+
+  function canMove(){
+    for(let r=0;r<size;r++) for(let c=0;c<size;c++){
+      if(!grid[r][c]) return true;
+      if(r<size-1 && grid[r][c]===grid[r+1][c]) return true;
+      if(c<size-1 && grid[r][c]===grid[r][c+1]) return true;
+    }
+    return false;
+  }
+
+  document.addEventListener('keydown', (e)=>{
+    const m = {ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};
+    if(m[e.key]){ e.preventDefault(); move(m[e.key]); }
+  });
+  document.getElementById('restartBtn').onclick = reset;
+  reset();
+}
+
+if(GAME_NAME === 'sudoku'){
+  const puzzle = [
+    [5,3,0,0,7,0,0,0,0],
+    [6,0,0,1,9,5,0,0,0],
+    [0,9,8,0,0,0,0,6,0],
+    [8,0,0,0,6,0,0,0,3],
+    [4,0,0,8,0,3,0,0,1],
+    [7,0,0,0,2,0,0,0,6],
+    [0,6,0,0,0,0,2,8,0],
+    [0,0,0,4,1,9,0,0,5],
+    [0,0,0,0,8,0,0,7,9]
+  ];
+  const solution = [
+    [5,3,4,6,7,8,9,1,2],[6,7,2,1,9,5,3,4,8],[1,9,8,3,4,2,5,6,7],
+    [8,5,9,7,6,1,4,2,3],[4,2,6,8,5,3,7,9,1],[7,1,3,9,2,4,8,5,6],
+    [9,6,1,5,3,7,2,8,4],[2,8,7,4,1,9,6,3,5],[3,4,5,2,8,6,1,7,9]
+  ];
+  let startTime = Date.now();
+  let score = 0;
+  const board = document.getElementById('sudokuBoard');
+  const timeEl = document.getElementById('sudokuTime');
+
+  function drawBoard(){
+    board.innerHTML = '';
+    for(let r=0;r<9;r++){
+      for(let c=0;c<9;c++){
+        const input = document.createElement('input');
+        input.maxLength = 1;
+        input.className = 'sudoku-cell';
+        if(puzzle[r][c]){
+          input.value = puzzle[r][c];
+          input.disabled = true;
+          input.classList.add('given');
+        }
+        input.dataset.r = r; input.dataset.c = c;
+        board.appendChild(input);
+      }
+    }
+  }
+
+  function check(){
+    let ok = true;
+    document.querySelectorAll('.sudoku-cell').forEach((cell)=>{
+      const r = Number(cell.dataset.r), c = Number(cell.dataset.c);
+      const v = Number(cell.value);
+      if(v !== solution[r][c]){ ok = false; if(!cell.disabled) cell.classList.add('wrong'); }
+      else cell.classList.remove('wrong');
+    });
+    if(ok){
+      const sec = Math.floor((Date.now()-startTime)/1000);
+      score = Math.max(0, 2000 - sec*5);
+      SCORE_LABEL.textContent = score;
+      submitScore(score);
+      alert(LANG==='en' ? `Completed! Score: ${score}` : `完成！得分：${score}`);
+    }
+  }
+
+  setInterval(()=>{ timeEl.textContent = Math.floor((Date.now()-startTime)/1000); }, 1000);
+  document.getElementById('checkSudoku').onclick = check;
+  document.getElementById('restartBtn').onclick = ()=>{ startTime = Date.now(); drawBoard(); SCORE_LABEL.textContent = 0; };
+  drawBoard();
+}
+
+if(GAME_NAME === 'tetris'){
+  const canvas = document.getElementById('tetrisCanvas');
+  const ctx = canvas.getContext('2d');
+  const COLS=10, ROWS=20, BLOCK=30;
+  const colors = ['#000','#38bdf8','#6366f1','#f472b6','#f59e0b','#10b981','#fb7185','#3b82f6'];
+  const shapes = [[],[[1,1,1,1]],[[2,2],[2,2]],[[0,3,0],[3,3,3]],[[4,4,0],[0,4,4]],[[0,5,5],[5,5,0]],[[6,0,0],[6,6,6]]];
+  let board = Array.from({length:ROWS},()=>Array(COLS).fill(0));
+  let piece, pos, dropCounter=0,last=0,score=0,gameOver=false;
+
+  function spawn(){
+    const id = 1 + Math.floor(Math.random()*6);
+    piece = shapes[id].map(r=>r.slice());
+    pos = {x: Math.floor(COLS/2)-1, y:0};
+    if(collide()) gameOver = true;
+  }
+
+  function collide(){
+    for(let y=0;y<piece.length;y++) for(let x=0;x<piece[y].length;x++){
+      if(piece[y][x] && ((board[y+pos.y]&&board[y+pos.y][x+pos.x]) !== 0)) return true;
+    }
+    return false;
+  }
+
+  function merge(){
+    piece.forEach((row,y)=>row.forEach((v,x)=>{ if(v) board[y+pos.y][x+pos.x]=v; }));
+  }
+
+  function rotate(){
+    const m = piece[0].map((_,i)=>piece.map(r=>r[i]).reverse());
+    const old = piece; piece = m; if(collide()) piece = old;
+  }
+
+  function clearLines(){
+    let lines = 0;
+    for(let y=ROWS-1;y>=0;y--){
+      if(board[y].every(v=>v)){ board.splice(y,1); board.unshift(Array(COLS).fill(0)); lines++; y++; }
+    }
+    if(lines){ score += lines*100; SCORE_LABEL.textContent = score; }
+  }
+
+  function drop(){
+    pos.y++;
+    if(collide()){
+      pos.y--; merge(); clearLines(); spawn();
+      if(gameOver){ submitScore(score); }
+    }
+    dropCounter=0;
+  }
+
+  function draw(){
+    ctx.fillStyle = '#f8fafc'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    board.forEach((row,y)=>row.forEach((v,x)=>{ if(v){ ctx.fillStyle=colors[v]; ctx.fillRect(x*BLOCK,y*BLOCK,BLOCK-1,BLOCK-1); } }));
+    piece.forEach((row,y)=>row.forEach((v,x)=>{ if(v){ ctx.fillStyle=colors[v]; ctx.fillRect((x+pos.x)*BLOCK,(y+pos.y)*BLOCK,BLOCK-1,BLOCK-1); } }));
+  }
+
+  function update(time=0){
+    const delta = time-last; last=time; dropCounter+=delta;
+    if(dropCounter>500 && !gameOver) drop();
+    draw();
+    if(!gameOver) requestAnimationFrame(update);
+  }
+
+  document.addEventListener('keydown', (e)=>{
+    if(gameOver) return;
+    if(e.key==='ArrowLeft'){ pos.x--; if(collide()) pos.x++; }
+    else if(e.key==='ArrowRight'){ pos.x++; if(collide()) pos.x--; }
+    else if(e.key==='ArrowDown'){ drop(); }
+    else if(e.key==='ArrowUp'){ rotate(); }
+  });
+
+  document.getElementById('restartBtn').onclick = ()=>{
+    board = Array.from({length:ROWS},()=>Array(COLS).fill(0));
+    score = 0; gameOver = false; SCORE_LABEL.textContent = 0;
+    spawn(); update();
+  };
+
+  spawn(); update();
+}
+</script>
+</body>
+</html>
