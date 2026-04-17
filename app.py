@@ -79,6 +79,17 @@ def init_db():
         )
         """
     )
+    existing_columns = {
+        row["name"] for row in conn.execute("PRAGMA table_info(users)").fetchall()
+    }
+    migration_columns = {
+        "birth_date": "ALTER TABLE users ADD COLUMN birth_date TEXT NOT NULL DEFAULT ''",
+        "school": "ALTER TABLE users ADD COLUMN school TEXT NOT NULL DEFAULT ''",
+        "email": "ALTER TABLE users ADD COLUMN email TEXT NOT NULL DEFAULT ''",
+    }
+    for column, sql in migration_columns.items():
+        if column not in existing_columns:
+            conn.execute(sql)
     conn.commit()
     conn.close()
 
