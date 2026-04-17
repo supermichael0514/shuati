@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Learning Hub Portal' if lang == 'en' else '学习平台入口' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body">
+  <div class="portal-page">
+    <header class="portal-header card">
+      <div>
+        <p class="neon-label">{{ 'NEXT GEN LEARNING SYSTEM' if lang == 'en' else '新一代学习系统' }}</p>
+        <h1>{{ 'Intelligent Learning Portal' if lang == 'en' else '智能学习入口主界面' }}</h1>
+        <p class="portal-subtitle">{{ 'Choose a module to start practicing, discussing, gaming, or studying.' if lang == 'en' else '选择一个模块，开始练习、交流、游戏或学习。' }}</p>
+      </div>
+      <div class="portal-actions">
+        <div class="lang-switch">
+          <a class="secondary {{ 'active' if lang != 'en' else '' }}" href="{{ url_for('portal', lang='zh') }}">中文</a>
+          <a class="secondary {{ 'active' if lang == 'en' else '' }}" href="{{ url_for('portal', lang='en') }}">English</a>
+        </div>
+        <span>{{ 'User' if lang == 'en' else '当前用户' }}: {{ current_user }}</span>
+        <form method="post" action="{{ url_for('logout', lang=lang) }}">
+          <button type="submit" class="secondary">{{ 'Log out' if lang == 'en' else '退出登录' }}</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="feature-grid">
+      <a class="feature-tile" href="{{ url_for('index', lang=lang) }}">
+        <div class="tile-icon">📝</div>
+        <h2>{{ 'Practice' if lang == 'en' else '练一练' }}</h2>
+        <p>{{ 'Enter the filtered question bank and start solving problems.' if lang == 'en' else '进入筛选题库，开始系统刷题。' }}</p>
+      </a>
+
+      <div class="feature-tile disabled">
+        <div class="tile-icon">💬</div>
+        <h2>{{ 'Forum' if lang == 'en' else '聊一聊' }}</h2>
+        <p>{{ 'Community forum for posting and replying to discussions (planned).' if lang == 'en' else '用户论坛，支持发帖与交流（规划中）。' }}</p>
+      </div>
+
+      <div class="feature-tile disabled">
+        <div class="tile-icon">🎮</div>
+        <h2>{{ 'Mini Games' if lang == 'en' else '玩一玩' }}</h2>
+        <p>{{ '2048, Sudoku, and Tetris with score ranking between users (planned).' if lang == 'en' else '内置 2048、数独、俄罗斯方块，并支持积分排行（规划中）。' }}</p>
+      </div>
+
+      <div class="feature-tile disabled">
+        <div class="tile-icon">📚</div>
+        <h2>{{ 'Resources' if lang == 'en' else '学一学' }}</h2>
+        <p>{{ 'Built-in study materials, guides, and curated references (planned).' if lang == 'en' else '内置学习资料、指南和精选资源（规划中）。' }}</p>
+      </div>
+    </main>
+
+    <footer class="portal-footer card">
+      <div class="logo-box">
+        <div class="logo-mark">LOGO</div>
+        <div>
+          <strong>{{ 'Your Brand' if lang == 'en' else '你的品牌 Logo 区域' }}</strong>
+          <p>{{ 'Replace LOGO with your final image asset.' if lang == 'en' else '可替换为你的正式 Logo 图片。' }}</p>
+        </div>
+      </div>
+      <div class="contact-box">
+        <h3>{{ 'Contact' if lang == 'en' else '联系方式' }}</h3>
+        <p>Email: yourname@example.com</p>
+        <p>WeChat: your_wechat_id</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

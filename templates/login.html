@@ -1,15 +1,19 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>登录 · PDF 题库练习系统</title>
+  <title>{{ 'Login' if lang == 'en' else '登录' }} · {{ 'Learning System' if lang == 'en' else '题库练习系统' }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <div class="auth-page">
     <div class="card auth-card">
-      <h1>登录</h1>
+      <div class="lang-switch auth-lang">
+        <a class="secondary {{ 'active' if lang != 'en' else '' }}" href="{{ url_for('login', lang='zh') }}">中文</a>
+        <a class="secondary {{ 'active' if lang == 'en' else '' }}" href="{{ url_for('login', lang='en') }}">English</a>
+      </div>
+      <h1>{{ 'Login' if lang == 'en' else '登录' }}</h1>
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       <div class="flash">{{ messages[0] }}</div>
@@ -18,16 +22,16 @@
       <form method="post" class="auth-form">
         <input type="hidden" name="next" value="{{ request.args.get('next','') }}">
         <label>
-          <span>用户名</span>
+          <span>{{ 'Username' if lang == 'en' else '用户名' }}</span>
           <input name="username" autocomplete="username" required>
         </label>
         <label>
-          <span>密码</span>
+          <span>{{ 'Password' if lang == 'en' else '密码' }}</span>
           <input type="password" name="password" autocomplete="current-password" required>
         </label>
-        <button type="submit">登录</button>
+        <button type="submit">{{ 'Login' if lang == 'en' else '登录' }}</button>
       </form>
-      <p class="auth-link">还没有账号？<a href="{{ url_for('register') }}">去注册</a></p>
+      <p class="auth-link">{{ "Don't have an account?" if lang == 'en' else '还没有账号？' }}<a href="{{ url_for('register', lang=lang) }}">{{ 'Register' if lang == 'en' else '去注册' }}</a></p>
     </div>
   </div>
 </body>
