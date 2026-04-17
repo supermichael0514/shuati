@@ -173,3 +173,91 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
   border:1px solid #fed7aa;
 }
 .auth-link{margin-top:12px;color:var(--muted)}
+
+.lang-switch{display:flex;gap:6px}
+.lang-switch .secondary.active{background:#dbeafe;border-color:#60a5fa;color:#1d4ed8}
+
+.portal-body{
+  background:radial-gradient(circle at 20% 10%, #1d4ed8 0%, #0f172a 40%, #020617 100%);
+  color:#e2e8f0;
+}
+.portal-page{padding:24px;max-width:1200px;margin:0 auto}
+.portal-header,.portal-footer{background:rgba(15,23,42,.78);border-color:#334155;backdrop-filter:blur(6px)}
+.portal-header{display:flex;justify-content:space-between;gap:16px;padding:22px;margin-bottom:16px}
+.neon-label{color:#22d3ee;font-size:12px;letter-spacing:.12em;margin:0 0 8px}
+.portal-header h1{margin:0 0 8px;font-size:34px;color:#f8fafc}
+.portal-subtitle{margin:0;color:#cbd5e1}
+.portal-actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px;color:#cbd5e1}
+.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.feature-tile{
+  display:block;
+  padding:18px;
+  border-radius:18px;
+  border:1px solid #334155;
+  background:linear-gradient(135deg, rgba(15,23,42,.85), rgba(30,41,59,.7));
+  color:#e2e8f0;
+  text-decoration:none;
+  min-height:220px;
+  transition:all .2s ease;
+}
+.feature-tile:hover{transform:translateY(-4px);border-color:#22d3ee;box-shadow:0 12px 24px rgba(34,211,238,.18)}
+.feature-tile.disabled{opacity:.88}
+.tile-icon{font-size:38px;margin-bottom:14px}
+.feature-tile h2{margin:0 0 10px;color:#f8fafc}
+.feature-tile p{margin:0;color:#cbd5e1;line-height:1.5}
+.portal-footer{display:flex;justify-content:space-between;gap:16px;padding:18px}
+.logo-box{display:flex;gap:14px;align-items:center}
+.logo-mark{
+  width:64px;height:64px;border-radius:14px;
+  border:1px solid #22d3ee;display:grid;place-items:center;
+  background:rgba(8,47,73,.4);font-weight:700;color:#67e8f9;
+}
+.logo-box p,.contact-box p{margin:4px 0 0;color:#cbd5e1}
+.contact-box h3{margin:0;color:#f8fafc}
+
+@media (max-width: 960px){
+  .feature-grid{grid-template-columns:repeat(2,1fr)}
+  .portal-header,.portal-footer{flex-direction:column;align-items:flex-start}
+  .portal-actions{align-items:flex-start}
+}
+@media (max-width: 620px){
+  .feature-grid{grid-template-columns:1fr}
+}
+
+.game-grid{grid-template-columns:repeat(3,1fr)}
+.game-layout{display:grid;grid-template-columns:1fr 320px;gap:16px}
+.game-main{padding:16px}
+.game-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.game-hint{color:#cbd5e1}
+.leaderboard-panel{padding:16px}
+.leaderboard-panel h2{margin:0 0 12px;color:#f8fafc}
+.leaderboard-panel ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.leaderboard-panel li{display:flex;justify-content:space-between;gap:10px;color:#e2e8f0}
+
+.board-2048{display:grid;grid-template-columns:repeat(4,90px);gap:8px;padding:12px;background:#1e293b;border-radius:12px;width:max-content}
+.cell-2048{width:90px;height:90px;display:grid;place-items:center;font-weight:700;font-size:26px;background:#334155;border-radius:10px;color:#e2e8f0}
+.cell-2048[data-value="0"]{background:#475569;color:transparent}
+.cell-2048[data-value="2"]{background:#7dd3fc;color:#0f172a}
+.cell-2048[data-value="4"]{background:#67e8f9;color:#083344}
+.cell-2048[data-value="8"]{background:#fcd34d;color:#451a03}
+.cell-2048[data-value="16"]{background:#fb923c}
+.cell-2048[data-value="32"]{background:#f97316}
+.cell-2048[data-value="64"]{background:#ef4444}
+.cell-2048[data-value="128"],
+.cell-2048[data-value="256"],
+.cell-2048[data-value="512"],
+.cell-2048[data-value="1024"],
+.cell-2048[data-value="2048"]{background:#a78bfa}
+
+.sudoku-panel{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.board-sudoku{display:grid;grid-template-columns:repeat(9,42px);gap:4px}
+.sudoku-cell{width:42px;height:42px;text-align:center;font-size:18px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;border-radius:6px}
+.sudoku-cell.given{background:#1e293b;font-weight:700}
+.sudoku-cell.wrong{border-color:#ef4444;background:#450a0a}
+
+#tetrisCanvas{background:#0b1220;border:1px solid #334155;border-radius:8px}
+
+@media (max-width: 980px){
+  .game-layout{grid-template-columns:1fr}
+  .game-grid{grid-template-columns:1fr}
+}

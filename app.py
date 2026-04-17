@@ -30,6 +30,10 @@ FILTER_ALL = "全部"
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")
 
+LANG_ZH = "zh"
+LANG_EN = "en"
+SUPPORTED_LANGS = {LANG_ZH, LANG_EN}
+
 
 def get_db_connection():
     conn = sqlite3.connect(DB_FILE)
@@ -45,6 +49,32 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
             password_hash TEXT NOT NULL,
+            birth_date TEXT NOT NULL DEFAULT '',
+            school TEXT NOT NULL DEFAULT '',
+            email TEXT NOT NULL DEFAULT '',
+            created_at TEXT NOT NULL
+        )
+        """
+    )
+    existing_columns = {
+        row["name"] for row in conn.execute("PRAGMA table_info(users)").fetchall()
+    }
+    migration_columns = {
+        "birth_date": "ALTER TABLE users ADD COLUMN birth_date TEXT NOT NULL DEFAULT ''",
+        "school": "ALTER TABLE users ADD COLUMN school TEXT NOT NULL DEFAULT ''",
+        "email": "ALTER TABLE users ADD COLUMN email TEXT NOT NULL DEFAULT ''",
+    }
+    for column, sql in migration_columns.items():
+        if column not in existing_columns:
+            conn.execute(sql)
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS game_scores (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            username TEXT NOT NULL,
+            game_name TEXT NOT NULL,
+            score INTEGER NOT NULL,
             created_at TEXT NOT NULL
         )
         """
@@ -68,7 +98,7 @@ def login_required(view_func):
     @wraps(view_func)
     def wrapped(*args, **kwargs):
         if "user_id" not in session:
-            return redirect(url_for("login", next=request.url))
+            return redirect(url_for("login", next=request.url, lang=get_lang()))
         return view_func(*args, **kwargs)
 
     return wrapped
@@ -76,6 +106,21 @@ def login_required(view_func):
 
 def current_username():
     return session.get("username", "")
+
+
+def get_lang():
+    query_lang = request.args.get("lang", "").strip().lower()
+    if query_lang in SUPPORTED_LANGS:
+        session["lang"] = query_lang
+        return query_lang
+    return session.get("lang", LANG_ZH)
+
+
+def is_en():
+    return get_lang() == LANG_EN
+
+
+SUPPORTED_GAMES = {"2048", "sudoku", "tetris"}
 
 
 def load_index():
@@ -207,35 +252,54 @@ def unique_values(df, col):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    lang = get_lang()
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
+        birth_date = request.form.get("birth_date", "").strip()
+        school = request.form.get("school", "").strip()
+        email = request.form.get("email", "").strip()
 
-        if not username or not password:
-            flash("用户名和密码不能为空。")
-            return render_template("register.html")
+        if not username or not password or not birth_date or not school or not email:
+            flash(
+                "Please complete all required fields."
+                if is_en()
+                else "请完整填写所有必填信息。"
+            )
+            return render_template("register.html", lang=lang)
 
         conn = get_db_connection()
         exists = conn.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone()
         if exists:
             conn.close()
-            flash("用户名已存在，请换一个。")
-            return render_template("register.html")
+            flash("Username already exists. Please choose another one." if is_en() else "用户名已存在，请换一个。")
+            return render_template("register.html", lang=lang)
 
         conn.execute(
-            "INSERT INTO users (username, password_hash, created_at) VALUES (?, ?, ?)",
-            (username, generate_password_hash(password), datetime.now().isoformat(timespec="seconds")),
+            """
+            INSERT INTO users (username, password_hash, birth_date, school, email, created_at)
+            VALUES (?, ?, ?, ?, ?, ?)
+            """,
+            (
+                username,
+                generate_password_hash(password),
+                birth_date,
+                school,
+                email,
+                datetime.now().isoformat(timespec="seconds"),
+            ),
         )
         conn.commit()
         conn.close()
-        flash("注册成功，请登录。")
-        return redirect(url_for("login"))
+        flash("Registration successful. Please log in." if is_en() else "注册成功，请登录。")
+        return redirect(url_for("login", lang=lang))
 
-    return render_template("register.html")
+    return render_template("register.html", lang=lang)
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    lang = get_lang()
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
@@ -247,30 +311,112 @@ def login():
         conn.close()
 
         if not user or not check_password_hash(user["password_hash"], password):
-            flash("用户名或密码错误。")
-            return render_template("login.html")
+            flash("Invalid username or password." if is_en() else "用户名或密码错误。")
+            return render_template("login.html", lang=lang)
 
         session.clear()
         session["user_id"] = user["id"]
         session["username"] = user["username"]
+        session["lang"] = lang
         next_url = request.args.get("next") or request.form.get("next")
-        return redirect(next_url or url_for("index"))
+        return redirect(next_url or url_for("portal", lang=lang))
 
     if "user_id" in session:
-        return redirect(url_for("index"))
-    return render_template("login.html")
+        return redirect(url_for("portal", lang=lang))
+    return render_template("login.html", lang=lang)
 
 
 @app.post("/logout")
 @login_required
 def logout():
+    lang = get_lang()
     session.clear()
-    return redirect(url_for("login"))
+    return redirect(url_for("login", lang=lang))
 
 
 @app.route("/")
 @login_required
+def portal():
+    lang = get_lang()
+    return render_template("portal.html", lang=lang, current_user=current_username())
+
+
+@app.route("/games")
+@login_required
+def games_home():
+    lang = get_lang()
+    return render_template("games_home.html", lang=lang, current_user=current_username())
+
+
+def load_leaderboard(game_name, limit=10):
+    conn = get_db_connection()
+    rows = conn.execute(
+        """
+        SELECT username, MAX(score) AS best_score
+        FROM game_scores
+        WHERE game_name = ?
+        GROUP BY username
+        ORDER BY best_score DESC, username ASC
+        LIMIT ?
+        """,
+        (game_name, limit),
+    ).fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
+
+
+@app.route("/games/<game_name>")
+@login_required
+def game_page(game_name):
+    if game_name not in SUPPORTED_GAMES:
+        return redirect(url_for("games_home", lang=get_lang()))
+    lang = get_lang()
+    return render_template(
+        "game_play.html",
+        lang=lang,
+        current_user=current_username(),
+        game_name=game_name,
+        leaderboard=load_leaderboard(game_name),
+    )
+
+
+@app.post("/api/games/<game_name>/score")
+@login_required
+def submit_game_score(game_name):
+    if game_name not in SUPPORTED_GAMES:
+        return jsonify({"ok": False, "error": "unsupported game"}), 400
+    try:
+        payload = request.get_json(force=True) or {}
+        score = int(payload.get("score", 0))
+    except Exception:
+        return jsonify({"ok": False, "error": "invalid score"}), 400
+
+    if score < 0:
+        return jsonify({"ok": False, "error": "invalid score"}), 400
+
+    conn = get_db_connection()
+    conn.execute(
+        """
+        INSERT INTO game_scores (user_id, username, game_name, score, created_at)
+        VALUES (?, ?, ?, ?, ?)
+        """,
+        (
+            session.get("user_id"),
+            current_username(),
+            game_name,
+            score,
+            datetime.now().isoformat(timespec="seconds"),
+        ),
+    )
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "leaderboard": load_leaderboard(game_name)})
+
+
+@app.route("/practice")
+@login_required
 def index():
+    lang = get_lang()
     all_df = load_index()
     progress = load_progress(current_username())
 
@@ -327,6 +473,7 @@ def index():
 
     return render_template(
         "index.html",
+        lang=lang,
         records=records,
         selected=selected,
         pdf_url=pdf_url,
@@ -377,7 +524,7 @@ def save_note_route(qid):
     item["note"] = request.form.get("note", "")
     item["updated_at"] = datetime.now().isoformat(timespec="seconds")
     save_progress(username, progress)
-    return redirect(request.referrer or url_for("index"))
+    return redirect(request.referrer or url_for("index", lang=get_lang()))
 
 
 if __name__ == "__main__":
