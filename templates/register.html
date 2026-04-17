@@ -1,15 +1,19 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>注册 · PDF 题库练习系统</title>
+  <title>{{ 'Register' if lang == 'en' else '注册' }} · {{ 'Learning System' if lang == 'en' else '题库练习系统' }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <div class="auth-page">
     <div class="card auth-card">
-      <h1>注册</h1>
+      <div class="lang-switch auth-lang">
+        <a class="secondary {{ 'active' if lang != 'en' else '' }}" href="{{ url_for('register', lang='zh') }}">中文</a>
+        <a class="secondary {{ 'active' if lang == 'en' else '' }}" href="{{ url_for('register', lang='en') }}">English</a>
+      </div>
+      <h1>{{ 'Register' if lang == 'en' else '注册' }}</h1>
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       <div class="flash">{{ messages[0] }}</div>
@@ -17,16 +21,16 @@
       {% endwith %}
       <form method="post" class="auth-form">
         <label>
-          <span>用户名</span>
+          <span>{{ 'Username' if lang == 'en' else '用户名' }}</span>
           <input name="username" autocomplete="username" required>
         </label>
         <label>
-          <span>密码</span>
+          <span>{{ 'Password' if lang == 'en' else '密码' }}</span>
           <input type="password" name="password" autocomplete="new-password" required>
         </label>
-        <button type="submit">注册</button>
+        <button type="submit">{{ 'Register' if lang == 'en' else '注册' }}</button>
       </form>
-      <p class="auth-link">已有账号？<a href="{{ url_for('login') }}">去登录</a></p>
+      <p class="auth-link">{{ 'Already have an account?' if lang == 'en' else '已有账号？' }}<a href="{{ url_for('login', lang=lang) }}">{{ 'Login' if lang == 'en' else '去登录' }}</a></p>
     </div>
   </div>
 </body>
