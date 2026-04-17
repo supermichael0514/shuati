@@ -231,7 +231,7 @@ if(GAME_NAME === 'tetris'){
   const canvas = document.getElementById('tetrisCanvas');
   const ctx = canvas.getContext('2d');
   const COLS=10, ROWS=20, BLOCK=30;
-  const colors = ['#000','#22d3ee','#818cf8','#f472b6','#facc15','#34d399','#fb7185','#60a5fa'];
+  const colors = ['#000','#38bdf8','#6366f1','#f472b6','#f59e0b','#10b981','#fb7185','#3b82f6'];
   const shapes = [[],[[1,1,1,1]],[[2,2],[2,2]],[[0,3,0],[3,3,3]],[[4,4,0],[0,4,4]],[[0,5,5],[5,5,0]],[[6,0,0],[6,6,6]]];
   let board = Array.from({length:ROWS},()=>Array(COLS).fill(0));
   let piece, pos, dropCounter=0,last=0,score=0,gameOver=false;
@@ -277,7 +277,7 @@ if(GAME_NAME === 'tetris'){
   }
 
   function draw(){
-    ctx.fillStyle = '#0b1220'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#f8fafc'; ctx.fillRect(0,0,canvas.width,canvas.height);
     board.forEach((row,y)=>row.forEach((v,x)=>{ if(v){ ctx.fillStyle=colors[v]; ctx.fillRect(x*BLOCK,y*BLOCK,BLOCK-1,BLOCK-1); } }));
     piece.forEach((row,y)=>row.forEach((v,x)=>{ if(v){ ctx.fillStyle=colors[v]; ctx.fillRect((x+pos.x)*BLOCK,(y+pos.y)*BLOCK,BLOCK-1,BLOCK-1); } }));
   }
