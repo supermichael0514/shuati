@@ -28,6 +28,18 @@
           <span>{{ 'Password' if lang == 'en' else '密码' }}</span>
           <input type="password" name="password" autocomplete="new-password" required>
         </label>
+        <label>
+          <span>{{ 'Birth Date' if lang == 'en' else '出生日期' }}</span>
+          <input type="date" name="birth_date" required>
+        </label>
+        <label>
+          <span>{{ 'School' if lang == 'en' else '学校' }}</span>
+          <input name="school" required>
+        </label>
+        <label>
+          <span>{{ 'Email' if lang == 'en' else '邮箱' }}</span>
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
         <button type="submit">{{ 'Register' if lang == 'en' else '注册' }}</button>
       </form>
       <p class="auth-link">{{ 'Already have an account?' if lang == 'en' else '已有账号？' }}<a href="{{ url_for('login', lang=lang) }}">{{ 'Login' if lang == 'en' else '去登录' }}</a></p>

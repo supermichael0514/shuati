@@ -49,10 +49,24 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
             password_hash TEXT NOT NULL,
+            birth_date TEXT NOT NULL DEFAULT '',
+            school TEXT NOT NULL DEFAULT '',
+            email TEXT NOT NULL DEFAULT '',
             created_at TEXT NOT NULL
         )
         """
     )
+    existing_columns = {
+        row["name"] for row in conn.execute("PRAGMA table_info(users)").fetchall()
+    }
+    migration_columns = {
+        "birth_date": "ALTER TABLE users ADD COLUMN birth_date TEXT NOT NULL DEFAULT ''",
+        "school": "ALTER TABLE users ADD COLUMN school TEXT NOT NULL DEFAULT ''",
+        "email": "ALTER TABLE users ADD COLUMN email TEXT NOT NULL DEFAULT ''",
+    }
+    for column, sql in migration_columns.items():
+        if column not in existing_columns:
+            conn.execute(sql)
     conn.commit()
     conn.close()
 
@@ -227,9 +241,16 @@ def register():
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
+        birth_date = request.form.get("birth_date", "").strip()
+        school = request.form.get("school", "").strip()
+        email = request.form.get("email", "").strip()
 
-        if not username or not password:
-            flash("Username and password are required." if is_en() else "用户名和密码不能为空。")
+        if not username or not password or not birth_date or not school or not email:
+            flash(
+                "Please complete all required fields."
+                if is_en()
+                else "请完整填写所有必填信息。"
+            )
             return render_template("register.html", lang=lang)
 
         conn = get_db_connection()
@@ -240,8 +261,18 @@ def register():
             return render_template("register.html", lang=lang)
 
         conn.execute(
-            "INSERT INTO users (username, password_hash, created_at) VALUES (?, ?, ?)",
-            (username, generate_password_hash(password), datetime.now().isoformat(timespec="seconds")),
+            """
+            INSERT INTO users (username, password_hash, birth_date, school, email, created_at)
+            VALUES (?, ?, ?, ?, ?, ?)
+            """,
+            (
+                username,
+                generate_password_hash(password),
+                birth_date,
+                school,
+                email,
+                datetime.now().isoformat(timespec="seconds"),
+            ),
         )
         conn.commit()
         conn.close()
