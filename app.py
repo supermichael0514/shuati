@@ -30,6 +30,10 @@ FILTER_ALL = "全部"
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")
 
+LANG_ZH = "zh"
+LANG_EN = "en"
+SUPPORTED_LANGS = {LANG_ZH, LANG_EN}
+
 
 def get_db_connection():
     conn = sqlite3.connect(DB_FILE)
@@ -68,7 +72,7 @@ def login_required(view_func):
     @wraps(view_func)
     def wrapped(*args, **kwargs):
         if "user_id" not in session:
-            return redirect(url_for("login", next=request.url))
+            return redirect(url_for("login", next=request.url, lang=get_lang()))
         return view_func(*args, **kwargs)
 
     return wrapped
@@ -76,6 +80,18 @@ def login_required(view_func):
 
 def current_username():
     return session.get("username", "")
+
+
+def get_lang():
+    query_lang = request.args.get("lang", "").strip().lower()
+    if query_lang in SUPPORTED_LANGS:
+        session["lang"] = query_lang
+        return query_lang
+    return session.get("lang", LANG_ZH)
+
+
+def is_en():
+    return get_lang() == LANG_EN
 
 
 def load_index():
@@ -207,20 +223,21 @@ def unique_values(df, col):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    lang = get_lang()
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
 
         if not username or not password:
-            flash("用户名和密码不能为空。")
-            return render_template("register.html")
+            flash("Username and password are required." if is_en() else "用户名和密码不能为空。")
+            return render_template("register.html", lang=lang)
 
         conn = get_db_connection()
         exists = conn.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone()
         if exists:
             conn.close()
-            flash("用户名已存在，请换一个。")
-            return render_template("register.html")
+            flash("Username already exists. Please choose another one." if is_en() else "用户名已存在，请换一个。")
+            return render_template("register.html", lang=lang)
 
         conn.execute(
             "INSERT INTO users (username, password_hash, created_at) VALUES (?, ?, ?)",
@@ -228,14 +245,15 @@ def register():
         )
         conn.commit()
         conn.close()
-        flash("注册成功，请登录。")
-        return redirect(url_for("login"))
+        flash("Registration successful. Please log in." if is_en() else "注册成功，请登录。")
+        return redirect(url_for("login", lang=lang))
 
-    return render_template("register.html")
+    return render_template("register.html", lang=lang)
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    lang = get_lang()
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
@@ -247,30 +265,40 @@ def login():
         conn.close()
 
         if not user or not check_password_hash(user["password_hash"], password):
-            flash("用户名或密码错误。")
-            return render_template("login.html")
+            flash("Invalid username or password." if is_en() else "用户名或密码错误。")
+            return render_template("login.html", lang=lang)
 
         session.clear()
         session["user_id"] = user["id"]
         session["username"] = user["username"]
+        session["lang"] = lang
         next_url = request.args.get("next") or request.form.get("next")
-        return redirect(next_url or url_for("index"))
+        return redirect(next_url or url_for("portal", lang=lang))
 
     if "user_id" in session:
-        return redirect(url_for("index"))
-    return render_template("login.html")
+        return redirect(url_for("portal", lang=lang))
+    return render_template("login.html", lang=lang)
 
 
 @app.post("/logout")
 @login_required
 def logout():
+    lang = get_lang()
     session.clear()
-    return redirect(url_for("login"))
+    return redirect(url_for("login", lang=lang))
 
 
 @app.route("/")
 @login_required
+def portal():
+    lang = get_lang()
+    return render_template("portal.html", lang=lang, current_user=current_username())
+
+
+@app.route("/practice")
+@login_required
 def index():
+    lang = get_lang()
     all_df = load_index()
     progress = load_progress(current_username())
 
@@ -327,6 +355,7 @@ def index():
 
     return render_template(
         "index.html",
+        lang=lang,
         records=records,
         selected=selected,
         pdf_url=pdf_url,
@@ -377,7 +406,7 @@ def save_note_route(qid):
     item["note"] = request.form.get("note", "")
     item["updated_at"] = datetime.now().isoformat(timespec="seconds")
     save_progress(username, progress)
-    return redirect(request.referrer or url_for("index"))
+    return redirect(request.referrer or url_for("index", lang=get_lang()))
 
 
 if __name__ == "__main__":
