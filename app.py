@@ -67,6 +67,29 @@ def init_db():
     for column, sql in migration_columns.items():
         if column not in existing_columns:
             conn.execute(sql)
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS game_scores (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            username TEXT NOT NULL,
+            game_name TEXT NOT NULL,
+            score INTEGER NOT NULL,
+            created_at TEXT NOT NULL
+        )
+        """
+    )
+    existing_columns = {
+        row["name"] for row in conn.execute("PRAGMA table_info(users)").fetchall()
+    }
+    migration_columns = {
+        "birth_date": "ALTER TABLE users ADD COLUMN birth_date TEXT NOT NULL DEFAULT ''",
+        "school": "ALTER TABLE users ADD COLUMN school TEXT NOT NULL DEFAULT ''",
+        "email": "ALTER TABLE users ADD COLUMN email TEXT NOT NULL DEFAULT ''",
+    }
+    for column, sql in migration_columns.items():
+        if column not in existing_columns:
+            conn.execute(sql)
     conn.commit()
     conn.close()
 
@@ -106,6 +129,9 @@ def get_lang():
 
 def is_en():
     return get_lang() == LANG_EN
+
+
+SUPPORTED_GAMES = {"2048", "sudoku", "tetris"}
 
 
 def load_index():
@@ -324,6 +350,78 @@ def logout():
 def portal():
     lang = get_lang()
     return render_template("portal.html", lang=lang, current_user=current_username())
+
+
+@app.route("/games")
+@login_required
+def games_home():
+    lang = get_lang()
+    return render_template("games_home.html", lang=lang, current_user=current_username())
+
+
+def load_leaderboard(game_name, limit=10):
+    conn = get_db_connection()
+    rows = conn.execute(
+        """
+        SELECT username, MAX(score) AS best_score
+        FROM game_scores
+        WHERE game_name = ?
+        GROUP BY username
+        ORDER BY best_score DESC, username ASC
+        LIMIT ?
+        """,
+        (game_name, limit),
+    ).fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
+
+
+@app.route("/games/<game_name>")
+@login_required
+def game_page(game_name):
+    if game_name not in SUPPORTED_GAMES:
+        return redirect(url_for("games_home", lang=get_lang()))
+    lang = get_lang()
+    return render_template(
+        "game_play.html",
+        lang=lang,
+        current_user=current_username(),
+        game_name=game_name,
+        leaderboard=load_leaderboard(game_name),
+    )
+
+
+@app.post("/api/games/<game_name>/score")
+@login_required
+def submit_game_score(game_name):
+    if game_name not in SUPPORTED_GAMES:
+        return jsonify({"ok": False, "error": "unsupported game"}), 400
+    try:
+        payload = request.get_json(force=True) or {}
+        score = int(payload.get("score", 0))
+    except Exception:
+        return jsonify({"ok": False, "error": "invalid score"}), 400
+
+    if score < 0:
+        return jsonify({"ok": False, "error": "invalid score"}), 400
+
+    conn = get_db_connection()
+    conn.execute(
+        """
+        INSERT INTO game_scores (user_id, username, game_name, score, created_at)
+        VALUES (?, ?, ?, ?, ?)
+        """,
+        (
+            session.get("user_id"),
+            current_username(),
+            game_name,
+            score,
+            datetime.now().isoformat(timespec="seconds"),
+        ),
+    )
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "leaderboard": load_leaderboard(game_name)})
 
 
 @app.route("/practice")

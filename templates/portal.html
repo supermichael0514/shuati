@@ -39,11 +39,11 @@
         <p>{{ 'Community forum for posting and replying to discussions (planned).' if lang == 'en' else '用户论坛，支持发帖与交流（规划中）。' }}</p>
       </div>
 
-      <div class="feature-tile disabled">
+      <a class="feature-tile" href="{{ url_for('games_home', lang=lang) }}">
         <div class="tile-icon">🎮</div>
         <h2>{{ 'Mini Games' if lang == 'en' else '玩一玩' }}</h2>
-        <p>{{ '2048, Sudoku, and Tetris with score ranking between users (planned).' if lang == 'en' else '内置 2048、数独、俄罗斯方块，并支持积分排行（规划中）。' }}</p>
-      </div>
+        <p>{{ 'Play 2048, Sudoku and Tetris with live leaderboard.' if lang == 'en' else '内置 2048、数独、俄罗斯方块，并支持排行榜。' }}</p>
+      </a>
 
       <div class="feature-tile disabled">
         <div class="tile-icon">📚</div>

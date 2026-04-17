@@ -223,3 +223,41 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 @media (max-width: 620px){
   .feature-grid{grid-template-columns:1fr}
 }
+
+.game-grid{grid-template-columns:repeat(3,1fr)}
+.game-layout{display:grid;grid-template-columns:1fr 320px;gap:16px}
+.game-main{padding:16px}
+.game-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.game-hint{color:#cbd5e1}
+.leaderboard-panel{padding:16px}
+.leaderboard-panel h2{margin:0 0 12px;color:#f8fafc}
+.leaderboard-panel ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.leaderboard-panel li{display:flex;justify-content:space-between;gap:10px;color:#e2e8f0}
+
+.board-2048{display:grid;grid-template-columns:repeat(4,90px);gap:8px;padding:12px;background:#1e293b;border-radius:12px;width:max-content}
+.cell-2048{width:90px;height:90px;display:grid;place-items:center;font-weight:700;font-size:26px;background:#334155;border-radius:10px;color:#e2e8f0}
+.cell-2048[data-value="0"]{background:#475569;color:transparent}
+.cell-2048[data-value="2"]{background:#7dd3fc;color:#0f172a}
+.cell-2048[data-value="4"]{background:#67e8f9;color:#083344}
+.cell-2048[data-value="8"]{background:#fcd34d;color:#451a03}
+.cell-2048[data-value="16"]{background:#fb923c}
+.cell-2048[data-value="32"]{background:#f97316}
+.cell-2048[data-value="64"]{background:#ef4444}
+.cell-2048[data-value="128"],
+.cell-2048[data-value="256"],
+.cell-2048[data-value="512"],
+.cell-2048[data-value="1024"],
+.cell-2048[data-value="2048"]{background:#a78bfa}
+
+.sudoku-panel{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.board-sudoku{display:grid;grid-template-columns:repeat(9,42px);gap:4px}
+.sudoku-cell{width:42px;height:42px;text-align:center;font-size:18px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;border-radius:6px}
+.sudoku-cell.given{background:#1e293b;font-weight:700}
+.sudoku-cell.wrong{border-color:#ef4444;background:#450a0a}
+
+#tetrisCanvas{background:#0b1220;border:1px solid #334155;border-radius:8px}
+
+@media (max-width: 980px){
+  .game-layout{grid-template-columns:1fr}
+  .game-grid{grid-template-columns:1fr}
+}
