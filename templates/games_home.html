@@ -9,13 +9,8 @@
 <body class="portal-body">
   <div class="portal-page">
     <header class="portal-header card">
-      <div>
-        <p class="neon-label">{{ 'GAME CENTER' if lang == 'en' else '游戏中心' }}</p>
-        <h1>{{ 'Play & Rank' if lang == 'en' else '玩一玩 · 游戏排行' }}</h1>
-      </div>
-      <div class="portal-actions">
-        <a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang == 'en' else '返回入口' }}</a>
-      </div>
+      <div><p class="neon-label">{{ 'GAME CENTER' if lang == 'en' else '游戏中心' }}</p><h1>{{ 'Play & Rank' if lang == 'en' else '玩一玩 · 游戏排行' }}</h1></div>
+      <div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang == 'en' else '返回入口' }}</a></div>
     </header>
 
     <main class="feature-grid game-grid game-grid-wide">
