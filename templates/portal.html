@@ -11,7 +11,7 @@
     <header class="portal-header card">
       <div>
         <p class="neon-label">{{ 'NEXT GEN LEARNING SYSTEM' if lang == 'en' else '新一代学习系统' }}</p>
-        <h1>{{ 'Intelligent Learning Portal' if lang == 'en' else '智能学习入口主界面' }}</h1>
+        <h1>{{ 'Computer Science Learning Portal' if lang == 'en' else '计算机学习入口主界面' }}</h1>
         <p class="portal-subtitle">{{ 'Choose a module to start practicing, discussing, gaming, or studying.' if lang == 'en' else '选择一个模块，开始练习、交流、游戏或学习。' }}</p>
       </div>
       <div class="portal-actions">
@@ -27,12 +27,19 @@
     </header>
 
     <main class="feature-grid">
+     
+      <div class="feature-tile disabled">
+        <div class="tile-icon">📚</div>
+        <h2>{{ 'Resources' if lang == 'en' else '学一学' }}</h2>
+        <p>{{ 'Built-in study materials, guides, and curated references (planned).' if lang == 'en' else '内置学习资料、指南和精选资源（规划中）。' }}</p>
+      </div>
+      
       <a class="feature-tile" href="{{ url_for('index', lang=lang) }}">
         <div class="tile-icon">📝</div>
         <h2>{{ 'Practice' if lang == 'en' else '练一练' }}</h2>
         <p>{{ 'Enter the filtered question bank and start solving problems.' if lang == 'en' else '进入筛选题库，开始系统刷题。' }}</p>
       </a>
-
+      
       <div class="feature-tile disabled">
         <div class="tile-icon">💬</div>
         <h2>{{ 'Forum' if lang == 'en' else '聊一聊' }}</h2>
@@ -45,25 +52,24 @@
         <p>{{ 'Play 2048, Sudoku and Tetris with live leaderboard.' if lang == 'en' else '内置 2048、数独、俄罗斯方块，并支持排行榜。' }}</p>
       </a>
 
-      <div class="feature-tile disabled">
-        <div class="tile-icon">📚</div>
-        <h2>{{ 'Resources' if lang == 'en' else '学一学' }}</h2>
-        <p>{{ 'Built-in study materials, guides, and curated references (planned).' if lang == 'en' else '内置学习资料、指南和精选资源（规划中）。' }}</p>
-      </div>
+      
     </main>
 
     <footer class="portal-footer card">
       <div class="logo-box">
-        <div class="logo-mark">LOGO</div>
+        <img class="logo-mark-img" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
         <div>
-          <strong>{{ 'Your Brand' if lang == 'en' else '你的品牌 Logo 区域' }}</strong>
-          <p>{{ 'Replace LOGO with your final image asset.' if lang == 'en' else '可替换为你的正式 Logo 图片。' }}</p>
+          <strong>{{ 'CS Teacher Michael Cao' if lang == 'en' else '计算机老师迈克曹' }}</strong>
+          <p>{{ 'Communication is always welcomed' if lang == 'en' else '欢迎多多交流' }}</p>
         </div>
       </div>
+      
+      
       <div class="contact-box">
         <h3>{{ 'Contact' if lang == 'en' else '联系方式' }}</h3>
-        <p>Email: yourname@example.com</p>
-        <p>WeChat: your_wechat_id</p>
+        <p>{{ 'Email: supermichael0514@163.com' if lang == 'en' else '邮箱：supermichael0514@163.com' }}</p>
+        <p>{{ 'WeChat: supermichael0514' if lang == 'en' else '微信：supermichael0514' }}</p>
+        <p>{{ 'RedNote: MichaelCao_0514' if lang == 'en' else '小红书：计算机老师迈克曹' }}</p>
       </div>
     </footer>
   </div>
