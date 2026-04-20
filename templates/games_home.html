@@ -9,31 +9,17 @@
 <body class="portal-body">
   <div class="portal-page">
     <header class="portal-header card">
-      <div>
-        <p class="neon-label">{{ 'GAME CENTER' if lang == 'en' else '游戏中心' }}</p>
-        <h1>{{ 'Play & Rank' if lang == 'en' else '玩一玩 · 游戏排行' }}</h1>
-      </div>
-      <div class="portal-actions">
-        <a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang == 'en' else '返回入口' }}</a>
-      </div>
+      <div><p class="neon-label">{{ 'GAME CENTER' if lang == 'en' else '游戏中心' }}</p><h1>{{ 'Play & Rank' if lang == 'en' else '玩一玩 · 游戏排行' }}</h1></div>
+      <div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang == 'en' else '返回入口' }}</a></div>
     </header>
 
-    <main class="feature-grid game-grid">
-      <a class="feature-tile" href="{{ url_for('game_page', game_name='2048', lang=lang) }}">
-        <div class="tile-icon">🔢</div>
-        <h2>2048</h2>
-        <p>{{ 'Merge numbers to reach higher tiles and score points.' if lang == 'en' else '通过合并数字获得更高分。' }}</p>
-      </a>
-      <a class="feature-tile" href="{{ url_for('game_page', game_name='sudoku', lang=lang) }}">
-        <div class="tile-icon">🧩</div>
-        <h2>{{ 'Sudoku' if lang == 'en' else '数独' }}</h2>
-        <p>{{ 'Fill the board correctly; faster completion means higher score.' if lang == 'en' else '正确完成数独，耗时越短得分越高。' }}</p>
-      </a>
-      <a class="feature-tile" href="{{ url_for('game_page', game_name='tetris', lang=lang) }}">
-        <div class="tile-icon">🟪</div>
-        <h2>{{ 'Tetris' if lang == 'en' else '俄罗斯方块' }}</h2>
-        <p>{{ 'Stack blocks, clear lines, and compete on leaderboard.' if lang == 'en' else '堆叠方块消行，冲击排行榜。' }}</p>
-      </a>
+    <main class="feature-grid game-grid game-grid-wide">
+      <a class="feature-tile" href="{{ url_for('game_page', game_name='2048', lang=lang) }}"><div class="tile-icon">🔢</div><h2>2048</h2></a>
+      <a class="feature-tile" href="{{ url_for('game_page', game_name='dino', lang=lang) }}"><div class="tile-icon">🦖</div><h2>Dino</h2></a>
+      <a class="feature-tile" href="{{ url_for('game_page', game_name='tetris', lang=lang) }}"><div class="tile-icon">🟪</div><h2>{{ 'Tetris' if lang == 'en' else '俄罗斯方块' }}</h2></a>
+      <a class="feature-tile" href="{{ url_for('game_page', game_name='shooter', lang=lang) }}"><div class="tile-icon">🚀</div><h2>{{ 'Shooter' if lang == 'en' else '打飞机' }}</h2></a>
+      <a class="feature-tile" href="{{ url_for('game_page', game_name='nonogram', lang=lang) }}"><div class="tile-icon">🧠</div><h2>{{ 'Nonogram' if lang == 'en' else '数织' }}</h2></a>
+      <a class="feature-tile" href="{{ url_for('game_page', game_name='sudoku', lang=lang) }}"><div class="tile-icon">📐</div><h2>{{ 'Sudoku' if lang == 'en' else '数独' }}</h2></a>
     </main>
   </div>
 </body>
