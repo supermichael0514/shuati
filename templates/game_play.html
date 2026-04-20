@@ -7,145 +7,97 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="portal-body">
-  <div class="portal-page">
-    <header class="portal-header card">
-      <div>
-        <p class="neon-label">{{ 'MINI GAME' if lang == 'en' else '小游戏' }}</p>
-        <h1>{{ game_name|upper }}</h1>
-      </div>
-      <div class="portal-actions"><a class="secondary" href="{{ url_for('games_home', lang=lang) }}">{{ 'Back to Games' if lang == 'en' else '返回游戏列表' }}</a></div>
-    </header>
+<div class="portal-page">
+  <header class="portal-header card">
+    <div><p class="neon-label">{{ 'MINI GAME' if lang == 'en' else '小游戏' }}</p><h1>{{ game_name|upper }}</h1></div>
+    <div class="portal-actions"><a class="secondary" href="{{ url_for('games_home', lang=lang) }}">{{ 'Back to Games' if lang == 'en' else '返回游戏列表' }}</a></div>
+  </header>
 
-    <div class="game-layout">
-      <section class="card game-main">
-        <div class="game-toolbar">
-          <div>{{ 'Current Score' if lang == 'en' else '当前分数' }}: <strong id="score">0</strong></div>
-          <div class="difficulty-wrap">
-            <label for="difficultySel">{{ 'Difficulty' if lang == 'en' else '难度' }}</label>
-            <select id="difficultySel">
-              <option value="easy" {% if difficulty=='easy' %}selected{% endif %}>{{ 'Easy' if lang=='en' else '简单' }}</option>
-              <option value="normal" {% if difficulty=='normal' %}selected{% endif %}>{{ 'Normal' if lang=='en' else '普通' }}</option>
-              <option value="hard" {% if difficulty=='hard' %}selected{% endif %}>{{ 'Hard' if lang=='en' else '困难' }}</option>
-            </select>
-          </div>
-          <button id="restartBtn">{{ 'Restart' if lang == 'en' else '重新开始' }}</button>
-        </div>
-        <div id="gameHost"></div>
-      </section>
-      <aside class="card leaderboard-panel">
-        <h2>{{ 'Leaderboard' if lang == 'en' else '排行榜' }}</h2>
-        <p class="game-hint">{{ 'Ranking for selected difficulty.' if lang == 'en' else '当前难度下的排行榜。' }}</p>
-        <ol id="leaderboardList">{% for row in leaderboard %}<li><span>{{ row.username }}</span><strong>{{ row.best_score }}</strong></li>{% else %}<li class="empty">{{ 'No scores yet.' if lang == 'en' else '暂无成绩。' }}</li>{% endfor %}</ol>
-      </aside>
-    </div>
+  <div class="game-layout">
+    <section class="card game-main">
+      <div class="game-toolbar"><div>{{ 'Current Score' if lang == 'en' else '当前分数' }}: <strong id="score">0</strong></div><button id="restartBtn">{{ 'Restart' if lang == 'en' else '重新开始' }}</button></div>
+      <div id="gameHost"></div>
+    </section>
+    <aside class="card leaderboard-panel">
+      <h2>{{ 'Leaderboard' if lang == 'en' else '排行榜' }}</h2>
+      <ol id="leaderboardList">{% for row in leaderboard %}<li><span>{{ row.username }}</span><strong>{{ row.best_score }}</strong></li>{% else %}<li class="empty">{{ 'No scores yet.' if lang == 'en' else '暂无成绩。' }}</li>{% endfor %}</ol>
+    </aside>
   </div>
+</div>
 <script>
-const GAME_NAME = "{{ game_name }}";
-const LANG = "{{ lang }}";
-const difficultySel = document.getElementById('difficultySel');
-const SCORE_LABEL = document.getElementById('score');
-const leaderboardList = document.getElementById('leaderboardList');
-const host = document.getElementById('gameHost');
+const GAME_NAME="{{ game_name }}", LANG="{{ lang }}";
+const host=document.getElementById('gameHost'), scoreEl=document.getElementById('score'), list=document.getElementById('leaderboardList'), restartBtn=document.getElementById('restartBtn');
+async function submitScore(score){ const res=await fetch(`/api/games/${GAME_NAME}/score?lang=${LANG}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({score})}); if(!res.ok)return; const data=await res.json(); if(data.ok)renderLeaderboard(data.leaderboard||[]); }
+function renderLeaderboard(items){list.innerHTML=''; if(!items.length){list.innerHTML=`<li class='empty'>${LANG==='en'?'No scores yet.':'暂无成绩。'}</li>`; return;} items.forEach(r=>{const li=document.createElement('li'); li.innerHTML=`<span>${r.username}</span><strong>${r.best_score}</strong>`; list.appendChild(li);});}
 
-function difficulty(){ return difficultySel.value; }
-difficultySel.onchange = ()=>{
-  const u = new URL(window.location.href);
-  u.searchParams.set('difficulty', difficulty());
-  u.searchParams.set('lang', LANG);
-  window.location.href = u.toString();
-};
-
-async function submitScore(score){
-  const res = await fetch(`/api/games/${GAME_NAME}/score?lang=${LANG}`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({score,difficulty:difficulty()})});
-  if(!res.ok) return;
-  const data = await res.json();
-  if(data.ok) renderLeaderboard(data.leaderboard || []);
-}
-function renderLeaderboard(items){ leaderboardList.innerHTML=''; if(!items.length){leaderboardList.innerHTML=`<li class='empty'>${LANG==='en'?'No scores yet.':'暂无成绩。'}</li>`; return;} items.forEach(row=>{const li=document.createElement('li'); li.innerHTML=`<span>${row.username}</span><strong>${row.best_score}</strong>`; leaderboardList.appendChild(li);}); }
-
-function init2048(){
-  host.innerHTML = '<div id="board2048" class="board-2048"></div>';
-  const boardEl = document.getElementById('board2048'); const size=4; let grid=[]; let score=0;
-  function reset(){grid=Array.from({length:size},()=>Array(size).fill(0));score=0;spawn();spawn();draw();}
-  function spawn(){const e=[];for(let r=0;r<size;r++)for(let c=0;c<size;c++)if(!grid[r][c])e.push([r,c]);if(!e.length)return;const [r,c]=e[Math.floor(Math.random()*e.length)];grid[r][c]=Math.random()<0.9?2:4;}
-  function draw(){boardEl.innerHTML='';SCORE_LABEL.textContent=score;grid.flat().forEach(v=>{const d=document.createElement('div');d.className='cell-2048';d.dataset.value=v;d.textContent=v||'';boardEl.appendChild(d);});}
-  function slide(line){const a=line.filter(Boolean);for(let i=0;i<a.length-1;i++){if(a[i]===a[i+1]){a[i]*=2;score+=a[i];a[i+1]=0;i++;}}const b=a.filter(Boolean);while(b.length<size)b.push(0);return b;}
-  function move(dir){const before=JSON.stringify(grid);for(let i=0;i<size;i++){let l=(dir==='left'||dir==='right')?grid[i].slice():[grid[0][i],grid[1][i],grid[2][i],grid[3][i]];if(dir==='right'||dir==='down')l.reverse();l=slide(l);if(dir==='right'||dir==='down')l.reverse();if(dir==='left'||dir==='right')grid[i]=l;else for(let r=0;r<size;r++)grid[r][i]=l[r];} if(before!==JSON.stringify(grid)){spawn();draw(); if(!canMove()) submitScore(score);} }
-  function canMove(){for(let r=0;r<size;r++)for(let c=0;c<size;c++){if(!grid[r][c])return true;if(r<size-1&&grid[r][c]===grid[r+1][c])return true;if(c<size-1&&grid[r][c]===grid[r][c+1])return true;}return false;}
-  window.onkeydown = (e)=>{const m={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};if(m[e.key]){e.preventDefault();move(m[e.key]);}};
-  restartBtn.onclick=reset; reset();
+function init2048(){ host.innerHTML='<div id="b2048" class="board-2048"></div>'; const b=document.getElementById('b2048'); const n=4; let g=[],s=0;
+  const spawn=()=>{const e=[];for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(!g[r][c])e.push([r,c]); if(!e.length)return; const [r,c]=e[Math.floor(Math.random()*e.length)]; g[r][c]=Math.random()<.9?2:4;};
+  const draw=()=>{b.innerHTML=''; scoreEl.textContent=s; g.flat().forEach(v=>{const d=document.createElement('div'); d.className='cell-2048'; d.dataset.value=v; d.textContent=v||''; b.appendChild(d);});};
+  const slide=(a)=>{a=a.filter(Boolean); for(let i=0;i<a.length-1;i++) if(a[i]===a[i+1]){a[i]*=2;s+=a[i];a[i+1]=0;i++;} a=a.filter(Boolean); while(a.length<n)a.push(0); return a;};
+  const can=()=>{for(let r=0;r<n;r++)for(let c=0;c<n;c++){if(!g[r][c])return true; if(r<n-1&&g[r][c]===g[r+1][c])return true; if(c<n-1&&g[r][c]===g[r][c+1])return true;} return false;};
+  const move=(dir)=>{const before=JSON.stringify(g); for(let i=0;i<n;i++){let l=(dir==='left'||dir==='right')?g[i].slice():[g[0][i],g[1][i],g[2][i],g[3][i]]; if(dir==='right'||dir==='down')l.reverse(); l=slide(l); if(dir==='right'||dir==='down')l.reverse(); if(dir==='left'||dir==='right')g[i]=l; else for(let r=0;r<n;r++)g[r][i]=l[r]; } if(before!==JSON.stringify(g)){spawn();draw(); if(!can())submitScore(s);} };
+  const reset=()=>{g=Array.from({length:n},()=>Array(n).fill(0)); s=0; spawn();spawn();draw();};
+  window.onkeydown=e=>{const m={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'}; if(m[e.key]){e.preventDefault(); move(m[e.key]);}}; restartBtn.onclick=reset; reset();
 }
 
-function initMinesweeper(){
-  const cfg={easy:8,normal:10,hard:12}[difficulty()]; const mines={easy:10,normal:18,hard:28}[difficulty()];
-  host.innerHTML='<p class="game-hint">'+(LANG==='en'?'Left click to open, right click to flag.':'左键翻开，右键插旗。')+'</p><div id="msBoard" class="mine-grid"></div>';
-  const b=document.getElementById('msBoard'); b.style.gridTemplateColumns=`repeat(${cfg},34px)`; let score=0;
-  const arr=Array.from({length:cfg},()=>Array.from({length:cfg},()=>({m:false,o:false,f:false,n:0})));
-  for(let i=0;i<mines;i++){let r,c;do{r=Math.floor(Math.random()*cfg);c=Math.floor(Math.random()*cfg);}while(arr[r][c].m);arr[r][c].m=true;}
-  for(let r=0;r<cfg;r++)for(let c=0;c<cfg;c++)for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const nr=r+dr,nc=c+dc;if(nr>=0&&nr<cfg&&nc>=0&&nc<cfg&&arr[nr][nc].m)arr[r][c].n++;}
-  function open(r,c){const cell=arr[r][c]; if(cell.o||cell.f) return; cell.o=true; if(cell.m){alert(LANG==='en'?'Boom!':'踩雷了！'); submitScore(score); return;} score+=10; if(cell.n===0){for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const nr=r+dr,nc=c+dc;if(nr>=0&&nr<cfg&&nc>=0&&nc<cfg)open(nr,nc);}} render(); checkWin();}
-  function checkWin(){const safe=cfg*cfg-mines; let opened=0; arr.flat().forEach(x=>{if(x.o&&!x.m)opened++;}); if(opened===safe){score+=200; SCORE_LABEL.textContent=score; submitScore(score); alert(LANG==='en'?'Win!':'通关！');}}
-  function render(){b.innerHTML=''; SCORE_LABEL.textContent=score; for(let r=0;r<cfg;r++)for(let c=0;c<cfg;c++){const cell=arr[r][c]; const d=document.createElement('button'); d.className='mine-cell'; d.oncontextmenu=(e)=>{e.preventDefault(); if(!cell.o)cell.f=!cell.f; render();}; d.onclick=()=>open(r,c); d.textContent=cell.o?(cell.m?'💣':(cell.n||'')):(cell.f?'🚩':''); b.appendChild(d);} }
-  restartBtn.onclick=()=>initMinesweeper(); render();
+function initDino(){ host.innerHTML='<canvas id="d" width="640" height="220"></canvas>'; const c=document.getElementById('d'),x=c.getContext('2d'); let y=160,vy=0,o=[],s=0,over=false;
+  const loop=()=>{if(over)return; x.fillStyle='#f8fafc';x.fillRect(0,0,640,220); x.fillStyle='#334155';x.fillRect(20,y,28,40);x.fillRect(0,200,640,2); vy+=0.8; y=Math.min(160,y+vy); if(Math.random()<.03)o.push({x:640,w:20,h:30}); o.forEach(v=>v.x-=6); o=o.filter(v=>v.x>-30); o.forEach(v=>{x.fillRect(v.x,170,v.w,v.h); if(v.x<48&&v.x+v.w>20&&y+40>170){over=true;submitScore(s);}}); s++; scoreEl.textContent=s; requestAnimationFrame(loop);};
+  window.onkeydown=e=>{if((e.key===' '||e.key==='ArrowUp')&&y>=160)vy=-12;}; restartBtn.onclick=()=>initDino(); loop();
 }
 
-function initHanoi(){
-  const n={easy:3,normal:4,hard:5}[difficulty()]; host.innerHTML='<div id="hanoi" class="hanoi"></div>'; const h=document.getElementById('hanoi'); let score=1000; const rods=[[],[],[]]; for(let i=n;i>=1;i--) rods[0].push(i); let pick=null;
-  function draw(){h.innerHTML=''; SCORE_LABEL.textContent=Math.max(0,score); rods.forEach((rod,idx)=>{const col=document.createElement('div'); col.className='rod'; col.onclick=()=>tap(idx); rod.slice().reverse().forEach(s=>{const d=document.createElement('div'); d.className='disk'; d.style.width=(s*24+40)+'px'; d.textContent=s; col.appendChild(d);}); h.appendChild(col);});}
-  function tap(i){if(pick===null){if(rods[i].length)pick=i; return;} if(i===pick){pick=null;return;} const d=rods[pick][rods[pick].length-1]; const t=rods[i][rods[i].length-1]; if(!t||d<t){rods[pick].pop();rods[i].push(d);score-=10;pick=null; draw(); if(rods[2].length===n){submitScore(Math.max(0,score)); alert(LANG==='en'?'Solved!':'完成！');}} }
-  restartBtn.onclick=()=>initHanoi(); draw();
+function initShooter(){ host.innerHTML='<canvas id="s" width="640" height="380"></canvas>'; const c=document.getElementById('s'),x=c.getContext('2d'); let p=300,b=[],e=[],s=0,over=false;
+  const loop=()=>{ if(over)return; x.fillStyle='#0f172a';x.fillRect(0,0,640,380); x.fillStyle='#38bdf8';x.fillRect(p,340,40,20); if(Math.random()<.05)e.push({x:Math.random()*600,y:0}); e.forEach(v=>v.y+=2); b.forEach(v=>v.y-=8); b=b.filter(v=>v.y>-20); e=e.filter(v=>v.y<400);
+    b.forEach(bi=>e.forEach(en=>{if(Math.abs(bi.x-en.x)<18&&Math.abs(bi.y-en.y)<18){en.y=500; bi.y=-50; s+=20;}}));
+    e.forEach(en=>{x.fillStyle='#f87171';x.fillRect(en.x,en.y,20,20); if(en.y>330&&en.x<p+40&&en.x+20>p){over=true;submitScore(s);}}); x.fillStyle='#fde047'; b.forEach(v=>x.fillRect(v.x,v.y,4,10)); scoreEl.textContent=s; requestAnimationFrame(loop); };
+  window.onkeydown=e2=>{if(e2.key==='ArrowLeft')p=Math.max(0,p-20); else if(e2.key==='ArrowRight')p=Math.min(600,p+20); else if(e2.key===' '||e2.key==='ArrowUp')b.push({x:p+18,y:340});}; restartBtn.onclick=()=>initShooter(); loop();
 }
 
-function initDino(){
-  host.innerHTML='<canvas id="dino" width="640" height="220"></canvas>'; const c=document.getElementById('dino'); const x=c.getContext('2d'); let y=160,vy=0,obs=[],s=0,go=false; const speed={easy:4,normal:6,hard:8}[difficulty()];
-  function loop(){if(go)return; x.fillStyle='#f8fafc';x.fillRect(0,0,640,220); x.fillStyle='#334155';x.fillRect(20,y,28,40); x.fillRect(0,200,640,2); vy+=0.8; y=Math.min(160,y+vy); if(Math.random()<0.03) obs.push({x:640,w:20,h:30}); obs.forEach(o=>o.x-=speed); obs=obs.filter(o=>o.x>-40); obs.forEach(o=>{x.fillRect(o.x,170,o.w,o.h); if(o.x<48&&o.x+o.w>20&&y+40>170){go=true; submitScore(s);}}); s++; SCORE_LABEL.textContent=s; if(!go) requestAnimationFrame(loop);} 
-  window.onkeydown=(e)=>{if((e.key===' '||e.key==='ArrowUp')&&y>=160)vy=-12;}; restartBtn.onclick=()=>initDino(); loop();
+function initTetris(){ host.innerHTML='<canvas id="tetrisCanvas" width="300" height="600"></canvas>'; const c=document.getElementById('tetrisCanvas'),ctx=c.getContext('2d'); const COLS=10,ROWS=20,B=30;
+  const colors=['#000','#38bdf8','#6366f1','#f472b6','#f59e0b','#10b981','#fb7185','#3b82f6']; const shapes=[[],[[1,1,1,1]],[[2,2],[2,2]],[[0,3,0],[3,3,3]],[[4,4,0],[0,4,4]],[[0,5,5],[5,5,0]],[[6,0,0],[6,6,6]]];
+  let board=Array.from({length:ROWS},()=>Array(COLS).fill(0)),piece,pos,drop=0,last=0,s=0,over=false;
+  const collide=()=>{for(let y=0;y<piece.length;y++)for(let x=0;x<piece[y].length;x++)if(piece[y][x]&&((board[y+pos.y]&&board[y+pos.y][x+pos.x])!==0))return true; return false;};
+  const spawn=()=>{const id=1+Math.floor(Math.random()*6); piece=shapes[id].map(r=>r.slice()); pos={x:Math.floor(COLS/2)-1,y:0}; if(collide()){over=true;submitScore(s);} };
+  const merge=()=>piece.forEach((r,y)=>r.forEach((v,x)=>{if(v)board[y+pos.y][x+pos.x]=v;}));
+  const clear=()=>{let lines=0; for(let y=ROWS-1;y>=0;y--){if(board[y].every(v=>v)){board.splice(y,1);board.unshift(Array(COLS).fill(0));lines++;y++;}} if(lines){s+=lines*100;scoreEl.textContent=s;}};
+  const rotate=()=>{const m=piece[0].map((_,i)=>piece.map(r=>r[i]).reverse()); const old=piece; piece=m; if(collide())piece=old;};
+  const step=()=>{pos.y++; if(collide()){pos.y--;merge();clear();spawn();} drop=0;};
+  const draw=()=>{ctx.fillStyle='#f8fafc';ctx.fillRect(0,0,c.width,c.height); board.forEach((r,y)=>r.forEach((v,x)=>{if(v){ctx.fillStyle=colors[v];ctx.fillRect(x*B,y*B,B-1,B-1)}})); if(piece)piece.forEach((r,y)=>r.forEach((v,x)=>{if(v){ctx.fillStyle=colors[v];ctx.fillRect((x+pos.x)*B,(y+pos.y)*B,B-1,B-1)}}));};
+  const update=(time=0)=>{const d=time-last;last=time;drop+=d; if(drop>500&&!over)step(); draw(); if(!over)requestAnimationFrame(update);};
+  window.onkeydown=e=>{if(over)return; if(e.key==='ArrowLeft'){pos.x--;if(collide())pos.x++;} else if(e.key==='ArrowRight'){pos.x++;if(collide())pos.x--;} else if(e.key==='ArrowDown')step(); else if(e.key==='ArrowUp')rotate();};
+  restartBtn.onclick=()=>initTetris(); spawn(); update();
 }
 
-function initShooter(){
-  host.innerHTML='<canvas id="shooter" width="640" height="380"></canvas>'; const c=document.getElementById('shooter'); const x=c.getContext('2d'); let p=300,bul=[],en=[],s=0,go=false; const spawn={easy:0.03,normal:0.05,hard:0.08}[difficulty()];
-  function loop(){if(go)return; x.fillStyle='#0f172a';x.fillRect(0,0,640,380); x.fillStyle='#38bdf8';x.fillRect(p,340,40,20); if(Math.random()<spawn) en.push({x:Math.random()*600,y:0}); en.forEach(e=>e.y+=2); bul.forEach(b=>b.y-=7); bul=bul.filter(b=>b.y>-10); en=en.filter(e=>e.y<390);
-    bul.forEach(b=>en.forEach(e=>{if(Math.abs(b.x-e.x)<18&&Math.abs(b.y-e.y)<18){e.y=500; b.y=-20; s+=20;}}));
-    en.forEach(e=>{x.fillStyle='#f87171';x.fillRect(e.x,e.y,20,20); if(e.y>330&&e.x<p+40&&e.x+20>p){go=true; submitScore(s);}});
-    x.fillStyle='#facc15'; bul.forEach(b=>x.fillRect(b.x,b.y,4,10)); SCORE_LABEL.textContent=s; if(!go) requestAnimationFrame(loop); }
-  window.onkeydown=(e)=>{if(e.key==='ArrowLeft')p=Math.max(0,p-20); if(e.key==='ArrowRight')p=Math.min(600,p+20); if(e.key===' '||e.key==='ArrowUp')bul.push({x:p+18,y:340});}; restartBtn.onclick=()=>initShooter(); loop();
+function makeSudoku(){
+  const base=[1,2,3,4,5,6,7,8,9];
+  const shuffle=a=>a.sort(()=>Math.random()-0.5);
+  const rows=[0,1,2,3,4,5,6,7,8].map(r=>(Math.floor(r/3)*3 + (r*2)%3)%9);
+  const cols=[0,1,2,3,4,5,6,7,8].map(c=>(Math.floor(c/3)*3 + (c*2)%3)%9);
+  const nums=shuffle(base.slice());
+  const solved=rows.map(r=>cols.map(c=>nums[(r+c)%9]));
+  const puzzle=solved.map(r=>r.slice());
+  let holes=48; while(holes>0){const r=Math.floor(Math.random()*9),c=Math.floor(Math.random()*9); if(puzzle[r][c]!==0){puzzle[r][c]=0;holes--;}}
+  return {puzzle,solved};
+}
+function initSudoku(){
+  const {puzzle,solved}=makeSudoku(); host.innerHTML='<div class="sudoku-panel"><button id="checkSudoku">'+(LANG==='en'?'Check':'检查')+'</button></div><div id="sudokuBoard" class="board-sudoku"></div>'; const board=document.getElementById('sudokuBoard');
+  const draw=()=>{board.innerHTML=''; for(let r=0;r<9;r++)for(let c=0;c<9;c++){const i=document.createElement('input');i.maxLength=1;i.className='sudoku-cell';i.dataset.r=r;i.dataset.c=c; if(puzzle[r][c]){i.value=puzzle[r][c];i.disabled=true;i.classList.add('given');} board.appendChild(i);} scoreEl.textContent='0';};
+  const check=()=>{let ok=true; document.querySelectorAll('.sudoku-cell').forEach(cell=>{const r=+cell.dataset.r,c=+cell.dataset.c,v=+cell.value; if(v!==solved[r][c]){ok=false;if(!cell.disabled)cell.classList.add('wrong');} else cell.classList.remove('wrong');}); if(ok){scoreEl.textContent='1500'; submitScore(1500); setTimeout(()=>initSudoku(),300);} };
+  restartBtn.onclick=()=>initSudoku(); draw(); document.getElementById('checkSudoku').onclick=check;
 }
 
-function initHuarongdao(){
-  host.innerHTML='<p class="game-hint">'+(LANG==='en'?'Click adjacent block to slide. Move Cao Cao to bottom center.':'点击相邻方块滑动，将曹操移动到底部中间。')+'</p><div id="hrd" class="hrd"></div>'; const b=document.getElementById('hrd');
-  const g=[[1,1,2,2],[1,1,3,3],[4,5,0,0],[4,6,7,8],[9,6,7,10]]; const names={1:'曹',2:'关',3:'张',4:'赵',5:'马',6:'黄',7:'兵',8:'兵',9:'兵',10:'兵'}; let steps=0;
-  function render(){b.innerHTML=''; SCORE_LABEL.textContent=Math.max(0,1000-steps*10); for(let r=0;r<5;r++)for(let c=0;c<4;c++){const v=g[r][c]; const d=document.createElement('button'); d.className='hrd-cell'; d.textContent=v?names[v]:''; d.onclick=()=>move(r,c); if(!v)d.classList.add('empty'); b.appendChild(d);} }
-  function move(r,c){ if(!g[r][c]) return; const empties=[]; for(let i=0;i<5;i++)for(let j=0;j<4;j++)if(g[i][j]===0)empties.push([i,j]);
-    for(const [er,ec] of empties){if(Math.abs(er-r)+Math.abs(ec-c)===1){g[er][ec]=g[r][c]; g[r][c]=0; steps++; break;}}
-    if(g[3][1]===1&&g[3][2]===1&&g[4][1]===1&&g[4][2]===1){submitScore(Math.max(0,1000-steps*10)); alert(LANG==='en'?'You escaped!':'曹操脱逃成功！');}
-    render();
-  }
-  restartBtn.onclick=()=>initHuarongdao(); render();
+function makeNonogram(){ const size=10; const pat=Array.from({length:size},()=>Array.from({length:size},()=>Math.random()<0.45?1:0)); if(pat.flat().every(v=>v===0))pat[0][0]=1; return pat; }
+function clue(line){const out=[];let c=0;line.forEach(v=>{if(v)c++; else if(c){out.push(c);c=0;}}); if(c)out.push(c); return out.length?out.join(' '):'0';}
+function initNonogram(){ const p=makeNonogram(),size=10; const d=Array.from({length:size},()=>Array(size).fill(0));
+  host.innerHTML='<div class="nonogram-wrap"><div id="rowClues" class="nono-clues"></div><div id="colClues" class="nono-clues"></div><div id="ng" class="nono-grid"></div><button id="checkNono">'+(LANG==='en'?'Check':'检查')+'</button></div>';
+  const g=document.getElementById('ng'); g.style.gridTemplateColumns='repeat(10,30px)';
+  document.getElementById('rowClues').innerHTML='<strong>'+(LANG==='en'?'Rows: ':'行：')+'</strong>'+p.map(r=>clue(r)).join(' | ');
+  document.getElementById('colClues').innerHTML='<strong>'+(LANG==='en'?'Cols: ':'列：')+'</strong>'+Array.from({length:size},(_,c)=>clue(p.map(r=>r[c]))).join(' | ');
+  const render=()=>{g.innerHTML=''; for(let r=0;r<size;r++)for(let c=0;c<size;c++){const b=document.createElement('button'); b.className='nono-cell'+(d[r][c]?' on':''); b.onclick=()=>{d[r][c]=1-d[r][c]; render();}; g.appendChild(b);} };
+  const check=()=>{const ok=JSON.stringify(p)===JSON.stringify(d); if(ok){scoreEl.textContent='1200'; submitScore(1200); setTimeout(()=>initNonogram(),300);} };
+  restartBtn.onclick=()=>initNonogram(); render(); scoreEl.textContent='0'; document.getElementById('checkNono').onclick=check;
 }
 
-
-function initNonogram(){
-  const size={easy:5,normal:8,hard:10}[difficulty()];
-  const pattern=Array.from({length:size},(_,r)=>Array.from({length:size},(_,c)=>((r*c+r+c)%3===0?1:0)));
-  let draw=Array.from({length:size},()=>Array(size).fill(0));
-  host.innerHTML='<div id="nonoWrap" class="nonogram-wrap"></div>';
-  const w=document.getElementById('nonoWrap');
-  function clues(line){const out=[];let cnt=0;line.forEach(v=>{if(v){cnt++;}else if(cnt){out.push(cnt);cnt=0;}}); if(cnt) out.push(cnt); return out.length?out.join(' '):'0';}
-  function render(){w.innerHTML='';
-    const head=document.createElement('div'); head.className='game-hint'; head.textContent=(LANG==='en'?'Fill cells to match row/column clues.':'根据行列提示填格子。'); w.appendChild(head);
-    const rowClues=document.createElement('div'); rowClues.className='nono-clues'; rowClues.innerHTML='<strong>'+(LANG==='en'?'Row clues: ':'行提示：')+'</strong>'+pattern.map(r=>clues(r)).join(' | '); w.appendChild(rowClues);
-    const colClues=document.createElement('div'); colClues.className='nono-clues'; colClues.innerHTML='<strong>'+(LANG==='en'?'Col clues: ':'列提示：')+'</strong>'+Array.from({length:size},(_,c)=>clues(pattern.map(r=>r[c]))).join(' | '); w.appendChild(colClues);
-    const g=document.createElement('div'); g.className='nono-grid'; g.style.gridTemplateColumns=`repeat(${size},30px)`;
-    for(let r=0;r<size;r++)for(let c=0;c<size;c++){const b=document.createElement('button'); b.className='nono-cell'; if(draw[r][c]) b.classList.add('on'); b.onclick=()=>{draw[r][c]=1-draw[r][c]; render();}; g.appendChild(b);} w.appendChild(g);
-    const ok=JSON.stringify(draw)===JSON.stringify(pattern); const score=Math.max(0,1500-size*40-(draw.flat().filter(v=>v).length*2)); SCORE_LABEL.textContent=ok?score:0; if(ok){submitScore(score);} }
-  restartBtn.onclick=()=>initNonogram(); render();
-}
-
-function initSudoku(){host.innerHTML='<p class="game-hint">'+(LANG==='en'?'Please use Nonogram for 数织. Sudoku retained as bonus game.':'数织请进入 Nonogram。数独作为附加小游戏保留。')+'</p>'; SCORE_LABEL.textContent=0; restartBtn.onclick=()=>initSudoku();}
-function initTetris(){host.innerHTML='<p class="game-hint">'+(LANG==='en'?'Use arrow keys. (Original mini tetris simplified placeholder)':'使用方向键。（保留简化版）')+'</p>'; SCORE_LABEL.textContent=0; restartBtn.onclick=()=>initTetris();}
-
-const map={2048:init2048,sudoku:initSudoku,tetris:initTetris,nonogram:initNonogram,minesweeper:initMinesweeper,hanoi:initHanoi,dino:initDino,shooter:initShooter,huarongdao:initHuarongdao};
-(map[GAME_NAME]||init2048)();
+({"2048":init2048,dino:initDino,tetris:initTetris,shooter:initShooter,nonogram:initNonogram,sudoku:initSudoku}[GAME_NAME]||init2048)();
 </script>
 </body>
 </html>

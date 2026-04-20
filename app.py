@@ -17,6 +17,7 @@ import sqlite3
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+import re
 
 BASE_DIR = Path(__file__).resolve().parent
 INDEX_XLSX = BASE_DIR / "index.xlsx"
@@ -190,16 +191,13 @@ def is_en():
 
 SUPPORTED_GAMES = {
     "2048",
-    "sudoku",
-    "tetris",
-    "nonogram",
-    "minesweeper",
-    "hanoi",
     "dino",
+    "tetris",
     "shooter",
-    "huarongdao",
+    "nonogram",
+    "sudoku",
 }
-SUPPORTED_DIFFICULTIES = {"easy", "normal", "hard"}
+
 
 
 def load_index():
@@ -488,7 +486,7 @@ def submit_game_score(game_name):
             session.get("user_id"),
             current_username(),
             game_name,
-            difficulty,
+            "normal",
             score,
             datetime.now().isoformat(timespec="seconds"),
         ),
@@ -610,6 +608,120 @@ def save_note_route(qid):
     item["updated_at"] = datetime.now().isoformat(timespec="seconds")
     save_progress(username, progress)
     return redirect(request.referrer or url_for("index", lang=get_lang()))
+
+
+@app.route("/learn")
+@login_required
+def learn_page():
+    lang = get_lang()
+    return render_template("learn.html", lang=lang, current_user=current_username())
+
+
+@app.route("/code")
+@login_required
+def code_page():
+    lang = get_lang()
+    return render_template("code_lab.html", lang=lang, current_user=current_username())
+
+
+@app.route("/profile")
+@login_required
+def profile_page():
+    lang = get_lang()
+    return render_template("profile.html", lang=lang, current_user=current_username())
+
+
+def run_caie_pseudocode(source: str):
+    lines = [ln.rstrip() for ln in source.splitlines() if ln.strip()]
+    env = {}
+    out = []
+
+    def eval_expr(expr: str):
+        expr = expr.strip()
+        for key, val in env.items():
+            expr = re.sub(rf"\b{re.escape(key)}\b", str(val), expr)
+        expr = expr.replace("DIV", "//").replace("MOD", "%")
+        if ".." in expr:
+            a, b = expr.split("..", 1)
+            return list(range(int(eval_expr(a)), int(eval_expr(b)) + 1))
+        return eval(expr, {"__builtins__": {}}, {})
+
+    i = 0
+    stack = []
+    while i < len(lines):
+        line = lines[i].strip()
+        upper = line.upper()
+        if upper.startswith("OUTPUT "):
+            out.append(str(eval_expr(line[7:])))
+        elif "<-" in line:
+            var, expr = [x.strip() for x in line.split("<-", 1)]
+            env[var] = eval_expr(expr)
+        elif upper.startswith("IF ") and upper.endswith("THEN"):
+            cond = bool(eval_expr(line[3:-4]))
+            stack.append(("IF", cond))
+            if not cond:
+                depth = 1
+                j = i + 1
+                while j < len(lines):
+                    u = lines[j].strip().upper()
+                    if u.startswith("IF ") and u.endswith("THEN"):
+                        depth += 1
+                    elif u == "ENDIF":
+                        depth -= 1
+                        if depth == 0:
+                            break
+                    elif u == "ELSE" and depth == 1:
+                        break
+                    j += 1
+                i = j
+        elif upper == "ELSE":
+            if stack and stack[-1][0] == "IF" and stack[-1][1]:
+                depth = 1
+                j = i + 1
+                while j < len(lines):
+                    u = lines[j].strip().upper()
+                    if u.startswith("IF ") and u.endswith("THEN"):
+                        depth += 1
+                    elif u == "ENDIF":
+                        depth -= 1
+                        if depth == 0:
+                            break
+                    j += 1
+                i = j
+        elif upper == "ENDIF":
+            if stack and stack[-1][0] == "IF":
+                stack.pop()
+        elif upper.startswith("FOR ") and " TO " in upper:
+            m = re.match(r"FOR\s+(\w+)\s*<-\s*(.+)\s+TO\s+(.+)", line, re.I)
+            if not m:
+                raise ValueError(f"Invalid FOR syntax: {line}")
+            var, a, b = m.group(1), eval_expr(m.group(2)), eval_expr(m.group(3))
+            env[var] = int(a)
+            stack.append(("FOR", var, int(b), i))
+        elif upper == "NEXT":
+            if not stack or stack[-1][0] != "FOR":
+                raise ValueError("NEXT without FOR")
+            _, var, end, start = stack[-1]
+            env[var] += 1
+            if env[var] <= end:
+                i = start
+            else:
+                stack.pop()
+        i += 1
+
+    return "\n".join(out)
+
+
+@app.post("/api/code/run")
+@login_required
+def run_code_route():
+    payload = request.get_json(force=True) or {}
+    source = str(payload.get("source", ""))
+    try:
+        result = run_caie_pseudocode(source)
+        return jsonify({"ok": True, "output": result})
+    except Exception as exc:
+        return jsonify({"ok": False, "error": str(exc)}), 400
 
 
 if __name__ == "__main__":
