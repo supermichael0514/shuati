@@ -8,6 +8,7 @@
   - 学一学：进入学习子页面（看课件 / 看动画 / 看文章）
   - 练一练：题库筛选 + PDF 阅读
   - 编一编：CAIE Pseudocode IDE（可运行伪代码 + 显示官方PDF指南）
+  - 支持：DECLARE、FOR/TO/NEXT（含 NEXT i）、IF/ELSE、PROCEDURE/FUNCTION/CALL/RETURN
   - 规则：变量与数组必须先 DECLARE，未声明即报错
   - 玩一玩：小游戏中心
   - 拜一拜：个人履历展示页
