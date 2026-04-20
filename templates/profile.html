@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ 'Profile' if lang=='en' else '拜一拜' }}</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">PROFILE</p><h1>{{ 'My Resume' if lang=='en' else '我的个人履历' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
+<main class="feature-grid feature-grid-portal">
+  <section class="feature-tile"><h2>{{ 'Basic Info' if lang=='en' else '基础信息' }}</h2><p>{{ 'Name: Michael Cao' if lang=='en' else '姓名：迈克曹' }}</p><p>{{ 'Computer Science Teacher' if lang=='en' else '职业：计算机老师' }}</p></section>
+  <section class="feature-tile"><h2>{{ 'Experience' if lang=='en' else '教学经历' }}</h2><p>{{ 'Focus on algorithmic thinking, A-level/IGCSE CS, and exam training.' if lang=='en' else '长期教授算法思维、A-level/IGCSE 计算机课程与考前训练。' }}</p></section>
+  <section class="feature-tile"><h2>{{ 'Contact' if lang=='en' else '联系方式' }}</h2><p>Email: supermichael0514@163.com</p><p>WeChat: supermichael0514</p><p>RedNote: MichaelCao_0514</p></section>
+</main>
+</div></body></html>
