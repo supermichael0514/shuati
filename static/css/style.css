@@ -264,6 +264,10 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .sudoku-cell{width:42px;height:42px;text-align:center;font-size:18px;border:1px solid var(--line);background:#fff;color:var(--text);border-radius:6px}
 .sudoku-cell.given{background:#f1f5f9;font-weight:700}
 .sudoku-cell.wrong{border-color:#ef4444;background:#fee2e2}
+.sudoku-cell.v-heavy-left{border-left:3px solid #334155}
+.sudoku-cell.v-heavy-right{border-right:3px solid #334155}
+.sudoku-cell.h-heavy-top{border-top:3px solid #334155}
+.sudoku-cell.h-heavy-bottom{border-bottom:3px solid #334155}
 
 #tetrisCanvas{background:#f8fafc;border:1px solid var(--line);border-radius:8px}
 
@@ -296,3 +300,12 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .guide-panel{padding:16px;margin-top:14px}
 .guide-panel h2{margin:0 0 8px}
 .guide-panel .pdf-frame{height:70vh}
+
+.mine-board{display:grid;gap:1px;background:#94a3b8;padding:4px;border-radius:8px;width:max-content;max-width:100%;overflow:auto}
+.mine-cell{width:24px;height:24px;padding:0;border:0;background:#e2e8f0;font-size:12px}
+.mine-cell.open{background:#f8fafc}
+
+.hanoi-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;min-height:320px}
+.hanoi-rod{display:flex;flex-direction:column-reverse;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#f8fafc;cursor:pointer}
+.hanoi-rod.selected{outline:2px solid #60a5fa}
+.hanoi-disk{height:24px;border-radius:999px;background:#bfdbfe;border:1px solid #60a5fa;display:flex;align-items:center;justify-content:center;font-size:12px}

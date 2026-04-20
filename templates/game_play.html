@@ -55,40 +55,39 @@ function initTetris(){ host.innerHTML='<canvas id="tetrisCanvas" width="300" hei
   restartBtn.onclick=()=>initTetris(); spawn(); update();
 }
 
-function makeSudoku(){
-  const base=[1,2,3,4,5,6,7,8,9];
-  const shuffle=a=>a.sort(()=>Math.random()-0.5);
-  const rows=[0,1,2,3,4,5,6,7,8].map(r=>(Math.floor(r/3)*3 + (r*2)%3)%9);
-  const cols=[0,1,2,3,4,5,6,7,8].map(c=>(Math.floor(c/3)*3 + (c*2)%3)%9);
-  const nums=shuffle(base.slice());
-  const solved=rows.map(r=>cols.map(c=>nums[(r+c)%9]));
-  const puzzle=solved.map(r=>r.slice());
-  let holes=48; while(holes>0){const r=Math.floor(Math.random()*9),c=Math.floor(Math.random()*9); if(puzzle[r][c]!==0){puzzle[r][c]=0;holes--;}}
-  return {puzzle,solved};
-}
-function initSudoku(){
-  const {puzzle,solved}=makeSudoku(); host.innerHTML='<div class="sudoku-panel"><button id="checkSudoku">'+(LANG==='en'?'Check':'检查')+'</button></div><div id="sudokuBoard" class="board-sudoku"></div>'; const board=document.getElementById('sudokuBoard');
-  const draw=()=>{board.innerHTML=''; for(let r=0;r<9;r++)for(let c=0;c<9;c++){const i=document.createElement('input');i.maxLength=1;i.className='sudoku-cell';i.dataset.r=r;i.dataset.c=c; if(puzzle[r][c]){i.value=puzzle[r][c];i.disabled=true;i.classList.add('given');} board.appendChild(i);} scoreEl.textContent='0';};
+function makeSudoku(){ const base=[1,2,3,4,5,6,7,8,9], sh=a=>a.sort(()=>Math.random()-0.5); const rows=[0,1,2,3,4,5,6,7,8].map(r=>(Math.floor(r/3)*3 + (r*2)%3)%9); const cols=[0,1,2,3,4,5,6,7,8].map(c=>(Math.floor(c/3)*3 + (c*2)%3)%9); const nums=sh(base.slice()); const solved=rows.map(r=>cols.map(c=>nums[(r+c)%9])); const puzzle=solved.map(r=>r.slice()); let holes=48; while(holes>0){const r=Math.floor(Math.random()*9),c=Math.floor(Math.random()*9); if(puzzle[r][c]!==0){puzzle[r][c]=0;holes--;}} return {puzzle,solved}; }
+function initSudoku(){ const {puzzle,solved}=makeSudoku(); host.innerHTML='<div class="sudoku-panel"><button id="checkSudoku">'+(LANG==='en'?'Check':'检查')+'</button></div><div id="sudokuBoard" class="board-sudoku"></div>'; const board=document.getElementById('sudokuBoard');
+  const draw=()=>{board.innerHTML=''; for(let r=0;r<9;r++)for(let c=0;c<9;c++){const i=document.createElement('input');i.maxLength=1;i.className='sudoku-cell'; if(c%3===0)i.classList.add('v-heavy-left'); if(r%3===0)i.classList.add('h-heavy-top'); if(c===8)i.classList.add('v-heavy-right'); if(r===8)i.classList.add('h-heavy-bottom'); i.dataset.r=r;i.dataset.c=c; if(puzzle[r][c]){i.value=puzzle[r][c];i.disabled=true;i.classList.add('given');} board.appendChild(i);} scoreEl.textContent='0';};
   const check=()=>{let ok=true; document.querySelectorAll('.sudoku-cell').forEach(cell=>{const r=+cell.dataset.r,c=+cell.dataset.c,v=+cell.value; if(v!==solved[r][c]){ok=false;if(!cell.disabled)cell.classList.add('wrong');} else cell.classList.remove('wrong');}); if(ok){scoreEl.textContent='1500'; submitScore(1500); setTimeout(()=>initSudoku(),300);} };
   restartBtn.onclick=()=>initSudoku(); draw(); document.getElementById('checkSudoku').onclick=check;
 }
 
-function makeNonogram(){ const size=10; const pat=Array.from({length:size},()=>Array.from({length:size},()=>Math.random()<0.45?1:0)); if(pat.flat().every(v=>v===0))pat[0][0]=1; return pat; }
+function makeNonogram(){ const size=8; const pat=Array.from({length:size},()=>Array.from({length:size},()=>Math.random()<0.45?1:0)); if(pat.flat().every(v=>v===0))pat[0][0]=1; return pat; }
 function clue(line){const out=[];let c=0;line.forEach(v=>{if(v)c++; else if(c){out.push(c);c=0;}}); if(c)out.push(c); return out.length?out:['0'];}
-function initNonogram(){ const p=makeNonogram(),size=10; const d=Array.from({length:size},()=>Array(size).fill(0));
+function initNonogram(){ const p=makeNonogram(),size=8; const d=Array.from({length:size},()=>Array(size).fill(0));
   host.innerHTML='<div class="nono-board-wrap"><div class="nono-corner"></div><div id="nonoTop" class="nono-top"></div><div id="nonoLeft" class="nono-left"></div><div id="ng" class="nono-grid"></div></div><div class="actions"><button id="checkNono">'+(LANG==='en'?'Check':'检查')+'</button></div>';
-  const g=document.getElementById('ng'); g.style.gridTemplateColumns='repeat(10,32px)';
-  const top=document.getElementById('nonoTop'); const left=document.getElementById('nonoLeft');
-  top.style.gridTemplateColumns='repeat(10,32px)'; left.style.gridTemplateRows='repeat(10,32px)';
-  top.innerHTML=''; left.innerHTML='';
-  for(let c=0;c<size;c++){const t=document.createElement('div');t.className='nono-clue-top';t.innerHTML=clue(p.map(r=>r[c])).join('<br>');top.appendChild(t);} 
-  for(let r=0;r<size;r++){const l=document.createElement('div');l.className='nono-clue-left';l.textContent=clue(p[r]).join(' ');left.appendChild(l);} 
+  const g=document.getElementById('ng'); g.style.gridTemplateColumns='repeat(8,32px)'; const top=document.getElementById('nonoTop'); const left=document.getElementById('nonoLeft'); top.style.gridTemplateColumns='repeat(8,32px)'; left.style.gridTemplateRows='repeat(8,32px)';
+  top.innerHTML=''; left.innerHTML=''; for(let c=0;c<size;c++){const t=document.createElement('div');t.className='nono-clue-top';t.innerHTML=clue(p.map(r=>r[c])).join('<br>');top.appendChild(t);} for(let r=0;r<size;r++){const l=document.createElement('div');l.className='nono-clue-left';l.textContent=clue(p[r]).join(' ');left.appendChild(l);} 
   const render=()=>{g.innerHTML=''; for(let r=0;r<size;r++)for(let c=0;c<size;c++){const b=document.createElement('button'); b.className='nono-cell'+(d[r][c]?' on':''); b.onclick=()=>{d[r][c]=1-d[r][c]; render();}; g.appendChild(b);} };
   const check=()=>{const ok=JSON.stringify(p)===JSON.stringify(d); if(ok){scoreEl.textContent='1200'; submitScore(1200); setTimeout(()=>initNonogram(),300);} };
   restartBtn.onclick=()=>initNonogram(); render(); scoreEl.textContent='0'; document.getElementById('checkNono').onclick=check;
 }
 
-({"2048":init2048,tetris:initTetris,nonogram:initNonogram,sudoku:initSudoku}[GAME_NAME]||init2048)();
+function initMinesweeper(){ const rows=16, cols=30, mines=99; let score=0, opened=0, gameOver=false; const board=Array.from({length:rows},()=>Array.from({length:cols},()=>({m:false,o:false,f:false,n:0}))); host.innerHTML='<p class="game-hint">'+(LANG==='en'?'Left click open, right click flag.':'左键翻开，右键插旗。')+'</p><div id="mineBoard" class="mine-board"></div>'; const el=document.getElementById('mineBoard'); el.style.gridTemplateColumns=`repeat(${cols}, 24px)`;
+  for(let i=0;i<mines;i++){let r,c; do{r=Math.floor(Math.random()*rows);c=Math.floor(Math.random()*cols);}while(board[r][c].m); board[r][c].m=true;}
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const nr=r+dr,nc=c+dc; if(nr>=0&&nr<rows&&nc>=0&&nc<cols&&board[nr][nc].m)board[r][c].n++;}
+  const flood=(r,c)=>{const q=[[r,c]]; while(q.length){const [x,y]=q.pop(); const cell=board[x][y]; if(cell.o||cell.f)continue; cell.o=true; if(cell.m)continue; opened++; score+=1; if(cell.n===0){for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const nx=x+dr,ny=y+dc; if(nx>=0&&nx<rows&&ny>=0&&ny<cols&&!board[nx][ny].o)q.push([nx,ny]);}} }};
+  const render=()=>{el.innerHTML=''; scoreEl.textContent=score; for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const cell=board[r][c]; const b=document.createElement('button'); b.className='mine-cell'; b.oncontextmenu=e=>{e.preventDefault(); if(!cell.o&&!gameOver){cell.f=!cell.f; render();}}; b.onclick=()=>{if(gameOver||cell.f)return; if(cell.m){cell.o=true; gameOver=true; submitScore(score); render(); return;} flood(r,c); if(opened===rows*cols-mines){score+=500; gameOver=true; submitScore(score);} render();}; if(cell.o){b.classList.add('open'); b.textContent=cell.m?'💣':(cell.n||'');} else {b.textContent=cell.f?'🚩':'';} el.appendChild(b);} };
+  restartBtn.onclick=()=>initMinesweeper(); render();
+}
+
+function initHanoi(){ const n=5; let rods=[[],[],[]], selected=-1, moves=0; for(let i=n;i>=1;i--)rods[0].push(i); host.innerHTML='<div id="hanoiBoard" class="hanoi-board"></div>'; const el=document.getElementById('hanoiBoard');
+  const draw=()=>{el.innerHTML=''; scoreEl.textContent=Math.max(0,2000-moves*5); rods.forEach((rod,i)=>{const col=document.createElement('div'); col.className='hanoi-rod'+(selected===i?' selected':''); col.onclick=()=>clickRod(i); rod.slice().reverse().forEach(v=>{const d=document.createElement('div'); d.className='hanoi-disk'; d.style.width=(40+v*24)+'px'; d.textContent=v; col.appendChild(d);}); el.appendChild(col);});};
+  const clickRod=(idx)=>{if(selected===-1){if(rods[idx].length)selected=idx; draw(); return;} if(selected===idx){selected=-1; draw(); return;} const from=rods[selected], to=rods[idx]; const disk=from[from.length-1], top=to[to.length-1]; if(!top||disk<top){to.push(from.pop()); moves++;} selected=-1; if(rods[2].length===n){submitScore(Math.max(0,2000-moves*5));} draw();};
+  restartBtn.onclick=()=>initHanoi(); draw();
+}
+
+({"2048":init2048,tetris:initTetris,nonogram:initNonogram,sudoku:initSudoku,minesweeper:initMinesweeper,hanoi:initHanoi}[GAME_NAME]||init2048)();
 </script>
 </body>
 </html>
