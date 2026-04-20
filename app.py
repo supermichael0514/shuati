@@ -653,6 +653,13 @@ def run_caie_pseudocode(source: str):
         upper = line.upper()
         if upper.startswith("OUTPUT "):
             out.append(str(eval_expr(line[7:])))
+        elif upper.startswith("FOR ") and " TO " in upper:
+            m = re.match(r"FOR\s+(\w+)\s*<-\s*(.+)\s+TO\s+(.+)", line, re.I)
+            if not m:
+                raise ValueError(f"Invalid FOR syntax: {line}")
+            var, a, b = m.group(1), eval_expr(m.group(2)), eval_expr(m.group(3))
+            env[var] = int(a)
+            stack.append(("FOR", var, int(b), i))
         elif "<-" in line:
             var, expr = [x.strip() for x in line.split("<-", 1)]
             env[var] = eval_expr(expr)
@@ -691,13 +698,6 @@ def run_caie_pseudocode(source: str):
         elif upper == "ENDIF":
             if stack and stack[-1][0] == "IF":
                 stack.pop()
-        elif upper.startswith("FOR ") and " TO " in upper:
-            m = re.match(r"FOR\s+(\w+)\s*<-\s*(.+)\s+TO\s+(.+)", line, re.I)
-            if not m:
-                raise ValueError(f"Invalid FOR syntax: {line}")
-            var, a, b = m.group(1), eval_expr(m.group(2)), eval_expr(m.group(3))
-            env[var] = int(a)
-            stack.append(("FOR", var, int(b), i))
         elif upper == "NEXT":
             if not stack or stack[-1][0] != "FOR":
                 raise ValueError("NEXT without FOR")
