@@ -634,35 +634,143 @@ def profile_page():
 def run_caie_pseudocode(source: str):
     lines = [ln.rstrip() for ln in source.splitlines() if ln.strip()]
     env = {}
+    declared = {}
+    arrays = {}
     out = []
+
+    default_by_type = {
+        "INTEGER": 0,
+        "REAL": 0.0,
+        "STRING": "",
+        "BOOLEAN": False,
+    }
+    keyword_tokens = {
+        "DIV",
+        "MOD",
+        "AND",
+        "OR",
+        "NOT",
+        "TRUE",
+        "FALSE",
+    }
+
+    def ensure_scalar_declared(name: str):
+        if name not in declared:
+            raise ValueError(f"Variable '{name}' used before DECLARE")
+        if declared[name] != "scalar":
+            raise ValueError(f"'{name}' is an ARRAY and must be indexed")
+
+    def ensure_array_declared(name: str):
+        if name not in declared:
+            raise ValueError(f"Array '{name}' used before DECLARE")
+        if declared[name] != "array":
+            raise ValueError(f"'{name}' is not an ARRAY")
+
+    def arr_get(name: str, idx: int):
+        ensure_array_declared(name)
+        spec = arrays[name]
+        lower, upper = spec["lower"], spec["upper"]
+        if idx < lower or idx > upper:
+            raise ValueError(f"Array index out of range: {name}[{idx}]")
+        return spec["values"][idx - lower]
+
+    def arr_set(name: str, idx: int, value):
+        ensure_array_declared(name)
+        spec = arrays[name]
+        lower, upper = spec["lower"], spec["upper"]
+        if idx < lower or idx > upper:
+            raise ValueError(f"Array index out of range: {name}[{idx}]")
+        spec["values"][idx - lower] = value
+
+    def parse_declare(line: str):
+        # DECLARE x : INTEGER
+        m_scalar = re.match(r"DECLARE\s+([A-Za-z_]\w*)\s*:\s*([A-Za-z]+)", line, re.I)
+        # DECLARE arr : ARRAY[1:5] OF INTEGER
+        m_array = re.match(
+            r"DECLARE\s+([A-Za-z_]\w*)\s*:\s*ARRAY\s*\[\s*(-?\d+)\s*:\s*(-?\d+)\s*\]\s*OF\s*([A-Za-z]+)",
+            line,
+            re.I,
+        )
+        if m_array:
+            name = m_array.group(1)
+            lower = int(m_array.group(2))
+            upper = int(m_array.group(3))
+            if upper < lower:
+                raise ValueError(f"Invalid ARRAY bounds in DECLARE: {line}")
+            declared[name] = "array"
+            arrays[name] = {
+                "lower": lower,
+                "upper": upper,
+                "values": [0] * (upper - lower + 1),
+                "elem_type": m_array.group(4).upper(),
+            }
+            return True
+        if m_scalar:
+            name = m_scalar.group(1)
+            ptype = m_scalar.group(2).upper()
+            declared[name] = "scalar"
+            env[name] = default_by_type.get(ptype, 0)
+            return True
+        return False
 
     def eval_expr(expr: str):
         expr = expr.strip()
-        for key, val in env.items():
-            expr = re.sub(rf"\b{re.escape(key)}\b", str(val), expr)
-        expr = expr.replace("DIV", "//").replace("MOD", "%")
         if ".." in expr:
             a, b = expr.split("..", 1)
             return list(range(int(eval_expr(a)), int(eval_expr(b)) + 1))
-        return eval(expr, {"__builtins__": {}}, {})
+        expr = re.sub(r"\bDIV\b", "//", expr, flags=re.I)
+        expr = re.sub(r"\bMOD\b", "%", expr, flags=re.I)
+        expr = re.sub(r"\bTRUE\b", "True", expr, flags=re.I)
+        expr = re.sub(r"\bFALSE\b", "False", expr, flags=re.I)
+
+        # 变量必须先 DECLARE
+        for token in re.findall(r"\b[A-Za-z_]\w*\b", expr):
+            t = token.upper()
+            if t in keyword_tokens or t in {"TRUE", "FALSE"}:
+                continue
+            if token not in declared and token not in {"True", "False"}:
+                raise ValueError(f"Identifier '{token}' used before DECLARE")
+
+        # 数组访问替换为安全读取函数，便于支持 1-based 下标
+        def replace_array_access(m):
+            name = m.group(1)
+            idx_expr = m.group(2).strip()
+            ensure_array_declared(name)
+            return f"__arr_get__('{name}', ({idx_expr}))"
+
+        expr = re.sub(r"\b([A-Za-z_]\w*)\s*\[\s*([^\]]+)\s*\]", replace_array_access, expr)
+        local_env = {k: v for k, v in env.items() if declared.get(k) == "scalar"}
+        local_env["__arr_get__"] = arr_get
+        return eval(expr, {"__builtins__": {}}, local_env)
 
     i = 0
     stack = []
     while i < len(lines):
         line = lines[i].strip()
         upper = line.upper()
-        if upper.startswith("OUTPUT "):
+        if upper.startswith("DECLARE "):
+            if not parse_declare(line):
+                raise ValueError(f"Invalid DECLARE syntax: {line}")
+        elif upper.startswith("OUTPUT "):
             out.append(str(eval_expr(line[7:])))
         elif upper.startswith("FOR ") and " TO " in upper:
             m = re.match(r"FOR\s+(\w+)\s*<-\s*(.+)\s+TO\s+(.+)", line, re.I)
             if not m:
                 raise ValueError(f"Invalid FOR syntax: {line}")
             var, a, b = m.group(1), eval_expr(m.group(2)), eval_expr(m.group(3))
+            ensure_scalar_declared(var)
             env[var] = int(a)
             stack.append(("FOR", var, int(b), i))
         elif "<-" in line:
             var, expr = [x.strip() for x in line.split("<-", 1)]
-            env[var] = eval_expr(expr)
+            arr_ref = re.match(r"^([A-Za-z_]\w*)\s*\[\s*(.+)\s*\]$", var)
+            if arr_ref:
+                name = arr_ref.group(1)
+                idx = int(eval_expr(arr_ref.group(2)))
+                arr_set(name, idx, eval_expr(expr))
+            else:
+                ensure_scalar_declared(var)
+                env[var] = eval_expr(expr)
         elif upper.startswith("IF ") and upper.endswith("THEN"):
             cond = bool(eval_expr(line[3:-4]))
             stack.append(("IF", cond))
