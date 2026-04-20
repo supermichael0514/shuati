@@ -48,7 +48,7 @@ button,.secondary{
 button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c5fd}
 .layout{
   display:grid;
-  grid-template-columns:360px 1fr 300px;
+  grid-template-columns:260px 1fr 220px;
   gap:14px;
   min-height:calc(100vh - 180px);
 }
@@ -56,7 +56,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .left{display:flex;flex-direction:column;min-height:0}
 .left-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .left-head h2,.right h2{margin:0;font-size:18px}
-.record-list{overflow:auto;display:flex;flex-direction:column;gap:10px}
+.record-list{overflow-y:auto;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 280px);padding-right:4px}
 .record{
   display:block;
   text-decoration:none;
@@ -105,7 +105,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .info .meta{font-size:14px;color:var(--muted)}
 .pdf-frame{
   width:100%;
-  height:calc(100vh - 290px);
+  height:82vh;
   border:1px solid var(--line);
   border-radius:12px;
   background:#fff;
@@ -113,7 +113,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .note-form{display:flex;flex-direction:column;gap:10px}
 .note-form textarea{
   width:100%;
-  min-height:240px;
+  min-height:180px;
   resize:vertical;
 }
 .empty{color:var(--muted);padding:20px 6px}
@@ -189,6 +189,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .portal-subtitle{margin:0;color:var(--muted)}
 .portal-actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px;color:var(--muted)}
 .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+.feature-grid-portal{grid-template-columns:repeat(3,1fr)}
 .feature-tile{
   display:block;
   padding:18px;
@@ -233,6 +234,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 }
 
 .game-grid{grid-template-columns:repeat(3,1fr)}
+.game-grid-wide{grid-template-columns:repeat(3,1fr)}
 .game-layout{display:grid;grid-template-columns:1fr 320px;gap:16px}
 .game-main{padding:16px}
 .game-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -262,6 +264,10 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .sudoku-cell{width:42px;height:42px;text-align:center;font-size:18px;border:1px solid var(--line);background:#fff;color:var(--text);border-radius:6px}
 .sudoku-cell.given{background:#f1f5f9;font-weight:700}
 .sudoku-cell.wrong{border-color:#ef4444;background:#fee2e2}
+.sudoku-cell.v-heavy-left{border-left:3px solid #334155}
+.sudoku-cell.v-heavy-right{border-right:3px solid #334155}
+.sudoku-cell.h-heavy-top{border-top:3px solid #334155}
+.sudoku-cell.h-heavy-bottom{border-bottom:3px solid #334155}
 
 #tetrisCanvas{background:#f8fafc;border:1px solid var(--line);border-radius:8px}
 
@@ -269,3 +275,37 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
   .game-layout{grid-template-columns:1fr}
   .game-grid{grid-template-columns:1fr}
 }
+
+
+#gameHost{min-height:420px}
+
+
+#pdfViewerContainer:fullscreen{padding:8px;border-radius:0}
+#pdfViewerContainer:fullscreen .pdf-frame{height:calc(100vh - 80px)}
+.code-lab{padding:16px;display:flex;flex-direction:column;gap:10px}
+.code-lab textarea{width:100%;min-height:320px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.code-lab pre{min-height:120px;background:#0b1220;color:#dbeafe;padding:12px;border-radius:10px;overflow:auto}
+
+
+.nono-board-wrap{display:grid;grid-template-columns:80px auto;grid-template-rows:80px auto;gap:4px;align-items:start}
+.nono-corner{border:1px solid var(--line);border-radius:8px;background:#f8fafc}
+.nono-top{display:grid;gap:2px}
+.nono-left{display:grid;gap:2px}
+.nono-grid{display:grid;gap:2px;width:max-content}
+.nono-clue-top,.nono-clue-left{border:1px solid var(--line);background:#f8fafc;border-radius:6px;font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:center;line-height:1.1;text-align:center;padding:2px}
+.nono-cell{width:32px;height:32px;padding:0;border:1px solid #cbd5e1;background:#fff}
+.nono-cell.on{background:#1e3a8a}
+
+
+.guide-panel{padding:16px;margin-top:14px}
+.guide-panel h2{margin:0 0 8px}
+.guide-panel .pdf-frame{height:70vh}
+
+.mine-board{display:grid;gap:1px;background:#94a3b8;padding:4px;border-radius:8px;width:max-content;max-width:100%;overflow:auto}
+.mine-cell{width:24px;height:24px;padding:0;border:0;background:#e2e8f0;font-size:12px}
+.mine-cell.open{background:#f8fafc}
+
+.hanoi-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;min-height:320px}
+.hanoi-rod{display:flex;flex-direction:column-reverse;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#f8fafc;cursor:pointer}
+.hanoi-rod.selected{outline:2px solid #60a5fa}
+.hanoi-disk{height:24px;border-radius:999px;background:#bfdbfe;border:1px solid #60a5fa;display:flex;align-items:center;justify-content:center;font-size:12px}
