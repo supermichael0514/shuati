@@ -197,6 +197,8 @@ SUPPORTED_GAMES = {
     "nonogram",
     "sudoku",
 }
+# 兼容旧代码分支中对难度变量的引用，当前版本仅使用 normal。
+SUPPORTED_DIFFICULTIES = {"normal"}
 
 
 
