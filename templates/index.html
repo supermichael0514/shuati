@@ -134,7 +134,7 @@
               {% if selected.source %} · {{ 'Source' if lang == 'en' else '来源' }}：{{ selected.source }}{% endif %}
             </div>
           </div>
-          <iframe src="{{ pdf_url }}#page={{ pdf_page }}" class="pdf-frame" title="PDF Viewer"></iframe>
+          <iframe src="{{ pdf_url }}#page={{ pdf_page }}&zoom=page-fit" class="pdf-frame" title="PDF Viewer"></iframe>
           {% else %}
           <div class="empty big">{{ 'Please choose a question from the left list.' if lang == 'en' else '请选择左侧题目' }}</div>
           {% endif %}
