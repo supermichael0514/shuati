@@ -18,6 +18,7 @@ from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import re
+import random
 
 BASE_DIR = Path(__file__).resolve().parent
 INDEX_XLSX = BASE_DIR / "index.xlsx"
@@ -631,9 +632,10 @@ def profile_page():
     return render_template("profile.html", lang=lang, current_user=current_username())
 
 
-def run_caie_pseudocode(source: str):
+def run_caie_pseudocode(source: str, inputs=None):
     raw_lines = [ln.rstrip() for ln in source.splitlines() if ln.strip()]
     out = []
+    input_queue = list(inputs or [])
 
     default_by_type = {
         "INTEGER": 0,
@@ -642,15 +644,8 @@ def run_caie_pseudocode(source: str):
         "BOOLEAN": False,
     }
     keyword_tokens = {
-        "DIV",
-        "MOD",
-        "AND",
-        "OR",
-        "NOT",
-        "TRUE",
-        "FALSE",
-        "RETURN",
-        "CALL",
+        "DIV", "MOD", "AND", "OR", "NOT", "TRUE", "FALSE", "RETURN", "CALL",
+        "MIDSTRING", "RAND",
     }
 
     subroutines = {}
@@ -679,7 +674,16 @@ def run_caie_pseudocode(source: str):
             lines.append(line)
         i += 1
 
-    def parse_declare(line: str, env, declared, arrays):
+    def infer_type(value):
+        if isinstance(value, bool):
+            return "BOOLEAN"
+        if isinstance(value, int):
+            return "INTEGER"
+        if isinstance(value, float):
+            return "REAL"
+        return "STRING"
+
+    def parse_declare(line: str, env, declared, arrays, scalar_types):
         m_scalar = re.match(r"DECLARE\s+([A-Za-z_]\w*)\s*:\s*([A-Za-z]+)", line, re.I)
         m_array = re.match(
             r"DECLARE\s+([A-Za-z_]\w*)\s*:\s*ARRAY\s*\[\s*(-?\d+)\s*:\s*(-?\d+)\s*\]\s*OF\s*([A-Za-z]+)",
@@ -703,11 +707,12 @@ def run_caie_pseudocode(source: str):
             name = m_scalar.group(1)
             ptype = m_scalar.group(2).upper()
             declared[name] = "scalar"
+            scalar_types[name] = ptype
             env[name] = default_by_type.get(ptype, 0)
             return True
         return False
 
-    def execute_block(block_lines, env, declared, arrays, allow_return=False):
+    def execute_block(block_lines, env, declared, arrays, scalar_types, allow_return=False):
         def ensure_scalar_declared(name: str):
             if name not in declared:
                 raise ValueError(f"Variable '{name}' used before DECLARE")
@@ -719,6 +724,16 @@ def run_caie_pseudocode(source: str):
                 raise ValueError(f"Array '{name}' used before DECLARE")
             if declared[name] != "array":
                 raise ValueError(f"'{name}' is not an ARRAY")
+
+        def cast_input(name: str, raw):
+            t = scalar_types.get(name, "STRING")
+            if t == "INTEGER":
+                return int(raw)
+            if t == "REAL":
+                return float(raw)
+            if t == "BOOLEAN":
+                return str(raw).strip().lower() in {"true", "1", "yes", "y"}
+            return str(raw)
 
         def arr_get(name: str, idx: int):
             ensure_array_declared(name)
@@ -736,6 +751,21 @@ def run_caie_pseudocode(source: str):
                 raise ValueError(f"Array index out of range: {name}[{idx}]")
             spec["values"][idx - lower] = value
 
+        def midstring(value, start, length):
+            s = str(value)
+            st = int(start)
+            ln = int(length)
+            if ln <= 0:
+                return ""
+            return s[max(0, st - 1): max(0, st - 1) + ln]
+
+        def rand_func(*args):
+            if len(args) == 1:
+                return random.randint(0, int(args[0]))
+            if len(args) == 2:
+                return random.randint(int(args[0]), int(args[1]))
+            raise ValueError("RAND expects 1 or 2 arguments")
+
         def call_subroutine(name: str, args, expect_value=False):
             if name not in subroutines:
                 raise ValueError(f"Unknown subroutine: {name}")
@@ -747,12 +777,13 @@ def run_caie_pseudocode(source: str):
             if len(args) != len(sub["params"]):
                 raise ValueError(f"{name} expects {len(sub['params'])} args, got {len(args)}")
 
-            local_env, local_declared, local_arrays = {}, {}, {}
+            local_env, local_declared, local_arrays, local_scalar_types = {}, {}, {}, {}
             for pname, pval in zip(sub["params"], args):
                 local_declared[pname] = "scalar"
                 local_env[pname] = pval
+                local_scalar_types[pname] = infer_type(pval)
             returned, value = execute_block(
-                sub["body"], local_env, local_declared, local_arrays, allow_return=sub["kind"] == "FUNCTION"
+                sub["body"], local_env, local_declared, local_arrays, local_scalar_types, allow_return=sub["kind"] == "FUNCTION"
             )
             if sub["kind"] == "FUNCTION":
                 if not returned:
@@ -772,11 +803,11 @@ def run_caie_pseudocode(source: str):
 
             for token in re.findall(r"\b[A-Za-z_]\w*\b", expr):
                 t = token.upper()
-                if t in keyword_tokens:
+                if t in keyword_tokens or token in {"True", "False"}:
                     continue
                 if token in subroutines:
                     continue
-                if token not in declared and token not in {"True", "False"}:
+                if token not in declared:
                     raise ValueError(f"Identifier '{token}' used before DECLARE")
 
             def replace_array_access(m):
@@ -788,6 +819,8 @@ def run_caie_pseudocode(source: str):
             expr = re.sub(r"\b([A-Za-z_]\w*)\s*\[\s*([^\]]+)\s*\]", replace_array_access, expr)
             local_env = {k: v for k, v in env.items() if declared.get(k) == "scalar"}
             local_env["__arr_get__"] = arr_get
+            local_env["MIDSTRING"] = midstring
+            local_env["RAND"] = rand_func
             for name in subroutines:
                 local_env[name] = (lambda n: (lambda *args: call_subroutine(n, list(args), expect_value=True)))(name)
             return eval(expr, {"__builtins__": {}}, local_env)
@@ -798,10 +831,16 @@ def run_caie_pseudocode(source: str):
             line = block_lines[i].strip()
             upper = line.upper()
             if upper.startswith("DECLARE "):
-                if not parse_declare(line, env, declared, arrays):
+                if not parse_declare(line, env, declared, arrays, scalar_types):
                     raise ValueError(f"Invalid DECLARE syntax: {line}")
             elif upper.startswith("OUTPUT "):
                 out.append(str(eval_expr(line[7:])))
+            elif upper.startswith("INPUT "):
+                var = line[6:].strip()
+                ensure_scalar_declared(var)
+                if not input_queue:
+                    raise ValueError(f"INPUT required for '{var}' but no input provided")
+                env[var] = cast_input(var, input_queue.pop(0))
             elif upper.startswith("CALL "):
                 m = re.match(r"CALL\s+([A-Za-z_]\w*)\s*\((.*)\)", line, re.I)
                 if not m:
@@ -814,6 +853,90 @@ def run_caie_pseudocode(source: str):
                 if not allow_return:
                     raise ValueError("RETURN is only allowed inside FUNCTION")
                 return True, eval_expr(line[7:])
+            elif upper.startswith("CASE OF"):
+                case_value = eval_expr(line[7:].strip())
+                depth, j = 1, i + 1
+                while j < len(block_lines):
+                    u = block_lines[j].strip().upper()
+                    if u.startswith("CASE OF"):
+                        depth += 1
+                    elif u == "ENDCASE":
+                        depth -= 1
+                        if depth == 0:
+                            break
+                    j += 1
+                if j >= len(block_lines):
+                    raise ValueError("CASE missing ENDCASE")
+
+                segments = []
+                current_labels = None
+                current_body = []
+                for k in range(i + 1, j):
+                    raw = block_lines[k].strip()
+                    m_other = re.match(r"OTHERWISE\s*:", raw, re.I)
+                    m_label = re.match(r"(.+?)\s*:", raw)
+                    if m_other or m_label:
+                        if current_labels is not None:
+                            segments.append((current_labels, current_body))
+                        current_body = []
+                        if m_other:
+                            current_labels = "OTHERWISE"
+                        else:
+                            labels_raw = m_label.group(1)
+                            current_labels = [eval_expr(x.strip()) for x in labels_raw.split(",") if x.strip()]
+                    else:
+                        current_body.append(raw)
+                if current_labels is not None:
+                    segments.append((current_labels, current_body))
+
+                chosen = None
+                for labels, body in segments:
+                    if labels == "OTHERWISE":
+                        if chosen is None:
+                            chosen = body
+                    elif case_value in labels:
+                        chosen = body
+                        break
+                if chosen:
+                    returned, value = execute_block(chosen, env, declared, arrays, scalar_types, allow_return=allow_return)
+                    if returned:
+                        return True, value
+                i = j
+            elif upper.startswith("WHILE ") and upper.endswith(" DO"):
+                cond_expr = line[6:-3].strip()
+                if bool(eval_expr(cond_expr)):
+                    stack.append(("WHILE", cond_expr, i))
+                else:
+                    depth, j = 1, i + 1
+                    while j < len(block_lines):
+                        u = block_lines[j].strip().upper()
+                        if u.startswith("WHILE ") and u.endswith(" DO"):
+                            depth += 1
+                        elif u == "ENDWHILE":
+                            depth -= 1
+                            if depth == 0:
+                                break
+                        j += 1
+                    i = j
+            elif upper == "ENDWHILE":
+                if not stack or stack[-1][0] != "WHILE":
+                    raise ValueError("ENDWHILE without WHILE")
+                _, cond_expr, start = stack[-1]
+                if bool(eval_expr(cond_expr)):
+                    i = start
+                else:
+                    stack.pop()
+            elif upper == "REPEAT":
+                stack.append(("REPEAT", i))
+            elif upper.startswith("UNTIL "):
+                if not stack or stack[-1][0] != "REPEAT":
+                    raise ValueError("UNTIL without REPEAT")
+                cond_expr = line[6:].strip()
+                _, start = stack[-1]
+                if bool(eval_expr(cond_expr)):
+                    stack.pop()
+                else:
+                    i = start
             elif upper.startswith("FOR ") and " TO " in upper:
                 m = re.match(r"FOR\s+(\w+)\s*<-\s*(.+)\s+TO\s+(.+)", line, re.I)
                 if not m:
@@ -836,8 +959,7 @@ def run_caie_pseudocode(source: str):
                 cond = bool(eval_expr(line[3:-4]))
                 stack.append(("IF", cond))
                 if not cond:
-                    depth = 1
-                    j = i + 1
+                    depth, j = 1, i + 1
                     while j < len(block_lines):
                         u = block_lines[j].strip().upper()
                         if u.startswith("IF ") and u.endswith("THEN"):
@@ -852,8 +974,7 @@ def run_caie_pseudocode(source: str):
                     i = j
             elif upper == "ELSE":
                 if stack and stack[-1][0] == "IF" and stack[-1][1]:
-                    depth = 1
-                    j = i + 1
+                    depth, j = 1, i + 1
                     while j < len(block_lines):
                         u = block_lines[j].strip().upper()
                         if u.startswith("IF ") and u.endswith("THEN"):
@@ -885,8 +1006,8 @@ def run_caie_pseudocode(source: str):
             i += 1
         return False, None
 
-    global_env, global_declared, global_arrays = {}, {}, {}
-    execute_block(lines, global_env, global_declared, global_arrays, allow_return=False)
+    global_env, global_declared, global_arrays, global_scalar_types = {}, {}, {}, {}
+    execute_block(lines, global_env, global_declared, global_arrays, global_scalar_types, allow_return=False)
     return "\n".join(out)
 
 
@@ -895,8 +1016,15 @@ def run_caie_pseudocode(source: str):
 def run_code_route():
     payload = request.get_json(force=True) or {}
     source = str(payload.get("source", ""))
+    raw_inputs = payload.get("inputs", [])
+    if isinstance(raw_inputs, str):
+        inputs = [x for x in raw_inputs.splitlines() if x.strip() != ""]
+    elif isinstance(raw_inputs, list):
+        inputs = [str(x) for x in raw_inputs]
+    else:
+        inputs = []
     try:
-        result = run_caie_pseudocode(source)
+        result = run_caie_pseudocode(source, inputs=inputs)
         return jsonify({"ok": True, "output": result})
     except Exception as exc:
         return jsonify({"ok": False, "error": str(exc)}), 400
