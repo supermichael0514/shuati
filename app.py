@@ -74,6 +74,7 @@ def init_db():
             user_id INTEGER NOT NULL,
             username TEXT NOT NULL,
             game_name TEXT NOT NULL,
+            difficulty TEXT NOT NULL DEFAULT 'normal',
             score INTEGER NOT NULL,
             created_at TEXT NOT NULL
         )
@@ -97,6 +98,7 @@ def init_db():
             user_id INTEGER NOT NULL,
             username TEXT NOT NULL,
             game_name TEXT NOT NULL,
+            difficulty TEXT NOT NULL DEFAULT 'normal',
             score INTEGER NOT NULL,
             created_at TEXT NOT NULL
         )
@@ -120,6 +122,7 @@ def init_db():
             user_id INTEGER NOT NULL,
             username TEXT NOT NULL,
             game_name TEXT NOT NULL,
+            difficulty TEXT NOT NULL DEFAULT 'normal',
             score INTEGER NOT NULL,
             created_at TEXT NOT NULL
         )
@@ -136,6 +139,14 @@ def init_db():
     for column, sql in migration_columns.items():
         if column not in existing_columns:
             conn.execute(sql)
+
+    score_columns = {
+        row["name"] for row in conn.execute("PRAGMA table_info(game_scores)").fetchall()
+    }
+    if "difficulty" not in score_columns:
+        conn.execute(
+            "ALTER TABLE game_scores ADD COLUMN difficulty TEXT NOT NULL DEFAULT 'normal'"
+        )
     conn.commit()
     conn.close()
 
@@ -177,7 +188,18 @@ def is_en():
     return get_lang() == LANG_EN
 
 
-SUPPORTED_GAMES = {"2048", "sudoku", "tetris"}
+SUPPORTED_GAMES = {
+    "2048",
+    "sudoku",
+    "tetris",
+    "nonogram",
+    "minesweeper",
+    "hanoi",
+    "dino",
+    "shooter",
+    "huarongdao",
+}
+SUPPORTED_DIFFICULTIES = {"easy", "normal", "hard"}
 
 
 def load_index():
@@ -405,18 +427,18 @@ def games_home():
     return render_template("games_home.html", lang=lang, current_user=current_username())
 
 
-def load_leaderboard(game_name, limit=10):
+def load_leaderboard(game_name, difficulty="normal", limit=10):
     conn = get_db_connection()
     rows = conn.execute(
         """
         SELECT username, MAX(score) AS best_score
         FROM game_scores
-        WHERE game_name = ?
+        WHERE game_name = ? AND difficulty = ?
         GROUP BY username
         ORDER BY best_score DESC, username ASC
         LIMIT ?
         """,
-        (game_name, limit),
+        (game_name, difficulty, limit),
     ).fetchall()
     conn.close()
     return [dict(row) for row in rows]
@@ -428,12 +450,16 @@ def game_page(game_name):
     if game_name not in SUPPORTED_GAMES:
         return redirect(url_for("games_home", lang=get_lang()))
     lang = get_lang()
+    difficulty = request.args.get("difficulty", "normal")
+    if difficulty not in SUPPORTED_DIFFICULTIES:
+        difficulty = "normal"
     return render_template(
         "game_play.html",
         lang=lang,
         current_user=current_username(),
         game_name=game_name,
-        leaderboard=load_leaderboard(game_name),
+        difficulty=difficulty,
+        leaderboard=load_leaderboard(game_name, difficulty),
     )
 
 
@@ -445,29 +471,31 @@ def submit_game_score(game_name):
     try:
         payload = request.get_json(force=True) or {}
         score = int(payload.get("score", 0))
+        difficulty = str(payload.get("difficulty", "normal")).strip().lower()
     except Exception:
         return jsonify({"ok": False, "error": "invalid score"}), 400
 
-    if score < 0:
+    if score < 0 or difficulty not in SUPPORTED_DIFFICULTIES:
         return jsonify({"ok": False, "error": "invalid score"}), 400
 
     conn = get_db_connection()
     conn.execute(
         """
-        INSERT INTO game_scores (user_id, username, game_name, score, created_at)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO game_scores (user_id, username, game_name, difficulty, score, created_at)
+        VALUES (?, ?, ?, ?, ?, ?)
         """,
         (
             session.get("user_id"),
             current_username(),
             game_name,
+            difficulty,
             score,
             datetime.now().isoformat(timespec="seconds"),
         ),
     )
     conn.commit()
     conn.close()
-    return jsonify({"ok": True, "leaderboard": load_leaderboard(game_name)})
+    return jsonify({"ok": True, "leaderboard": load_leaderboard(game_name, difficulty)})
 
 
 @app.route("/practice")

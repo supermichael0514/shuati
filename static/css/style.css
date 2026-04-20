@@ -48,7 +48,7 @@ button,.secondary{
 button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c5fd}
 .layout{
   display:grid;
-  grid-template-columns:360px 1fr 300px;
+  grid-template-columns:260px 1fr 220px;
   gap:14px;
   min-height:calc(100vh - 180px);
 }
@@ -56,7 +56,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .left{display:flex;flex-direction:column;min-height:0}
 .left-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .left-head h2,.right h2{margin:0;font-size:18px}
-.record-list{overflow:auto;display:flex;flex-direction:column;gap:10px}
+.record-list{overflow-y:auto;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 280px);padding-right:4px}
 .record{
   display:block;
   text-decoration:none;
@@ -105,7 +105,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .info .meta{font-size:14px;color:var(--muted)}
 .pdf-frame{
   width:100%;
-  height:calc(100vh - 290px);
+  height:82vh;
   border:1px solid var(--line);
   border-radius:12px;
   background:#fff;
@@ -113,7 +113,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .note-form{display:flex;flex-direction:column;gap:10px}
 .note-form textarea{
   width:100%;
-  min-height:240px;
+  min-height:180px;
   resize:vertical;
 }
 .empty{color:var(--muted);padding:20px 6px}
@@ -189,6 +189,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .portal-subtitle{margin:0;color:var(--muted)}
 .portal-actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px;color:var(--muted)}
 .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+.feature-grid-portal{grid-template-columns:repeat(3,1fr)}
 .feature-tile{
   display:block;
   padding:18px;
@@ -233,6 +234,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 }
 
 .game-grid{grid-template-columns:repeat(3,1fr)}
+.game-grid-wide{grid-template-columns:repeat(3,1fr)}
 .game-layout{display:grid;grid-template-columns:1fr 320px;gap:16px}
 .game-main{padding:16px}
 .game-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -269,3 +271,20 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
   .game-layout{grid-template-columns:1fr}
   .game-grid{grid-template-columns:1fr}
 }
+
+
+.difficulty-wrap{display:flex;gap:8px;align-items:center}
+#gameHost{min-height:420px}
+.mine-grid{display:grid;gap:4px}
+.mine-cell{width:34px;height:34px;padding:0}
+.hanoi{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:end;min-height:320px}
+.rod{border:1px solid var(--line);border-radius:10px;min-height:280px;display:flex;flex-direction:column-reverse;align-items:center;gap:6px;padding:10px;background:#f8fafc;cursor:pointer}
+.disk{height:24px;background:#bfdbfe;border:1px solid #60a5fa;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:12px}
+.hrd{display:grid;grid-template-columns:repeat(4,56px);gap:6px}
+.hrd-cell{width:56px;height:56px;padding:0}
+.hrd-cell.empty{background:#f8fafc}
+.nonogram-wrap{display:flex;flex-direction:column;gap:8px}
+.nono-grid{display:grid;gap:3px;width:max-content}
+.nono-cell{width:30px;height:30px;padding:0}
+.nono-cell.on{background:#1e3a8a}
+.nono-clues{font-size:13px;color:var(--muted)}

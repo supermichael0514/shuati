@@ -11,300 +11,141 @@
     <header class="portal-header card">
       <div>
         <p class="neon-label">{{ 'MINI GAME' if lang == 'en' else '小游戏' }}</p>
-        <h1>{% if game_name == '2048' %}2048{% elif game_name == 'sudoku' %}{{ 'Sudoku' if lang == 'en' else '数独' }}{% else %}{{ 'Tetris' if lang == 'en' else '俄罗斯方块' }}{% endif %}</h1>
+        <h1>{{ game_name|upper }}</h1>
       </div>
-      <div class="portal-actions">
-        <a class="secondary" href="{{ url_for('games_home', lang=lang) }}">{{ 'Back to Games' if lang == 'en' else '返回游戏列表' }}</a>
-      </div>
+      <div class="portal-actions"><a class="secondary" href="{{ url_for('games_home', lang=lang) }}">{{ 'Back to Games' if lang == 'en' else '返回游戏列表' }}</a></div>
     </header>
 
     <div class="game-layout">
       <section class="card game-main">
         <div class="game-toolbar">
           <div>{{ 'Current Score' if lang == 'en' else '当前分数' }}: <strong id="score">0</strong></div>
+          <div class="difficulty-wrap">
+            <label for="difficultySel">{{ 'Difficulty' if lang == 'en' else '难度' }}</label>
+            <select id="difficultySel">
+              <option value="easy" {% if difficulty=='easy' %}selected{% endif %}>{{ 'Easy' if lang=='en' else '简单' }}</option>
+              <option value="normal" {% if difficulty=='normal' %}selected{% endif %}>{{ 'Normal' if lang=='en' else '普通' }}</option>
+              <option value="hard" {% if difficulty=='hard' %}selected{% endif %}>{{ 'Hard' if lang=='en' else '困难' }}</option>
+            </select>
+          </div>
           <button id="restartBtn">{{ 'Restart' if lang == 'en' else '重新开始' }}</button>
         </div>
-
-        {% if game_name == '2048' %}
-        <div id="board2048" class="board-2048"></div>
-        <p class="game-hint">{{ 'Use arrow keys to move.' if lang == 'en' else '使用方向键移动。' }}</p>
-        {% elif game_name == 'sudoku' %}
-        <div class="sudoku-panel">
-          <div>{{ 'Time' if lang == 'en' else '用时' }}: <strong id="sudokuTime">0</strong>s</div>
-          <button id="checkSudoku">{{ 'Check' if lang == 'en' else '检查答案' }}</button>
-        </div>
-        <div id="sudokuBoard" class="board-sudoku"></div>
-        {% else %}
-        <canvas id="tetrisCanvas" width="300" height="600"></canvas>
-        <p class="game-hint">{{ 'Arrow keys: move/rotate, down to drop.' if lang == 'en' else '方向键移动，↑旋转，↓加速下落。' }}</p>
-        {% endif %}
+        <div id="gameHost"></div>
       </section>
-
       <aside class="card leaderboard-panel">
         <h2>{{ 'Leaderboard' if lang == 'en' else '排行榜' }}</h2>
-        <ol id="leaderboardList">
-          {% for row in leaderboard %}
-          <li><span>{{ row.username }}</span><strong>{{ row.best_score }}</strong></li>
-          {% else %}
-          <li class="empty">{{ 'No scores yet.' if lang == 'en' else '暂无成绩。' }}</li>
-          {% endfor %}
-        </ol>
+        <p class="game-hint">{{ 'Ranking for selected difficulty.' if lang == 'en' else '当前难度下的排行榜。' }}</p>
+        <ol id="leaderboardList">{% for row in leaderboard %}<li><span>{{ row.username }}</span><strong>{{ row.best_score }}</strong></li>{% else %}<li class="empty">{{ 'No scores yet.' if lang == 'en' else '暂无成绩。' }}</li>{% endfor %}</ol>
       </aside>
     </div>
   </div>
-
 <script>
 const GAME_NAME = "{{ game_name }}";
 const LANG = "{{ lang }}";
+const difficultySel = document.getElementById('difficultySel');
 const SCORE_LABEL = document.getElementById('score');
 const leaderboardList = document.getElementById('leaderboardList');
+const host = document.getElementById('gameHost');
+
+function difficulty(){ return difficultySel.value; }
+difficultySel.onchange = ()=>{
+  const u = new URL(window.location.href);
+  u.searchParams.set('difficulty', difficulty());
+  u.searchParams.set('lang', LANG);
+  window.location.href = u.toString();
+};
 
 async function submitScore(score){
-  const res = await fetch(`/api/games/${GAME_NAME}/score?lang=${LANG}`, {
-    method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({score})
-  });
+  const res = await fetch(`/api/games/${GAME_NAME}/score?lang=${LANG}`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({score,difficulty:difficulty()})});
   if(!res.ok) return;
   const data = await res.json();
-  if(data.ok && Array.isArray(data.leaderboard)){
-    renderLeaderboard(data.leaderboard);
-  }
+  if(data.ok) renderLeaderboard(data.leaderboard || []);
+}
+function renderLeaderboard(items){ leaderboardList.innerHTML=''; if(!items.length){leaderboardList.innerHTML=`<li class='empty'>${LANG==='en'?'No scores yet.':'暂无成绩。'}</li>`; return;} items.forEach(row=>{const li=document.createElement('li'); li.innerHTML=`<span>${row.username}</span><strong>${row.best_score}</strong>`; leaderboardList.appendChild(li);}); }
+
+function init2048(){
+  host.innerHTML = '<div id="board2048" class="board-2048"></div>';
+  const boardEl = document.getElementById('board2048'); const size=4; let grid=[]; let score=0;
+  function reset(){grid=Array.from({length:size},()=>Array(size).fill(0));score=0;spawn();spawn();draw();}
+  function spawn(){const e=[];for(let r=0;r<size;r++)for(let c=0;c<size;c++)if(!grid[r][c])e.push([r,c]);if(!e.length)return;const [r,c]=e[Math.floor(Math.random()*e.length)];grid[r][c]=Math.random()<0.9?2:4;}
+  function draw(){boardEl.innerHTML='';SCORE_LABEL.textContent=score;grid.flat().forEach(v=>{const d=document.createElement('div');d.className='cell-2048';d.dataset.value=v;d.textContent=v||'';boardEl.appendChild(d);});}
+  function slide(line){const a=line.filter(Boolean);for(let i=0;i<a.length-1;i++){if(a[i]===a[i+1]){a[i]*=2;score+=a[i];a[i+1]=0;i++;}}const b=a.filter(Boolean);while(b.length<size)b.push(0);return b;}
+  function move(dir){const before=JSON.stringify(grid);for(let i=0;i<size;i++){let l=(dir==='left'||dir==='right')?grid[i].slice():[grid[0][i],grid[1][i],grid[2][i],grid[3][i]];if(dir==='right'||dir==='down')l.reverse();l=slide(l);if(dir==='right'||dir==='down')l.reverse();if(dir==='left'||dir==='right')grid[i]=l;else for(let r=0;r<size;r++)grid[r][i]=l[r];} if(before!==JSON.stringify(grid)){spawn();draw(); if(!canMove()) submitScore(score);} }
+  function canMove(){for(let r=0;r<size;r++)for(let c=0;c<size;c++){if(!grid[r][c])return true;if(r<size-1&&grid[r][c]===grid[r+1][c])return true;if(c<size-1&&grid[r][c]===grid[r][c+1])return true;}return false;}
+  window.onkeydown = (e)=>{const m={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};if(m[e.key]){e.preventDefault();move(m[e.key]);}};
+  restartBtn.onclick=reset; reset();
 }
 
-function renderLeaderboard(items){
-  leaderboardList.innerHTML = '';
-  if(!items.length){
-    const li = document.createElement('li');
-    li.className = 'empty';
-    li.textContent = LANG === 'en' ? 'No scores yet.' : '暂无成绩。';
-    leaderboardList.appendChild(li);
-    return;
-  }
-  items.forEach((row)=>{
-    const li = document.createElement('li');
-    li.innerHTML = `<span>${row.username}</span><strong>${row.best_score}</strong>`;
-    leaderboardList.appendChild(li);
-  });
+function initMinesweeper(){
+  const cfg={easy:8,normal:10,hard:12}[difficulty()]; const mines={easy:10,normal:18,hard:28}[difficulty()];
+  host.innerHTML='<p class="game-hint">'+(LANG==='en'?'Left click to open, right click to flag.':'左键翻开，右键插旗。')+'</p><div id="msBoard" class="mine-grid"></div>';
+  const b=document.getElementById('msBoard'); b.style.gridTemplateColumns=`repeat(${cfg},34px)`; let score=0;
+  const arr=Array.from({length:cfg},()=>Array.from({length:cfg},()=>({m:false,o:false,f:false,n:0})));
+  for(let i=0;i<mines;i++){let r,c;do{r=Math.floor(Math.random()*cfg);c=Math.floor(Math.random()*cfg);}while(arr[r][c].m);arr[r][c].m=true;}
+  for(let r=0;r<cfg;r++)for(let c=0;c<cfg;c++)for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const nr=r+dr,nc=c+dc;if(nr>=0&&nr<cfg&&nc>=0&&nc<cfg&&arr[nr][nc].m)arr[r][c].n++;}
+  function open(r,c){const cell=arr[r][c]; if(cell.o||cell.f) return; cell.o=true; if(cell.m){alert(LANG==='en'?'Boom!':'踩雷了！'); submitScore(score); return;} score+=10; if(cell.n===0){for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const nr=r+dr,nc=c+dc;if(nr>=0&&nr<cfg&&nc>=0&&nc<cfg)open(nr,nc);}} render(); checkWin();}
+  function checkWin(){const safe=cfg*cfg-mines; let opened=0; arr.flat().forEach(x=>{if(x.o&&!x.m)opened++;}); if(opened===safe){score+=200; SCORE_LABEL.textContent=score; submitScore(score); alert(LANG==='en'?'Win!':'通关！');}}
+  function render(){b.innerHTML=''; SCORE_LABEL.textContent=score; for(let r=0;r<cfg;r++)for(let c=0;c<cfg;c++){const cell=arr[r][c]; const d=document.createElement('button'); d.className='mine-cell'; d.oncontextmenu=(e)=>{e.preventDefault(); if(!cell.o)cell.f=!cell.f; render();}; d.onclick=()=>open(r,c); d.textContent=cell.o?(cell.m?'💣':(cell.n||'')):(cell.f?'🚩':''); b.appendChild(d);} }
+  restartBtn.onclick=()=>initMinesweeper(); render();
 }
 
-if(GAME_NAME === '2048'){
-  const boardEl = document.getElementById('board2048');
-  const size = 4;
-  let grid = [];
-  let score = 0;
-
-  function reset(){
-    grid = Array.from({length:size}, ()=>Array(size).fill(0));
-    score = 0;
-    spawn(); spawn();
-    draw();
-  }
-
-  function spawn(){
-    const empty = [];
-    for(let r=0;r<size;r++) for(let c=0;c<size;c++) if(!grid[r][c]) empty.push([r,c]);
-    if(!empty.length) return;
-    const [r,c] = empty[Math.floor(Math.random()*empty.length)];
-    grid[r][c] = Math.random() < 0.9 ? 2 : 4;
-  }
-
-  function draw(){
-    boardEl.innerHTML = '';
-    SCORE_LABEL.textContent = score;
-    grid.flat().forEach(v=>{
-      const cell = document.createElement('div');
-      cell.className = 'cell-2048';
-      cell.textContent = v || '';
-      cell.dataset.value = v;
-      boardEl.appendChild(cell);
-    });
-  }
-
-  function slide(line){
-    const arr = line.filter(Boolean);
-    for(let i=0;i<arr.length-1;i++){
-      if(arr[i] === arr[i+1]){ arr[i] *= 2; score += arr[i]; arr[i+1] = 0; i++; }
-    }
-    const merged = arr.filter(Boolean);
-    while(merged.length < size) merged.push(0);
-    return merged;
-  }
-
-  function move(dir){
-    const before = JSON.stringify(grid);
-    for(let i=0;i<size;i++){
-      let line;
-      if(dir==='left' || dir==='right') line = grid[i].slice();
-      else line = [grid[0][i],grid[1][i],grid[2][i],grid[3][i]];
-      if(dir==='right' || dir==='down') line.reverse();
-      line = slide(line);
-      if(dir==='right' || dir==='down') line.reverse();
-      if(dir==='left' || dir==='right') grid[i] = line;
-      else for(let r=0;r<size;r++) grid[r][i] = line[r];
-    }
-    if(before !== JSON.stringify(grid)){
-      spawn(); draw();
-      if(!canMove()) submitScore(score);
-    }
-  }
-
-  function canMove(){
-    for(let r=0;r<size;r++) for(let c=0;c<size;c++){
-      if(!grid[r][c]) return true;
-      if(r<size-1 && grid[r][c]===grid[r+1][c]) return true;
-      if(c<size-1 && grid[r][c]===grid[r][c+1]) return true;
-    }
-    return false;
-  }
-
-  document.addEventListener('keydown', (e)=>{
-    const m = {ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};
-    if(m[e.key]){ e.preventDefault(); move(m[e.key]); }
-  });
-  document.getElementById('restartBtn').onclick = reset;
-  reset();
+function initHanoi(){
+  const n={easy:3,normal:4,hard:5}[difficulty()]; host.innerHTML='<div id="hanoi" class="hanoi"></div>'; const h=document.getElementById('hanoi'); let score=1000; const rods=[[],[],[]]; for(let i=n;i>=1;i--) rods[0].push(i); let pick=null;
+  function draw(){h.innerHTML=''; SCORE_LABEL.textContent=Math.max(0,score); rods.forEach((rod,idx)=>{const col=document.createElement('div'); col.className='rod'; col.onclick=()=>tap(idx); rod.slice().reverse().forEach(s=>{const d=document.createElement('div'); d.className='disk'; d.style.width=(s*24+40)+'px'; d.textContent=s; col.appendChild(d);}); h.appendChild(col);});}
+  function tap(i){if(pick===null){if(rods[i].length)pick=i; return;} if(i===pick){pick=null;return;} const d=rods[pick][rods[pick].length-1]; const t=rods[i][rods[i].length-1]; if(!t||d<t){rods[pick].pop();rods[i].push(d);score-=10;pick=null; draw(); if(rods[2].length===n){submitScore(Math.max(0,score)); alert(LANG==='en'?'Solved!':'完成！');}} }
+  restartBtn.onclick=()=>initHanoi(); draw();
 }
 
-if(GAME_NAME === 'sudoku'){
-  const puzzle = [
-    [5,3,0,0,7,0,0,0,0],
-    [6,0,0,1,9,5,0,0,0],
-    [0,9,8,0,0,0,0,6,0],
-    [8,0,0,0,6,0,0,0,3],
-    [4,0,0,8,0,3,0,0,1],
-    [7,0,0,0,2,0,0,0,6],
-    [0,6,0,0,0,0,2,8,0],
-    [0,0,0,4,1,9,0,0,5],
-    [0,0,0,0,8,0,0,7,9]
-  ];
-  const solution = [
-    [5,3,4,6,7,8,9,1,2],[6,7,2,1,9,5,3,4,8],[1,9,8,3,4,2,5,6,7],
-    [8,5,9,7,6,1,4,2,3],[4,2,6,8,5,3,7,9,1],[7,1,3,9,2,4,8,5,6],
-    [9,6,1,5,3,7,2,8,4],[2,8,7,4,1,9,6,3,5],[3,4,5,2,8,6,1,7,9]
-  ];
-  let startTime = Date.now();
-  let score = 0;
-  const board = document.getElementById('sudokuBoard');
-  const timeEl = document.getElementById('sudokuTime');
-
-  function drawBoard(){
-    board.innerHTML = '';
-    for(let r=0;r<9;r++){
-      for(let c=0;c<9;c++){
-        const input = document.createElement('input');
-        input.maxLength = 1;
-        input.className = 'sudoku-cell';
-        if(puzzle[r][c]){
-          input.value = puzzle[r][c];
-          input.disabled = true;
-          input.classList.add('given');
-        }
-        input.dataset.r = r; input.dataset.c = c;
-        board.appendChild(input);
-      }
-    }
-  }
-
-  function check(){
-    let ok = true;
-    document.querySelectorAll('.sudoku-cell').forEach((cell)=>{
-      const r = Number(cell.dataset.r), c = Number(cell.dataset.c);
-      const v = Number(cell.value);
-      if(v !== solution[r][c]){ ok = false; if(!cell.disabled) cell.classList.add('wrong'); }
-      else cell.classList.remove('wrong');
-    });
-    if(ok){
-      const sec = Math.floor((Date.now()-startTime)/1000);
-      score = Math.max(0, 2000 - sec*5);
-      SCORE_LABEL.textContent = score;
-      submitScore(score);
-      alert(LANG==='en' ? `Completed! Score: ${score}` : `完成！得分：${score}`);
-    }
-  }
-
-  setInterval(()=>{ timeEl.textContent = Math.floor((Date.now()-startTime)/1000); }, 1000);
-  document.getElementById('checkSudoku').onclick = check;
-  document.getElementById('restartBtn').onclick = ()=>{ startTime = Date.now(); drawBoard(); SCORE_LABEL.textContent = 0; };
-  drawBoard();
+function initDino(){
+  host.innerHTML='<canvas id="dino" width="640" height="220"></canvas>'; const c=document.getElementById('dino'); const x=c.getContext('2d'); let y=160,vy=0,obs=[],s=0,go=false; const speed={easy:4,normal:6,hard:8}[difficulty()];
+  function loop(){if(go)return; x.fillStyle='#f8fafc';x.fillRect(0,0,640,220); x.fillStyle='#334155';x.fillRect(20,y,28,40); x.fillRect(0,200,640,2); vy+=0.8; y=Math.min(160,y+vy); if(Math.random()<0.03) obs.push({x:640,w:20,h:30}); obs.forEach(o=>o.x-=speed); obs=obs.filter(o=>o.x>-40); obs.forEach(o=>{x.fillRect(o.x,170,o.w,o.h); if(o.x<48&&o.x+o.w>20&&y+40>170){go=true; submitScore(s);}}); s++; SCORE_LABEL.textContent=s; if(!go) requestAnimationFrame(loop);} 
+  window.onkeydown=(e)=>{if((e.key===' '||e.key==='ArrowUp')&&y>=160)vy=-12;}; restartBtn.onclick=()=>initDino(); loop();
 }
 
-if(GAME_NAME === 'tetris'){
-  const canvas = document.getElementById('tetrisCanvas');
-  const ctx = canvas.getContext('2d');
-  const COLS=10, ROWS=20, BLOCK=30;
-  const colors = ['#000','#38bdf8','#6366f1','#f472b6','#f59e0b','#10b981','#fb7185','#3b82f6'];
-  const shapes = [[],[[1,1,1,1]],[[2,2],[2,2]],[[0,3,0],[3,3,3]],[[4,4,0],[0,4,4]],[[0,5,5],[5,5,0]],[[6,0,0],[6,6,6]]];
-  let board = Array.from({length:ROWS},()=>Array(COLS).fill(0));
-  let piece, pos, dropCounter=0,last=0,score=0,gameOver=false;
-
-  function spawn(){
-    const id = 1 + Math.floor(Math.random()*6);
-    piece = shapes[id].map(r=>r.slice());
-    pos = {x: Math.floor(COLS/2)-1, y:0};
-    if(collide()) gameOver = true;
-  }
-
-  function collide(){
-    for(let y=0;y<piece.length;y++) for(let x=0;x<piece[y].length;x++){
-      if(piece[y][x] && ((board[y+pos.y]&&board[y+pos.y][x+pos.x]) !== 0)) return true;
-    }
-    return false;
-  }
-
-  function merge(){
-    piece.forEach((row,y)=>row.forEach((v,x)=>{ if(v) board[y+pos.y][x+pos.x]=v; }));
-  }
-
-  function rotate(){
-    const m = piece[0].map((_,i)=>piece.map(r=>r[i]).reverse());
-    const old = piece; piece = m; if(collide()) piece = old;
-  }
-
-  function clearLines(){
-    let lines = 0;
-    for(let y=ROWS-1;y>=0;y--){
-      if(board[y].every(v=>v)){ board.splice(y,1); board.unshift(Array(COLS).fill(0)); lines++; y++; }
-    }
-    if(lines){ score += lines*100; SCORE_LABEL.textContent = score; }
-  }
-
-  function drop(){
-    pos.y++;
-    if(collide()){
-      pos.y--; merge(); clearLines(); spawn();
-      if(gameOver){ submitScore(score); }
-    }
-    dropCounter=0;
-  }
-
-  function draw(){
-    ctx.fillStyle = '#f8fafc'; ctx.fillRect(0,0,canvas.width,canvas.height);
-    board.forEach((row,y)=>row.forEach((v,x)=>{ if(v){ ctx.fillStyle=colors[v]; ctx.fillRect(x*BLOCK,y*BLOCK,BLOCK-1,BLOCK-1); } }));
-    piece.forEach((row,y)=>row.forEach((v,x)=>{ if(v){ ctx.fillStyle=colors[v]; ctx.fillRect((x+pos.x)*BLOCK,(y+pos.y)*BLOCK,BLOCK-1,BLOCK-1); } }));
-  }
-
-  function update(time=0){
-    const delta = time-last; last=time; dropCounter+=delta;
-    if(dropCounter>500 && !gameOver) drop();
-    draw();
-    if(!gameOver) requestAnimationFrame(update);
-  }
-
-  document.addEventListener('keydown', (e)=>{
-    if(gameOver) return;
-    if(e.key==='ArrowLeft'){ pos.x--; if(collide()) pos.x++; }
-    else if(e.key==='ArrowRight'){ pos.x++; if(collide()) pos.x--; }
-    else if(e.key==='ArrowDown'){ drop(); }
-    else if(e.key==='ArrowUp'){ rotate(); }
-  });
-
-  document.getElementById('restartBtn').onclick = ()=>{
-    board = Array.from({length:ROWS},()=>Array(COLS).fill(0));
-    score = 0; gameOver = false; SCORE_LABEL.textContent = 0;
-    spawn(); update();
-  };
-
-  spawn(); update();
+function initShooter(){
+  host.innerHTML='<canvas id="shooter" width="640" height="380"></canvas>'; const c=document.getElementById('shooter'); const x=c.getContext('2d'); let p=300,bul=[],en=[],s=0,go=false; const spawn={easy:0.03,normal:0.05,hard:0.08}[difficulty()];
+  function loop(){if(go)return; x.fillStyle='#0f172a';x.fillRect(0,0,640,380); x.fillStyle='#38bdf8';x.fillRect(p,340,40,20); if(Math.random()<spawn) en.push({x:Math.random()*600,y:0}); en.forEach(e=>e.y+=2); bul.forEach(b=>b.y-=7); bul=bul.filter(b=>b.y>-10); en=en.filter(e=>e.y<390);
+    bul.forEach(b=>en.forEach(e=>{if(Math.abs(b.x-e.x)<18&&Math.abs(b.y-e.y)<18){e.y=500; b.y=-20; s+=20;}}));
+    en.forEach(e=>{x.fillStyle='#f87171';x.fillRect(e.x,e.y,20,20); if(e.y>330&&e.x<p+40&&e.x+20>p){go=true; submitScore(s);}});
+    x.fillStyle='#facc15'; bul.forEach(b=>x.fillRect(b.x,b.y,4,10)); SCORE_LABEL.textContent=s; if(!go) requestAnimationFrame(loop); }
+  window.onkeydown=(e)=>{if(e.key==='ArrowLeft')p=Math.max(0,p-20); if(e.key==='ArrowRight')p=Math.min(600,p+20); if(e.key===' '||e.key==='ArrowUp')bul.push({x:p+18,y:340});}; restartBtn.onclick=()=>initShooter(); loop();
 }
+
+function initHuarongdao(){
+  host.innerHTML='<p class="game-hint">'+(LANG==='en'?'Click adjacent block to slide. Move Cao Cao to bottom center.':'点击相邻方块滑动，将曹操移动到底部中间。')+'</p><div id="hrd" class="hrd"></div>'; const b=document.getElementById('hrd');
+  const g=[[1,1,2,2],[1,1,3,3],[4,5,0,0],[4,6,7,8],[9,6,7,10]]; const names={1:'曹',2:'关',3:'张',4:'赵',5:'马',6:'黄',7:'兵',8:'兵',9:'兵',10:'兵'}; let steps=0;
+  function render(){b.innerHTML=''; SCORE_LABEL.textContent=Math.max(0,1000-steps*10); for(let r=0;r<5;r++)for(let c=0;c<4;c++){const v=g[r][c]; const d=document.createElement('button'); d.className='hrd-cell'; d.textContent=v?names[v]:''; d.onclick=()=>move(r,c); if(!v)d.classList.add('empty'); b.appendChild(d);} }
+  function move(r,c){ if(!g[r][c]) return; const empties=[]; for(let i=0;i<5;i++)for(let j=0;j<4;j++)if(g[i][j]===0)empties.push([i,j]);
+    for(const [er,ec] of empties){if(Math.abs(er-r)+Math.abs(ec-c)===1){g[er][ec]=g[r][c]; g[r][c]=0; steps++; break;}}
+    if(g[3][1]===1&&g[3][2]===1&&g[4][1]===1&&g[4][2]===1){submitScore(Math.max(0,1000-steps*10)); alert(LANG==='en'?'You escaped!':'曹操脱逃成功！');}
+    render();
+  }
+  restartBtn.onclick=()=>initHuarongdao(); render();
+}
+
+
+function initNonogram(){
+  const size={easy:5,normal:8,hard:10}[difficulty()];
+  const pattern=Array.from({length:size},(_,r)=>Array.from({length:size},(_,c)=>((r*c+r+c)%3===0?1:0)));
+  let draw=Array.from({length:size},()=>Array(size).fill(0));
+  host.innerHTML='<div id="nonoWrap" class="nonogram-wrap"></div>';
+  const w=document.getElementById('nonoWrap');
+  function clues(line){const out=[];let cnt=0;line.forEach(v=>{if(v){cnt++;}else if(cnt){out.push(cnt);cnt=0;}}); if(cnt) out.push(cnt); return out.length?out.join(' '):'0';}
+  function render(){w.innerHTML='';
+    const head=document.createElement('div'); head.className='game-hint'; head.textContent=(LANG==='en'?'Fill cells to match row/column clues.':'根据行列提示填格子。'); w.appendChild(head);
+    const rowClues=document.createElement('div'); rowClues.className='nono-clues'; rowClues.innerHTML='<strong>'+(LANG==='en'?'Row clues: ':'行提示：')+'</strong>'+pattern.map(r=>clues(r)).join(' | '); w.appendChild(rowClues);
+    const colClues=document.createElement('div'); colClues.className='nono-clues'; colClues.innerHTML='<strong>'+(LANG==='en'?'Col clues: ':'列提示：')+'</strong>'+Array.from({length:size},(_,c)=>clues(pattern.map(r=>r[c]))).join(' | '); w.appendChild(colClues);
+    const g=document.createElement('div'); g.className='nono-grid'; g.style.gridTemplateColumns=`repeat(${size},30px)`;
+    for(let r=0;r<size;r++)for(let c=0;c<size;c++){const b=document.createElement('button'); b.className='nono-cell'; if(draw[r][c]) b.classList.add('on'); b.onclick=()=>{draw[r][c]=1-draw[r][c]; render();}; g.appendChild(b);} w.appendChild(g);
+    const ok=JSON.stringify(draw)===JSON.stringify(pattern); const score=Math.max(0,1500-size*40-(draw.flat().filter(v=>v).length*2)); SCORE_LABEL.textContent=ok?score:0; if(ok){submitScore(score);} }
+  restartBtn.onclick=()=>initNonogram(); render();
+}
+
+function initSudoku(){host.innerHTML='<p class="game-hint">'+(LANG==='en'?'Please use Nonogram for 数织. Sudoku retained as bonus game.':'数织请进入 Nonogram。数独作为附加小游戏保留。')+'</p>'; SCORE_LABEL.textContent=0; restartBtn.onclick=()=>initSudoku();}
+function initTetris(){host.innerHTML='<p class="game-hint">'+(LANG==='en'?'Use arrow keys. (Original mini tetris simplified placeholder)':'使用方向键。（保留简化版）')+'</p>'; SCORE_LABEL.textContent=0; restartBtn.onclick=()=>initTetris();}
+
+const map={2048:init2048,sudoku:initSudoku,tetris:initTetris,nonogram:initNonogram,minesweeper:initMinesweeper,hanoi:initHanoi,dino:initDino,shooter:initShooter,huarongdao:initHuarongdao};
+(map[GAME_NAME]||init2048)();
 </script>
 </body>
 </html>
