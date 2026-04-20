@@ -15,9 +15,7 @@
 
     <main class="feature-grid game-grid game-grid-wide">
       <a class="feature-tile" href="{{ url_for('game_page', game_name='2048', lang=lang) }}"><div class="tile-icon">🔢</div><h2>2048</h2></a>
-      <a class="feature-tile" href="{{ url_for('game_page', game_name='dino', lang=lang) }}"><div class="tile-icon">🦖</div><h2>Dino</h2></a>
       <a class="feature-tile" href="{{ url_for('game_page', game_name='tetris', lang=lang) }}"><div class="tile-icon">🟪</div><h2>{{ 'Tetris' if lang == 'en' else '俄罗斯方块' }}</h2></a>
-      <a class="feature-tile" href="{{ url_for('game_page', game_name='shooter', lang=lang) }}"><div class="tile-icon">🚀</div><h2>{{ 'Shooter' if lang == 'en' else '打飞机' }}</h2></a>
       <a class="feature-tile" href="{{ url_for('game_page', game_name='nonogram', lang=lang) }}"><div class="tile-icon">🧠</div><h2>{{ 'Nonogram' if lang == 'en' else '数织' }}</h2></a>
       <a class="feature-tile" href="{{ url_for('game_page', game_name='sudoku', lang=lang) }}"><div class="tile-icon">📐</div><h2>{{ 'Sudoku' if lang == 'en' else '数独' }}</h2></a>
     </main>

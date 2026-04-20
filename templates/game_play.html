@@ -40,18 +40,6 @@ function init2048(){ host.innerHTML='<div id="b2048" class="board-2048"></div>';
   window.onkeydown=e=>{const m={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'}; if(m[e.key]){e.preventDefault(); move(m[e.key]);}}; restartBtn.onclick=reset; reset();
 }
 
-function initDino(){ host.innerHTML='<canvas id="d" width="640" height="220"></canvas>'; const c=document.getElementById('d'),x=c.getContext('2d'); let y=160,vy=0,o=[],s=0,over=false;
-  const loop=()=>{if(over)return; x.fillStyle='#f8fafc';x.fillRect(0,0,640,220); x.fillStyle='#334155';x.fillRect(20,y,28,40);x.fillRect(0,200,640,2); vy+=0.8; y=Math.min(160,y+vy); if(Math.random()<.03)o.push({x:640,w:20,h:30}); o.forEach(v=>v.x-=6); o=o.filter(v=>v.x>-30); o.forEach(v=>{x.fillRect(v.x,170,v.w,v.h); if(v.x<48&&v.x+v.w>20&&y+40>170){over=true;submitScore(s);}}); s++; scoreEl.textContent=s; requestAnimationFrame(loop);};
-  window.onkeydown=e=>{if((e.key===' '||e.key==='ArrowUp')&&y>=160)vy=-12;}; restartBtn.onclick=()=>initDino(); loop();
-}
-
-function initShooter(){ host.innerHTML='<canvas id="s" width="640" height="380"></canvas>'; const c=document.getElementById('s'),x=c.getContext('2d'); let p=300,b=[],e=[],s=0,over=false;
-  const loop=()=>{ if(over)return; x.fillStyle='#0f172a';x.fillRect(0,0,640,380); x.fillStyle='#38bdf8';x.fillRect(p,340,40,20); if(Math.random()<.05)e.push({x:Math.random()*600,y:0}); e.forEach(v=>v.y+=2); b.forEach(v=>v.y-=8); b=b.filter(v=>v.y>-20); e=e.filter(v=>v.y<400);
-    b.forEach(bi=>e.forEach(en=>{if(Math.abs(bi.x-en.x)<18&&Math.abs(bi.y-en.y)<18){en.y=500; bi.y=-50; s+=20;}}));
-    e.forEach(en=>{x.fillStyle='#f87171';x.fillRect(en.x,en.y,20,20); if(en.y>330&&en.x<p+40&&en.x+20>p){over=true;submitScore(s);}}); x.fillStyle='#fde047'; b.forEach(v=>x.fillRect(v.x,v.y,4,10)); scoreEl.textContent=s; requestAnimationFrame(loop); };
-  window.onkeydown=e2=>{if(e2.key==='ArrowLeft')p=Math.max(0,p-20); else if(e2.key==='ArrowRight')p=Math.min(600,p+20); else if(e2.key===' '||e2.key==='ArrowUp')b.push({x:p+18,y:340});}; restartBtn.onclick=()=>initShooter(); loop();
-}
-
 function initTetris(){ host.innerHTML='<canvas id="tetrisCanvas" width="300" height="600"></canvas>'; const c=document.getElementById('tetrisCanvas'),ctx=c.getContext('2d'); const COLS=10,ROWS=20,B=30;
   const colors=['#000','#38bdf8','#6366f1','#f472b6','#f59e0b','#10b981','#fb7185','#3b82f6']; const shapes=[[],[[1,1,1,1]],[[2,2],[2,2]],[[0,3,0],[3,3,3]],[[4,4,0],[0,4,4]],[[0,5,5],[5,5,0]],[[6,0,0],[6,6,6]]];
   let board=Array.from({length:ROWS},()=>Array(COLS).fill(0)),piece,pos,drop=0,last=0,s=0,over=false;
@@ -86,18 +74,21 @@ function initSudoku(){
 }
 
 function makeNonogram(){ const size=10; const pat=Array.from({length:size},()=>Array.from({length:size},()=>Math.random()<0.45?1:0)); if(pat.flat().every(v=>v===0))pat[0][0]=1; return pat; }
-function clue(line){const out=[];let c=0;line.forEach(v=>{if(v)c++; else if(c){out.push(c);c=0;}}); if(c)out.push(c); return out.length?out.join(' '):'0';}
+function clue(line){const out=[];let c=0;line.forEach(v=>{if(v)c++; else if(c){out.push(c);c=0;}}); if(c)out.push(c); return out.length?out:['0'];}
 function initNonogram(){ const p=makeNonogram(),size=10; const d=Array.from({length:size},()=>Array(size).fill(0));
-  host.innerHTML='<div class="nonogram-wrap"><div id="rowClues" class="nono-clues"></div><div id="colClues" class="nono-clues"></div><div id="ng" class="nono-grid"></div><button id="checkNono">'+(LANG==='en'?'Check':'检查')+'</button></div>';
-  const g=document.getElementById('ng'); g.style.gridTemplateColumns='repeat(10,30px)';
-  document.getElementById('rowClues').innerHTML='<strong>'+(LANG==='en'?'Rows: ':'行：')+'</strong>'+p.map(r=>clue(r)).join(' | ');
-  document.getElementById('colClues').innerHTML='<strong>'+(LANG==='en'?'Cols: ':'列：')+'</strong>'+Array.from({length:size},(_,c)=>clue(p.map(r=>r[c]))).join(' | ');
+  host.innerHTML='<div class="nono-board-wrap"><div class="nono-corner"></div><div id="nonoTop" class="nono-top"></div><div id="nonoLeft" class="nono-left"></div><div id="ng" class="nono-grid"></div></div><div class="actions"><button id="checkNono">'+(LANG==='en'?'Check':'检查')+'</button></div>';
+  const g=document.getElementById('ng'); g.style.gridTemplateColumns='repeat(10,32px)';
+  const top=document.getElementById('nonoTop'); const left=document.getElementById('nonoLeft');
+  top.style.gridTemplateColumns='repeat(10,32px)'; left.style.gridTemplateRows='repeat(10,32px)';
+  top.innerHTML=''; left.innerHTML='';
+  for(let c=0;c<size;c++){const t=document.createElement('div');t.className='nono-clue-top';t.innerHTML=clue(p.map(r=>r[c])).join('<br>');top.appendChild(t);} 
+  for(let r=0;r<size;r++){const l=document.createElement('div');l.className='nono-clue-left';l.textContent=clue(p[r]).join(' ');left.appendChild(l);} 
   const render=()=>{g.innerHTML=''; for(let r=0;r<size;r++)for(let c=0;c<size;c++){const b=document.createElement('button'); b.className='nono-cell'+(d[r][c]?' on':''); b.onclick=()=>{d[r][c]=1-d[r][c]; render();}; g.appendChild(b);} };
   const check=()=>{const ok=JSON.stringify(p)===JSON.stringify(d); if(ok){scoreEl.textContent='1200'; submitScore(1200); setTimeout(()=>initNonogram(),300);} };
   restartBtn.onclick=()=>initNonogram(); render(); scoreEl.textContent='0'; document.getElementById('checkNono').onclick=check;
 }
 
-({"2048":init2048,dino:initDino,tetris:initTetris,shooter:initShooter,nonogram:initNonogram,sudoku:initSudoku}[GAME_NAME]||init2048)();
+({"2048":init2048,tetris:initTetris,nonogram:initNonogram,sudoku:initSudoku}[GAME_NAME]||init2048)();
 </script>
 </body>
 </html>

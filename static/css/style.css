@@ -274,11 +274,6 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 
 
 #gameHost{min-height:420px}
-.nonogram-wrap{display:flex;flex-direction:column;gap:8px}
-.nono-grid{display:grid;gap:3px;width:max-content}
-.nono-cell{width:30px;height:30px;padding:0}
-.nono-cell.on{background:#1e3a8a}
-.nono-clues{font-size:13px;color:var(--muted)}
 
 
 #pdfViewerContainer:fullscreen{padding:8px;border-radius:0}
@@ -286,3 +281,18 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .code-lab{padding:16px;display:flex;flex-direction:column;gap:10px}
 .code-lab textarea{width:100%;min-height:320px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 .code-lab pre{min-height:120px;background:#0b1220;color:#dbeafe;padding:12px;border-radius:10px;overflow:auto}
+
+
+.nono-board-wrap{display:grid;grid-template-columns:80px auto;grid-template-rows:80px auto;gap:4px;align-items:start}
+.nono-corner{border:1px solid var(--line);border-radius:8px;background:#f8fafc}
+.nono-top{display:grid;gap:2px}
+.nono-left{display:grid;gap:2px}
+.nono-grid{display:grid;gap:2px;width:max-content}
+.nono-clue-top,.nono-clue-left{border:1px solid var(--line);background:#f8fafc;border-radius:6px;font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:center;line-height:1.1;text-align:center;padding:2px}
+.nono-cell{width:32px;height:32px;padding:0;border:1px solid #cbd5e1;background:#fff}
+.nono-cell.on{background:#1e3a8a}
+
+
+.guide-panel{padding:16px;margin-top:14px}
+.guide-panel h2{margin:0 0 8px}
+.guide-panel .pdf-frame{height:70vh}

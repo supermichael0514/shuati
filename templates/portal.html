@@ -29,7 +29,7 @@
       <a class="feature-tile" href="{{ url_for('index', lang=lang) }}"><div class="tile-icon">📝</div><h2>{{ 'Practice' if lang == 'en' else '练一练' }}</h2><p>{{ 'Enter the filtered question bank and start solving problems.' if lang == 'en' else '进入筛选题库，开始系统刷题。' }}</p></a>
       <a class="feature-tile" href="{{ url_for('code_page', lang=lang) }}"><div class="tile-icon">💻</div><h2>{{ 'Code Lab' if lang == 'en' else '编一编' }}</h2><p>{{ 'CAIE pseudocode IDE with runnable examples.' if lang == 'en' else '符合 CAIE Guide 的伪代码 IDE，可运行程序。' }}</p></a>
       <div class="feature-tile disabled"><div class="tile-icon">💬</div><h2>{{ 'Forum' if lang == 'en' else '聊一聊' }}</h2><p>{{ 'Community forum (planned).' if lang == 'en' else '用户论坛（规划中）。' }}</p></div>
-      <a class="feature-tile" href="{{ url_for('games_home', lang=lang) }}"><div class="tile-icon">🎮</div><h2>{{ 'Mini Games' if lang == 'en' else '玩一玩' }}</h2><p>{{ 'Play 2048 / Dino / Tetris / Shooter / Nonogram / Sudoku.' if lang == 'en' else '支持 2048、Dino、俄罗斯方块、打飞机、数织、数独。' }}</p></a>
+      <a class="feature-tile" href="{{ url_for('games_home', lang=lang) }}"><div class="tile-icon">🎮</div><h2>{{ 'Mini Games' if lang == 'en' else '玩一玩' }}</h2><p>{{ 'Play 2048 / Tetris / Nonogram / Sudoku.' if lang == 'en' else '支持 2048、俄罗斯方块、数织、数独。' }}</p></a>
       <a class="feature-tile" href="{{ url_for('profile_page', lang=lang) }}"><div class="tile-icon">🙌</div><h2>{{ 'Profile' if lang == 'en' else '拜一拜' }}</h2><p>{{ 'My personal resume and experience.' if lang == 'en' else '我的个人履历与经历展示。' }}</p></a>
     </main>
 

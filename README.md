@@ -7,12 +7,12 @@
 - 入口页 `/`
   - 学一学：进入学习子页面（看课件 / 看动画 / 看文章）
   - 练一练：题库筛选 + PDF 阅读
-  - 编一编：CAIE Pseudocode IDE（可运行伪代码）
+  - 编一编：CAIE Pseudocode IDE（可运行伪代码 + 显示官方PDF指南）
   - 玩一玩：小游戏中心
   - 拜一拜：个人履历展示页
 
 - 游戏 `/games`
-  - 仅保留：`2048`、`dino`、`tetris`、`shooter`、`nonogram`、`sudoku`
+  - 仅保留：`2048`、`tetris`、`nonogram`、`sudoku`
   - 每个游戏支持积分排行榜（按游戏最高分）
   - 数织固定为 `10*10`
   - 数织与数独在通关后会自动随机生成下一题
@@ -36,3 +36,8 @@ python app.py
 ```
 
 默认地址：<http://127.0.0.1:8000>
+
+
+## 文档放置路径
+
+- 官方伪代码指南 PDF：`static/docs/caie-pseudocode-guide.pdf`

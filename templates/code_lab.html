@@ -13,6 +13,12 @@ OUTPUT a</textarea>
   <div class="actions"><button id="runCode">{{ 'Run' if lang=='en' else '运行' }}</button></div>
   <pre id="codeOutput"></pre>
 </section>
+
+<section class="card guide-panel">
+  <h2>{{ 'Official Pseudocode Guide (PDF)' if lang=='en' else '官方伪代码指南（PDF）' }}</h2>
+  <p class="game-hint">{{ 'Put the PDF at: static/docs/caie-pseudocode-guide.pdf' if lang=='en' else '请把文档放到路径：static/docs/caie-pseudocode-guide.pdf' }}</p>
+  <iframe src="{{ url_for('static', filename='docs/caie-pseudocode-guide.pdf') }}" class="pdf-frame" title="CAIE Pseudocode Guide"></iframe>
+</section>
 </div>
 <script>
 document.getElementById('runCode').onclick = async ()=>{

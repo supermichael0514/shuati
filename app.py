@@ -191,9 +191,7 @@ def is_en():
 
 SUPPORTED_GAMES = {
     "2048",
-    "dino",
     "tetris",
-    "shooter",
     "nonogram",
     "sudoku",
 }
