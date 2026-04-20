@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ 'Learn' if lang=='en' else '学一学' }}</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">LEARN</p><h1>{{ 'Learn Center' if lang=='en' else '学一学' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
+<main class="feature-grid feature-grid-portal">
+  <section class="feature-tile"><div class="tile-icon">📊</div><h2>{{ 'Slides' if lang=='en' else '看课件' }}</h2><p>{{ 'Organized slide deck entry (reserved).' if lang=='en' else '按章节查看课件（预留）。' }}</p></section>
+  <section class="feature-tile"><div class="tile-icon">🎬</div><h2>{{ 'Animations' if lang=='en' else '看动画' }}</h2><p>{{ 'Concept animations and demos (reserved).' if lang=='en' else '概念动画与演示（预留）。' }}</p></section>
+  <section class="feature-tile"><div class="tile-icon">📰</div><h2>{{ 'Articles' if lang=='en' else '看文章' }}</h2><p>{{ 'Reading materials and notes (reserved).' if lang=='en' else '阅读材料与拓展文章（预留）。' }}</p></section>
+</main>
+</div></body></html>

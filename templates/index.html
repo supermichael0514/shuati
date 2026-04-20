@@ -105,7 +105,7 @@
       </aside>
 
       <section class="center">
-        <div class="viewer-toolbar card">
+        <div class="viewer-toolbar card" id="viewerToolbar">
           <div class="mode-tabs">
             {% for key, label_zh, label_en in [('question','看题目','Question'),('answer','看答案','Answer'),('syllabus','看考纲','Syllabus')] %}
             <a class="{% if mode == key %}active{% endif %}"
@@ -119,13 +119,14 @@
           </div>
           {% if selected %}
           <div class="state-buttons">
+            <button type="button" onclick="toggleFullscreen()">{{ "Fullscreen PDF" if lang == "en" else "PDF全屏" }}</button>
             <button type="button" onclick="toggleState('{{ selected.id }}','done')">{{ 'Mark Undone' if lang == 'en' and selected.done else ('Mark Done' if lang == 'en' else ('取消完成' if selected.done else '标记完成')) }}</button>
             <button type="button" onclick="toggleState('{{ selected.id }}','favorite')">{{ 'Remove Favorite' if lang == 'en' and selected.favorite else ('Add Favorite' if lang == 'en' else ('取消收藏' if selected.favorite else '加入收藏')) }}</button>
           </div>
           {% endif %}
         </div>
 
-        <div class="viewer card">
+        <div class="viewer card" id="pdfViewerContainer">
           {% if selected %}
           <div class="info">
             <div class="title">{{ selected.title or selected.id }}</div>
@@ -134,7 +135,7 @@
               {% if selected.source %} · {{ 'Source' if lang == 'en' else '来源' }}：{{ selected.source }}{% endif %}
             </div>
           </div>
-          <iframe src="{{ pdf_url }}#page={{ pdf_page }}" class="pdf-frame" title="PDF Viewer"></iframe>
+          <iframe src="{{ pdf_url }}#page={{ pdf_page }}&zoom=page-fit" class="pdf-frame" title="PDF Viewer"></iframe>
           {% else %}
           <div class="empty big">{{ 'Please choose a question from the left list.' if lang == 'en' else '请选择左侧题目' }}</div>
           {% endif %}
@@ -159,6 +160,15 @@
     async function toggleState(qid, field) {
       await fetch(`/toggle/${qid}/${field}?lang={{ lang }}`, {method: 'POST'});
       window.location.reload();
+    }
+
+    async function toggleFullscreen() {
+      const el = document.getElementById("pdfViewerContainer");
+      if (!document.fullscreenElement) {
+        if (el.requestFullscreen) await el.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
     }
   </script>
 </body>
