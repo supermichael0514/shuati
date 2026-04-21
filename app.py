@@ -616,9 +616,7 @@ def serve_pdf(filename):
     return send_from_directory(PDF_BASE, filename)
 
 
-@app.post("/toggle/<path:qid>/<field>")
-@login_required
-def toggle(qid, field):
+def _toggle_progress_field(qid, field):
     if field not in {"done", "favorite"}:
         return jsonify({"ok": False, "error": "invalid field"}), 400
 
@@ -631,7 +629,24 @@ def toggle(qid, field):
     return jsonify({"ok": True, field: item[field]})
 
 
-@app.post("/note/<qid>")
+@app.post("/toggle/<path:qid>/<field>")
+@login_required
+def toggle(qid, field):
+    return _toggle_progress_field(qid, field)
+
+
+@app.post("/toggle")
+@login_required
+def toggle_by_payload():
+    payload = request.get_json(silent=True) or {}
+    qid = str(payload.get("qid", "")).strip()
+    field = str(payload.get("field", "")).strip()
+    if not qid:
+        return jsonify({"ok": False, "error": "missing qid"}), 400
+    return _toggle_progress_field(qid, field)
+
+
+@app.post("/note/<path:qid>")
 @login_required
 def save_note_route(qid):
     username = current_username()

@@ -197,8 +197,11 @@
     {% endif %}
 
     async function toggleState(qid, field) {
-      const encodedQid = encodeURIComponent(qid);
-      await fetch(`/toggle/${encodedQid}/${field}?lang={{ lang }}`, {method: 'POST'});
+      await fetch(`/toggle?lang={{ lang }}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({qid, field})
+      });
       window.location.reload();
     }
 
