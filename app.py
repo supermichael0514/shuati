@@ -437,7 +437,7 @@ def games_home():
     return render_template("games_home.html", lang=lang, current_user=current_username())
 
 
-def load_leaderboard(game_name, limit=10):
+def load_leaderboard(game_name, difficulty="normal", limit=10):
     conn = get_db_connection()
     if game_name in TIME_RANK_GAMES:
         rows = conn.execute(
@@ -481,12 +481,16 @@ def game_page(game_name):
     if game_name not in SUPPORTED_GAMES:
         return redirect(url_for("games_home", lang=get_lang()))
     lang = get_lang()
+    difficulty = request.args.get("difficulty", "normal")
+    if difficulty not in SUPPORTED_DIFFICULTIES:
+        difficulty = "normal"
     return render_template(
         "game_play.html",
         lang=lang,
         current_user=current_username(),
         game_name=game_name,
-        leaderboard=load_leaderboard(game_name),
+        difficulty=difficulty,
+        leaderboard=load_leaderboard(game_name, difficulty),
     )
 
 
@@ -498,10 +502,11 @@ def submit_game_score(game_name):
     try:
         payload = request.get_json(force=True) or {}
         score = int(payload.get("score", 0))
+        difficulty = str(payload.get("difficulty", "normal")).strip().lower()
     except Exception:
         return jsonify({"ok": False, "error": "invalid score"}), 400
 
-    if score < 0:
+    if score < 0 or difficulty not in SUPPORTED_DIFFICULTIES:
         return jsonify({"ok": False, "error": "invalid score"}), 400
 
     conn = get_db_connection()
@@ -521,7 +526,7 @@ def submit_game_score(game_name):
     )
     conn.commit()
     conn.close()
-    return jsonify({"ok": True, "leaderboard": load_leaderboard(game_name)})
+    return jsonify({"ok": True, "leaderboard": load_leaderboard(game_name, difficulty)})
 
 
 @app.route("/practice")
