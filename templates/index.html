@@ -109,7 +109,7 @@
       </aside>
 
       <section class="center">
-        <div class="viewer-toolbar card">
+        <div class="viewer-toolbar card" id="viewerToolbar">
           <div class="mode-tabs">
             {% for key, label_zh, label_en in [('question','看题目','Question'),('answer','看答案','Answer'),('syllabus','看考纲','Syllabus')] %}
             <a class="{% if mode == key %}active{% endif %}"
