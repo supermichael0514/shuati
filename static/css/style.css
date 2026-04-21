@@ -55,7 +55,9 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .left,.right,.viewer,.viewer-toolbar{padding:14px}
 .left{display:flex;flex-direction:column;min-height:0}
 .left-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.left-head-main{display:flex;align-items:center;gap:8px}
 .left-head h2,.right h2{margin:0;font-size:18px}
+.small-btn{padding:6px 10px;font-size:12px;border-radius:8px}
 .record-list{overflow-y:auto;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 280px);padding-right:4px}
 .record{
   display:block;
@@ -285,8 +287,16 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 #pdfViewerContainer:fullscreen{padding:8px;border-radius:0}
 #pdfViewerContainer:fullscreen .pdf-frame{height:calc(100vh - 120px);border-radius:8px}
 .code-lab{padding:16px;display:flex;flex-direction:column;gap:10px}
-.code-lab textarea{width:100%;min-height:320px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.editor-row{display:grid;grid-template-columns:2fr 1fr;gap:12px;align-items:start}
+.editor-panel{display:flex;flex-direction:column;gap:6px;min-width:0}
+.code-lab textarea{width:100%;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+#codeInput{min-height:220px}
+#codeInputs{min-height:220px}
 .code-lab pre{min-height:120px;background:#0b1220;color:#dbeafe;padding:12px;border-radius:10px;overflow:auto}
+
+@media (max-width: 900px){
+  .editor-row{grid-template-columns:1fr}
+}
 
 
 .nono-board-wrap{display:grid;grid-template-columns:80px auto;grid-template-rows:80px auto;gap:4px;align-items:start}
@@ -314,7 +324,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 
 
 .blessing-top{padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin-bottom:14px;text-align:center}
-.blessing-top img{width:400px;height:400px;object-fit:cover;border-radius:14px;border:1px solid var(--line);background:#fff}
+.blessing-top img{width:180px;height:180px;object-fit:cover;border-radius:14px;border:1px solid var(--line);background:#fff}
 .blessing-btn{font:inherit;text-align:left}
 .blessing-modal{position:fixed;inset:0;background:rgba(15,23,42,.45);display:grid;place-items:center;z-index:60}
 .blessing-modal[hidden]{display:none !important}

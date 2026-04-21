@@ -77,7 +77,10 @@
     <main class="layout">
       <aside class="left card">
         <div class="left-head">
-          <h2>{{ 'Question List' if lang == 'en' else '题目列表' }}</h2>
+          <div class="left-head-main">
+            <h2>{{ 'Question List' if lang == 'en' else '题目列表' }}</h2>
+            <button type="button" class="secondary small-btn" onclick="pickRandomQuestion()">{{ 'Random' if lang == 'en' else '随机' }}</button>
+          </div>
           <span>{{ records|length }} {{ 'items' if lang == 'en' else '题' }}</span>
         </div>
 
@@ -189,6 +192,13 @@
         }
       });
     });
+
+    function pickRandomQuestion() {
+      const links = Array.from(document.querySelectorAll('.record-list a.record'));
+      if (!links.length) return;
+      const idx = Math.floor(Math.random() * links.length);
+      window.location.href = links[idx].href;
+    }
   </script>
 </body>
 </html>

@@ -5,18 +5,23 @@
 <header class="portal-header card"><div><p class="neon-label">PSEUDOCODE IDE</p><h1>{{ 'Code Lab' if lang=='en' else '编一编 · 伪代码IDE' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
 <section class="card code-lab">
   <p class="game-hint">{{ 'CAIE Pseudocode Guide style: DECLARE, INPUT, IF/CASE, FOR/NEXT, WHILE, REPEAT, PROCEDURE/FUNCTION, MIDSTRING, RAND. Variables/arrays must be declared first.' if lang=='en' else '遵循 CAIE Guide：DECLARE、INPUT、IF/CASE、FOR/NEXT、WHILE、REPEAT、PROCEDURE/FUNCTION、MIDSTRING、RAND。变量和数组必须先声明。' }}</p>
-  <textarea id="codeInput" spellcheck="false">DECLARE a : INTEGER
+  <div class="editor-row">
+    <div class="editor-panel">
+      <span>{{ 'Main Code' if lang=='en' else '主代码' }}</span>
+      <textarea id="codeInput" spellcheck="false">DECLARE a : INTEGER
 DECLARE i : INTEGER
 a <- 0
 FOR i <- 1 TO 5
   a <- a + i
 NEXT
 OUTPUT a</textarea>
+    </div>
+    <label class="editor-panel">
+      <span>{{ 'Program Inputs (one per line)' if lang=='en' else '程序输入（每行一个）' }}</span>
+      <textarea id="codeInputs" spellcheck="false" placeholder="{{ 'e.g.\\nAlice\\n18' if lang=='en' else '例如：\\nAlice\\n18' }}"></textarea>
+    </label>
+  </div>
   <div class="actions"><button id="runCode">{{ 'Run' if lang=='en' else '运行' }}</button></div>
-  <label>
-    <span>{{ 'Program Inputs (one per line)' if lang=='en' else '程序输入（每行一个）' }}</span>
-    <textarea id="codeInputs" spellcheck="false" placeholder="{{ 'e.g.\\nAlice\\n18' if lang=='en' else '例如：\\nAlice\\n18' }}"></textarea>
-  </label>
   <pre id="codeOutput"></pre>
 </section>
 

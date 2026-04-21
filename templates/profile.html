@@ -28,11 +28,6 @@ const lang='{{ lang }}';
 const modal=document.getElementById('blessingModal');
 const modalTitle=document.getElementById('modalTitle');
 const modalBody=document.getElementById('modalBody');
-const incenseBtn = document.getElementById('incenseBtn');
-const incenseImg = document.getElementById('incenseImg');
-const idleImg = '{{ url_for('static', filename='images/incense_idle.png') }}';
-const burningImg = '{{ url_for('static', filename='images/incense_burning.png') }}';
-
 function openModal(title, html){modalTitle.textContent=title; modalBody.innerHTML=html; modal.hidden=false;}
 document.getElementById('closeModal').onclick=()=>modal.hidden=true;
 modal.onclick=(e)=>{if(e.target===modal) modal.hidden=true;};
@@ -42,17 +37,10 @@ document.getElementById('fortuneBtn').onclick=async ()=>{
   openModal(lang==='en'?'Fortune':'求签结果', (lang==='en'?'You will get: ':'你将在考试中拿到：')+`<strong>${data.grade}</strong>`);
 };
 
-incenseBtn.addEventListener('pointerdown', async () => {
-  incenseImg.src = burningImg;
-  const res = await fetch(`/api/profile/incense?lang=${lang}`, { method: 'POST' });
-  const data = await res.json();
-  if (data.ok) document.getElementById('incenseCount').textContent = data.count;
-});
-
-function resetIncense(){ incenseImg.src = idleImg; }
-incenseBtn.addEventListener('pointerup', resetIncense);
-incenseBtn.addEventListener('pointercancel', resetIncense);
-incenseBtn.addEventListener('pointerleave', resetIncense);
+document.getElementById('incenseBtn').onclick=async ()=>{
+  const res=await fetch(`/api/profile/incense?lang=${lang}`,{method:'POST'}); const data=await res.json();
+  if(data.ok){document.getElementById('incenseCount').textContent=data.count; document.getElementById('incenseImg').src='{{ url_for('static', filename='images/incense_burning.png') }}';}
+};
 
 document.getElementById('meritBtn').onclick=()=>{
   openModal(lang==='en'?'Donation QR':'赛博功德', `<img class='donation-qr' src='{{ url_for('static', filename='images/donation_qrcode.png') }}' alt='qr'>`);
