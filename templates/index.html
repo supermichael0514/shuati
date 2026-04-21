@@ -119,9 +119,8 @@
           </div>
           {% if selected %}
           <div class="state-buttons">
-            <button type="button" onclick="toggleFullscreen()">{{ "Fullscreen PDF" if lang == "en" else "PDF全屏" }}</button>
-            <button type="button" onclick="toggleState('{{ selected.id }}','done')">{{ 'Mark Undone' if lang == 'en' and selected.done else ('Mark Done' if lang == 'en' else ('取消完成' if selected.done else '标记完成')) }}</button>
-            <button type="button" onclick="toggleState('{{ selected.id }}','favorite')">{{ 'Remove Favorite' if lang == 'en' and selected.favorite else ('Add Favorite' if lang == 'en' else ('取消收藏' if selected.favorite else '加入收藏')) }}</button>
+            <button type="button" class="toggle-btn" data-qid="{{ selected.id }}" data-field="done">{{ 'Mark Undone' if lang == 'en' and selected.done else ('Mark Done' if lang == 'en' else ('取消完成' if selected.done else '标记完成')) }}</button>
+            <button type="button" class="toggle-btn" data-qid="{{ selected.id }}" data-field="favorite">{{ 'Remove Favorite' if lang == 'en' and selected.favorite else ('Add Favorite' if lang == 'en' else ('取消收藏' if selected.favorite else '加入收藏')) }}</button>
           </div>
           {% endif %}
         </div>
@@ -197,11 +196,12 @@
     {% endif %}
 
     async function toggleState(qid, field) {
-      await fetch(`/toggle?lang={{ lang }}`, {
+      const res = await fetch(`/toggle?lang={{ lang }}`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({qid, field})
       });
+      if (!res.ok) throw new Error(`toggle failed: ${res.status}`);
       window.location.reload();
     }
 
@@ -213,6 +213,17 @@
         await document.exitFullscreen();
       }
     }
+
+    document.querySelectorAll('.toggle-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        try {
+          await toggleState(btn.dataset.qid || '', btn.dataset.field || '');
+        } catch (err) {
+          console.error(err);
+          alert('{{ "Operation failed, please retry." if lang == "en" else "操作失败，请重试。" }}');
+        }
+      });
+    });
   </script>
 </body>
 </html>
