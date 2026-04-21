@@ -616,7 +616,7 @@ def serve_pdf(filename):
     return send_from_directory(PDF_BASE, filename)
 
 
-@app.post("/toggle/<qid>/<field>")
+@app.post("/toggle/<path:qid>/<field>")
 @login_required
 def toggle(qid, field):
     if field not in {"done", "favorite"}:
