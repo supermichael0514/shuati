@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ 'Cyber Blessing' if lang=='en' else '拜一拜' }}</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">CYBER BLESSING</p><h1>{{ 'Cyber Blessing Hall' if lang=='en' else '赛博祈福堂' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
+
+<section class="card blessing-top">
+  <img id="incenseImg" src="{{ url_for('static', filename='images/incense_idle.png') }}" alt="incense">
+  <p id="incenseCountText">{{ 'Today ' if lang=='en' else '今日已有' }}<strong id="incenseCount">{{ incense_count }}</strong>{{ ' people prayed.' if lang=='en' else ' 人上香祈福。' }}</p>
+</section>
+
+<main class="feature-grid feature-grid-portal">
+  <button class="feature-tile blessing-btn" id="fortuneBtn"><div class="tile-icon">🪄</div><h2>{{ 'Cyber Fortune' if lang=='en' else '赛博求签' }}</h2></button>
+  <button class="feature-tile blessing-btn" id="incenseBtn"><div class="tile-icon">🕯️</div><h2>{{ 'Cyber Incense' if lang=='en' else '赛博上香' }}</h2></button>
+  <button class="feature-tile blessing-btn" id="meritBtn"><div class="tile-icon">💝</div><h2>{{ 'Cyber Merit' if lang=='en' else '赛博功德' }}</h2></button>
+</main>
+
+<div id="blessingModal" class="blessing-modal" hidden>
+  <div class="blessing-modal-card">
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
+    <button id="closeModal">{{ 'Close' if lang=='en' else '关闭' }}</button>
+  </div>
+</div>
+</div>
+<script>
+const lang='{{ lang }}';
+const modal=document.getElementById('blessingModal');
+const modalTitle=document.getElementById('modalTitle');
+const modalBody=document.getElementById('modalBody');
+const incenseBtn=document.getElementById('incenseBtn');
+const incenseImg=document.getElementById('incenseImg');
+const incenseIdle='{{ url_for('static', filename='images/incense_idle.png') }}';
+const incenseBurning='{{ url_for('static', filename='images/incense_burning.png') }}';
+function openModal(title, html){modalTitle.textContent=title; modalBody.innerHTML=html; modal.hidden=false;}
+document.getElementById('closeModal').onclick=()=>modal.hidden=true;
+modal.onclick=(e)=>{if(e.target===modal) modal.hidden=true;};
+
+document.getElementById('fortuneBtn').onclick=async ()=>{
+  const res=await fetch(`/api/profile/fortune?lang=${lang}`,{method:'POST'}); const data=await res.json();
+  openModal(lang==='en'?'Fortune':'求签结果', (lang==='en'?'You will get: ':'你将在考试中拿到：')+`<strong>${data.grade}</strong>`);
+};
+
+incenseBtn.addEventListener('pointerdown', async ()=>{
+  incenseImg.src=incenseBurning;
+  const res=await fetch(`/api/profile/incense?lang=${lang}`,{method:'POST'}); const data=await res.json();
+  if(data.ok){document.getElementById('incenseCount').textContent=data.count;}
+});
+const resetIncense=()=>{incenseImg.src=incenseIdle;};
+incenseBtn.addEventListener('pointerup', resetIncense);
+incenseBtn.addEventListener('pointercancel', resetIncense);
+incenseBtn.addEventListener('pointerleave', resetIncense);
+
+document.getElementById('meritBtn').onclick=()=>{
+  openModal(lang==='en'?'Donation QR':'赛博功德', `<img class='donation-qr' src='{{ url_for('static', filename='images/donation_qrcode.png') }}' alt='qr'>`);
+};
+</script>
+</body></html>

@@ -6,19 +6,20 @@
   <title>{{ 'Practice Center' if lang == 'en' else '刷题中心' }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-  <div class="page">
-    <header class="topbar">
+<body class="portal-body">
+  <div class="portal-page">
+    <header class="portal-header card">
       <div>
+        <p class="neon-label">{{ 'PRACTICE CENTER' if lang == 'en' else '刷题中心' }}</p>
         <h1>{{ 'Practice Center' if lang == 'en' else '刷题中心' }}</h1>
-        <p>{{ 'Question filtering + in-page PDF preview' if lang == 'en' else '四级筛选 + 页面内 PDF 预览' }}</p>
+        <p class="portal-subtitle">{{ 'Question filtering + in-page PDF preview' if lang == 'en' else '四级筛选 + 页面内 PDF 预览' }}</p>
       </div>
-      <div class="user-bar">
+      <div class="portal-actions">
         <div class="lang-switch">
           <a class="secondary {{ 'active' if lang != 'en' else '' }}" href="{{ url_for('index', lang='zh') }}">中文</a>
           <a class="secondary {{ 'active' if lang == 'en' else '' }}" href="{{ url_for('index', lang='en') }}">English</a>
         </div>
-        <a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Portal' if lang == 'en' else '返回入口' }}</a>
+        <a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang == 'en' else '返回入口' }}</a>
         <span>{{ 'User' if lang == 'en' else '当前用户' }}：{{ current_user }}</span>
         <form method="post" action="{{ url_for('logout', lang=lang) }}">
           <button type="submit" class="secondary">{{ 'Log out' if lang == 'en' else '退出登录' }}</button>
@@ -77,7 +78,10 @@
     <main class="layout">
       <aside class="left card">
         <div class="left-head">
-          <h2>{{ 'Question List' if lang == 'en' else '题目列表' }}</h2>
+          <div class="left-head-main">
+            <h2>{{ 'Question List' if lang == 'en' else '题目列表' }}</h2>
+            <button type="button" class="secondary small-btn" onclick="pickRandomQuestion()">{{ 'Random' if lang == 'en' else '随机' }}</button>
+          </div>
           <span>{{ records|length }} {{ 'items' if lang == 'en' else '题' }}</span>
         </div>
 
@@ -119,13 +123,13 @@
           </div>
           {% if selected %}
           <div class="state-buttons">
-            <button type="button" onclick="toggleState('{{ selected.id }}','done')">{{ 'Mark Undone' if lang == 'en' and selected.done else ('Mark Done' if lang == 'en' else ('取消完成' if selected.done else '标记完成')) }}</button>
-            <button type="button" onclick="toggleState('{{ selected.id }}','favorite')">{{ 'Remove Favorite' if lang == 'en' and selected.favorite else ('Add Favorite' if lang == 'en' else ('取消收藏' if selected.favorite else '加入收藏')) }}</button>
+            <button type="button" class="toggle-btn" data-qid="{{ selected.id }}" data-field="done">{{ 'Mark Undone' if lang == 'en' and selected.done else ('Mark Done' if lang == 'en' else ('取消完成' if selected.done else '标记完成')) }}</button>
+            <button type="button" class="toggle-btn" data-qid="{{ selected.id }}" data-field="favorite">{{ 'Remove Favorite' if lang == 'en' and selected.favorite else ('Add Favorite' if lang == 'en' else ('取消收藏' if selected.favorite else '加入收藏')) }}</button>
           </div>
           {% endif %}
         </div>
 
-        <div class="viewer card">
+        <div class="viewer card" id="pdfViewerContainer">
           {% if selected %}
           <div class="info">
             <div class="title">{{ selected.title or selected.id }}</div>
@@ -134,7 +138,11 @@
               {% if selected.source %} · {{ 'Source' if lang == 'en' else '来源' }}：{{ selected.source }}{% endif %}
             </div>
           </div>
-          <iframe src="{{ pdf_url }}#page={{ pdf_page }}" class="pdf-frame" title="PDF Viewer"></iframe>
+          <div class="pdf-inline-toolbar">
+            <button type="button" onclick="togglePdfFullscreen()">{{ "Fullscreen" if lang == "en" else "全屏阅读" }}</button>
+            <a class="secondary" href="{{ pdf_url }}#page={{ pdf_page }}" target="_blank" rel="noopener">{{ "Open in New Tab" if lang == "en" else "新标签打开" }}</a>
+          </div>
+          <iframe src="{{ pdf_url }}#page={{ pdf_page }}&toolbar=1&navpanes=0" class="pdf-frame" title="PDF Viewer"></iframe>
           {% else %}
           <div class="empty big">{{ 'Please choose a question from the left list.' if lang == 'en' else '请选择左侧题目' }}</div>
           {% endif %}
@@ -157,8 +165,40 @@
 
   <script>
     async function toggleState(qid, field) {
-      await fetch(`/toggle/${qid}/${field}?lang={{ lang }}`, {method: 'POST'});
+      const res = await fetch(`/toggle?lang={{ lang }}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({qid, field})
+      });
+      if (!res.ok) throw new Error(`toggle failed: ${res.status}`);
       window.location.reload();
+    }
+
+    async function togglePdfFullscreen() {
+      const el = document.getElementById("pdfViewerContainer");
+      if (!document.fullscreenElement) {
+        if (el.requestFullscreen) await el.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    }
+
+    document.querySelectorAll('.toggle-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        try {
+          await toggleState(btn.dataset.qid || '', btn.dataset.field || '');
+        } catch (err) {
+          console.error(err);
+          alert('{{ "Operation failed, please retry." if lang == "en" else "操作失败，请重试。" }}');
+        }
+      });
+    });
+
+    function pickRandomQuestion() {
+      const links = Array.from(document.querySelectorAll('.record-list a.record'));
+      if (!links.length) return;
+      const idx = Math.floor(Math.random() * links.length);
+      window.location.href = links[idx].href;
     }
   </script>
 </body>
