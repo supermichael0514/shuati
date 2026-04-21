@@ -12,7 +12,7 @@
       <div>
         <p class="neon-label">{{ 'NEXT GEN LEARNING SYSTEM' if lang == 'en' else '新一代学习系统' }}</p>
         <h1>{{ 'Computer Science Learning Portal' if lang == 'en' else '计算机学习入口主界面' }}</h1>
-        <p class="portal-subtitle">{{ 'Choose a module to start practicing, coding, gaming, or studying.' if lang == 'en' else '选择一个模块，开始练习、编程、游戏或学习。' }}</p>
+        <p class="portal-subtitle">{{ 'Choose a module to start studying, practicing or coding.' if lang == 'en' else '选择一个模块，开始学习、练习或编程。' }}</p>
       </div>
       <div class="portal-actions">
         <div class="lang-switch">
@@ -30,7 +30,7 @@
       <a class="feature-tile" href="{{ url_for('code_page', lang=lang) }}"><div class="tile-icon">💻</div><h2>{{ 'Code Lab' if lang == 'en' else '编一编' }}</h2><p>{{ 'CAIE pseudocode IDE with runnable examples.' if lang == 'en' else '符合 CAIE Guide 的伪代码 IDE，可运行程序。' }}</p></a>
       <div class="feature-tile disabled"><div class="tile-icon">💬</div><h2>{{ 'Forum' if lang == 'en' else '聊一聊' }}</h2><p>{{ 'Community forum (planned).' if lang == 'en' else '用户论坛（规划中）。' }}</p></div>
       <a class="feature-tile" href="{{ url_for('games_home', lang=lang) }}"><div class="tile-icon">🎮</div><h2>{{ 'Mini Games' if lang == 'en' else '玩一玩' }}</h2><p>{{ 'Play 2048 / Tetris / Nonogram / Sudoku / Minesweeper / Hanoi.' if lang == 'en' else '支持 2048、俄罗斯方块、数织、数独、扫雷、汉诺塔。' }}</p></a>
-      <a class="feature-tile" href="{{ url_for('profile_page', lang=lang) }}"><div class="tile-icon">🙌</div><h2>{{ 'Profile' if lang == 'en' else '拜一拜' }}</h2><p>{{ 'My personal resume and experience.' if lang == 'en' else '我的个人履历与经历展示。' }}</p></a>
+      <a class="feature-tile" href="{{ url_for('profile_page', lang=lang) }}"><div class="tile-icon">🙏</div><h2>{{ 'Cyber Wish' if lang == 'en' else '拜一拜' }}</h2><p>{{ 'Make a wish before or after exams.' if lang == 'en' else '考前许愿，考后祈福。' }}</p></a>
     </main>
 
     <footer class="portal-footer card">
@@ -38,10 +38,19 @@
         <img class="logo-mark-img" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
         <div><strong>{{ 'CS Teacher Michael Cao' if lang == 'en' else '计算机老师迈克曹' }}</strong><p>{{ 'Communication is always welcomed' if lang == 'en' else '欢迎多多交流' }}</p></div>
       </div>
+
+      <div class="contact-box">
+        <h3>{{ 'Self-Intro' if lang == 'en' else '个人简介' }}</h3>
+        <p>{{ 'Bachelor of Automation in BIT, Master of EE in NTU' if lang == 'en' else '北京理工大学自动化学士，台湾大学电机系硕士' }}</p>
+        <p>{{ 'CS Teacher at Teaching CAIE, AP and Competition' if lang == 'en' else '国际学校高中计算机老师，执教CAIE、AP及竞赛课程' }}</p>
+        <p>{{ 'Examiner of Cambridge A-Level, iPGCE Certificate, Apple ADE' if lang == 'en' else '剑桥A-Level考官，iPGCE，苹果杰出教育工作者' }}</p>
+      </div>
+
       <div class="contact-box">
         <h3>{{ 'Contact' if lang == 'en' else '联系方式' }}</h3>
         <p>{{ 'Email: supermichael0514@163.com' if lang == 'en' else '邮箱：supermichael0514@163.com' }}</p>
         <p>{{ 'WeChat: supermichael0514' if lang == 'en' else '微信：supermichael0514' }}</p>
+        <p>{{ 'RedNote: MichaelCao_0514' if lang == 'en' else '小红书：计算机老师迈克曹' }}</p>
       </div>
     </footer>
   </div>
