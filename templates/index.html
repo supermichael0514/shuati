@@ -135,19 +135,11 @@
               {% if selected.source %} · {{ 'Source' if lang == 'en' else '来源' }}：{{ selected.source }}{% endif %}
             </div>
           </div>
-          <div class="pdf-controls">
-            <button type="button" onclick="changePdfPage(-1)">{{ 'Prev Page' if lang == 'en' else '上一页' }}</button>
-            <span id="pdfPageInfo">- / -</span>
-            <button type="button" onclick="changePdfPage(1)">{{ 'Next Page' if lang == 'en' else '下一页' }}</button>
-            <label>
-              <span>{{ 'Go to' if lang == 'en' else '跳转到' }}</span>
-              <input id="pdfPageInput" type="number" min="1" style="width:90px">
-            </label>
-            <button type="button" onclick="goToPdfPage()">{{ 'Go' if lang == 'en' else '跳转' }}</button>
+          <div class="pdf-inline-toolbar">
+            <button type="button" onclick="togglePdfFullscreen()">{{ "Fullscreen" if lang == "en" else "全屏阅读" }}</button>
+            <a class="secondary" href="{{ pdf_url }}#page={{ pdf_page }}" target="_blank" rel="noopener">{{ "Open in New Tab" if lang == "en" else "新标签打开" }}</a>
           </div>
-          <div id="pdfCanvasWrap" class="pdf-frame">
-            <canvas id="pdfCanvas"></canvas>
-          </div>
+          <iframe src="{{ pdf_url }}#page={{ pdf_page }}&toolbar=1&navpanes=0" class="pdf-frame" title="PDF Viewer"></iframe>
           {% else %}
           <div class="empty big">{{ 'Please choose a question from the left list.' if lang == 'en' else '请选择左侧题目' }}</div>
           {% endif %}
@@ -209,7 +201,7 @@
       window.location.reload();
     }
 
-    async function toggleFullscreen() {
+    async function togglePdfFullscreen() {
       const el = document.getElementById("pdfViewerContainer");
       if (!document.fullscreenElement) {
         if (el.requestFullscreen) await el.requestFullscreen();
