@@ -77,7 +77,10 @@
     <main class="layout">
       <aside class="left card">
         <div class="left-head">
-          <h2>{{ 'Question List' if lang == 'en' else '题目列表' }}</h2>
+          <div class="left-head-main">
+            <h2>{{ 'Question List' if lang == 'en' else '题目列表' }}</h2>
+            <button type="button" class="secondary small-btn" onclick="pickRandomQuestion()">{{ 'Random' if lang == 'en' else '随机' }}</button>
+          </div>
           <span>{{ records|length }} {{ 'items' if lang == 'en' else '题' }}</span>
         </div>
 
@@ -119,13 +122,13 @@
           </div>
           {% if selected %}
           <div class="state-buttons">
-            <button type="button" onclick="toggleState('{{ selected.id }}','done')">{{ 'Mark Undone' if lang == 'en' and selected.done else ('Mark Done' if lang == 'en' else ('取消完成' if selected.done else '标记完成')) }}</button>
-            <button type="button" onclick="toggleState('{{ selected.id }}','favorite')">{{ 'Remove Favorite' if lang == 'en' and selected.favorite else ('Add Favorite' if lang == 'en' else ('取消收藏' if selected.favorite else '加入收藏')) }}</button>
+            <button type="button" class="toggle-btn" data-qid="{{ selected.id }}" data-field="done">{{ 'Mark Undone' if lang == 'en' and selected.done else ('Mark Done' if lang == 'en' else ('取消完成' if selected.done else '标记完成')) }}</button>
+            <button type="button" class="toggle-btn" data-qid="{{ selected.id }}" data-field="favorite">{{ 'Remove Favorite' if lang == 'en' and selected.favorite else ('Add Favorite' if lang == 'en' else ('取消收藏' if selected.favorite else '加入收藏')) }}</button>
           </div>
           {% endif %}
         </div>
 
-        <div class="viewer card">
+        <div class="viewer card" id="pdfViewerContainer">
           {% if selected %}
           <div class="info">
             <div class="title">{{ selected.title or selected.id }}</div>
@@ -134,7 +137,11 @@
               {% if selected.source %} · {{ 'Source' if lang == 'en' else '来源' }}：{{ selected.source }}{% endif %}
             </div>
           </div>
-          <iframe src="{{ pdf_url }}#page={{ pdf_page }}" class="pdf-frame" title="PDF Viewer"></iframe>
+          <div class="pdf-inline-toolbar">
+            <button type="button" onclick="togglePdfFullscreen()">{{ "Fullscreen" if lang == "en" else "全屏阅读" }}</button>
+            <a class="secondary" href="{{ pdf_url }}#page={{ pdf_page }}" target="_blank" rel="noopener">{{ "Open in New Tab" if lang == "en" else "新标签打开" }}</a>
+          </div>
+          <iframe src="{{ pdf_url }}#page={{ pdf_page }}&toolbar=1&navpanes=0" class="pdf-frame" title="PDF Viewer"></iframe>
           {% else %}
           <div class="empty big">{{ 'Please choose a question from the left list.' if lang == 'en' else '请选择左侧题目' }}</div>
           {% endif %}
@@ -157,8 +164,40 @@
 
   <script>
     async function toggleState(qid, field) {
-      await fetch(`/toggle/${qid}/${field}?lang={{ lang }}`, {method: 'POST'});
+      const res = await fetch(`/toggle?lang={{ lang }}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({qid, field})
+      });
+      if (!res.ok) throw new Error(`toggle failed: ${res.status}`);
       window.location.reload();
+    }
+
+    async function togglePdfFullscreen() {
+      const el = document.getElementById("pdfViewerContainer");
+      if (!document.fullscreenElement) {
+        if (el.requestFullscreen) await el.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    }
+
+    document.querySelectorAll('.toggle-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        try {
+          await toggleState(btn.dataset.qid || '', btn.dataset.field || '');
+        } catch (err) {
+          console.error(err);
+          alert('{{ "Operation failed, please retry." if lang == "en" else "操作失败，请重试。" }}');
+        }
+      });
+    });
+
+    function pickRandomQuestion() {
+      const links = Array.from(document.querySelectorAll('.record-list a.record'));
+      if (!links.length) return;
+      const idx = Math.floor(Math.random() * links.length);
+      window.location.href = links[idx].href;
     }
   </script>
 </body>
