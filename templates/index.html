@@ -159,42 +159,7 @@
     </main>
   </div>
 
-  <script type="module">
-    {% if selected %}
-    import * as pdfjsLib from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.5.136/build/pdf.min.mjs';
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.5.136/build/pdf.worker.min.mjs';
-
-    const pdfUrl = {{ pdf_url|tojson }};
-    let currentPage = {{ pdf_page|int }};
-    let pdfDoc = null;
-    const canvas = document.getElementById('pdfCanvas');
-    const wrap = document.getElementById('pdfCanvasWrap');
-    const ctx = canvas.getContext('2d');
-    const pageInfo = document.getElementById('pdfPageInfo');
-    const pageInput = document.getElementById('pdfPageInput');
-
-    async function renderPdfPage(pageNum) {
-      if (!pdfDoc) return;
-      currentPage = Math.max(1, Math.min(pageNum, pdfDoc.numPages));
-      const page = await pdfDoc.getPage(currentPage);
-      const viewport = page.getViewport({ scale: 1 });
-      const scale = Math.max(0.5, (wrap.clientWidth - 24) / viewport.width);
-      const scaled = page.getViewport({ scale });
-      canvas.width = scaled.width;
-      canvas.height = scaled.height;
-      await page.render({ canvasContext: ctx, viewport: scaled }).promise;
-      pageInfo.textContent = `${currentPage} / ${pdfDoc.numPages}`;
-      pageInput.value = currentPage;
-    }
-
-    window.changePdfPage = async (delta) => { await renderPdfPage(currentPage + delta); };
-    window.goToPdfPage = async () => { await renderPdfPage(Number(pageInput.value || 1)); };
-
-    window.addEventListener('resize', () => renderPdfPage(currentPage));
-    pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
-    await renderPdfPage(currentPage);
-    {% endif %}
-
+  <script>
     async function toggleState(qid, field) {
       const res = await fetch(`/toggle?lang={{ lang }}`, {
         method: 'POST',
