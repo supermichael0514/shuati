@@ -149,6 +149,14 @@ def init_db():
         conn.execute(
             "ALTER TABLE game_scores ADD COLUMN difficulty TEXT NOT NULL DEFAULT 'normal'"
         )
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS incense_daily (
+            day TEXT PRIMARY KEY,
+            count INTEGER NOT NULL DEFAULT 0
+        )
+        """
+    )
     conn.commit()
     conn.close()
 
@@ -200,6 +208,7 @@ SUPPORTED_GAMES = {
 }
 # 兼容旧代码分支中对难度变量的引用，当前版本仅使用 normal。
 SUPPORTED_DIFFICULTIES = {"normal"}
+TIME_RANK_GAMES = {"sudoku", "nonogram", "minesweeper", "hanoi"}
 
 
 
@@ -430,19 +439,40 @@ def games_home():
 
 def load_leaderboard(game_name, difficulty="normal", limit=10):
     conn = get_db_connection()
-    rows = conn.execute(
-        """
-        SELECT username, MAX(score) AS best_score
-        FROM game_scores
-        WHERE game_name = ? AND difficulty = ?
-        GROUP BY username
-        ORDER BY best_score DESC, username ASC
-        LIMIT ?
-        """,
-        (game_name, difficulty, limit),
-    ).fetchall()
+    if game_name in TIME_RANK_GAMES:
+        rows = conn.execute(
+            """
+            SELECT username, MIN(score) AS best_score
+            FROM game_scores
+            WHERE game_name = ?
+            GROUP BY username
+            ORDER BY best_score ASC, username ASC
+            LIMIT ?
+            """,
+            (game_name, limit),
+        ).fetchall()
+    else:
+        rows = conn.execute(
+            """
+            SELECT username, MAX(score) AS best_score
+            FROM game_scores
+            WHERE game_name = ?
+            GROUP BY username
+            ORDER BY best_score DESC, username ASC
+            LIMIT ?
+            """,
+            (game_name, limit),
+        ).fetchall()
     conn.close()
     return [dict(row) for row in rows]
+
+
+def get_today_incense_count():
+    today = datetime.now().strftime("%Y-%m-%d")
+    conn = get_db_connection()
+    row = conn.execute("SELECT count FROM incense_daily WHERE day = ?", (today,)).fetchone()
+    conn.close()
+    return int(row["count"]) if row else 0
 
 
 @app.route("/games/<game_name>")
@@ -631,8 +661,43 @@ def code_page():
 @login_required
 def profile_page():
     lang = get_lang()
-    return render_template("profile.html", lang=lang, current_user=current_username())
+    return render_template("profile.html", lang=lang, current_user=current_username(), incense_count=get_today_incense_count())
 
+
+
+@app.post("/api/profile/fortune")
+@login_required
+def draw_fortune():
+    import random as _random
+
+    r = _random.random()
+    if r < 0.50:
+        grade = "A*"
+    elif r < 0.80:
+        grade = "A"
+    elif r < 0.95:
+        grade = "B"
+    else:
+        grade = "C"
+    return jsonify({"ok": True, "grade": grade})
+
+
+@app.post("/api/profile/incense")
+@login_required
+def burn_incense():
+    today = datetime.now().strftime("%Y-%m-%d")
+    conn = get_db_connection()
+    conn.execute(
+        """
+        INSERT INTO incense_daily(day, count) VALUES (?, 1)
+        ON CONFLICT(day) DO UPDATE SET count = count + 1
+        """,
+        (today,),
+    )
+    row = conn.execute("SELECT count FROM incense_daily WHERE day = ?", (today,)).fetchone()
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "count": int(row["count"])})
 
 def run_caie_pseudocode(source: str, inputs=None):
     raw_lines = [ln.rstrip() for ln in source.splitlines() if ln.strip()]
