@@ -125,7 +125,7 @@
           {% endif %}
         </div>
 
-        <div class="viewer card">
+        <div class="viewer card" id="pdfViewerContainer">
           {% if selected %}
           <div class="info">
             <div class="title">{{ selected.title or selected.id }}</div>
@@ -134,7 +134,11 @@
               {% if selected.source %} · {{ 'Source' if lang == 'en' else '来源' }}：{{ selected.source }}{% endif %}
             </div>
           </div>
-          <iframe src="{{ pdf_url }}#page={{ pdf_page }}" class="pdf-frame" title="PDF Viewer"></iframe>
+          <div class="pdf-inline-toolbar">
+            <button type="button" onclick="togglePdfFullscreen()">{{ "Fullscreen" if lang == "en" else "全屏阅读" }}</button>
+            <a class="secondary" href="{{ pdf_url }}#page={{ pdf_page }}" target="_blank" rel="noopener">{{ "Open in New Tab" if lang == "en" else "新标签打开" }}</a>
+          </div>
+          <iframe src="{{ pdf_url }}#page={{ pdf_page }}&toolbar=1&navpanes=0" class="pdf-frame" title="PDF Viewer"></iframe>
           {% else %}
           <div class="empty big">{{ 'Please choose a question from the left list.' if lang == 'en' else '请选择左侧题目' }}</div>
           {% endif %}
@@ -157,8 +161,21 @@
 
   <script>
     async function toggleState(qid, field) {
-      await fetch(`/toggle/${qid}/${field}?lang={{ lang }}`, {method: 'POST'});
+      await fetch(`/toggle?lang={{ lang }}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({qid, field})
+      });
       window.location.reload();
+    }
+
+    async function togglePdfFullscreen() {
+      const el = document.getElementById("pdfViewerContainer");
+      if (!document.fullscreenElement) {
+        if (el.requestFullscreen) await el.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
     }
   </script>
 </body>
