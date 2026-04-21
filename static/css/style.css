@@ -109,6 +109,19 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
   border:1px solid var(--line);
   border-radius:12px;
   background:#fff;
+  overflow:auto;
+  padding:10px;
+}
+.pdf-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+#pdfCanvas{
+  display:block;
+  margin:0 auto;
+  max-width:100%;
 }
 .note-form{display:flex;flex-direction:column;gap:10px}
 .note-form textarea{
