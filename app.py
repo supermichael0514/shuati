@@ -17,6 +17,8 @@ import sqlite3
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+import re
+import random
 
 BASE_DIR = Path(__file__).resolve().parent
 INDEX_XLSX = BASE_DIR / "index.xlsx"
@@ -74,6 +76,7 @@ def init_db():
             user_id INTEGER NOT NULL,
             username TEXT NOT NULL,
             game_name TEXT NOT NULL,
+            difficulty TEXT NOT NULL DEFAULT 'normal',
             score INTEGER NOT NULL,
             created_at TEXT NOT NULL
         )
@@ -97,6 +100,7 @@ def init_db():
             user_id INTEGER NOT NULL,
             username TEXT NOT NULL,
             game_name TEXT NOT NULL,
+            difficulty TEXT NOT NULL DEFAULT 'normal',
             score INTEGER NOT NULL,
             created_at TEXT NOT NULL
         )
@@ -120,6 +124,7 @@ def init_db():
             user_id INTEGER NOT NULL,
             username TEXT NOT NULL,
             game_name TEXT NOT NULL,
+            difficulty TEXT NOT NULL DEFAULT 'normal',
             score INTEGER NOT NULL,
             created_at TEXT NOT NULL
         )
@@ -136,6 +141,22 @@ def init_db():
     for column, sql in migration_columns.items():
         if column not in existing_columns:
             conn.execute(sql)
+
+    score_columns = {
+        row["name"] for row in conn.execute("PRAGMA table_info(game_scores)").fetchall()
+    }
+    if "difficulty" not in score_columns:
+        conn.execute(
+            "ALTER TABLE game_scores ADD COLUMN difficulty TEXT NOT NULL DEFAULT 'normal'"
+        )
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS incense_daily (
+            day TEXT PRIMARY KEY,
+            count INTEGER NOT NULL DEFAULT 0
+        )
+        """
+    )
     conn.commit()
     conn.close()
 
@@ -177,7 +198,18 @@ def is_en():
     return get_lang() == LANG_EN
 
 
-SUPPORTED_GAMES = {"2048", "sudoku", "tetris"}
+SUPPORTED_GAMES = {
+    "2048",
+    "tetris",
+    "nonogram",
+    "sudoku",
+    "minesweeper",
+    "hanoi",
+}
+# 兼容旧代码分支中对难度变量的引用，当前版本仅使用 normal。
+SUPPORTED_DIFFICULTIES = {"normal"}
+TIME_RANK_GAMES = {"sudoku", "nonogram", "minesweeper", "hanoi"}
+
 
 
 def load_index():
@@ -407,19 +439,40 @@ def games_home():
 
 def load_leaderboard(game_name, limit=10):
     conn = get_db_connection()
-    rows = conn.execute(
-        """
-        SELECT username, MAX(score) AS best_score
-        FROM game_scores
-        WHERE game_name = ?
-        GROUP BY username
-        ORDER BY best_score DESC, username ASC
-        LIMIT ?
-        """,
-        (game_name, limit),
-    ).fetchall()
+    if game_name in TIME_RANK_GAMES:
+        rows = conn.execute(
+            """
+            SELECT username, MIN(score) AS best_score
+            FROM game_scores
+            WHERE game_name = ?
+            GROUP BY username
+            ORDER BY best_score ASC, username ASC
+            LIMIT ?
+            """,
+            (game_name, limit),
+        ).fetchall()
+    else:
+        rows = conn.execute(
+            """
+            SELECT username, MAX(score) AS best_score
+            FROM game_scores
+            WHERE game_name = ?
+            GROUP BY username
+            ORDER BY best_score DESC, username ASC
+            LIMIT ?
+            """,
+            (game_name, limit),
+        ).fetchall()
     conn.close()
     return [dict(row) for row in rows]
+
+
+def get_today_incense_count():
+    today = datetime.now().strftime("%Y-%m-%d")
+    conn = get_db_connection()
+    row = conn.execute("SELECT count FROM incense_daily WHERE day = ?", (today,)).fetchone()
+    conn.close()
+    return int(row["count"]) if row else 0
 
 
 @app.route("/games/<game_name>")
@@ -454,13 +507,14 @@ def submit_game_score(game_name):
     conn = get_db_connection()
     conn.execute(
         """
-        INSERT INTO game_scores (user_id, username, game_name, score, created_at)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO game_scores (user_id, username, game_name, difficulty, score, created_at)
+        VALUES (?, ?, ?, ?, ?, ?)
         """,
         (
             session.get("user_id"),
             current_username(),
             game_name,
+            "normal",
             score,
             datetime.now().isoformat(timespec="seconds"),
         ),
@@ -582,6 +636,460 @@ def save_note_route(qid):
     item["updated_at"] = datetime.now().isoformat(timespec="seconds")
     save_progress(username, progress)
     return redirect(request.referrer or url_for("index", lang=get_lang()))
+
+
+@app.route("/learn")
+@login_required
+def learn_page():
+    lang = get_lang()
+    return render_template("learn.html", lang=lang, current_user=current_username())
+
+
+@app.route("/code")
+@login_required
+def code_page():
+    lang = get_lang()
+    return render_template("code_lab.html", lang=lang, current_user=current_username())
+
+
+@app.route("/profile")
+@login_required
+def profile_page():
+    lang = get_lang()
+    return render_template("profile.html", lang=lang, current_user=current_username(), incense_count=get_today_incense_count())
+
+
+
+@app.post("/api/profile/fortune")
+@login_required
+def draw_fortune():
+    import random as _random
+
+    r = _random.random()
+    if r < 0.50:
+        grade = "A*"
+    elif r < 0.80:
+        grade = "A"
+    elif r < 0.95:
+        grade = "B"
+    else:
+        grade = "C"
+    return jsonify({"ok": True, "grade": grade})
+
+
+@app.post("/api/profile/incense")
+@login_required
+def burn_incense():
+    today = datetime.now().strftime("%Y-%m-%d")
+    conn = get_db_connection()
+    conn.execute(
+        """
+        INSERT INTO incense_daily(day, count) VALUES (?, 1)
+        ON CONFLICT(day) DO UPDATE SET count = count + 1
+        """,
+        (today,),
+    )
+    row = conn.execute("SELECT count FROM incense_daily WHERE day = ?", (today,)).fetchone()
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "count": int(row["count"])})
+
+def run_caie_pseudocode(source: str, inputs=None):
+    raw_lines = [ln.rstrip() for ln in source.splitlines() if ln.strip()]
+    out = []
+    input_queue = list(inputs or [])
+
+    default_by_type = {
+        "INTEGER": 0,
+        "REAL": 0.0,
+        "STRING": "",
+        "BOOLEAN": False,
+    }
+    keyword_tokens = {
+        "DIV", "MOD", "AND", "OR", "NOT", "TRUE", "FALSE", "RETURN", "CALL",
+        "MIDSTRING", "RAND",
+    }
+
+    subroutines = {}
+    lines = []
+    i = 0
+    while i < len(raw_lines):
+        line = raw_lines[i].strip()
+        m_proc = re.match(r"PROCEDURE\s+([A-Za-z_]\w*)\s*\((.*)\)", line, re.I)
+        m_func = re.match(r"FUNCTION\s+([A-Za-z_]\w*)\s*\((.*)\)", line, re.I)
+        if m_proc or m_func:
+            kind = "PROCEDURE" if m_proc else "FUNCTION"
+            m = m_proc or m_func
+            name = m.group(1)
+            params_raw = m.group(2).strip()
+            params = [x.strip() for x in params_raw.split(",") if x.strip()] if params_raw else []
+            end_token = "ENDPROCEDURE" if kind == "PROCEDURE" else "ENDFUNCTION"
+            body = []
+            i += 1
+            while i < len(raw_lines) and raw_lines[i].strip().upper() != end_token:
+                body.append(raw_lines[i].strip())
+                i += 1
+            if i >= len(raw_lines):
+                raise ValueError(f"{kind} '{name}' missing {end_token}")
+            subroutines[name] = {"kind": kind, "params": params, "body": body}
+        else:
+            lines.append(line)
+        i += 1
+
+    def infer_type(value):
+        if isinstance(value, bool):
+            return "BOOLEAN"
+        if isinstance(value, int):
+            return "INTEGER"
+        if isinstance(value, float):
+            return "REAL"
+        return "STRING"
+
+    def parse_declare(line: str, env, declared, arrays, scalar_types):
+        m_scalar = re.match(r"DECLARE\s+([A-Za-z_]\w*)\s*:\s*([A-Za-z]+)", line, re.I)
+        m_array = re.match(
+            r"DECLARE\s+([A-Za-z_]\w*)\s*:\s*ARRAY\s*\[\s*(-?\d+)\s*:\s*(-?\d+)\s*\]\s*OF\s*([A-Za-z]+)",
+            line,
+            re.I,
+        )
+        if m_array:
+            name = m_array.group(1)
+            lower, upper = int(m_array.group(2)), int(m_array.group(3))
+            if upper < lower:
+                raise ValueError(f"Invalid ARRAY bounds in DECLARE: {line}")
+            declared[name] = "array"
+            arrays[name] = {
+                "lower": lower,
+                "upper": upper,
+                "values": [0] * (upper - lower + 1),
+                "elem_type": m_array.group(4).upper(),
+            }
+            return True
+        if m_scalar:
+            name = m_scalar.group(1)
+            ptype = m_scalar.group(2).upper()
+            declared[name] = "scalar"
+            scalar_types[name] = ptype
+            env[name] = default_by_type.get(ptype, 0)
+            return True
+        return False
+
+    def execute_block(block_lines, env, declared, arrays, scalar_types, allow_return=False):
+        def ensure_scalar_declared(name: str):
+            if name not in declared:
+                raise ValueError(f"Variable '{name}' used before DECLARE")
+            if declared[name] != "scalar":
+                raise ValueError(f"'{name}' is an ARRAY and must be indexed")
+
+        def ensure_array_declared(name: str):
+            if name not in declared:
+                raise ValueError(f"Array '{name}' used before DECLARE")
+            if declared[name] != "array":
+                raise ValueError(f"'{name}' is not an ARRAY")
+
+        def cast_input(name: str, raw):
+            t = scalar_types.get(name, "STRING")
+            if t == "INTEGER":
+                return int(raw)
+            if t == "REAL":
+                return float(raw)
+            if t == "BOOLEAN":
+                return str(raw).strip().lower() in {"true", "1", "yes", "y"}
+            return str(raw)
+
+        def arr_get(name: str, idx: int):
+            ensure_array_declared(name)
+            spec = arrays[name]
+            lower, upper = spec["lower"], spec["upper"]
+            if idx < lower or idx > upper:
+                raise ValueError(f"Array index out of range: {name}[{idx}]")
+            return spec["values"][idx - lower]
+
+        def arr_set(name: str, idx: int, value):
+            ensure_array_declared(name)
+            spec = arrays[name]
+            lower, upper = spec["lower"], spec["upper"]
+            if idx < lower or idx > upper:
+                raise ValueError(f"Array index out of range: {name}[{idx}]")
+            spec["values"][idx - lower] = value
+
+        def midstring(value, start, length):
+            s = str(value)
+            st = int(start)
+            ln = int(length)
+            if ln <= 0:
+                return ""
+            return s[max(0, st - 1): max(0, st - 1) + ln]
+
+        def rand_func(*args):
+            if len(args) == 1:
+                return random.randint(0, int(args[0]))
+            if len(args) == 2:
+                return random.randint(int(args[0]), int(args[1]))
+            raise ValueError("RAND expects 1 or 2 arguments")
+
+        def call_subroutine(name: str, args, expect_value=False):
+            if name not in subroutines:
+                raise ValueError(f"Unknown subroutine: {name}")
+            sub = subroutines[name]
+            if expect_value and sub["kind"] != "FUNCTION":
+                raise ValueError(f"{name} is PROCEDURE and cannot be used in expression")
+            if not expect_value and sub["kind"] != "PROCEDURE":
+                raise ValueError(f"{name} is FUNCTION; use it in expression")
+            if len(args) != len(sub["params"]):
+                raise ValueError(f"{name} expects {len(sub['params'])} args, got {len(args)}")
+
+            local_env, local_declared, local_arrays, local_scalar_types = {}, {}, {}, {}
+            for pname, pval in zip(sub["params"], args):
+                local_declared[pname] = "scalar"
+                local_env[pname] = pval
+                local_scalar_types[pname] = infer_type(pval)
+            returned, value = execute_block(
+                sub["body"], local_env, local_declared, local_arrays, local_scalar_types, allow_return=sub["kind"] == "FUNCTION"
+            )
+            if sub["kind"] == "FUNCTION":
+                if not returned:
+                    raise ValueError(f"FUNCTION {name} must RETURN a value")
+                return value
+            return None
+
+        def eval_expr(expr: str):
+            expr = expr.strip()
+            if ".." in expr:
+                a, b = expr.split("..", 1)
+                return list(range(int(eval_expr(a)), int(eval_expr(b)) + 1))
+            expr = re.sub(r"\bDIV\b", "//", expr, flags=re.I)
+            expr = re.sub(r"\bMOD\b", "%", expr, flags=re.I)
+            expr = re.sub(r"\bTRUE\b", "True", expr, flags=re.I)
+            expr = re.sub(r"\bFALSE\b", "False", expr, flags=re.I)
+
+            for token in re.findall(r"\b[A-Za-z_]\w*\b", expr):
+                t = token.upper()
+                if t in keyword_tokens or token in {"True", "False"}:
+                    continue
+                if token in subroutines:
+                    continue
+                if token not in declared:
+                    raise ValueError(f"Identifier '{token}' used before DECLARE")
+
+            def replace_array_access(m):
+                name = m.group(1)
+                idx_expr = m.group(2).strip()
+                ensure_array_declared(name)
+                return f"__arr_get__('{name}', ({idx_expr}))"
+
+            expr = re.sub(r"\b([A-Za-z_]\w*)\s*\[\s*([^\]]+)\s*\]", replace_array_access, expr)
+            local_env = {k: v for k, v in env.items() if declared.get(k) == "scalar"}
+            local_env["__arr_get__"] = arr_get
+            local_env["MIDSTRING"] = midstring
+            local_env["RAND"] = rand_func
+            for name in subroutines:
+                local_env[name] = (lambda n: (lambda *args: call_subroutine(n, list(args), expect_value=True)))(name)
+            return eval(expr, {"__builtins__": {}}, local_env)
+
+        i = 0
+        stack = []
+        while i < len(block_lines):
+            line = block_lines[i].strip()
+            upper = line.upper()
+            if upper.startswith("DECLARE "):
+                if not parse_declare(line, env, declared, arrays, scalar_types):
+                    raise ValueError(f"Invalid DECLARE syntax: {line}")
+            elif upper.startswith("OUTPUT "):
+                out.append(str(eval_expr(line[7:])))
+            elif upper.startswith("INPUT "):
+                var = line[6:].strip()
+                ensure_scalar_declared(var)
+                if not input_queue:
+                    raise ValueError(f"INPUT required for '{var}' but no input provided")
+                env[var] = cast_input(var, input_queue.pop(0))
+            elif upper.startswith("CALL "):
+                m = re.match(r"CALL\s+([A-Za-z_]\w*)\s*\((.*)\)", line, re.I)
+                if not m:
+                    raise ValueError(f"Invalid CALL syntax: {line}")
+                name = m.group(1)
+                args_text = m.group(2).strip()
+                args = [eval_expr(x.strip()) for x in args_text.split(",") if x.strip()] if args_text else []
+                call_subroutine(name, args, expect_value=False)
+            elif upper.startswith("RETURN "):
+                if not allow_return:
+                    raise ValueError("RETURN is only allowed inside FUNCTION")
+                return True, eval_expr(line[7:])
+            elif upper.startswith("CASE OF"):
+                case_value = eval_expr(line[7:].strip())
+                depth, j = 1, i + 1
+                while j < len(block_lines):
+                    u = block_lines[j].strip().upper()
+                    if u.startswith("CASE OF"):
+                        depth += 1
+                    elif u == "ENDCASE":
+                        depth -= 1
+                        if depth == 0:
+                            break
+                    j += 1
+                if j >= len(block_lines):
+                    raise ValueError("CASE missing ENDCASE")
+
+                segments = []
+                current_labels = None
+                current_body = []
+                for k in range(i + 1, j):
+                    raw = block_lines[k].strip()
+                    m_other = re.match(r"OTHERWISE\s*:", raw, re.I)
+                    m_label = re.match(r"(.+?)\s*:", raw)
+                    if m_other or m_label:
+                        if current_labels is not None:
+                            segments.append((current_labels, current_body))
+                        current_body = []
+                        if m_other:
+                            current_labels = "OTHERWISE"
+                        else:
+                            labels_raw = m_label.group(1)
+                            current_labels = [eval_expr(x.strip()) for x in labels_raw.split(",") if x.strip()]
+                    else:
+                        current_body.append(raw)
+                if current_labels is not None:
+                    segments.append((current_labels, current_body))
+
+                chosen = None
+                for labels, body in segments:
+                    if labels == "OTHERWISE":
+                        if chosen is None:
+                            chosen = body
+                    elif case_value in labels:
+                        chosen = body
+                        break
+                if chosen:
+                    returned, value = execute_block(chosen, env, declared, arrays, scalar_types, allow_return=allow_return)
+                    if returned:
+                        return True, value
+                i = j
+            elif upper.startswith("WHILE ") and upper.endswith(" DO"):
+                cond_expr = line[6:-3].strip()
+                if bool(eval_expr(cond_expr)):
+                    stack.append(("WHILE", cond_expr, i))
+                else:
+                    depth, j = 1, i + 1
+                    while j < len(block_lines):
+                        u = block_lines[j].strip().upper()
+                        if u.startswith("WHILE ") and u.endswith(" DO"):
+                            depth += 1
+                        elif u == "ENDWHILE":
+                            depth -= 1
+                            if depth == 0:
+                                break
+                        j += 1
+                    i = j
+            elif upper == "ENDWHILE":
+                if not stack or stack[-1][0] != "WHILE":
+                    raise ValueError("ENDWHILE without WHILE")
+                _, cond_expr, start = stack[-1]
+                if bool(eval_expr(cond_expr)):
+                    i = start
+                else:
+                    stack.pop()
+            elif upper == "REPEAT":
+                stack.append(("REPEAT", i))
+            elif upper.startswith("UNTIL "):
+                if not stack or stack[-1][0] != "REPEAT":
+                    raise ValueError("UNTIL without REPEAT")
+                cond_expr = line[6:].strip()
+                _, start = stack[-1]
+                if bool(eval_expr(cond_expr)):
+                    stack.pop()
+                else:
+                    i = start
+            elif upper.startswith("FOR ") and " TO " in upper:
+                m = re.match(r"FOR\s+(\w+)\s*<-\s*(.+)\s+TO\s+(.+)", line, re.I)
+                if not m:
+                    raise ValueError(f"Invalid FOR syntax: {line}")
+                var, a, b = m.group(1), eval_expr(m.group(2)), eval_expr(m.group(3))
+                ensure_scalar_declared(var)
+                env[var] = int(a)
+                stack.append(("FOR", var, int(b), i))
+            elif "<-" in line:
+                var, expr = [x.strip() for x in line.split("<-", 1)]
+                arr_ref = re.match(r"^([A-Za-z_]\w*)\s*\[\s*(.+)\s*\]$", var)
+                if arr_ref:
+                    name = arr_ref.group(1)
+                    idx = int(eval_expr(arr_ref.group(2)))
+                    arr_set(name, idx, eval_expr(expr))
+                else:
+                    ensure_scalar_declared(var)
+                    env[var] = eval_expr(expr)
+            elif upper.startswith("IF ") and upper.endswith("THEN"):
+                cond = bool(eval_expr(line[3:-4]))
+                stack.append(("IF", cond))
+                if not cond:
+                    depth, j = 1, i + 1
+                    while j < len(block_lines):
+                        u = block_lines[j].strip().upper()
+                        if u.startswith("IF ") and u.endswith("THEN"):
+                            depth += 1
+                        elif u == "ENDIF":
+                            depth -= 1
+                            if depth == 0:
+                                break
+                        elif u == "ELSE" and depth == 1:
+                            break
+                        j += 1
+                    i = j
+            elif upper == "ELSE":
+                if stack and stack[-1][0] == "IF" and stack[-1][1]:
+                    depth, j = 1, i + 1
+                    while j < len(block_lines):
+                        u = block_lines[j].strip().upper()
+                        if u.startswith("IF ") and u.endswith("THEN"):
+                            depth += 1
+                        elif u == "ENDIF":
+                            depth -= 1
+                            if depth == 0:
+                                break
+                        j += 1
+                    i = j
+            elif upper == "ENDIF":
+                if stack and stack[-1][0] == "IF":
+                    stack.pop()
+            elif upper.startswith("NEXT"):
+                m = re.match(r"NEXT(?:\s+([A-Za-z_]\w*))?$", line, re.I)
+                if not m:
+                    raise ValueError(f"Invalid NEXT syntax: {line}")
+                if not stack or stack[-1][0] != "FOR":
+                    raise ValueError("NEXT without FOR")
+                _, var, end, start = stack[-1]
+                next_var = m.group(1)
+                if next_var and next_var != var:
+                    raise ValueError(f"NEXT variable mismatch: expected {var}, got {next_var}")
+                env[var] += 1
+                if env[var] <= end:
+                    i = start
+                else:
+                    stack.pop()
+            i += 1
+        return False, None
+
+    global_env, global_declared, global_arrays, global_scalar_types = {}, {}, {}, {}
+    execute_block(lines, global_env, global_declared, global_arrays, global_scalar_types, allow_return=False)
+    return "\n".join(out)
+
+
+@app.post("/api/code/run")
+@login_required
+def run_code_route():
+    payload = request.get_json(force=True) or {}
+    source = str(payload.get("source", ""))
+    raw_inputs = payload.get("inputs", [])
+    if isinstance(raw_inputs, str):
+        inputs = [x for x in raw_inputs.splitlines() if x.strip() != ""]
+    elif isinstance(raw_inputs, list):
+        inputs = [str(x) for x in raw_inputs]
+    else:
+        inputs = []
+    try:
+        result = run_caie_pseudocode(source, inputs=inputs)
+        return jsonify({"ok": True, "output": result})
+    except Exception as exc:
+        return jsonify({"ok": False, "error": str(exc)}), 400
 
 
 if __name__ == "__main__":
