@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ 'Code Lab' if lang=='en' else '编一编' }}</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">PSEUDOCODE IDE</p><h1>{{ 'Code Lab' if lang=='en' else '编一编 · 伪代码IDE' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
+<section class="card code-lab">
+  <p class="game-hint">{{ 'CAIE Pseudocode Guide style: DECLARE, INPUT, IF/CASE, FOR/NEXT, WHILE, REPEAT, PROCEDURE/FUNCTION, MIDSTRING, RAND. Variables/arrays must be declared first.' if lang=='en' else '遵循 CAIE Guide：DECLARE、INPUT、IF/CASE、FOR/NEXT、WHILE、REPEAT、PROCEDURE/FUNCTION、MIDSTRING、RAND。变量和数组必须先声明。' }}</p>
+  <textarea id="codeInput" spellcheck="false">DECLARE a : INTEGER
+DECLARE i : INTEGER
+a <- 0
+FOR i <- 1 TO 5
+  a <- a + i
+NEXT
+OUTPUT a</textarea>
+  <div class="actions"><button id="runCode">{{ 'Run' if lang=='en' else '运行' }}</button></div>
+  <label>
+    <span>{{ 'Program Inputs (one per line)' if lang=='en' else '程序输入（每行一个）' }}</span>
+    <textarea id="codeInputs" spellcheck="false" placeholder="{{ 'e.g.\\nAlice\\n18' if lang=='en' else '例如：\\nAlice\\n18' }}"></textarea>
+  </label>
+  <pre id="codeOutput"></pre>
+</section>
+
+<section class="card guide-panel">
+  <h2>{{ 'Official Pseudocode Guide (PDF)' if lang=='en' else '官方伪代码指南（PDF）' }}</h2>
+  <p class="game-hint">{{ 'Put the PDF at: static/docs/caie-pseudocode-guide.pdf' if lang=='en' else '请把文档放到路径：static/docs/caie-pseudocode-guide.pdf' }}</p>
+  <iframe src="{{ url_for('static', filename='docs/caie-pseudocode-guide.pdf') }}" class="pdf-frame" title="CAIE Pseudocode Guide"></iframe>
+</section>
+</div>
+<script>
+document.getElementById('runCode').onclick = async ()=>{
+  const source = document.getElementById('codeInput').value;
+  const inputs = document.getElementById('codeInputs').value;
+  const res = await fetch(`/api/code/run?lang={{ lang }}`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({source, inputs})});
+  const data = await res.json();
+  document.getElementById('codeOutput').textContent = data.ok ? (data.output || '(no output)') : `Error: ${data.error}`;
+};
+</script>
+</body></html>
