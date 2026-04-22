@@ -165,29 +165,24 @@ def init_db():
     )
     conn.execute(
         """
-        CREATE TABLE IF NOT EXISTS forum_posts (
+        CREATE TABLE IF NOT EXISTS internal_messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            username TEXT NOT NULL,
-            category TEXT NOT NULL DEFAULT 'discussion',
-            title TEXT NOT NULL,
+            sender_id INTEGER NOT NULL,
+            sender_username TEXT NOT NULL,
+            receiver_username TEXT NOT NULL,
             content TEXT NOT NULL,
+            is_read INTEGER NOT NULL DEFAULT 0,
             created_at TEXT NOT NULL
         )
         """
     )
-    conn.execute(
-        """
-        CREATE TABLE IF NOT EXISTS forum_replies (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            post_id INTEGER NOT NULL,
-            user_id INTEGER NOT NULL,
-            username TEXT NOT NULL,
-            content TEXT NOT NULL,
-            created_at TEXT NOT NULL
+    message_columns = {
+        row["name"] for row in conn.execute("PRAGMA table_info(internal_messages)").fetchall()
+    }
+    if "is_read" not in message_columns:
+        conn.execute(
+            "ALTER TABLE internal_messages ADD COLUMN is_read INTEGER NOT NULL DEFAULT 0"
         )
-        """
-    )
     conn.commit()
     conn.close()
 
@@ -227,35 +222,28 @@ def list_files_with_suffix(directory: Path, suffix: str):
     return items
 
 
-def send_chat_email(signature: str, content: str):
-    to_email = os.environ.get("CHAT_TARGET_EMAIL", "").strip()
-    smtp_host = os.environ.get("SMTP_HOST", "").strip()
-    smtp_user = os.environ.get("SMTP_USER", "").strip()
-    smtp_pass = os.environ.get("SMTP_PASS", "")
-    smtp_port = int(os.environ.get("SMTP_PORT", "465"))
-
-    if not to_email:
-        return False, "CHAT_TARGET_EMAIL is not configured."
-    if not smtp_host:
-        return False, "SMTP_HOST is not configured."
-
-    message = EmailMessage()
-    message["Subject"] = f"聊一聊留言 - {signature}"
-    message["From"] = smtp_user or to_email
-    message["To"] = to_email
-    message.set_content(
-        f"署名 / Signature: {signature}\n"
-        f"时间 / Time: {datetime.now().isoformat(timespec='seconds')}\n\n"
-        f"消息内容 / Message:\n{content}\n"
-    )
-    try:
-        with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=15) as server:
-            if smtp_user and smtp_pass:
-                server.login(smtp_user, smtp_pass)
-            server.send_message(message)
-        return True, ""
-    except Exception as exc:
-        return False, str(exc)
+def list_chapter_files(directory: Path, suffix: str):
+    if not directory.exists():
+        return {}
+    rel_root = directory.relative_to(BASE_DIR / "static").as_posix()
+    grouped = {}
+    for sub in sorted([p for p in directory.iterdir() if p.is_dir()], key=lambda p: p.name.lower()):
+        files = []
+        for path in sorted(sub.glob(f"*{suffix}"), key=lambda p: p.name.lower()):
+            files.append(
+                {
+                    "name": path.name,
+                    "url": url_for("static", filename=f"{rel_root}/{sub.name}/{path.name}"),
+                }
+            )
+        if files:
+            grouped[sub.name] = files
+    root_files = []
+    for path in sorted(directory.glob(f"*{suffix}"), key=lambda p: p.name.lower()):
+        root_files.append({"name": path.name, "url": url_for("static", filename=f"{rel_root}/{path.name}")})
+    if root_files:
+        grouped["未分章"] = root_files
+    return grouped
 
 
 def load_section_items(filename: str):
@@ -279,9 +267,27 @@ def load_section_items(filename: str):
                 "date": str(row.get("date", "")).strip(),
                 "link": str(row.get("link", "")).strip(),
                 "image": str(row.get("image", "")).strip(),
+                "content": str(row.get("content", "")).strip(),
             }
         )
     return [it for it in items if it["title"]]
+
+
+def has_unread_messages(username: str):
+    if not username:
+        return False
+    conn = get_db_connection()
+    row = conn.execute(
+        """
+        SELECT 1
+        FROM internal_messages
+        WHERE receiver_username = ? AND is_read = 0
+        LIMIT 1
+        """,
+        (username,),
+    ).fetchone()
+    conn.close()
+    return bool(row)
 
 
 def get_lang():
@@ -525,7 +531,13 @@ def logout():
 @login_required
 def portal():
     lang = get_lang()
-    return render_template("portal.html", lang=lang, current_user=current_username())
+    username = current_username()
+    return render_template(
+        "portal.html",
+        lang=lang,
+        current_user=username,
+        has_unread_messages=has_unread_messages(username),
+    )
 
 
 @app.route("/games")
@@ -767,7 +779,12 @@ def learn_page():
 @login_required
 def learn_slides_page():
     lang = get_lang()
-    slides = list_files_with_suffix(SLIDES_DIR, ".pdf")
+    chapter_map = list_chapter_files(SLIDES_DIR, ".pdf")
+    chapters = list(chapter_map.keys())
+    selected_chapter = request.args.get("chapter", "").strip()
+    if chapters and selected_chapter not in chapter_map:
+        selected_chapter = chapters[0]
+    slides = chapter_map.get(selected_chapter, []) if selected_chapter else []
     selected = request.args.get("file", "").strip()
     selected_slide = None
     if slides:
@@ -776,6 +793,8 @@ def learn_slides_page():
         "learn_slides.html",
         lang=lang,
         current_user=current_username(),
+        chapters=chapters,
+        selected_chapter=selected_chapter,
         slides=slides,
         selected_slide=selected_slide,
     )
@@ -785,7 +804,12 @@ def learn_slides_page():
 @login_required
 def learn_animations_page():
     lang = get_lang()
-    pages = list_files_with_suffix(ANIMATIONS_DIR, ".html")
+    chapter_map = list_chapter_files(ANIMATIONS_DIR, ".html")
+    chapters = list(chapter_map.keys())
+    selected_chapter = request.args.get("chapter", "").strip()
+    if chapters and selected_chapter not in chapter_map:
+        selected_chapter = chapters[0]
+    pages = chapter_map.get(selected_chapter, []) if selected_chapter else []
     selected = request.args.get("file", "").strip()
     selected_page = None
     if pages:
@@ -794,6 +818,8 @@ def learn_animations_page():
         "learn_animations.html",
         lang=lang,
         current_user=current_username(),
+        chapters=chapters,
+        selected_chapter=selected_chapter,
         pages=pages,
         selected_page=selected_page,
     )
@@ -857,16 +883,74 @@ def learn_files_page():
 @login_required
 def chat_page():
     lang = get_lang()
+    current_user = current_username()
+    conn = get_db_connection()
     if request.method == "POST":
         content = request.form.get("content", "").strip()
-        signature = request.form.get("signature", "").strip() or current_username()
-        if content:
-            ok, err = send_chat_email(signature[:80], content[:2000])
-            if ok:
-                flash("Message sent successfully." if is_en() else "消息已发送到老师邮箱。")
+        receiver = request.form.get("receiver", "").strip()
+        if content and receiver:
+            target = conn.execute(
+                "SELECT id, username FROM users WHERE username = ?",
+                (receiver,),
+            ).fetchone()
+            if not target:
+                flash("Target user not found." if is_en() else "发送对象不存在。")
+            else:
+                conn.execute(
+                    """
+                    INSERT INTO internal_messages
+                    (sender_id, sender_username, receiver_username, content, is_read, created_at)
+                    VALUES (?, ?, ?, ?, 0, ?)
+                    """,
+                    (
+                        session.get("user_id"),
+                        current_user,
+                        target["username"],
+                        content[:2000],
+                        datetime.now().isoformat(timespec="seconds"),
+                    ),
+                )
+                conn.commit()
+                flash("Sent successfully." if is_en() else "站内信发送成功。")
+                conn.close()
                 return redirect(url_for("chat_page", lang=lang))
-            flash((f"Failed to send: {err}") if is_en() else f"发送失败：{err}")
-    return render_template("chat.html", lang=lang, current_user=current_username())
+
+    inbox = conn.execute(
+        """
+        SELECT id, sender_username, content, is_read, created_at
+        FROM internal_messages
+        WHERE receiver_username = ?
+        ORDER BY id DESC
+        LIMIT 100
+        """,
+        (current_user,),
+    ).fetchall()
+    sent = conn.execute(
+        """
+        SELECT id, receiver_username, content, created_at
+        FROM internal_messages
+        WHERE sender_username = ?
+        ORDER BY id DESC
+        LIMIT 100
+        """,
+        (current_user,),
+    ).fetchall()
+    unread_ids = [int(row["id"]) for row in inbox if int(row["is_read"]) == 0]
+    if unread_ids:
+        conn.executemany(
+            "UPDATE internal_messages SET is_read = 1 WHERE id = ?",
+            [(mid,) for mid in unread_ids],
+        )
+        conn.commit()
+    conn.close()
+    return render_template(
+        "chat.html",
+        lang=lang,
+        current_user=current_user,
+        inbox=[dict(row) for row in inbox],
+        sent=[dict(row) for row in sent],
+        has_unread_messages=has_unread_messages(current_user),
+    )
 
 
 @app.route("/code")

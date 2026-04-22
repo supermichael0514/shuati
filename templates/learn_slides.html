@@ -10,12 +10,19 @@
 <header class="portal-header card"><div><p class="neon-label">LEARN · SLIDES</p><h1>{{ 'Slides' if lang=='en' else '看课件' }}</h1><p class="portal-subtitle">{{ 'Upload PDF files into static/learn/slides for students to read.' if lang=='en' else '把 PDF 文件放到 static/learn/slides 目录即可给学生查看。' }}</p></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
 
 <section class="card learn-subpage">
+  {% if chapters %}
+  <div class="chapter-tabs">
+    {% for chapter in chapters %}
+    <a class="secondary {{ 'active' if chapter == selected_chapter else '' }}" href="{{ url_for('learn_slides_page', lang=lang, chapter=chapter) }}">{{ chapter }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
   {% if slides %}
   <div class="learn-sub-layout">
     <aside class="learn-sidebar">
       <h2>{{ 'Courseware List' if lang=='en' else '课件列表' }}</h2>
       {% for item in slides %}
-      <a class="record {{ 'active' if selected_slide and selected_slide.name == item.name else '' }}" href="{{ url_for('learn_slides_page', lang=lang, file=item.name) }}">
+      <a class="record {{ 'active' if selected_slide and selected_slide.name == item.name else '' }}" href="{{ url_for('learn_slides_page', lang=lang, chapter=selected_chapter, file=item.name) }}">
         <div class="record-title">{{ item.name }}</div>
       </a>
       {% endfor %}
@@ -25,7 +32,7 @@
     </div>
   </div>
   {% else %}
-  <div class="empty big">{{ 'No slide PDF yet. Put files into static/learn/slides first.' if lang=='en' else '暂时没有课件，请先把 PDF 放到 static/learn/slides。' }}</div>
+  <div class="empty big">{{ 'No slide PDF yet. Put files into chapter folders under static/learn/slides.' if lang=='en' else '暂时没有课件，请放到 static/learn/slides/章节名/ 目录。' }}</div>
   {% endif %}
 </section>
 </div></body></html>

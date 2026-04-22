@@ -11,6 +11,7 @@
 
 <section class="card learn-subpage">
   <h2>{{ 'Student Works' if lang=='en' else '学生作品展示' }}</h2>
+  <p class="portal-subtitle">{{ 'If a project has a PDF report, store it under static/learn/projects and put /static/learn/projects/filename.pdf into link.' if lang=='en' else '若作品有 PDF 报告，请放在 static/learn/projects，并在 link 中填写 /static/learn/projects/文件名.pdf。' }}</p>
   <div class="article-list">
     {% for item in items %}
     <article class="article-card">
