@@ -10,9 +10,9 @@
   <div class="portal-page">
     <header class="portal-header card">
       <div>
-        <p class="neon-label">{{ 'NEXT GEN LEARNING SYSTEM' if lang == 'en' else '新一代学习系统' }}</p>
-        <h1>{{ 'Computer Science Learning Portal' if lang == 'en' else '计算机学习入口主界面' }}</h1>
-        <p class="portal-subtitle">{{ 'Choose a module to start studying, practicing or coding.' if lang == 'en' else '选择一个模块，开始学习、练习或编程。' }}</p>
+        <p class="neon-label">{{ 'NEXT GEN LEARNING SYSTEM' if lang == 'en' else 'NEXT GEN LEARNING SYSTEM' }}</p>
+        <h1>{{ 'NEXT GEN COMPUTER SCIENCE LEARNING SYSTEM' if lang == 'en' else '新一代计算机学习系统' }}</h1>
+        <p class="portal-subtitle">{{ 'Choose a module to start your study.' if lang == 'en' else '选择一个模块，开始你的学习之旅。' }}</p>
       </div>
       <div class="portal-actions">
         <div class="lang-switch">
@@ -25,25 +25,28 @@
     </header>
 
     <main class="feature-grid feature-grid-portal">
-      <a class="feature-tile" href="{{ url_for('learn_page', lang=lang) }}"><div class="tile-icon">📚</div><h2>{{ 'Resources' if lang == 'en' else '学一学' }}</h2><p>{{ 'Slides, animations, articles, projects, announcements and files.' if lang == 'en' else '看课件、看动画、看文章、看作品、看公告、看文件。' }}</p></a>
-      <a class="feature-tile" href="{{ url_for('index', lang=lang) }}"><div class="tile-icon">📝</div><h2>{{ 'Practice' if lang == 'en' else '练一练' }}</h2><p>{{ 'Enter the filtered question bank and start solving problems.' if lang == 'en' else '进入筛选题库，开始系统刷题。' }}</p></a>
-      <a class="feature-tile" href="{{ url_for('code_page', lang=lang) }}"><div class="tile-icon">💻</div><h2>{{ 'Code Lab' if lang == 'en' else '编一编' }}</h2><p>{{ 'CAIE pseudocode IDE with runnable examples.' if lang == 'en' else '符合 CAIE Guide 的伪代码 IDE，可运行程序。' }}</p></a>
-      <a class="feature-tile" href="{{ url_for('chat_page', lang=lang) }}"><div class="tile-icon">{{ '📩' if has_unread_messages else '📨' }}</div><h2>{{ 'Inbox' if lang == 'en' else '站内信' }}</h2><p>{{ 'Send and receive internal plain-text messages.' if lang == 'en' else '发送和接收站内纯文字消息。' }}</p></a>
-      <a class="feature-tile" href="{{ url_for('games_home', lang=lang) }}"><div class="tile-icon">🎮</div><h2>{{ 'Mini Games' if lang == 'en' else '玩一玩' }}</h2><p>{{ 'Play 2048 / Tetris / Nonogram / Sudoku / Minesweeper / Hanoi.' if lang == 'en' else '支持 2048、俄罗斯方块、数织、数独、扫雷、汉诺塔。' }}</p></a>
+      <a class="feature-tile" href="{{ url_for('learn_page', lang=lang) }}"><div class="tile-icon">📚</div><h2>{{ 'Resources' if lang == 'en' else '学一学' }}</h2><p>{{ 'Slides, animations, articles, projects, announcements and documents.' if lang == 'en' else '看课件、动画、文章、作品、公告和文件。' }}</p></a>
+      <a class="feature-tile" href="{{ url_for('index', lang=lang) }}"><div class="tile-icon">📝</div><h2>{{ 'Practice' if lang == 'en' else '练一练' }}</h2><p>{{ 'Enter the filtered question bank and start targeted practicing.' if lang == 'en' else '进入筛选题库，开始针对性练习。' }}</p></a>
+      <a class="feature-tile" href="{{ url_for('code_page', lang=lang) }}"><div class="tile-icon">💻</div><h2>{{ 'Code Lab' if lang == 'en' else '编一编' }}</h2><p>{{ 'CAIE pseudocode running evironment.' if lang == 'en' else '符合 CAIE 标准 的伪代码运行环境。' }}</p></a>
+      <a class="feature-tile" href="{{ url_for('chat_page', lang=lang) }}"><div class="tile-icon">{{ '📩' if has_unread_messages else '📨' }}</div><h2>{{ 'ChatBox' if lang == 'en' else '聊一聊' }}</h2><p>{{ 'Send and receive internal plain-text messages.' if lang == 'en' else '与我沟通，或向指定用户发送站内信。' }}</p></a>
+      <a class="feature-tile" href="{{ url_for('games_home', lang=lang) }}"><div class="tile-icon">🎮</div><h2>{{ 'Mini Games' if lang == 'en' else '玩一玩' }}</h2><p>{{ 'Relax when tired.' if lang == 'en' else '学累了就玩一会。' }}</p></a>
       <a class="feature-tile" href="{{ url_for('profile_page', lang=lang) }}"><div class="tile-icon">🙏</div><h2>{{ 'Cyber Wish' if lang == 'en' else '拜一拜' }}</h2><p>{{ 'Make a wish before or after exams.' if lang == 'en' else '考前许愿，考后祈福。' }}</p></a>
     </main>
 
     <footer class="portal-footer card">
       <div class="logo-box">
         <img class="logo-mark-img" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
-        <div><strong>{{ 'CS Teacher Michael Cao' if lang == 'en' else '计算机老师迈克曹' }}</strong><p>{{ 'Communication is always welcomed' if lang == 'en' else '欢迎多多交流' }}</p></div>
+        <div><strong>{{ 'CS Teacher Michael Cao' if lang == 'en' else '计算机老师迈克曹' }}</strong>
+          <p>{{ 'Computer Science Teacher' if lang == 'en' else '国际学校高中计算机老师' }}</p>
+          <p>{{ 'Teaching AL, IG, AP and Competition' if lang == 'en' else '执教AL、IG、AP及竞赛课程' }}</p>
+        </div>
       </div>
 
       <div class="contact-box">
         <h3>{{ 'Self-Intro' if lang == 'en' else '个人简介' }}</h3>
         <p>{{ 'Bachelor of Automation in BIT, Master of EE in NTU' if lang == 'en' else '北京理工大学自动化学士，台湾大学电机系硕士' }}</p>
-        <p>{{ 'CS Teacher at Teaching CAIE, AP and Competition' if lang == 'en' else '国际学校高中计算机老师，执教CAIE、AP及竞赛课程' }}</p>
-        <p>{{ 'Examiner of Cambridge A-Level, iPGCE Certificate, Apple ADE' if lang == 'en' else '剑桥A-Level考官，iPGCE，苹果杰出教育工作者' }}</p>
+        <p>{{ 'Examiner of Cambridge A-Level, iPGCE, Apple ADE' if lang == 'en' else '剑桥A-Level考官，iPGCE，苹果杰出教育工作者' }}</p>
+        <p>{{ 'Former technical project management supervisor' if lang == 'en' else '曾任企业智能硬件项目高级项目主管，PMP证书' }}</p>
       </div>
 
       <div class="contact-box">

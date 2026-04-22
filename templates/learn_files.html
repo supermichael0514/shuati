@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="portal-body"><div class="portal-page">
-<header class="portal-header card"><div><p class="neon-label">LEARN · FILES</p><h1>{{ 'Official Files' if lang=='en' else '看文件' }}</h1><p class="portal-subtitle">{{ 'Put official PDFs into static/learn/files for viewing.' if lang=='en' else '把官方 PDF 放到 static/learn/files 目录即可查看。' }}</p></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+<header class="portal-header card"><div><p class="neon-label">LEARN · FILES</p><h1>{{ 'Official Files' if lang=='en' else '看文件' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
 
 <section class="card learn-subpage">
   {% if docs %}

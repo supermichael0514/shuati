@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ 'Inbox' if lang=='en' else '站内信' }}</title>
+  <title>{{ 'Inbox' if lang=='en' else '聊一聊' }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="portal-body"><div class="portal-page">
-<header class="portal-header card"><div><p class="neon-label">INTERNAL MAIL</p><h1>{{ 'Inbox' if lang=='en' else '站内信' }}</h1><p class="portal-subtitle">{{ 'Send plain-text messages between users.' if lang=='en' else '用户之间发送纯文字站内信。' }}</p></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
+<header class="portal-header card"><div><p class="neon-label">INTERNAL MAIL</p><h1>{{ 'Inbox' if lang=='en' else '聊一聊' }}</h1>
+  <p class="portal-subtitle">{{ 'Send plain-text messages between users.' if lang=='en' else '用户之间发送纯文字站内信。' }}</p></div>
+  <div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
 
 <section class="card forum-editor">
   <h2>{{ 'Send Message' if lang=='en' else '发送站内信' }}</h2>

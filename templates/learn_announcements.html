@@ -11,7 +11,6 @@
 
 <section class="card learn-subpage">
   <h2>{{ 'Website Notices' if lang=='en' else '网站公告' }}</h2>
-  <p class="portal-subtitle">{{ 'This page is display-only and has no user interaction.' if lang=='en' else '本页面仅展示公告，用户不可交互。' }}</p>
   <div class="reply-list">
     {% for item in items %}
     <button type="button" class="reply-item announcement-item" data-title="{{ item.title }}" data-date="{{ item.date }}" data-content="{{ item.content or item.summary }}">

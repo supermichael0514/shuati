@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linear Search 动画</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eff6ff, #f8fafc);
+      color: #1f2937;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .app {
+      width: min(980px, 100%);
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 24px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+      padding: 24px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      margin: 0 0 22px;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 15px;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      transform: none;
+    }
+
+    .secondary { background: #64748b; }
+    .danger { background: #dc2626; }
+
+    .target-wrap, .speed-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #f1f5f9;
+      border-radius: 12px;
+    }
+
+    input[type="number"] {
+      width: 90px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+      font-size: 15px;
+    }
+
+    input[type="range"] {
+      width: 180px;
+      cursor: pointer;
+    }
+
+    .board {
+      min-height: 180px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      padding: 24px;
+      border-radius: 18px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .cell {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: #94a3b8;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      transition: transform 0.3s ease, background 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+    }
+
+    .cell.active {
+      background: #f59e0b;
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 10px 24px rgba(245, 158, 11, 0.25);
+    }
+
+    .cell.checked {
+      background: #64748b;
+    }
+
+    .cell.found {
+      background: #10b981;
+      transform: translateY(-8px) scale(1.08);
+      box-shadow: 0 10px 24px rgba(16, 185, 129, 0.3);
+    }
+
+    .cell .index {
+      position: absolute;
+      bottom: -24px;
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .status {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+
+    .label {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .value {
+      font-size: 18px;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+    }
+
+    @media (max-width: 720px) {
+      .cell { width: 58px; height: 58px; font-size: 18px; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>Linear Search 动画演示</h1>
+    <p class="subtitle">
+      线性查找会从左到右，一个一个检查元素，直到找到目标值或遍历完整个数组。橙色表示当前检查，绿色表示找到目标。
+    </p>
+
+    <div class="controls">
+      <button id="startBtn">开始查找</button>
+      <button id="resetBtn" class="secondary">重新随机</button>
+      <button id="stepBtn" class="secondary">单步执行</button>
+      <button id="stopBtn" class="danger">暂停</button>
+
+      <div class="target-wrap">
+        <label for="targetInput">目标值</label>
+        <input id="targetInput" type="number" />
+      </div>
+
+      <div class="speed-wrap">
+        <label for="speed">速度</label>
+        <input id="speed" type="range" min="100" max="1200" value="450" step="50" />
+        <span id="speedValue">450 ms</span>
+      </div>
+    </div>
+
+    <div id="board" class="board"></div>
+
+    <div class="status">
+      <div class="card">
+        <div class="label">当前数组</div>
+        <div class="value" id="arrayText">-</div>
+      </div>
+      <div class="card">
+        <div class="label">目标值</div>
+        <div class="value" id="targetText">-</div>
+      </div>
+      <div class="card">
+        <div class="label">检查次数</div>
+        <div class="value" id="checkCount">0</div>
+      </div>
+      <div class="card">
+        <div class="label">当前状态</div>
+        <div class="value" id="message">等待开始</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span class="legend-item"><span class="dot" style="background:#94a3b8"></span>未检查</span>
+      <span class="legend-item"><span class="dot" style="background:#f59e0b"></span>当前检查</span>
+      <span class="legend-item"><span class="dot" style="background:#64748b"></span>已检查</span>
+      <span class="legend-item"><span class="dot" style="background:#10b981"></span>已找到</span>
+    </div>
+  </div>
+
+  <script>
+    const board = document.getElementById('board');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const stepBtn = document.getElementById('stepBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const targetInput = document.getElementById('targetInput');
+    const speedInput = document.getElementById('speed');
+    const speedValue = document.getElementById('speedValue');
+    const arrayText = document.getElementById('arrayText');
+    const targetText = document.getElementById('targetText');
+    const checkCountEl = document.getElementById('checkCount');
+    const messageEl = document.getElementById('message');
+
+    let arr = [];
+    let target = 0;
+    let delay = Number(speedInput.value);
+    let running = false;
+    let stopRequested = false;
+    let currentIndex = 0;
+    let checkCount = 0;
+    let checkedSet = new Set();
+    let foundIndex = -1;
+
+    function randomArray(size = 10) {
+      return Array.from({ length: size }, () => Math.floor(Math.random() * 90) + 10);
+    }
+
+    function pickTarget() {
+      const chooseExisting = Math.random() > 0.35;
+      if (chooseExisting) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+      return Math.floor(Math.random() * 90) + 10;
+    }
+
+    function resetState() {
+      arr = randomArray();
+      target = pickTarget();
+      targetInput.value = target;
+      delay = Number(speedInput.value);
+      running = false;
+      stopRequested = false;
+      currentIndex = 0;
+      checkCount = 0;
+      checkedSet = new Set();
+      foundIndex = -1;
+      updateInfo('等待开始');
+      render();
+      updateButtons();
+    }
+
+    function updateButtons() {
+      startBtn.disabled = running;
+      resetBtn.disabled = running;
+      stepBtn.disabled = running;
+      targetInput.disabled = running;
+    }
+
+    function updateInfo(message) {
+      arrayText.textContent = arr.join(', ');
+      targetText.textContent = target;
+      checkCountEl.textContent = checkCount;
+      messageEl.textContent = message;
+    }
+
+    function render() {
+      board.innerHTML = '';
+      arr.forEach((value, index) => {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.textContent = value;
+
+        if (checkedSet.has(index)) cell.classList.add('checked');
+        if (index === currentIndex && foundIndex === -1 && currentIndex < arr.length) cell.classList.add('active');
+        if (index === foundIndex) cell.classList.add('found');
+
+        const indexLabel = document.createElement('div');
+        indexLabel.className = 'index';
+        indexLabel.textContent = index;
+        cell.appendChild(indexLabel);
+
+        board.appendChild(cell);
+      });
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function linearSearch() {
+      target = Number(targetInput.value);
+      if (Number.isNaN(target)) {
+        updateInfo('请输入目标值');
+        return;
+      }
+
+      running = true;
+      stopRequested = false;
+      updateButtons();
+
+      while (currentIndex < arr.length) {
+        if (stopRequested) {
+          running = false;
+          updateButtons();
+          updateInfo('已暂停');
+          render();
+          return;
+        }
+
+        checkCount++;
+        updateInfo(`正在检查索引 ${currentIndex} 的元素 ${arr[currentIndex]}`);
+        render();
+        await sleep(delay);
+
+        if (arr[currentIndex] === target) {
+          foundIndex = currentIndex;
+          updateInfo(`找到目标值 ${target}，索引为 ${currentIndex}`);
+          render();
+          running = false;
+          updateButtons();
+          return;
+        }
+
+        checkedSet.add(currentIndex);
+        currentIndex++;
+        render();
+        await sleep(delay * 0.5);
+      }
+
+      updateInfo(`查找结束：数组中不存在 ${target}`);
+      running = false;
+      updateButtons();
+      render();
+    }
+
+    function singleStep() {
+      if (running) return;
+
+      target = Number(targetInput.value);
+      if (Number.isNaN(target)) {
+        updateInfo('请输入目标值');
+        return;
+      }
+
+      if (foundIndex !== -1) {
+        updateInfo(`已经找到目标值 ${target}，索引为 ${foundIndex}`);
+        render();
+        return;
+      }
+
+      if (currentIndex >= arr.length) {
+        updateInfo(`查找结束：数组中不存在 ${target}`);
+        render();
+        return;
+      }
+
+      checkCount++;
+      updateInfo(`单步：检查索引 ${currentIndex} 的元素 ${arr[currentIndex]}`);
+      render();
+
+      if (arr[currentIndex] === target) {
+        foundIndex = currentIndex;
+        updateInfo(`找到目标值 ${target}，索引为 ${currentIndex}`);
+        render();
+        return;
+      }
+
+      checkedSet.add(currentIndex);
+      currentIndex++;
+      render();
+
+      if (currentIndex >= arr.length) {
+        updateInfo(`查找结束：数组中不存在 ${target}`);
+      }
+    }
+
+    startBtn.addEventListener('click', linearSearch);
+    resetBtn.addEventListener('click', resetState);
+    stepBtn.addEventListener('click', singleStep);
+    stopBtn.addEventListener('click', () => {
+      stopRequested = true;
+    });
+
+    targetInput.addEventListener('change', () => {
+      target = Number(targetInput.value);
+      targetText.textContent = target;
+    });
+
+    speedInput.addEventListener('input', (e) => {
+      delay = Number(e.target.value);
+      speedValue.textContent = `${delay} ms`;
+    });
+
+    resetState();
+  </script>
+</body>
+</html>

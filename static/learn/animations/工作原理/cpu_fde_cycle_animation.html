@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPU FDE 循环动画</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      color: #0f172a;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .app {
+      max-width: 1180px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.94);
+      border-radius: 28px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      padding: 24px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      font-size: 15px;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .secondary { background: #64748b; }
+    .danger { background: #dc2626; }
+
+    .speed-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #f1f5f9;
+      border-radius: 12px;
+    }
+
+    input[type="range"] { width: 180px; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .diagram {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 18px;
+      min-height: 560px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cpu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .block {
+      border-radius: 18px;
+      background: white;
+      border: 2px solid #cbd5e1;
+      min-height: 106px;
+      padding: 14px;
+      position: relative;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .block.active {
+      border-color: #f59e0b;
+      background: #fff7ed;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(245, 158, 11, 0.18);
+    }
+
+    .block.done {
+      border-color: #10b981;
+      background: #ecfdf5;
+    }
+
+    .block h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .value {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1e293b;
+      word-break: break-word;
+    }
+
+    .memory {
+      margin-top: 18px;
+      background: white;
+      border: 2px solid #cbd5e1;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .memory-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .memory-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .cell {
+      border-radius: 14px;
+      background: #e2e8f0;
+      padding: 12px 10px;
+      text-align: center;
+      transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cell.active {
+      background: #fde68a;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 18px rgba(245, 158, 11, 0.2);
+    }
+
+    .cell.done {
+      background: #bbf7d0;
+    }
+
+    .cell .addr {
+      font-size: 12px;
+      color: #475569;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .cell .instr {
+      font-size: 13px;
+      color: #0f172a;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .arrow-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .pulse {
+      position: absolute;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+      opacity: 0;
+    }
+
+    .pulse.show {
+      opacity: 1;
+      animation: movePulse 1s linear infinite;
+    }
+
+    .pulse.bus1 { top: 180px; left: 12%; width: 56%; }
+    .pulse.bus2 { top: 365px; left: 22%; width: 48%; }
+    .pulse.bus3 { top: 470px; left: 18%; width: 58%; }
+
+    @keyframes movePulse {
+      from { transform: translateX(-24px); }
+      to { transform: translateX(24px); }
+    }
+
+    .side {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step {
+      border-radius: 14px;
+      padding: 12px;
+      background: white;
+      border: 1px solid #dbeafe;
+      transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .step.active {
+      background: #eff6ff;
+      border-color: #60a5fa;
+      transform: translateX(4px);
+    }
+
+    .step-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .status-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .status-item {
+      border-radius: 14px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      padding: 12px;
+    }
+
+    .status-label {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .status-value {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .memory-list { grid-template-columns: repeat(3, 1fr); }
+      .cpu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .cpu-grid, .memory-list { grid-template-columns: 1fr; }
+      h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>CPU 的 FDE 循环动画</h1>
+    <p class="subtitle">
+      这个动画演示 CPU 如何不断执行 <strong>Fetch（取指）→ Decode（译码）→ Execute（执行）</strong>。你可以单步播放，也可以自动运行，适合课堂演示 FDE cycle。
+    </p>
+
+    <div class="controls">
+      <button id="startBtn">自动播放</button>
+      <button id="stepBtn" class="secondary">单步执行</button>
+      <button id="pauseBtn" class="danger">暂停</button>
+      <button id="resetBtn" class="secondary">重置</button>
+      <div class="speed-wrap">
+        <label for="speed">速度</label>
+        <input id="speed" type="range" min="300" max="1800" step="100" value="900" />
+        <span id="speedText">900 ms</span>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="diagram">
+        <div class="arrow-layer">
+          <div class="pulse bus1" id="bus1"></div>
+          <div class="pulse bus2" id="bus2"></div>
+          <div class="pulse bus3" id="bus3"></div>
+        </div>
+
+        <div class="cpu-grid">
+          <div class="block" id="pcBlock">
+            <h3>PC</h3>
+            <div class="small">Program Counter</div>
+            <div class="value" id="pcValue">0</div>
+          </div>
+
+          <div class="block" id="marBlock">
+            <h3>MAR</h3>
+            <div class="small">Memory Address Register</div>
+            <div class="value" id="marValue">-</div>
+          </div>
+
+          <div class="block" id="mdrBlock">
+            <h3>MDR</h3>
+            <div class="small">Memory Data Register</div>
+            <div class="value" id="mdrValue">-</div>
+          </div>
+
+          <div class="block" id="cirBlock">
+            <h3>CIR</h3>
+            <div class="small">Current Instruction Register</div>
+            <div class="value" id="cirValue">-</div>
+          </div>
+
+          <div class="block" id="cuBlock">
+            <h3>CU</h3>
+            <div class="small">Control Unit</div>
+            <div class="value" id="cuValue">等待控制信号</div>
+          </div>
+
+          <div class="block" id="accBlock">
+            <h3>ACC</h3>
+            <div class="small">Accumulator</div>
+            <div class="value" id="accValue">5</div>
+          </div>
+        </div>
+
+        <div class="memory">
+          <div class="memory-title">Main Memory</div>
+          <div class="memory-list" id="memoryList"></div>
+        </div>
+
+        <div class="legend">
+          <span class="legend-item"><span class="dot" style="background:#fde68a"></span>当前地址 / 活跃部件</span>
+          <span class="legend-item"><span class="dot" style="background:#bbf7d0"></span>已完成指令</span>
+          <span class="legend-item"><span class="dot" style="background:#e2e8f0"></span>普通状态</span>
+        </div>
+      </div>
+
+      <div class="side">
+        <div class="panel">
+          <h2>FDE 步骤</h2>
+          <div class="steps">
+            <div class="step" id="step1">
+              <div class="step-title">1. Fetch</div>
+              <div class="step-desc">PC 的地址送到 MAR，并从主存中取出指令到 MDR。</div>
+            </div>
+            <div class="step" id="step2">
+              <div class="step-title">2. Decode</div>
+              <div class="step-desc">指令进入 CIR，控制单元分析操作码和操作数。</div>
+            </div>
+            <div class="step" id="step3">
+              <div class="step-title">3. Execute</div>
+              <div class="step-desc">控制单元发出信号，执行指令并更新寄存器或内存。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>当前状态</h2>
+          <div class="status-grid">
+            <div class="status-item">
+              <div class="status-label">当前阶段</div>
+              <div class="status-value" id="phaseText">等待开始</div>
+            </div>
+            <div class="status-item">
+              <div class="status-label">正在处理的指令</div>
+              <div class="status-value" id="instructionText">-</div>
+            </div>
+            <div class="status-item">
+              <div class="status-label">解释说明</div>
+              <div class="status-value" id="messageText">点击按钮开始动画</div>
+            </div>
+            <div class="status-item">
+              <div class="status-label">已完成周期数</div>
+              <div class="status-value" id="cycleText">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const memory = [
+      { addr: 0, instr: 'LDA #3', type: 'LDA', value: 3 },
+      { addr: 1, instr: 'ADD #4', type: 'ADD', value: 4 },
+      { addr: 2, instr: 'SUB #2', type: 'SUB', value: 2 },
+      { addr: 3, instr: 'STA 9', type: 'STA', value: 9 },
+      { addr: 4, instr: 'ADD #1', type: 'ADD', value: 1 },
+      { addr: 5, instr: 'HLT', type: 'HLT', value: null },
+      { addr: 6, instr: '---', type: 'DATA', value: null },
+      { addr: 7, instr: '---', type: 'DATA', value: null },
+      { addr: 8, instr: '---', type: 'DATA', value: null },
+      { addr: 9, instr: '0', type: 'DATA', value: 0 }
+    ];
+
+    const state = {
+      pc: 0,
+      mar: '-',
+      mdr: '-',
+      cir: '-',
+      acc: 5,
+      cu: '等待控制信号',
+      currentPhase: '等待开始',
+      currentInstruction: '-',
+      message: '点击按钮开始动画',
+      cycleCount: 0,
+      currentStep: 0,
+      running: false,
+      paused: false,
+      finished: false,
+      activeAddr: null,
+      completed: new Set()
+    };
+
+    const phaseFlow = ['fetch', 'decode', 'execute'];
+
+    const els = {
+      pcValue: document.getElementById('pcValue'),
+      marValue: document.getElementById('marValue'),
+      mdrValue: document.getElementById('mdrValue'),
+      cirValue: document.getElementById('cirValue'),
+      accValue: document.getElementById('accValue'),
+      cuValue: document.getElementById('cuValue'),
+      phaseText: document.getElementById('phaseText'),
+      instructionText: document.getElementById('instructionText'),
+      messageText: document.getElementById('messageText'),
+      cycleText: document.getElementById('cycleText'),
+      memoryList: document.getElementById('memoryList'),
+      speed: document.getElementById('speed'),
+      speedText: document.getElementById('speedText'),
+      startBtn: document.getElementById('startBtn'),
+      stepBtn: document.getElementById('stepBtn'),
+      pauseBtn: document.getElementById('pauseBtn'),
+      resetBtn: document.getElementById('resetBtn'),
+      blocks: {
+        pc: document.getElementById('pcBlock'),
+        mar: document.getElementById('marBlock'),
+        mdr: document.getElementById('mdrBlock'),
+        cir: document.getElementById('cirBlock'),
+        cu: document.getElementById('cuBlock'),
+        acc: document.getElementById('accBlock')
+      },
+      steps: {
+        fetch: document.getElementById('step1'),
+        decode: document.getElementById('step2'),
+        execute: document.getElementById('step3')
+      },
+      buses: {
+        bus1: document.getElementById('bus1'),
+        bus2: document.getElementById('bus2'),
+        bus3: document.getElementById('bus3')
+      }
+    };
+
+    function getDelay() {
+      return Number(els.speed.value);
+    }
+
+    function renderMemory() {
+      els.memoryList.innerHTML = '';
+      memory.forEach(cell => {
+        const div = document.createElement('div');
+        div.className = 'cell';
+        if (state.activeAddr === cell.addr) div.classList.add('active');
+        if (state.completed.has(cell.addr)) div.classList.add('done');
+        div.innerHTML = `<div class="addr">Address ${cell.addr}</div><div class="instr">${cell.instr}</div>`;
+        els.memoryList.appendChild(div);
+      });
+    }
+
+    function clearHighlights() {
+      Object.values(els.blocks).forEach(b => b.classList.remove('active', 'done'));
+      Object.values(els.steps).forEach(s => s.classList.remove('active'));
+      Object.values(els.buses).forEach(b => b.classList.remove('show'));
+    }
+
+    function render() {
+      els.pcValue.textContent = state.pc;
+      els.marValue.textContent = state.mar;
+      els.mdrValue.textContent = state.mdr;
+      els.cirValue.textContent = state.cir;
+      els.accValue.textContent = state.acc;
+      els.cuValue.textContent = state.cu;
+      els.phaseText.textContent = state.currentPhase;
+      els.instructionText.textContent = state.currentInstruction;
+      els.messageText.textContent = state.message;
+      els.cycleText.textContent = state.cycleCount;
+      renderMemory();
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function setUIState() {
+      els.startBtn.disabled = state.running;
+      els.stepBtn.disabled = state.running;
+      els.resetBtn.disabled = state.running;
+    }
+
+    function getCurrentInstruction() {
+      return memory[state.pc] || null;
+    }
+
+    async function runFetch() {
+      clearHighlights();
+      const instruction = getCurrentInstruction();
+      if (!instruction) {
+        state.finished = true;
+        state.currentPhase = '结束';
+        state.message = 'PC 超出范围，程序结束';
+        render();
+        return;
+      }
+
+      state.currentPhase = 'Fetch';
+      state.currentInstruction = instruction.instr;
+      state.message = '把 PC 中的地址复制到 MAR，准备访问主存';
+      state.mar = state.pc;
+      state.activeAddr = state.pc;
+      els.blocks.pc.classList.add('active');
+      els.blocks.mar.classList.add('active');
+      els.steps.fetch.classList.add('active');
+      els.buses.bus1.classList.add('show');
+      render();
+      await sleep(getDelay());
+
+      clearHighlights();
+      state.message = '主存把该地址中的指令送到 MDR';
+      state.mdr = instruction.instr;
+      els.blocks.mdr.classList.add('active');
+      els.steps.fetch.classList.add('active');
+      els.buses.bus2.classList.add('show');
+      render();
+      await sleep(getDelay());
+
+      state.pc += 1;
+    }
+
+    async function runDecode() {
+      clearHighlights();
+      state.currentPhase = 'Decode';
+      state.cir = state.mdr;
+      state.cu = '正在译码';
+      state.message = '把 MDR 中的指令复制到 CIR，并由控制单元分析操作码';
+      els.blocks.cir.classList.add('active');
+      els.blocks.cu.classList.add('active');
+      els.steps.decode.classList.add('active');
+      els.buses.bus3.classList.add('show');
+      render();
+      await sleep(getDelay());
+    }
+
+    async function runExecute() {
+      clearHighlights();
+      const instruction = state.cir;
+      const item = memory.find(m => m.instr === instruction && m.addr === state.activeAddr) || memory[state.activeAddr];
+
+      state.currentPhase = 'Execute';
+      els.steps.execute.classList.add('active');
+      els.blocks.cu.classList.add('active');
+
+      if (!item) {
+        state.message = '找不到当前指令';
+        render();
+        await sleep(getDelay());
+        return;
+      }
+
+      switch (item.type) {
+        case 'LDA':
+          state.acc = item.value;
+          state.cu = '执行 LDA';
+          state.message = `把立即数 ${item.value} 载入 ACC`; 
+          els.blocks.acc.classList.add('active');
+          break;
+        case 'ADD':
+          state.acc += item.value;
+          state.cu = '执行 ADD';
+          state.message = `ACC 加上 ${item.value}，结果变为 ${state.acc}`;
+          els.blocks.acc.classList.add('active');
+          break;
+        case 'SUB':
+          state.acc -= item.value;
+          state.cu = '执行 SUB';
+          state.message = `ACC 减去 ${item.value}，结果变为 ${state.acc}`;
+          els.blocks.acc.classList.add('active');
+          break;
+        case 'STA':
+          memory[item.value].instr = String(state.acc);
+          memory[item.value].value = state.acc;
+          state.cu = '执行 STA';
+          state.message = `把 ACC 的值 ${state.acc} 存入地址 ${item.value}`;
+          state.activeAddr = item.value;
+          break;
+        case 'HLT':
+          state.cu = '执行 HLT';
+          state.message = '遇到 HLT，程序停止';
+          state.finished = true;
+          break;
+        default:
+          state.cu = '无操作';
+          state.message = '这一步没有可执行操作';
+      }
+
+      state.completed.add(item.addr);
+      state.cycleCount += 1;
+      render();
+      await sleep(getDelay());
+    }
+
+    async function oneFullCycle() {
+      if (state.finished) {
+        state.currentPhase = '结束';
+        state.message = '程序已经结束，请点击重置';
+        render();
+        return;
+      }
+      await runFetch();
+      if (state.finished) return;
+      await runDecode();
+      if (state.finished) return;
+      await runExecute();
+      clearHighlights();
+      if (!state.finished) {
+        state.activeAddr = null;
+        state.cu = '等待下一条指令';
+        render();
+      } else {
+        state.currentPhase = '结束';
+        render();
+      }
+    }
+
+    async function autoRun() {
+      if (state.running || state.finished) return;
+      state.running = true;
+      setUIState();
+      while (state.running && !state.finished) {
+        await oneFullCycle();
+      }
+      state.running = false;
+      setUIState();
+    }
+
+    function pauseRun() {
+      state.running = false;
+      state.currentPhase = '已暂停';
+      state.message = '自动播放已暂停';
+      clearHighlights();
+      render();
+      setUIState();
+    }
+
+    function resetAll() {
+      memory[9].instr = '0';
+      memory[9].value = 0;
+      Object.assign(state, {
+        pc: 0,
+        mar: '-',
+        mdr: '-',
+        cir: '-',
+        acc: 5,
+        cu: '等待控制信号',
+        currentPhase: '等待开始',
+        currentInstruction: '-',
+        message: '点击按钮开始动画',
+        cycleCount: 0,
+        currentStep: 0,
+        running: false,
+        paused: false,
+        finished: false,
+        activeAddr: null,
+        completed: new Set()
+      });
+      clearHighlights();
+      render();
+      setUIState();
+    }
+
+    els.startBtn.addEventListener('click', autoRun);
+    els.pauseBtn.addEventListener('click', pauseRun);
+    els.resetBtn.addEventListener('click', resetAll);
+    els.stepBtn.addEventListener('click', async () => {
+      if (state.running) return;
+      await oneFullCycle();
+    });
+    els.speed.addEventListener('input', e => {
+      els.speedText.textContent = `${e.target.value} ms`;
+    });
+
+    render();
+    setUIState();
+  </script>
+</body>
+</html>

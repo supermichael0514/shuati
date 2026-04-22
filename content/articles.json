@@ -1,9 +1,9 @@
 [
   {
-    "title": "如何带学生建立计算思维",
-    "summary": "课堂设计思路：从问题分解到抽象建模，再到迭代优化。",
+    "title": "让计算机网络章节的海量名词不再头疼",
+    "summary": "通过绘制数据包的传输过程，深入理解网络中各个关节的功能。",
     "date": "2026-04-22",
-    "link": "",
-    "image": "/static/images/logo.png"
+    "link": "/static/learn/articles/NetworkPoster.pdf",
+    "image": "/static/learn/articles/NetworkPoster.jpg"
   }
 ]

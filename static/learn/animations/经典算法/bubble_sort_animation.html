@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bubble Sort 动画</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      color: #1f2937;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .app {
+      width: min(980px, 100%);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+      padding: 24px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      margin: 0 0 22px;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 15px;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      transform: none;
+    }
+
+    .secondary { background: #64748b; }
+    .danger { background: #dc2626; }
+
+    .speed-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #f1f5f9;
+      border-radius: 12px;
+    }
+
+    input[type="range"] {
+      width: 180px;
+      cursor: pointer;
+    }
+
+    .board {
+      height: 360px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 8px;
+      padding: 20px;
+      border-radius: 18px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    .bar {
+      width: 42px;
+      min-width: 18px;
+      border-radius: 12px 12px 6px 6px;
+      background: #94a3b8;
+      color: white;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      font-weight: bold;
+      padding-top: 8px;
+      transition: height 0.35s ease, transform 0.35s ease, background 0.25s ease;
+      user-select: none;
+    }
+
+    .bar.active { background: #f59e0b; transform: translateY(-8px); }
+    .bar.compare { background: #ef4444; transform: translateY(-10px); }
+    .bar.sorted { background: #10b981; }
+
+    .status {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+
+    .label {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .value {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+    }
+
+    @media (max-width: 720px) {
+      .board { gap: 5px; height: 300px; }
+      .bar { width: 28px; font-size: 12px; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>Bubble Sort 动画演示</h1>
+    <p class="subtitle">
+      点击“开始排序”后，页面会逐步展示冒泡排序如何比较并交换相邻元素。红色表示正在比较，绿色表示已经排好序。
+    </p>
+
+    <div class="controls">
+      <button id="startBtn">开始排序</button>
+      <button id="resetBtn" class="secondary">重新随机</button>
+      <button id="stepBtn" class="secondary">单步执行</button>
+      <button id="stopBtn" class="danger">暂停</button>
+      <div class="speed-wrap">
+        <label for="speed">速度</label>
+        <input id="speed" type="range" min="80" max="1200" value="420" step="20" />
+        <span id="speedValue">420 ms</span>
+      </div>
+    </div>
+
+    <div id="board" class="board"></div>
+
+    <div class="status">
+      <div class="card">
+        <div class="label">当前数组</div>
+        <div class="value" id="arrayText">-</div>
+      </div>
+      <div class="card">
+        <div class="label">比较次数</div>
+        <div class="value" id="compareCount">0</div>
+      </div>
+      <div class="card">
+        <div class="label">交换次数</div>
+        <div class="value" id="swapCount">0</div>
+      </div>
+      <div class="card">
+        <div class="label">当前状态</div>
+        <div class="value" id="message">等待开始</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span class="legend-item"><span class="dot" style="background:#94a3b8"></span>未处理</span>
+      <span class="legend-item"><span class="dot" style="background:#ef4444"></span>正在比较</span>
+      <span class="legend-item"><span class="dot" style="background:#10b981"></span>已排序</span>
+    </div>
+  </div>
+
+  <script>
+    const board = document.getElementById('board');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const stepBtn = document.getElementById('stepBtn');
+    const speedInput = document.getElementById('speed');
+    const speedValue = document.getElementById('speedValue');
+    const arrayText = document.getElementById('arrayText');
+    const compareCountEl = document.getElementById('compareCount');
+    const swapCountEl = document.getElementById('swapCount');
+    const messageEl = document.getElementById('message');
+
+    let arr = [];
+    let compareCount = 0;
+    let swapCount = 0;
+    let delay = Number(speedInput.value);
+    let running = false;
+    let stopRequested = false;
+    let i = 0;
+    let j = 0;
+
+    function randomArray(size = 10) {
+      return Array.from({ length: size }, () => Math.floor(Math.random() * 90) + 10);
+    }
+
+    function resetState() {
+      arr = randomArray();
+      compareCount = 0;
+      swapCount = 0;
+      running = false;
+      stopRequested = false;
+      i = 0;
+      j = 0;
+      updateInfo('等待开始');
+      render();
+      updateButtons();
+    }
+
+    function updateButtons() {
+      startBtn.disabled = running;
+      resetBtn.disabled = running;
+      stepBtn.disabled = running;
+    }
+
+    function updateInfo(message) {
+      arrayText.textContent = arr.join(', ');
+      compareCountEl.textContent = compareCount;
+      swapCountEl.textContent = swapCount;
+      messageEl.textContent = message;
+    }
+
+    function render(active = [], sortedFrom = arr.length) {
+      board.innerHTML = '';
+      const maxVal = Math.max(...arr);
+
+      arr.forEach((value, index) => {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        bar.style.height = `${(value / maxVal) * 260 + 30}px`;
+        bar.textContent = value;
+
+        if (index >= sortedFrom) {
+          bar.classList.add('sorted');
+        }
+        if (active.includes(index)) {
+          bar.classList.add('compare');
+        }
+
+        board.appendChild(bar);
+      });
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function bubbleSort() {
+      running = true;
+      stopRequested = false;
+      updateButtons();
+
+      for (; i < arr.length - 1; i++) {
+        let swapped = false;
+
+        for (; j < arr.length - 1 - i; j++) {
+          if (stopRequested) {
+            running = false;
+            updateButtons();
+            updateInfo('已暂停');
+            render([], arr.length - i);
+            return;
+          }
+
+          compareCount++;
+          updateInfo(`比较第 ${j + 1} 和第 ${j + 2} 个元素`);
+          render([j, j + 1], arr.length - i);
+          await sleep(delay);
+
+          if (arr[j] > arr[j + 1]) {
+            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            swapCount++;
+            swapped = true;
+            updateInfo(`交换 ${arr[j + 1]} 和 ${arr[j]}`);
+            render([j, j + 1], arr.length - i);
+            await sleep(delay);
+          }
+        }
+
+        j = 0;
+        if (!swapped) {
+          render([], 0);
+          updateInfo('数组已有序，提前结束');
+          running = false;
+          updateButtons();
+          return;
+        }
+      }
+
+      render([], 0);
+      updateInfo('排序完成');
+      running = false;
+      updateButtons();
+      i = 0;
+      j = 0;
+    }
+
+    function singleStep() {
+      if (running) return;
+
+      if (i >= arr.length - 1) {
+        render([], 0);
+        updateInfo('排序完成');
+        return;
+      }
+
+      const sortedFrom = arr.length - i;
+      compareCount++;
+      render([j, j + 1], sortedFrom);
+
+      if (arr[j] > arr[j + 1]) {
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        swapCount++;
+        updateInfo(`单步：交换第 ${j + 1} 和第 ${j + 2} 个元素`);
+      } else {
+        updateInfo(`单步：比较第 ${j + 1} 和第 ${j + 2} 个元素，无需交换`);
+      }
+
+      j++;
+      if (j >= arr.length - 1 - i) {
+        j = 0;
+        i++;
+      }
+
+      if (i >= arr.length - 1) {
+        render([], 0);
+        updateInfo('排序完成');
+      }
+    }
+
+    startBtn.addEventListener('click', bubbleSort);
+    resetBtn.addEventListener('click', resetState);
+    stopBtn.addEventListener('click', () => {
+      stopRequested = true;
+    });
+    stepBtn.addEventListener('click', singleStep);
+
+    speedInput.addEventListener('input', (e) => {
+      delay = Number(e.target.value);
+      speedValue.textContent = `${delay} ms`;
+    });
+
+    resetState();
+  </script>
+</body>
+</html>

@@ -10,9 +10,8 @@
   <div class="portal-page">
     <header class="portal-header card">
       <div>
-        <p class="neon-label">{{ 'PRACTICE CENTER' if lang == 'en' else '练习中心' }}</p>
-        <h1>{{ 'Practice Center' if lang == 'en' else '练习中心' }}</h1>
-        <p class="portal-subtitle">{{ 'Question filtering + in-page PDF preview' if lang == 'en' else '四级筛选 + 页面内 PDF 预览' }}</p>
+        <p class="neon-label">{{ 'PRACTICE CENTER' if lang == 'en' else 'PRACTICE' }}</p>
+        <h1>{{ 'Practice Center' if lang == 'en' else '练一练' }}</h1>
       </div>
       <div class="portal-actions">
         <a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang == 'en' else '返回入口' }}</a>
