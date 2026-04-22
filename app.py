@@ -31,6 +31,7 @@ DB_FILE = BASE_DIR / "app.db"
 SLIDES_DIR = BASE_DIR / "static" / "learn" / "slides"
 FILES_DIR = BASE_DIR / "static" / "learn" / "files"
 ANIMATIONS_DIR = BASE_DIR / "static" / "learn" / "animations"
+CONTENT_DIR = BASE_DIR / "content"
 
 FILTER_ALL = "全部"
 
@@ -255,6 +256,32 @@ def send_chat_email(signature: str, content: str):
         return True, ""
     except Exception as exc:
         return False, str(exc)
+
+
+def load_section_items(filename: str):
+    path = CONTENT_DIR / filename
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    if not isinstance(data, list):
+        return []
+    items = []
+    for row in data:
+        if not isinstance(row, dict):
+            continue
+        items.append(
+            {
+                "title": str(row.get("title", "")).strip(),
+                "summary": str(row.get("summary", "")).strip(),
+                "date": str(row.get("date", "")).strip(),
+                "link": str(row.get("link", "")).strip(),
+                "image": str(row.get("image", "")).strip(),
+            }
+        )
+    return [it for it in items if it["title"]]
 
 
 def get_lang():
@@ -776,21 +803,36 @@ def learn_animations_page():
 @login_required
 def learn_articles_page():
     lang = get_lang()
-    return render_template("learn_articles.html", lang=lang, current_user=current_username())
+    return render_template(
+        "learn_articles.html",
+        lang=lang,
+        current_user=current_username(),
+        items=load_section_items("articles.json"),
+    )
 
 
 @app.route("/learn/projects")
 @login_required
 def learn_projects_page():
     lang = get_lang()
-    return render_template("learn_projects.html", lang=lang, current_user=current_username())
+    return render_template(
+        "learn_projects.html",
+        lang=lang,
+        current_user=current_username(),
+        items=load_section_items("projects.json"),
+    )
 
 
 @app.route("/learn/announcements")
 @login_required
 def learn_announcements_page():
     lang = get_lang()
-    return render_template("learn_announcements.html", lang=lang, current_user=current_username())
+    return render_template(
+        "learn_announcements.html",
+        lang=lang,
+        current_user=current_username(),
+        items=load_section_items("announcements.json"),
+    )
 
 
 @app.route("/learn/files")

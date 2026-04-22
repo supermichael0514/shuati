@@ -12,8 +12,20 @@
 <section class="card learn-subpage">
   <h2>{{ 'Student Works' if lang=='en' else '学生作品展示' }}</h2>
   <div class="article-list">
-    <article class="article-card"><h3>{{ 'Game Development Project' if lang=='en' else '小游戏开发项目' }}</h3><p>{{ 'Show game screenshots, source code and reflection.' if lang=='en' else '可展示作品截图、源码和项目总结。' }}</p></article>
-    <article class="article-card"><h3>{{ 'Data Analysis Project' if lang=='en' else '数据分析项目' }}</h3><p>{{ 'Present student outcome and report summary here.' if lang=='en' else '可展示学生成果与报告摘要。' }}</p></article>
+    {% for item in items %}
+    <article class="article-card">
+      <h3>{{ item.title }}</h3>
+      {% if item.date %}<p class="record-meta">{{ item.date }}</p>{% endif %}
+      {% if item.image %}<img class="content-image" src="{{ item.image }}" alt="{{ item.title }}">{% endif %}
+      <p>{{ item.summary }}</p>
+      {% if item.link %}<p><a class="secondary" href="{{ item.link }}" target="_blank">{{ 'Open' if lang=='en' else '查看作品' }}</a></p>{% endif %}
+    </article>
+    {% else %}
+    <article class="article-card">
+      <h3>{{ 'No project yet' if lang=='en' else '暂时没有作品' }}</h3>
+      <p>{{ 'Please add records into content/projects.json.' if lang=='en' else '请在 content/projects.json 中新增内容。' }}</p>
+    </article>
+    {% endfor %}
   </div>
 </section>
 </div></body></html>

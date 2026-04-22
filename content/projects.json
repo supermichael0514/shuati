@@ -1,0 +1,9 @@
+[
+  {
+    "title": "学生作品：迷宫寻路可视化",
+    "summary": "使用 BFS/DFS 对比路径搜索策略，并展示动画过程。",
+    "date": "2026-04-22",
+    "link": "",
+    "image": "/static/images/logo.png"
+  }
+]

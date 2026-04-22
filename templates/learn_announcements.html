@@ -13,8 +13,19 @@
   <h2>{{ 'Website Notices' if lang=='en' else '网站公告' }}</h2>
   <p class="portal-subtitle">{{ 'This page is display-only and has no user interaction.' if lang=='en' else '本页面仅展示公告，用户不可交互。' }}</p>
   <div class="reply-list">
-    <div class="reply-item"><strong>2026-04-22</strong> {{ 'Weekly update: New learning resources are being uploaded.' if lang=='en' else '本周更新：正在持续上传新的学习资源。' }}</div>
-    <div class="reply-item"><strong>2026-04-22</strong> {{ 'Game module optimization completed, welcome to try.' if lang=='en' else '游戏模块优化已完成，欢迎体验。' }}</div>
+    {% for item in items %}
+    <div class="reply-item">
+      {% if item.date %}<strong>{{ item.date }}</strong>{% endif %}
+      {{ item.title }}
+      {% if item.summary %}<div class="record-meta">{{ item.summary }}</div>{% endif %}
+      {% if item.link %}<p><a class="secondary" href="{{ item.link }}" target="_blank">{{ 'Open' if lang=='en' else '查看' }}</a></p>{% endif %}
+    </div>
+    {% else %}
+    <div class="reply-item">
+      <strong>{{ 'No announcement yet' if lang=='en' else '暂时没有公告' }}</strong>
+      <div class="record-meta">{{ 'Please add records into content/announcements.json.' if lang=='en' else '请在 content/announcements.json 中新增公告。' }}</div>
+    </div>
+    {% endfor %}
   </div>
 </section>
 </div></body></html>
