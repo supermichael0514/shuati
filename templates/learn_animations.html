@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Animations' if lang=='en' else '看动画' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">LEARN · ANIMATIONS</p><h1>{{ 'Animations' if lang=='en' else '看动画' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+
+<section class="card learn-subpage">
+  {% if pages %}
+  <div class="learn-sub-layout">
+    <aside class="learn-sidebar">
+      <h2>{{ 'Animation Pages' if lang=='en' else '动画页面列表' }}</h2>
+      {% for item in pages %}
+      <a class="record {{ 'active' if selected_page and selected_page.name == item.name else '' }}" href="{{ url_for('learn_animations_page', lang=lang, file=item.name) }}">
+        <div class="record-title">{{ item.name }}</div>
+      </a>
+      {% endfor %}
+    </aside>
+    <div>
+      <iframe class="pdf-frame" src="{{ selected_page.url }}" title="animation-viewer"></iframe>
+    </div>
+  </div>
+  {% else %}
+  <div class="empty big">{{ 'No animation HTML file yet. Put files into static/learn/animations first.' if lang=='en' else '暂时没有动画 HTML，请先放到 static/learn/animations。' }}</div>
+  {% endif %}
+</section>
+</div></body></html>

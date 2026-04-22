@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Articles' if lang=='en' else '看文章' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">LEARN · ARTICLES</p><h1>{{ 'Articles' if lang=='en' else '看文章' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+
+<section class="card learn-subpage">
+  <h2>{{ 'Teaching Reflection Zone' if lang=='en' else '教学心得区' }}</h2>
+  <p class="portal-subtitle">{{ 'Use this area to publish learning notes, topic explanations and teaching reflections.' if lang=='en' else '可在这里发布教学心得、专题文章与学习建议。' }}</p>
+  <div class="article-list">
+    {% for item in items %}
+    <article class="article-card">
+      <h3>{{ item.title }}</h3>
+      {% if item.date %}<p class="record-meta">{{ item.date }}</p>{% endif %}
+      {% if item.image %}<img class="content-image" src="{{ item.image }}" alt="{{ item.title }}">{% endif %}
+      <p>{{ item.summary }}</p>
+      {% if item.link %}<p><a class="secondary" href="{{ item.link }}" target="_blank">{{ 'Open' if lang=='en' else '查看' }}</a></p>{% endif %}
+    </article>
+    {% else %}
+    <article class="article-card">
+      <h3>{{ 'No article yet' if lang=='en' else '暂时没有文章' }}</h3>
+      <p>{{ 'Please add records into content/articles.json.' if lang=='en' else '请在 content/articles.json 中新增内容。' }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+</div></body></html>

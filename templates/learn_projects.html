@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Projects' if lang=='en' else '看作品' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">LEARN · PROJECTS</p><h1>{{ 'Projects' if lang=='en' else '看作品' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+
+<section class="card learn-subpage">
+  <h2>{{ 'Student Works' if lang=='en' else '学生作品展示' }}</h2>
+  <div class="article-list">
+    {% for item in items %}
+    <article class="article-card">
+      <h3>{{ item.title }}</h3>
+      {% if item.date %}<p class="record-meta">{{ item.date }}</p>{% endif %}
+      {% if item.image %}<img class="content-image" src="{{ item.image }}" alt="{{ item.title }}">{% endif %}
+      <p>{{ item.summary }}</p>
+      {% if item.link %}<p><a class="secondary" href="{{ item.link }}" target="_blank">{{ 'Open' if lang=='en' else '查看作品' }}</a></p>{% endif %}
+    </article>
+    {% else %}
+    <article class="article-card">
+      <h3>{{ 'No project yet' if lang=='en' else '暂时没有作品' }}</h3>
+      <p>{{ 'Please add records into content/projects.json.' if lang=='en' else '请在 content/projects.json 中新增内容。' }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+</div></body></html>

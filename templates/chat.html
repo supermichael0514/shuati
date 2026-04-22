@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Message Box' if lang=='en' else '聊一聊' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">CHAT</p><h1>{{ 'Send a Message' if lang=='en' else '发送消息' }}</h1><p class="portal-subtitle">{{ 'Leave your signature and message, then send to teacher email.' if lang=='en' else '填写署名和消息内容，点击发送到老师邮箱。' }}</p></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
+
+<section class="card forum-editor">
+  <form method="post" class="forum-form">
+    <label><span>{{ 'Signature' if lang=='en' else '署名' }}</span><input name="signature" maxlength="80" value="{{ current_user }}" required></label>
+    <label><span>{{ 'Message' if lang=='en' else '消息内容' }}</span><textarea name="content" maxlength="2000" required></textarea></label>
+    <button type="submit">{{ 'Send' if lang=='en' else '发送' }}</button>
+  </form>
+</section>
+</div></body></html>

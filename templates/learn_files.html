@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Official Files' if lang=='en' else '看文件' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">LEARN · FILES</p><h1>{{ 'Official Files' if lang=='en' else '看文件' }}</h1><p class="portal-subtitle">{{ 'Put official PDFs into static/learn/files for viewing.' if lang=='en' else '把官方 PDF 放到 static/learn/files 目录即可查看。' }}</p></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+
+<section class="card learn-subpage">
+  {% if docs %}
+  <div class="learn-sub-layout">
+    <aside class="learn-sidebar">
+      <h2>{{ 'Official Document List' if lang=='en' else '官方文档列表' }}</h2>
+      {% for item in docs %}
+      <a class="record {{ 'active' if selected_doc and selected_doc.name == item.name else '' }}" href="{{ url_for('learn_files_page', lang=lang, file=item.name) }}">
+        <div class="record-title">{{ item.name }}</div>
+      </a>
+      {% endfor %}
+    </aside>
+    <div>
+      <iframe class="pdf-frame" src="{{ selected_doc.url }}#toolbar=1&navpanes=0"></iframe>
+    </div>
+  </div>
+  {% else %}
+  <div class="empty big">{{ 'No official PDF yet. Put files into static/learn/files first.' if lang=='en' else '暂时没有官方 PDF，请先放到 static/learn/files。' }}</div>
+  {% endif %}
+</section>
+</div></body></html>
