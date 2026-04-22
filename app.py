@@ -19,6 +19,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import re
 import random
+import smtplib
+from email.message import EmailMessage
 
 BASE_DIR = Path(__file__).resolve().parent
 INDEX_XLSX = BASE_DIR / "index.xlsx"
@@ -27,6 +29,8 @@ PDF_BASE = BASE_DIR / "pdfs"
 PROGRESS_FILE = BASE_DIR / "progress_web.json"
 DB_FILE = BASE_DIR / "app.db"
 SLIDES_DIR = BASE_DIR / "static" / "learn" / "slides"
+FILES_DIR = BASE_DIR / "static" / "learn" / "files"
+ANIMATIONS_DIR = BASE_DIR / "static" / "learn" / "animations"
 
 FILTER_ALL = "全部"
 
@@ -212,13 +216,45 @@ def current_username():
     return session.get("username", "")
 
 
-def list_slide_pdfs():
-    if not SLIDES_DIR.exists():
+def list_files_with_suffix(directory: Path, suffix: str):
+    if not directory.exists():
         return []
     items = []
-    for path in sorted(SLIDES_DIR.glob("*.pdf"), key=lambda p: p.name.lower()):
-        items.append({"name": path.name, "url": url_for("static", filename=f"learn/slides/{path.name}")})
+    rel_dir = directory.relative_to(BASE_DIR / "static").as_posix()
+    for path in sorted(directory.glob(f"*{suffix}"), key=lambda p: p.name.lower()):
+        items.append({"name": path.name, "url": url_for("static", filename=f"{rel_dir}/{path.name}")})
     return items
+
+
+def send_chat_email(signature: str, content: str):
+    to_email = os.environ.get("CHAT_TARGET_EMAIL", "").strip()
+    smtp_host = os.environ.get("SMTP_HOST", "").strip()
+    smtp_user = os.environ.get("SMTP_USER", "").strip()
+    smtp_pass = os.environ.get("SMTP_PASS", "")
+    smtp_port = int(os.environ.get("SMTP_PORT", "465"))
+
+    if not to_email:
+        return False, "CHAT_TARGET_EMAIL is not configured."
+    if not smtp_host:
+        return False, "SMTP_HOST is not configured."
+
+    message = EmailMessage()
+    message["Subject"] = f"聊一聊留言 - {signature}"
+    message["From"] = smtp_user or to_email
+    message["To"] = to_email
+    message.set_content(
+        f"署名 / Signature: {signature}\n"
+        f"时间 / Time: {datetime.now().isoformat(timespec='seconds')}\n\n"
+        f"消息内容 / Message:\n{content}\n"
+    )
+    try:
+        with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=15) as server:
+            if smtp_user and smtp_pass:
+                server.login(smtp_user, smtp_pass)
+            server.send_message(message)
+        return True, ""
+    except Exception as exc:
+        return False, str(exc)
 
 
 def get_lang():
@@ -704,7 +740,7 @@ def learn_page():
 @login_required
 def learn_slides_page():
     lang = get_lang()
-    slides = list_slide_pdfs()
+    slides = list_files_with_suffix(SLIDES_DIR, ".pdf")
     selected = request.args.get("file", "").strip()
     selected_slide = None
     if slides:
@@ -722,7 +758,18 @@ def learn_slides_page():
 @login_required
 def learn_animations_page():
     lang = get_lang()
-    return render_template("learn_animations.html", lang=lang, current_user=current_username())
+    pages = list_files_with_suffix(ANIMATIONS_DIR, ".html")
+    selected = request.args.get("file", "").strip()
+    selected_page = None
+    if pages:
+        selected_page = next((it for it in pages if it["name"] == selected), pages[0])
+    return render_template(
+        "learn_animations.html",
+        lang=lang,
+        current_user=current_username(),
+        pages=pages,
+        selected_page=selected_page,
+    )
 
 
 @app.route("/learn/articles")
@@ -732,89 +779,52 @@ def learn_articles_page():
     return render_template("learn_articles.html", lang=lang, current_user=current_username())
 
 
+@app.route("/learn/projects")
+@login_required
+def learn_projects_page():
+    lang = get_lang()
+    return render_template("learn_projects.html", lang=lang, current_user=current_username())
+
+
+@app.route("/learn/announcements")
+@login_required
+def learn_announcements_page():
+    lang = get_lang()
+    return render_template("learn_announcements.html", lang=lang, current_user=current_username())
+
+
+@app.route("/learn/files")
+@login_required
+def learn_files_page():
+    lang = get_lang()
+    docs = list_files_with_suffix(FILES_DIR, ".pdf")
+    selected = request.args.get("file", "").strip()
+    selected_doc = None
+    if docs:
+        selected_doc = next((it for it in docs if it["name"] == selected), docs[0])
+    return render_template(
+        "learn_files.html",
+        lang=lang,
+        current_user=current_username(),
+        docs=docs,
+        selected_doc=selected_doc,
+    )
+
+
 @app.route("/chat", methods=["GET", "POST"])
 @login_required
 def chat_page():
     lang = get_lang()
-    conn = get_db_connection()
     if request.method == "POST":
-        category = request.form.get("category", "discussion").strip().lower()
-        title = request.form.get("title", "").strip()
         content = request.form.get("content", "").strip()
-        if category not in {"discussion", "announcement"}:
-            category = "discussion"
-        if title and content:
-            conn.execute(
-                """
-                INSERT INTO forum_posts (user_id, username, category, title, content, created_at)
-                VALUES (?, ?, ?, ?, ?, ?)
-                """,
-                (
-                    session.get("user_id"),
-                    current_username(),
-                    category,
-                    title[:120],
-                    content[:2000],
-                    datetime.now().isoformat(timespec="seconds"),
-                ),
-            )
-            conn.commit()
-
-    posts = conn.execute(
-        """
-        SELECT p.id, p.username, p.category, p.title, p.content, p.created_at,
-               COUNT(r.id) AS reply_count
-        FROM forum_posts p
-        LEFT JOIN forum_replies r ON r.post_id = p.id
-        GROUP BY p.id
-        ORDER BY CASE WHEN p.category = 'announcement' THEN 0 ELSE 1 END, p.id DESC
-        LIMIT 100
-        """
-    ).fetchall()
-    replies = conn.execute(
-        """
-        SELECT id, post_id, username, content, created_at
-        FROM forum_replies
-        ORDER BY id ASC
-        """
-    ).fetchall()
-    conn.close()
-    reply_map = {}
-    for row in replies:
-        reply_map.setdefault(int(row["post_id"]), []).append(dict(row))
-    return render_template(
-        "chat.html",
-        lang=lang,
-        current_user=current_username(),
-        posts=[dict(row) for row in posts],
-        reply_map=reply_map,
-    )
-
-
-@app.post("/chat/<int:post_id>/reply")
-@login_required
-def add_chat_reply(post_id):
-    content = request.form.get("content", "").strip()
-    if content:
-        conn = get_db_connection()
-        exists = conn.execute("SELECT id FROM forum_posts WHERE id = ?", (post_id,)).fetchone()
-        if exists:
-            conn.execute(
-                """
-                INSERT INTO forum_replies (post_id, user_id, username, content, created_at)
-                VALUES (?, ?, ?, ?, ?)
-                """,
-                (
-                    post_id,
-                    session.get("user_id"),
-                    current_username(),
-                    content[:1000],
-                    datetime.now().isoformat(timespec="seconds"),
-                ),
-            )
-            conn.commit()
-        conn.close()
-    return redirect(url_for("chat_page", lang=get_lang()))
+        signature = request.form.get("signature", "").strip() or current_username()
+        if content:
+            ok, err = send_chat_email(signature[:80], content[:2000])
+            if ok:
+                flash("Message sent successfully." if is_en() else "消息已发送到老师邮箱。")
+                return redirect(url_for("chat_page", lang=lang))
+            flash((f"Failed to send: {err}") if is_en() else f"发送失败：{err}")
+    return render_template("chat.html", lang=lang, current_user=current_username())
 
 
 @app.route("/code")

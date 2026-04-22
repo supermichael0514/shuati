@@ -3,54 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ 'Forum' if lang=='en' else '聊一聊' }}</title>
+  <title>{{ 'Message Box' if lang=='en' else '聊一聊' }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="portal-body"><div class="portal-page">
-<header class="portal-header card"><div><p class="neon-label">COMMUNITY</p><h1>{{ 'Forum' if lang=='en' else '聊一聊' }}</h1><p class="portal-subtitle">{{ 'Post discussions, make announcements, and reply to each other.' if lang=='en' else '可以发帖讨论、发布公告，并在帖子下回复交流。' }}</p></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
+<header class="portal-header card"><div><p class="neon-label">CHAT</p><h1>{{ 'Send a Message' if lang=='en' else '发送消息' }}</h1><p class="portal-subtitle">{{ 'Leave your signature and message, then send to teacher email.' if lang=='en' else '填写署名和消息内容，点击发送到老师邮箱。' }}</p></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
 
 <section class="card forum-editor">
-  <h2>{{ 'Create a Post' if lang=='en' else '发布新帖' }}</h2>
   <form method="post" class="forum-form">
-    <div class="forum-form-row">
-      <label><span>{{ 'Type' if lang=='en' else '类型' }}</span>
-        <select name="category">
-          <option value="discussion">{{ 'Discussion' if lang=='en' else '讨论帖' }}</option>
-          <option value="announcement">{{ 'Announcement' if lang=='en' else '公告' }}</option>
-        </select>
-      </label>
-      <label><span>{{ 'Title' if lang=='en' else '标题' }}</span><input name="title" maxlength="120" required></label>
-    </div>
-    <label><span>{{ 'Content' if lang=='en' else '内容' }}</span><textarea name="content" maxlength="2000" required></textarea></label>
-    <button type="submit">{{ 'Publish' if lang=='en' else '发布' }}</button>
+    <label><span>{{ 'Signature' if lang=='en' else '署名' }}</span><input name="signature" maxlength="80" value="{{ current_user }}" required></label>
+    <label><span>{{ 'Message' if lang=='en' else '消息内容' }}</span><textarea name="content" maxlength="2000" required></textarea></label>
+    <button type="submit">{{ 'Send' if lang=='en' else '发送' }}</button>
   </form>
-</section>
-
-<section class="forum-list">
-  {% for post in posts %}
-  <article class="card forum-post">
-    <div class="forum-post-head">
-      <div>
-        <span class="tag {{ 'fav' if post.category == 'announcement' else '' }}">{{ 'Announcement' if post.category == 'announcement' and lang=='en' else ('公告' if post.category == 'announcement' else ('Discussion' if lang=='en' else '讨论')) }}</span>
-        <h3>{{ post.title }}</h3>
-      </div>
-      <div class="record-meta">{{ post.username }} · {{ post.created_at.replace('T', ' ') }}</div>
-    </div>
-    <p>{{ post.content }}</p>
-
-    <div class="reply-list">
-      {% for reply in reply_map.get(post.id, []) %}
-      <div class="reply-item"><strong>{{ reply.username }}</strong>：{{ reply.content }}<span class="record-meta">{{ reply.created_at.replace('T', ' ') }}</span></div>
-      {% endfor %}
-    </div>
-
-    <form method="post" action="{{ url_for('add_chat_reply', post_id=post.id, lang=lang) }}" class="reply-form">
-      <input name="content" maxlength="1000" placeholder="{{ 'Write a reply...' if lang=='en' else '写下你的回复...' }}" required>
-      <button type="submit">{{ 'Reply' if lang=='en' else '回复' }}</button>
-    </form>
-  </article>
-  {% else %}
-  <div class="card empty big">{{ 'No posts yet. Be the first one!' if lang=='en' else '还没有帖子，快来发第一条吧！' }}</div>
-  {% endfor %}
 </section>
 </div></body></html>
