@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Articles' if lang=='en' else '看文章' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">LEARN · ARTICLES</p><h1>{{ 'Articles' if lang=='en' else '看文章' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+
+<section class="card learn-subpage">
+  <h2>{{ 'Teaching Reflection Zone' if lang=='en' else '教学心得区' }}</h2>
+  <p class="portal-subtitle">{{ 'Use this area to publish learning notes, topic explanations and teaching reflections.' if lang=='en' else '可在这里发布教学心得、专题文章与学习建议。' }}</p>
+  <div class="article-list">
+    <article class="article-card">
+      <h3>{{ 'How to Guide Students in Computational Thinking' if lang=='en' else '如何带学生建立计算思维' }}</h3>
+      <p>{{ 'Recommended as your first reflection post template.' if lang=='en' else '可作为第一篇教学反思模板。' }}</p>
+    </article>
+    <article class="article-card">
+      <h3>{{ 'Common Mistakes in Exam Problem Solving' if lang=='en' else '考试刷题常见误区' }}</h3>
+      <p>{{ 'Summarize key mistakes and fixes after each chapter.' if lang=='en' else '每章学习后整理错误类型与改进建议。' }}</p>
+    </article>
+  </div>
+</section>
+</div></body></html>

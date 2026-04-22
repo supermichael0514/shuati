@@ -55,9 +55,24 @@ function initTetris(){ host.innerHTML='<canvas id="tetrisCanvas" width="300" hei
   restartBtn.onclick=()=>initTetris(); spawn(); update();
 }
 
-function makeSudoku(){ const base=[1,2,3,4,5,6,7,8,9], sh=a=>a.sort(()=>Math.random()-0.5); const rows=[0,1,2,3,4,5,6,7,8].map(r=>(Math.floor(r/3)*3 + (r*2)%3)%9); const cols=[0,1,2,3,4,5,6,7,8].map(c=>(Math.floor(c/3)*3 + (c*2)%3)%9); const nums=sh(base.slice()); const solved=rows.map(r=>cols.map(c=>nums[(r+c)%9])); const puzzle=solved.map(r=>r.slice()); let holes=48; while(holes>0){const r=Math.floor(Math.random()*9),c=Math.floor(Math.random()*9); if(puzzle[r][c]!==0){puzzle[r][c]=0;holes--;}} return {puzzle,solved}; }
+function makeSudoku(){
+  const base=[0,1,2], nums=[1,2,3,4,5,6,7,8,9];
+  const shuffle=(arr)=>{const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a;};
+  const rows=shuffle(base).flatMap(g=>shuffle(base).map(r=>g*3+r));
+  const cols=shuffle(base).flatMap(g=>shuffle(base).map(c=>g*3+c));
+  const values=shuffle(nums);
+  const pattern=(r,c)=>(r*3 + Math.floor(r/3) + c) % 9;
+  const solved=rows.map(r=>cols.map(c=>values[pattern(r,c)]));
+  const puzzle=solved.map(r=>r.slice());
+  let holes=48;
+  while(holes>0){
+    const r=Math.floor(Math.random()*9),c=Math.floor(Math.random()*9);
+    if(puzzle[r][c]!==0){puzzle[r][c]=0;holes--;}
+  }
+  return {puzzle,solved};
+}
 function initSudoku(){ const {puzzle,solved}=makeSudoku(); const start=Date.now(); host.innerHTML='<div class="sudoku-panel"><button id="checkSudoku">'+(LANG==='en'?'Check':'检查')+'</button></div><div id="sudokuBoard" class="board-sudoku"></div>'; const board=document.getElementById('sudokuBoard');
-  const draw=()=>{board.innerHTML=''; for(let r=0;r<9;r++)for(let c=0;c<9;c++){const i=document.createElement('input');i.maxLength=1;i.className='sudoku-cell'; if(c%3===0)i.classList.add('v-heavy-left'); if(r%3===0)i.classList.add('h-heavy-top'); if(c===8)i.classList.add('v-heavy-right'); if(r===8)i.classList.add('h-heavy-bottom'); i.dataset.r=r;i.dataset.c=c; if(puzzle[r][c]){i.value=puzzle[r][c];i.disabled=true;i.classList.add('given');} board.appendChild(i);} scoreEl.textContent='0';};
+  const draw=()=>{board.innerHTML=''; for(let r=0;r<9;r++)for(let c=0;c<9;c++){const i=document.createElement('input');i.maxLength=1;i.className='sudoku-cell'; if(c%3===0)i.classList.add('v-heavy-left'); if(r%3===0)i.classList.add('h-heavy-top'); if(c===8)i.classList.add('v-heavy-right'); if(r===8)i.classList.add('h-heavy-bottom'); i.dataset.r=r;i.dataset.c=c; if(puzzle[r][c]){i.value=puzzle[r][c];i.disabled=true;i.classList.add('given');} else {i.inputMode='numeric'; i.pattern='[1-9]'; i.oninput=()=>{i.value=i.value.replace(/[^1-9]/g,'').slice(0,1); i.classList.remove('wrong');};} board.appendChild(i);} scoreEl.textContent='0';};
   const check=()=>{let ok=true; document.querySelectorAll('.sudoku-cell').forEach(cell=>{const r=+cell.dataset.r,c=+cell.dataset.c,v=+cell.value; if(v!==solved[r][c]){ok=false;if(!cell.disabled)cell.classList.add('wrong');} else cell.classList.remove('wrong');}); if(ok){const sec=Math.max(1,Math.floor((Date.now()-start)/1000)); scoreEl.textContent=sec; submitScore(sec); setTimeout(()=>initSudoku(),300);} };
   restartBtn.onclick=()=>initSudoku(); draw(); document.getElementById('checkSudoku').onclick=check;
 }

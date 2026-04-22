@@ -26,6 +26,7 @@ INDEX_CSV = BASE_DIR / "index.csv"
 PDF_BASE = BASE_DIR / "pdfs"
 PROGRESS_FILE = BASE_DIR / "progress_web.json"
 DB_FILE = BASE_DIR / "app.db"
+SLIDES_DIR = BASE_DIR / "static" / "learn" / "slides"
 
 FILTER_ALL = "全部"
 
@@ -157,6 +158,31 @@ def init_db():
         )
         """
     )
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS forum_posts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            username TEXT NOT NULL,
+            category TEXT NOT NULL DEFAULT 'discussion',
+            title TEXT NOT NULL,
+            content TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        )
+        """
+    )
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS forum_replies (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            post_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL,
+            username TEXT NOT NULL,
+            content TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        )
+        """
+    )
     conn.commit()
     conn.close()
 
@@ -184,6 +210,15 @@ def login_required(view_func):
 
 def current_username():
     return session.get("username", "")
+
+
+def list_slide_pdfs():
+    if not SLIDES_DIR.exists():
+        return []
+    items = []
+    for path in sorted(SLIDES_DIR.glob("*.pdf"), key=lambda p: p.name.lower()):
+        items.append({"name": path.name, "url": url_for("static", filename=f"learn/slides/{path.name}")})
+    return items
 
 
 def get_lang():
@@ -663,6 +698,123 @@ def save_note_route(qid):
 def learn_page():
     lang = get_lang()
     return render_template("learn.html", lang=lang, current_user=current_username())
+
+
+@app.route("/learn/slides")
+@login_required
+def learn_slides_page():
+    lang = get_lang()
+    slides = list_slide_pdfs()
+    selected = request.args.get("file", "").strip()
+    selected_slide = None
+    if slides:
+        selected_slide = next((it for it in slides if it["name"] == selected), slides[0])
+    return render_template(
+        "learn_slides.html",
+        lang=lang,
+        current_user=current_username(),
+        slides=slides,
+        selected_slide=selected_slide,
+    )
+
+
+@app.route("/learn/animations")
+@login_required
+def learn_animations_page():
+    lang = get_lang()
+    return render_template("learn_animations.html", lang=lang, current_user=current_username())
+
+
+@app.route("/learn/articles")
+@login_required
+def learn_articles_page():
+    lang = get_lang()
+    return render_template("learn_articles.html", lang=lang, current_user=current_username())
+
+
+@app.route("/chat", methods=["GET", "POST"])
+@login_required
+def chat_page():
+    lang = get_lang()
+    conn = get_db_connection()
+    if request.method == "POST":
+        category = request.form.get("category", "discussion").strip().lower()
+        title = request.form.get("title", "").strip()
+        content = request.form.get("content", "").strip()
+        if category not in {"discussion", "announcement"}:
+            category = "discussion"
+        if title and content:
+            conn.execute(
+                """
+                INSERT INTO forum_posts (user_id, username, category, title, content, created_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    session.get("user_id"),
+                    current_username(),
+                    category,
+                    title[:120],
+                    content[:2000],
+                    datetime.now().isoformat(timespec="seconds"),
+                ),
+            )
+            conn.commit()
+
+    posts = conn.execute(
+        """
+        SELECT p.id, p.username, p.category, p.title, p.content, p.created_at,
+               COUNT(r.id) AS reply_count
+        FROM forum_posts p
+        LEFT JOIN forum_replies r ON r.post_id = p.id
+        GROUP BY p.id
+        ORDER BY CASE WHEN p.category = 'announcement' THEN 0 ELSE 1 END, p.id DESC
+        LIMIT 100
+        """
+    ).fetchall()
+    replies = conn.execute(
+        """
+        SELECT id, post_id, username, content, created_at
+        FROM forum_replies
+        ORDER BY id ASC
+        """
+    ).fetchall()
+    conn.close()
+    reply_map = {}
+    for row in replies:
+        reply_map.setdefault(int(row["post_id"]), []).append(dict(row))
+    return render_template(
+        "chat.html",
+        lang=lang,
+        current_user=current_username(),
+        posts=[dict(row) for row in posts],
+        reply_map=reply_map,
+    )
+
+
+@app.post("/chat/<int:post_id>/reply")
+@login_required
+def add_chat_reply(post_id):
+    content = request.form.get("content", "").strip()
+    if content:
+        conn = get_db_connection()
+        exists = conn.execute("SELECT id FROM forum_posts WHERE id = ?", (post_id,)).fetchone()
+        if exists:
+            conn.execute(
+                """
+                INSERT INTO forum_replies (post_id, user_id, username, content, created_at)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                (
+                    post_id,
+                    session.get("user_id"),
+                    current_username(),
+                    content[:1000],
+                    datetime.now().isoformat(timespec="seconds"),
+                ),
+            )
+            conn.commit()
+        conn.close()
+    return redirect(url_for("chat_page", lang=get_lang()))
 
 
 @app.route("/code")
