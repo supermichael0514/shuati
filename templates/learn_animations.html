@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Animations' if lang=='en' else '看动画' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">LEARN · ANIMATIONS</p><h1>{{ 'Animations' if lang=='en' else '看动画' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+
+<section class="card learn-subpage">
+  <h2>{{ 'Animation Showcase' if lang=='en' else '动画展示区' }}</h2>
+  <p class="portal-subtitle">{{ 'You can embed algorithm demos, process videos, or interactive principles here.' if lang=='en' else '你可以在这里放置算法演示、过程动画或交互式原理演示。' }}</p>
+  <div class="placeholder-grid">
+    <article class="feature-tile">
+      <div class="tile-icon">⚙️</div>
+      <h2>{{ 'Algorithm Demo Slot' if lang=='en' else '算法动画位' }}</h2>
+      <p>{{ 'Embed video/animation links here.' if lang=='en' else '可嵌入视频或动画链接。' }}</p>
+    </article>
+    <article class="feature-tile">
+      <div class="tile-icon">🔬</div>
+      <h2>{{ 'Working Principle Slot' if lang=='en' else '原理动画位' }}</h2>
+      <p>{{ 'Great for hardware/network principles.' if lang=='en' else '适合展示硬件/网络工作原理。' }}</p>
+    </article>
+  </div>
+</section>
+</div></body></html>
