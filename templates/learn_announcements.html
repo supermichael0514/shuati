@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Announcements' if lang=='en' else '看公告' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">LEARN · ANNOUNCEMENTS</p><h1>{{ 'Announcements' if lang=='en' else '看公告' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+
+<section class="card learn-subpage">
+  <h2>{{ 'Website Notices' if lang=='en' else '网站公告' }}</h2>
+  <p class="portal-subtitle">{{ 'This page is display-only and has no user interaction.' if lang=='en' else '本页面仅展示公告，用户不可交互。' }}</p>
+  <div class="reply-list">
+    <div class="reply-item"><strong>2026-04-22</strong> {{ 'Weekly update: New learning resources are being uploaded.' if lang=='en' else '本周更新：正在持续上传新的学习资源。' }}</div>
+    <div class="reply-item"><strong>2026-04-22</strong> {{ 'Game module optimization completed, welcome to try.' if lang=='en' else '游戏模块优化已完成，欢迎体验。' }}</div>
+  </div>
+</section>
+</div></body></html>

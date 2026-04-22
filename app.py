@@ -19,6 +19,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import re
 import random
+import smtplib
+from email.message import EmailMessage
 
 BASE_DIR = Path(__file__).resolve().parent
 INDEX_XLSX = BASE_DIR / "index.xlsx"
@@ -26,6 +28,9 @@ INDEX_CSV = BASE_DIR / "index.csv"
 PDF_BASE = BASE_DIR / "pdfs"
 PROGRESS_FILE = BASE_DIR / "progress_web.json"
 DB_FILE = BASE_DIR / "app.db"
+SLIDES_DIR = BASE_DIR / "static" / "learn" / "slides"
+FILES_DIR = BASE_DIR / "static" / "learn" / "files"
+ANIMATIONS_DIR = BASE_DIR / "static" / "learn" / "animations"
 
 FILTER_ALL = "全部"
 
@@ -184,6 +189,47 @@ def login_required(view_func):
 
 def current_username():
     return session.get("username", "")
+
+
+def list_files_with_suffix(directory: Path, suffix: str):
+    if not directory.exists():
+        return []
+    items = []
+    rel_dir = directory.relative_to(BASE_DIR / "static").as_posix()
+    for path in sorted(directory.glob(f"*{suffix}"), key=lambda p: p.name.lower()):
+        items.append({"name": path.name, "url": url_for("static", filename=f"{rel_dir}/{path.name}")})
+    return items
+
+
+def send_chat_email(signature: str, content: str):
+    to_email = os.environ.get("CHAT_TARGET_EMAIL", "").strip()
+    smtp_host = os.environ.get("SMTP_HOST", "").strip()
+    smtp_user = os.environ.get("SMTP_USER", "").strip()
+    smtp_pass = os.environ.get("SMTP_PASS", "")
+    smtp_port = int(os.environ.get("SMTP_PORT", "465"))
+
+    if not to_email:
+        return False, "CHAT_TARGET_EMAIL is not configured."
+    if not smtp_host:
+        return False, "SMTP_HOST is not configured."
+
+    message = EmailMessage()
+    message["Subject"] = f"聊一聊留言 - {signature}"
+    message["From"] = smtp_user or to_email
+    message["To"] = to_email
+    message.set_content(
+        f"署名 / Signature: {signature}\n"
+        f"时间 / Time: {datetime.now().isoformat(timespec='seconds')}\n\n"
+        f"消息内容 / Message:\n{content}\n"
+    )
+    try:
+        with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=15) as server:
+            if smtp_user and smtp_pass:
+                server.login(smtp_user, smtp_pass)
+            server.send_message(message)
+        return True, ""
+    except Exception as exc:
+        return False, str(exc)
 
 
 def get_lang():
@@ -663,6 +709,97 @@ def save_note_route(qid):
 def learn_page():
     lang = get_lang()
     return render_template("learn.html", lang=lang, current_user=current_username())
+
+
+@app.route("/learn/slides")
+@login_required
+def learn_slides_page():
+    lang = get_lang()
+    slides = list_files_with_suffix(SLIDES_DIR, ".pdf")
+    selected = request.args.get("file", "").strip()
+    selected_slide = None
+    if slides:
+        selected_slide = next((it for it in slides if it["name"] == selected), slides[0])
+    return render_template(
+        "learn_slides.html",
+        lang=lang,
+        current_user=current_username(),
+        slides=slides,
+        selected_slide=selected_slide,
+    )
+
+
+@app.route("/learn/animations")
+@login_required
+def learn_animations_page():
+    lang = get_lang()
+    pages = list_files_with_suffix(ANIMATIONS_DIR, ".html")
+    selected = request.args.get("file", "").strip()
+    selected_page = None
+    if pages:
+        selected_page = next((it for it in pages if it["name"] == selected), pages[0])
+    return render_template(
+        "learn_animations.html",
+        lang=lang,
+        current_user=current_username(),
+        pages=pages,
+        selected_page=selected_page,
+    )
+
+
+@app.route("/learn/articles")
+@login_required
+def learn_articles_page():
+    lang = get_lang()
+    return render_template("learn_articles.html", lang=lang, current_user=current_username())
+
+
+@app.route("/learn/projects")
+@login_required
+def learn_projects_page():
+    lang = get_lang()
+    return render_template("learn_projects.html", lang=lang, current_user=current_username())
+
+
+@app.route("/learn/announcements")
+@login_required
+def learn_announcements_page():
+    lang = get_lang()
+    return render_template("learn_announcements.html", lang=lang, current_user=current_username())
+
+
+@app.route("/learn/files")
+@login_required
+def learn_files_page():
+    lang = get_lang()
+    docs = list_files_with_suffix(FILES_DIR, ".pdf")
+    selected = request.args.get("file", "").strip()
+    selected_doc = None
+    if docs:
+        selected_doc = next((it for it in docs if it["name"] == selected), docs[0])
+    return render_template(
+        "learn_files.html",
+        lang=lang,
+        current_user=current_username(),
+        docs=docs,
+        selected_doc=selected_doc,
+    )
+
+
+@app.route("/chat", methods=["GET", "POST"])
+@login_required
+def chat_page():
+    lang = get_lang()
+    if request.method == "POST":
+        content = request.form.get("content", "").strip()
+        signature = request.form.get("signature", "").strip() or current_username()
+        if content:
+            ok, err = send_chat_email(signature[:80], content[:2000])
+            if ok:
+                flash("Message sent successfully." if is_en() else "消息已发送到老师邮箱。")
+                return redirect(url_for("chat_page", lang=lang))
+            flash((f"Failed to send: {err}") if is_en() else f"发送失败：{err}")
+    return render_template("chat.html", lang=lang, current_user=current_username())
 
 
 @app.route("/code")

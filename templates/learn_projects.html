@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Projects' if lang=='en' else '看作品' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">LEARN · PROJECTS</p><h1>{{ 'Projects' if lang=='en' else '看作品' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+
+<section class="card learn-subpage">
+  <h2>{{ 'Student Works' if lang=='en' else '学生作品展示' }}</h2>
+  <div class="article-list">
+    <article class="article-card"><h3>{{ 'Game Development Project' if lang=='en' else '小游戏开发项目' }}</h3><p>{{ 'Show game screenshots, source code and reflection.' if lang=='en' else '可展示作品截图、源码和项目总结。' }}</p></article>
+    <article class="article-card"><h3>{{ 'Data Analysis Project' if lang=='en' else '数据分析项目' }}</h3><p>{{ 'Present student outcome and report summary here.' if lang=='en' else '可展示学生成果与报告摘要。' }}</p></article>
+  </div>
+</section>
+</div></body></html>
