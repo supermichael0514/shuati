@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Inbox' if lang=='en' else '站内信' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">INTERNAL MAIL</p><h1>{{ 'Inbox' if lang=='en' else '站内信' }}</h1><p class="portal-subtitle">{{ 'Send plain-text messages between users.' if lang=='en' else '用户之间发送纯文字站内信。' }}</p></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
+
+<section class="card forum-editor">
+  <h2>{{ 'Send Message' if lang=='en' else '发送站内信' }}</h2>
+  <form method="post" class="forum-form">
+    <label><span>{{ 'To Username' if lang=='en' else '发送对象用户名' }}</span><input name="receiver" maxlength="80" required></label>
+    <label><span>{{ 'Message' if lang=='en' else '消息内容' }}</span><textarea name="content" maxlength="2000" required></textarea></label>
+    <button type="submit">{{ 'Send' if lang=='en' else '发送' }}</button>
+  </form>
+</section>
+
+<section class="card learn-subpage" style="margin-bottom:14px;">
+  <h2>{{ 'Inbox' if lang=='en' else '收件箱' }}</h2>
+  <div class="reply-list">
+    {% for msg in inbox %}
+    <div class="reply-item">
+      <strong>{% if msg.is_read %}📨{% else %}📩{% endif %} {{ msg.sender_username }}</strong>
+      <span class="record-meta">{{ msg.created_at.replace('T',' ') }}</span>
+      <div>{{ msg.content }}</div>
+    </div>
+    {% else %}
+    <div class="reply-item">{{ 'No messages yet.' if lang=='en' else '暂无站内信。' }}</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="card learn-subpage">
+  <h2>{{ 'Sent' if lang=='en' else '已发送' }}</h2>
+  <div class="reply-list">
+    {% for msg in sent %}
+    <div class="reply-item"><strong>➡ {{ msg.receiver_username }}</strong><span class="record-meta">{{ msg.created_at.replace('T',' ') }}</span><div>{{ msg.content }}</div></div>
+    {% else %}
+    <div class="reply-item">{{ 'No sent messages yet.' if lang=='en' else '暂无发送记录。' }}</div>
+    {% endfor %}
+  </div>
+</section>
+</div></body></html>

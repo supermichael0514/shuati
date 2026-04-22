@@ -26,6 +26,10 @@ INDEX_CSV = BASE_DIR / "index.csv"
 PDF_BASE = BASE_DIR / "pdfs"
 PROGRESS_FILE = BASE_DIR / "progress_web.json"
 DB_FILE = BASE_DIR / "app.db"
+SLIDES_DIR = BASE_DIR / "static" / "learn" / "slides"
+FILES_DIR = BASE_DIR / "static" / "learn" / "files"
+ANIMATIONS_DIR = BASE_DIR / "static" / "learn" / "animations"
+CONTENT_DIR = BASE_DIR / "content"
 
 FILTER_ALL = "全部"
 
@@ -157,6 +161,26 @@ def init_db():
         )
         """
     )
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS internal_messages (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            sender_id INTEGER NOT NULL,
+            sender_username TEXT NOT NULL,
+            receiver_username TEXT NOT NULL,
+            content TEXT NOT NULL,
+            is_read INTEGER NOT NULL DEFAULT 0,
+            created_at TEXT NOT NULL
+        )
+        """
+    )
+    message_columns = {
+        row["name"] for row in conn.execute("PRAGMA table_info(internal_messages)").fetchall()
+    }
+    if "is_read" not in message_columns:
+        conn.execute(
+            "ALTER TABLE internal_messages ADD COLUMN is_read INTEGER NOT NULL DEFAULT 0"
+        )
     conn.commit()
     conn.close()
 
@@ -184,6 +208,84 @@ def login_required(view_func):
 
 def current_username():
     return session.get("username", "")
+
+
+def list_files_with_suffix(directory: Path, suffix: str):
+    if not directory.exists():
+        return []
+    items = []
+    rel_dir = directory.relative_to(BASE_DIR / "static").as_posix()
+    for path in sorted(directory.glob(f"*{suffix}"), key=lambda p: p.name.lower()):
+        items.append({"name": path.name, "url": url_for("static", filename=f"{rel_dir}/{path.name}")})
+    return items
+
+
+def list_chapter_files(directory: Path, suffix: str):
+    if not directory.exists():
+        return {}
+    rel_root = directory.relative_to(BASE_DIR / "static").as_posix()
+    grouped = {}
+    for sub in sorted([p for p in directory.iterdir() if p.is_dir()], key=lambda p: p.name.lower()):
+        files = []
+        for path in sorted(sub.glob(f"*{suffix}"), key=lambda p: p.name.lower()):
+            files.append(
+                {
+                    "name": path.name,
+                    "url": url_for("static", filename=f"{rel_root}/{sub.name}/{path.name}"),
+                }
+            )
+        if files:
+            grouped[sub.name] = files
+    root_files = []
+    for path in sorted(directory.glob(f"*{suffix}"), key=lambda p: p.name.lower()):
+        root_files.append({"name": path.name, "url": url_for("static", filename=f"{rel_root}/{path.name}")})
+    if root_files:
+        grouped["未分章"] = root_files
+    return grouped
+
+
+def load_section_items(filename: str):
+    path = CONTENT_DIR / filename
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    if not isinstance(data, list):
+        return []
+    items = []
+    for row in data:
+        if not isinstance(row, dict):
+            continue
+        items.append(
+            {
+                "title": str(row.get("title", "")).strip(),
+                "summary": str(row.get("summary", "")).strip(),
+                "date": str(row.get("date", "")).strip(),
+                "link": str(row.get("link", "")).strip(),
+                "image": str(row.get("image", "")).strip(),
+                "content": str(row.get("content", "")).strip(),
+            }
+        )
+    return [it for it in items if it["title"]]
+
+
+def has_unread_messages(username: str):
+    if not username:
+        return False
+    conn = get_db_connection()
+    row = conn.execute(
+        """
+        SELECT 1
+        FROM internal_messages
+        WHERE receiver_username = ? AND is_read = 0
+        LIMIT 1
+        """,
+        (username,),
+    ).fetchone()
+    conn.close()
+    return bool(row)
 
 
 def get_lang():
@@ -427,7 +529,13 @@ def logout():
 @login_required
 def portal():
     lang = get_lang()
-    return render_template("portal.html", lang=lang, current_user=current_username())
+    username = current_username()
+    return render_template(
+        "portal.html",
+        lang=lang,
+        current_user=username,
+        has_unread_messages=has_unread_messages(username),
+    )
 
 
 @app.route("/games")
@@ -663,6 +771,184 @@ def save_note_route(qid):
 def learn_page():
     lang = get_lang()
     return render_template("learn.html", lang=lang, current_user=current_username())
+
+
+@app.route("/learn/slides")
+@login_required
+def learn_slides_page():
+    lang = get_lang()
+    chapter_map = list_chapter_files(SLIDES_DIR, ".pdf")
+    chapters = list(chapter_map.keys())
+    selected_chapter = request.args.get("chapter", "").strip()
+    if chapters and selected_chapter not in chapter_map:
+        selected_chapter = chapters[0]
+    slides = chapter_map.get(selected_chapter, []) if selected_chapter else []
+    selected = request.args.get("file", "").strip()
+    selected_slide = None
+    if slides:
+        selected_slide = next((it for it in slides if it["name"] == selected), slides[0])
+    return render_template(
+        "learn_slides.html",
+        lang=lang,
+        current_user=current_username(),
+        chapters=chapters,
+        selected_chapter=selected_chapter,
+        slides=slides,
+        selected_slide=selected_slide,
+    )
+
+
+@app.route("/learn/animations")
+@login_required
+def learn_animations_page():
+    lang = get_lang()
+    chapter_map = list_chapter_files(ANIMATIONS_DIR, ".html")
+    chapters = list(chapter_map.keys())
+    selected_chapter = request.args.get("chapter", "").strip()
+    if chapters and selected_chapter not in chapter_map:
+        selected_chapter = chapters[0]
+    pages = chapter_map.get(selected_chapter, []) if selected_chapter else []
+    selected = request.args.get("file", "").strip()
+    selected_page = None
+    if pages:
+        selected_page = next((it for it in pages if it["name"] == selected), pages[0])
+    return render_template(
+        "learn_animations.html",
+        lang=lang,
+        current_user=current_username(),
+        chapters=chapters,
+        selected_chapter=selected_chapter,
+        pages=pages,
+        selected_page=selected_page,
+    )
+
+
+@app.route("/learn/articles")
+@login_required
+def learn_articles_page():
+    lang = get_lang()
+    return render_template(
+        "learn_articles.html",
+        lang=lang,
+        current_user=current_username(),
+        items=load_section_items("articles.json"),
+    )
+
+
+@app.route("/learn/projects")
+@login_required
+def learn_projects_page():
+    lang = get_lang()
+    return render_template(
+        "learn_projects.html",
+        lang=lang,
+        current_user=current_username(),
+        items=load_section_items("projects.json"),
+    )
+
+
+@app.route("/learn/announcements")
+@login_required
+def learn_announcements_page():
+    lang = get_lang()
+    return render_template(
+        "learn_announcements.html",
+        lang=lang,
+        current_user=current_username(),
+        items=load_section_items("announcements.json"),
+    )
+
+
+@app.route("/learn/files")
+@login_required
+def learn_files_page():
+    lang = get_lang()
+    docs = list_files_with_suffix(FILES_DIR, ".pdf")
+    selected = request.args.get("file", "").strip()
+    selected_doc = None
+    if docs:
+        selected_doc = next((it for it in docs if it["name"] == selected), docs[0])
+    return render_template(
+        "learn_files.html",
+        lang=lang,
+        current_user=current_username(),
+        docs=docs,
+        selected_doc=selected_doc,
+    )
+
+
+@app.route("/chat", methods=["GET", "POST"])
+@login_required
+def chat_page():
+    lang = get_lang()
+    current_user = current_username()
+    conn = get_db_connection()
+    if request.method == "POST":
+        content = request.form.get("content", "").strip()
+        receiver = request.form.get("receiver", "").strip()
+        if content and receiver:
+            target = conn.execute(
+                "SELECT id, username FROM users WHERE username = ?",
+                (receiver,),
+            ).fetchone()
+            if not target:
+                flash("Target user not found." if is_en() else "发送对象不存在。")
+            else:
+                conn.execute(
+                    """
+                    INSERT INTO internal_messages
+                    (sender_id, sender_username, receiver_username, content, is_read, created_at)
+                    VALUES (?, ?, ?, ?, 0, ?)
+                    """,
+                    (
+                        session.get("user_id"),
+                        current_user,
+                        target["username"],
+                        content[:2000],
+                        datetime.now().isoformat(timespec="seconds"),
+                    ),
+                )
+                conn.commit()
+                flash("Sent successfully." if is_en() else "站内信发送成功。")
+                conn.close()
+                return redirect(url_for("chat_page", lang=lang))
+
+    inbox = conn.execute(
+        """
+        SELECT id, sender_username, content, is_read, created_at
+        FROM internal_messages
+        WHERE receiver_username = ?
+        ORDER BY id DESC
+        LIMIT 100
+        """,
+        (current_user,),
+    ).fetchall()
+    sent = conn.execute(
+        """
+        SELECT id, receiver_username, content, created_at
+        FROM internal_messages
+        WHERE sender_username = ?
+        ORDER BY id DESC
+        LIMIT 100
+        """,
+        (current_user,),
+    ).fetchall()
+    unread_ids = [int(row["id"]) for row in inbox if int(row["is_read"]) == 0]
+    if unread_ids:
+        conn.executemany(
+            "UPDATE internal_messages SET is_read = 1 WHERE id = ?",
+            [(mid,) for mid in unread_ids],
+        )
+        conn.commit()
+    conn.close()
+    return render_template(
+        "chat.html",
+        lang=lang,
+        current_user=current_user,
+        inbox=[dict(row) for row in inbox],
+        sent=[dict(row) for row in sent],
+        has_unread_messages=has_unread_messages(current_user),
+    )
 
 
 @app.route("/code")

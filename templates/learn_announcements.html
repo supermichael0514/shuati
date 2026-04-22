@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'Announcements' if lang=='en' else '看公告' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body"><div class="portal-page">
+<header class="portal-header card"><div><p class="neon-label">LEARN · ANNOUNCEMENTS</p><h1>{{ 'Announcements' if lang=='en' else '看公告' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+
+<section class="card learn-subpage">
+  <h2>{{ 'Website Notices' if lang=='en' else '网站公告' }}</h2>
+  <p class="portal-subtitle">{{ 'This page is display-only and has no user interaction.' if lang=='en' else '本页面仅展示公告，用户不可交互。' }}</p>
+  <div class="reply-list">
+    {% for item in items %}
+    <button type="button" class="reply-item announcement-item" data-title="{{ item.title }}" data-date="{{ item.date }}" data-content="{{ item.content or item.summary }}">
+      {% if item.date %}<strong>{{ item.date }}</strong>{% endif %}
+      {{ item.title }}
+      {% if item.summary %}<div class="record-meta">{{ item.summary }}</div>{% endif %}
+    </button>
+    {% else %}
+    <div class="reply-item">
+      <strong>{{ 'No announcement yet' if lang=='en' else '暂时没有公告' }}</strong>
+      <div class="record-meta">{{ 'Please add records into content/announcements.json.' if lang=='en' else '请在 content/announcements.json 中新增公告。' }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+<div id="noticeModal" class="blessing-modal" hidden>
+  <div class="blessing-modal-card">
+    <h3 id="noticeTitle"></h3>
+    <p class="record-meta" id="noticeDate"></p>
+    <p id="noticeContent"></p>
+    <div class="actions"><button id="closeNotice" type="button">{{ 'Close' if lang=='en' else '关闭' }}</button></div>
+  </div>
+</div>
+<script>
+const modal=document.getElementById('noticeModal');
+const titleEl=document.getElementById('noticeTitle');
+const dateEl=document.getElementById('noticeDate');
+const contentEl=document.getElementById('noticeContent');
+document.querySelectorAll('.announcement-item').forEach(btn=>{
+  btn.onclick=()=>{titleEl.textContent=btn.dataset.title||'';dateEl.textContent=btn.dataset.date||'';contentEl.textContent=btn.dataset.content||'';modal.hidden=false;};
+});
+document.getElementById('closeNotice').onclick=()=>modal.hidden=true;
+modal.onclick=(e)=>{if(e.target===modal)modal.hidden=true;};
+</script>
+</div></body></html>
