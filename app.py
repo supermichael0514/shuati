@@ -19,6 +19,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import re
 import random
+import smtplib
+from email.message import EmailMessage
 
 BASE_DIR = Path(__file__).resolve().parent
 INDEX_XLSX = BASE_DIR / "index.xlsx"
