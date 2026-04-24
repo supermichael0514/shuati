@@ -21,6 +21,7 @@ import re
 import random
 import smtplib
 from email.message import EmailMessage
+from urllib.parse import urlsplit
 
 BASE_DIR = Path(__file__).resolve().parent
 INDEX_XLSX = BASE_DIR / "index.xlsx"
@@ -202,10 +203,22 @@ def login_required(view_func):
     @wraps(view_func)
     def wrapped(*args, **kwargs):
         if "user_id" not in session:
-            return redirect(url_for("login", next=request.url, lang=get_lang()))
+            next_path = request.full_path if request.query_string else request.path
+            return redirect(url_for("login", next=next_path, lang=get_lang()))
         return view_func(*args, **kwargs)
 
     return wrapped
+
+
+def normalize_next_url(next_url: str):
+    if not next_url:
+        return None
+    parts = urlsplit(next_url)
+    if parts.scheme or parts.netloc:
+        return None
+    if not parts.path.startswith("/"):
+        return None
+    return next_url
 
 
 def current_username():
@@ -511,7 +524,7 @@ def login():
         session["user_id"] = user["id"]
         session["username"] = user["username"]
         session["lang"] = lang
-        next_url = request.args.get("next") or request.form.get("next")
+        next_url = normalize_next_url(request.args.get("next") or request.form.get("next", ""))
         return redirect(next_url or url_for("portal", lang=lang))
 
     if "user_id" in session:
