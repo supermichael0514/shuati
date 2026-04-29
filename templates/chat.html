@@ -22,7 +22,7 @@
 
 <section class="card learn-subpage" style="margin-bottom:14px;">
   <h2>{{ 'Inbox' if lang=='en' else '收件箱' }}</h2>
-  <div class="reply-list">
+  <div class="reply-list message-scroll">
     {% for msg in inbox %}
     <div class="reply-item">
       <strong>{% if msg.is_read %}📨{% else %}📩{% endif %} {{ msg.sender_username }}</strong>
@@ -37,7 +37,7 @@
 
 <section class="card learn-subpage">
   <h2>{{ 'Sent' if lang=='en' else '已发送' }}</h2>
-  <div class="reply-list">
+  <div class="reply-list message-scroll">
     {% for msg in sent %}
     <div class="reply-item"><strong>➡ {{ msg.receiver_username }}</strong><span class="record-meta">{{ msg.created_at.replace('T',' ') }}</span><div>{{ msg.content }}</div></div>
     {% else %}

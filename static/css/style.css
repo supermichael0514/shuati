@@ -51,6 +51,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
   grid-template-columns:260px 1fr 220px;
   gap:14px;
   min-height:calc(100vh - 180px);
+  height:calc(100vh - 180px);
 }
 .left,.right,.viewer,.viewer-toolbar{padding:14px}
 .left{display:flex;flex-direction:column;min-height:0}
@@ -58,7 +59,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .left-head-main{display:flex;align-items:center;gap:8px}
 .left-head h2,.right h2{margin:0;font-size:18px}
 .small-btn{padding:6px 10px;font-size:12px;border-radius:8px}
-.record-list{overflow-y:auto;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 280px);padding-right:4px}
+.record-list{overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:4px;flex:1;min-height:0}
 .record{
   display:block;
   text-decoration:none;
@@ -102,13 +103,15 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
   color:#1d4ed8;
 }
 .state-buttons{display:flex;gap:8px}
-.viewer{display:flex;flex-direction:column;gap:12px;min-height:0}
+.viewer{display:flex;flex-direction:column;gap:12px;min-height:0;height:100%}
 .info .title{font-size:20px;font-weight:800;margin-bottom:6px}
 .info .meta{font-size:14px;color:var(--muted)}
 .pdf-inline-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .pdf-frame{
   width:100%;
-  height:82vh;
+  height:auto;
+  flex:1;
+  min-height:0;
   border:1px solid var(--line);
   border-radius:12px;
   background:#fff;
@@ -130,7 +133,6 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 @media (max-width: 900px){
   .grid{grid-template-columns:repeat(2, minmax(140px,1fr))}
   .layout{grid-template-columns:1fr}
-  .pdf-frame{height:65vh}
 }
 
 .topbar{
@@ -192,6 +194,8 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .portal-header h1{margin:0 0 8px;font-size:32px;color:var(--text)}
 .portal-subtitle{margin:0;color:var(--muted)}
 .portal-actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px;color:var(--muted)}
+.user-inline{display:flex;align-items:center;gap:10px}
+.user-inline form{margin:0}
 .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
 .feature-grid-portal{grid-template-columns:repeat(3,1fr)}
 .feature-tile{
@@ -236,6 +240,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .forum-post-head{display:flex;justify-content:space-between;gap:10px}
 .forum-post h3{margin:8px 0 0}
 .reply-list{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.message-scroll{max-height:246px;overflow-y:auto;padding-right:4px}
 .reply-item{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#f8fafc}
 .announcement-item{width:100%;text-align:left;display:block}
 .reply-item .record-meta{margin-left:8px}
@@ -273,8 +278,8 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .game-grid-wide{grid-template-columns:repeat(3,1fr)}
 .game-layout{display:grid;grid-template-columns:1fr 320px;gap:16px}
 .game-main{padding:16px}
-.game-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.game-hint{color:var(--muted)}
+.game-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:8px 10px;background:#f8fafc;border:1px solid var(--line);border-radius:10px}
+.game-hint{color:var(--muted);margin:6px 0 10px;font-size:13px}
 .leaderboard-panel{padding:16px}
 .leaderboard-panel h2{margin:0 0 12px;color:var(--text)}
 .leaderboard-panel ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
@@ -319,6 +324,8 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 #pdfViewerContainer:fullscreen{padding:8px;border-radius:0}
 #pdfViewerContainer:fullscreen .pdf-frame{height:calc(100vh - 120px);border-radius:8px}
 .code-lab{padding:16px;display:flex;flex-direction:column;gap:10px}
+.pseudo-viewport{width:100%;height:80vh;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff}
+.pseudo-frame{width:100%;height:1200px;border:0;background:#fff;transform:translateY(-150px)}
 .editor-row{display:grid;grid-template-columns:2fr 1fr;gap:12px;align-items:start}
 .editor-panel{display:flex;flex-direction:column;gap:6px;min-width:0}
 .code-lab textarea{width:100%;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
@@ -345,9 +352,10 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .guide-panel h2{margin:0 0 8px}
 .guide-panel .pdf-frame{height:70vh}
 
-.mine-board{display:grid;gap:1px;background:#94a3b8;padding:4px;border-radius:8px;width:max-content;max-width:100%;overflow:auto}
-.mine-cell{width:24px;height:24px;padding:0;border:0;background:#e2e8f0;font-size:12px}
-.mine-cell.open{background:#f8fafc}
+.mine-board{display:grid;gap:1px;background:#cbd5e1;padding:8px;border-radius:12px;width:max-content;max-width:100%;overflow:auto;border:1px solid #e2e8f0}
+.mine-cell{width:24px;height:24px;padding:0;border:1px solid #dbe4f0;background:#f8fafc;font-size:12px;border-radius:4px;color:#334155}
+.mine-cell:hover{background:#f1f5f9}
+.mine-cell.open{background:#ffffff;border-color:#e2e8f0;font-weight:600}
 
 .hanoi-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;min-height:320px}
 .hanoi-rod{display:flex;flex-direction:column-reverse;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#f8fafc;cursor:pointer}
