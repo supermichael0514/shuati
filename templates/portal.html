@@ -19,8 +19,10 @@
           <a class="secondary {{ 'active' if lang != 'en' else '' }}" href="{{ url_for('portal', lang='zh') }}">中文</a>
           <a class="secondary {{ 'active' if lang == 'en' else '' }}" href="{{ url_for('portal', lang='en') }}">English</a>
         </div>
-        <span>{{ 'User' if lang == 'en' else '当前用户' }}: {{ current_user }}</span>
-        <form method="post" action="{{ url_for('logout', lang=lang) }}"><button type="submit" class="secondary">{{ 'Log out' if lang == 'en' else '退出登录' }}</button></form>
+        <div class="user-inline">
+          <span>{{ 'User' if lang == 'en' else '当前用户' }}: {{ current_user }}</span>
+          <form method="post" action="{{ url_for('logout', lang=lang) }}"><button type="submit" class="secondary">{{ 'Log out' if lang == 'en' else '退出登录' }}</button></form>
+        </div>
       </div>
     </header>
 
