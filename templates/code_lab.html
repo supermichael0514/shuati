@@ -4,8 +4,9 @@
 <body class="portal-body"><div class="portal-page">
 <header class="portal-header card"><div><p class="neon-label">PSEUDOCODE IDE</p><h1>{{ 'Code Lab' if lang=='en' else '编一编 · 伪代码IDE' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
 <section class="card code-lab pseudo-wrapper">
-  <h2>{{ 'PseudoEditor Workspace' if lang=='en' else 'PseudoEditor 工作区' }}</h2>
-  <iframe src="https://pseudoeditor.com/app" class="pseudo-frame" title="PseudoEditor"></iframe>
+  <div class="pseudo-viewport">
+    <iframe src="https://pseudoeditor.com/app" class="pseudo-frame" title="PseudoEditor"></iframe>
+  </div>
 </section>
 </div>
 </body></html>
