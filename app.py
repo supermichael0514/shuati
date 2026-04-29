@@ -12,7 +12,7 @@ from flask import (
 import pandas as pd
 from pathlib import Path
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 import sqlite3
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -560,31 +560,38 @@ def games_home():
     return render_template("games_home.html", lang=lang, current_user=current_username())
 
 
-def load_leaderboard(game_name, difficulty="normal", limit=10):
+def load_leaderboard(game_name, difficulty="normal", limit=5, days=None):
     conn = get_db_connection()
+    where_extra = ""
+    params = [game_name]
+    if days is not None:
+        cutoff = (datetime.now() - timedelta(days=days)).isoformat(timespec="seconds")
+        where_extra = " AND created_at >= ? "
+        params.append(cutoff)
+    params.append(limit)
     if game_name in TIME_RANK_GAMES:
         rows = conn.execute(
             """
             SELECT username, MIN(score) AS best_score
             FROM game_scores
-            WHERE game_name = ?
+            WHERE game_name = ? {where_extra}
             GROUP BY username
             ORDER BY best_score ASC, username ASC
             LIMIT ?
-            """,
-            (game_name, limit),
+            """.format(where_extra=where_extra),
+            tuple(params),
         ).fetchall()
     else:
         rows = conn.execute(
             """
             SELECT username, MAX(score) AS best_score
             FROM game_scores
-            WHERE game_name = ?
+            WHERE game_name = ? {where_extra}
             GROUP BY username
             ORDER BY best_score DESC, username ASC
             LIMIT ?
-            """,
-            (game_name, limit),
+            """.format(where_extra=where_extra),
+            tuple(params),
         ).fetchall()
     conn.close()
     return [dict(row) for row in rows]
@@ -613,7 +620,8 @@ def game_page(game_name):
         current_user=current_username(),
         game_name=game_name,
         difficulty=difficulty,
-        leaderboard=load_leaderboard(game_name, difficulty),
+        leaderboard_all=load_leaderboard(game_name, difficulty, limit=5),
+        leaderboard_week=load_leaderboard(game_name, difficulty, limit=5, days=7),
     )
 
 
@@ -649,7 +657,13 @@ def submit_game_score(game_name):
     )
     conn.commit()
     conn.close()
-    return jsonify({"ok": True, "leaderboard": load_leaderboard(game_name, difficulty)})
+    return jsonify(
+        {
+            "ok": True,
+            "leaderboard_all": load_leaderboard(game_name, difficulty, limit=5),
+            "leaderboard_week": load_leaderboard(game_name, difficulty, limit=5, days=7),
+        }
+    )
 
 
 @app.route("/practice")

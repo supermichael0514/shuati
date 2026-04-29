@@ -19,16 +19,18 @@
       <div id="gameHost"></div>
     </section>
     <aside class="card leaderboard-panel">
-      <h2>{{ 'Leaderboard' if lang == 'en' else '排行榜' }}</h2>
-      <ol id="leaderboardList">{% for row in leaderboard %}<li><span>{{ row.username }}</span><strong>{{ row.best_score }}</strong></li>{% else %}<li class="empty">{{ 'No scores yet.' if lang == 'en' else '暂无成绩。' }}</li>{% endfor %}</ol>
+      <h2>{{ 'All-time Top 5' if lang == 'en' else '历史最佳 Top 5' }}</h2>
+      <ol id="leaderboardAllList">{% for row in leaderboard_all %}<li><span>{{ row.username }}</span><strong>{{ row.best_score }}</strong></li>{% else %}<li class="empty">{{ 'No scores yet.' if lang == 'en' else '暂无成绩。' }}</li>{% endfor %}</ol>
+      <h2 style="margin-top:14px;">{{ 'Weekly Top 5' if lang == 'en' else '周最佳 Top 5' }}</h2>
+      <ol id="leaderboardWeekList">{% for row in leaderboard_week %}<li><span>{{ row.username }}</span><strong>{{ row.best_score }}</strong></li>{% else %}<li class="empty">{{ 'No scores yet.' if lang == 'en' else '暂无成绩。' }}</li>{% endfor %}</ol>
     </aside>
   </div>
 </div>
 <script>
 const GAME_NAME="{{ game_name }}", LANG="{{ lang }}";
-const host=document.getElementById('gameHost'), scoreEl=document.getElementById('score'), list=document.getElementById('leaderboardList'), restartBtn=document.getElementById('restartBtn');
-async function submitScore(score){ const res=await fetch(`/api/games/${GAME_NAME}/score?lang=${LANG}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({score})}); if(!res.ok)return; const data=await res.json(); if(data.ok)renderLeaderboard(data.leaderboard||[]); }
-function renderLeaderboard(items){list.innerHTML=''; if(!items.length){list.innerHTML=`<li class='empty'>${LANG==='en'?'No scores yet.':'暂无成绩。'}</li>`; return;} items.forEach(r=>{const li=document.createElement('li'); li.innerHTML=`<span>${r.username}</span><strong>${r.best_score}</strong>`; list.appendChild(li);});}
+const host=document.getElementById('gameHost'), scoreEl=document.getElementById('score'), listAll=document.getElementById('leaderboardAllList'), listWeek=document.getElementById('leaderboardWeekList'), restartBtn=document.getElementById('restartBtn');
+async function submitScore(score){ const res=await fetch(`/api/games/${GAME_NAME}/score?lang=${LANG}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({score})}); if(!res.ok)return; const data=await res.json(); if(data.ok){renderLeaderboard(listAll,data.leaderboard_all||[]); renderLeaderboard(listWeek,data.leaderboard_week||[]);} }
+function renderLeaderboard(target, items){target.innerHTML=''; if(!items.length){target.innerHTML=`<li class='empty'>${LANG==='en'?'No scores yet.':'暂无成绩。'}</li>`; return;} items.forEach(r=>{const li=document.createElement('li'); li.innerHTML=`<span>${r.username}</span><strong>${r.best_score}</strong>`; target.appendChild(li);});}
 
 function init2048(){ host.innerHTML='<div id="b2048" class="board-2048"></div>'; const b=document.getElementById('b2048'); const n=4; let g=[],s=0;
   const spawn=()=>{const e=[];for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(!g[r][c])e.push([r,c]); if(!e.length)return; const [r,c]=e[Math.floor(Math.random()*e.length)]; g[r][c]=Math.random()<.9?2:4;};
@@ -41,10 +43,10 @@ function init2048(){ host.innerHTML='<div id="b2048" class="board-2048"></div>';
 }
 
 function initTetris(){ host.innerHTML='<canvas id="tetrisCanvas" width="300" height="600"></canvas>'; const c=document.getElementById('tetrisCanvas'),ctx=c.getContext('2d'); const COLS=10,ROWS=20,B=30;
-  const colors=['#000','#38bdf8','#6366f1','#f472b6','#f59e0b','#10b981','#fb7185','#3b82f6']; const shapes=[[],[[1,1,1,1]],[[2,2],[2,2]],[[0,3,0],[3,3,3]],[[4,4,0],[0,4,4]],[[0,5,5],[5,5,0]],[[6,0,0],[6,6,6]]];
+  const colors=['#000','#38bdf8','#6366f1','#f472b6','#f59e0b','#10b981','#fb7185','#3b82f6','#22c55e']; const shapes=[[],[[1,1,1,1]],[[2,2],[2,2]],[[0,3,0],[3,3,3]],[[4,4,0],[0,4,4]],[[0,5,5],[5,5,0]],[[6,0,0],[6,6,6]],[[0,0,7],[7,7,7]]];
   let board=Array.from({length:ROWS},()=>Array(COLS).fill(0)),piece,pos,drop=0,last=0,s=0,over=false,dropInterval=500;
   const collide=()=>{for(let y=0;y<piece.length;y++)for(let x=0;x<piece[y].length;x++)if(piece[y][x]&&((board[y+pos.y]&&board[y+pos.y][x+pos.x])!==0))return true; return false;};
-  const spawn=()=>{const id=1+Math.floor(Math.random()*6); piece=shapes[id].map(r=>r.slice()); pos={x:Math.floor(COLS/2)-1,y:0}; if(collide()){over=true;submitScore(s);} };
+  const spawn=()=>{const id=1+Math.floor(Math.random()*7); piece=shapes[id].map(r=>r.slice()); pos={x:Math.floor(COLS/2)-1,y:0}; if(collide()){over=true;submitScore(s);} };
   const merge=()=>piece.forEach((r,y)=>r.forEach((v,x)=>{if(v)board[y+pos.y][x+pos.x]=v;}));
   const clear=()=>{let lines=0; for(let y=ROWS-1;y>=0;y--){if(board[y].every(v=>v)){board.splice(y,1);board.unshift(Array(COLS).fill(0));lines++;y++;}} if(lines){const bonus=[0,100,250,450,700]; s+=bonus[lines]||lines*220; dropInterval=Math.max(120,500-Math.floor(s/1000)*40); scoreEl.textContent=s;}};
   const rotate=()=>{const m=piece[0].map((_,i)=>piece.map(r=>r[i]).reverse()); const old=piece; piece=m; if(collide())piece=old;};
