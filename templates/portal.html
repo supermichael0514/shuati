@@ -27,7 +27,7 @@
     </header>
 
     <main class="feature-grid feature-grid-portal">
-      <a class="feature-tile" href="{{ url_for('learn_page', lang=lang) }}"><div class="tile-icon">📚</div><h2>{{ 'Resources' if lang == 'en' else '学一学' }}</h2><p>{{ 'Slides, animations, articles, projects, announcements and documents.' if lang == 'en' else '看课件、动画、文章、作品、公告和文件。' }}</p></a>
+      <a class="feature-tile" href="{{ url_for('learn_page', lang=lang) }}"><div class="tile-icon">📚</div><h2>{{ 'Resources' if lang == 'en' else '学一学' }}</h2><p>{{ 'Slides, animations, articles, documents, announcements and ads.' if lang == 'en' else '看课件、动画、文章、文件、公告和广告。' }}</p></a>
       <a class="feature-tile" href="{{ url_for('index', lang=lang) }}"><div class="tile-icon">📝</div><h2>{{ 'Practice' if lang == 'en' else '练一练' }}</h2><p>{{ 'Enter the filtered question bank and start targeted practicing.' if lang == 'en' else '进入筛选题库，开始针对性练习。' }}</p></a>
       <a class="feature-tile" href="{{ url_for('code_page', lang=lang) }}"><div class="tile-icon">💻</div><h2>{{ 'Code Lab' if lang == 'en' else '编一编' }}</h2><p>{{ 'CAIE pseudocode running evironment.' if lang == 'en' else '符合 CAIE 标准 的伪代码运行环境。' }}</p></a>
       <a class="feature-tile" href="{{ url_for('chat_page', lang=lang) }}"><div class="tile-icon">{{ '📩' if has_unread_messages else '📨' }}</div><h2>{{ 'ChatBox' if lang == 'en' else '聊一聊' }}</h2><p>{{ 'Send and receive internal plain-text messages.' if lang == 'en' else '与我沟通，或向指定用户发送站内信。' }}</p></a>
