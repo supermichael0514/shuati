@@ -272,7 +272,10 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .forum-post-head{display:flex;justify-content:space-between;gap:10px}
 .forum-post h3{margin:8px 0 0}
 .reply-list{display:flex;flex-direction:column;gap:8px;margin:12px 0}
-.message-scroll{max-height:208px;overflow-y:auto;padding-right:4px}
+.message-scroll{max-height:208px;overflow-y:auto;padding-right:4px;margin-bottom:0}
+.chat-message-section{padding:16px;margin-bottom:14px}
+.chat-message-section h2{margin:0 0 8px}
+.chat-message-section:last-child{margin-bottom:0}
 .reply-item{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#f8fafc;min-height:64px}
 .announcement-item{width:100%;text-align:left;display:block}
 .reply-item .record-meta{margin-left:8px}
@@ -354,8 +357,13 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 
 
 .code-lab{padding:16px;display:flex;flex-direction:column;gap:10px}
-.pseudo-viewport{width:100%;height:80vh;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff}
-.pseudo-frame{width:100%;height:1200px;border:0;background:#fff;transform:translateY(-150px)}
+.iframe-lab{min-height:calc(100vh - 180px)}
+.iframe-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.iframe-tabs button{width:100%;font-weight:700}
+.iframe-tabs button.active{background:#eff6ff;border-color:var(--accent);color:#1d4ed8}
+.iframe-stack{position:relative;flex:1;min-height:70vh;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.tool-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff;display:none}
+.tool-frame.active{display:block}
 .editor-row{display:grid;grid-template-columns:2fr 1fr;gap:12px;align-items:start}
 .editor-panel{display:flex;flex-direction:column;gap:6px;min-width:0}
 .code-lab textarea{width:100%;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
@@ -378,9 +386,6 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .nono-cell.on{background:#1e3a8a}
 
 
-.guide-panel{padding:16px;margin-top:14px}
-.guide-panel h2{margin:0 0 8px}
-.guide-panel .pdf-frame{height:70vh}
 
 .mine-board{display:grid;gap:1px;background:#cbd5e1;padding:8px;border-radius:12px;width:max-content;max-width:100%;overflow:auto;border:1px solid #e2e8f0}
 .mine-cell{width:24px;height:24px;padding:0;border:1px solid #93c5fd;background:#bfdbfe;font-size:12px;border-radius:4px;color:#1e3a8a;box-shadow:inset 0 -2px 0 rgba(37,99,235,.18)}

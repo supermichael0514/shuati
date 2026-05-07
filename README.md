@@ -7,10 +7,7 @@
 - 入口页 `/`
   - 学一学：进入学习子页面（看课件 / 看动画 / 看文章）
   - 练一练：题库筛选 + PDF 阅读
-  - 编一编：CAIE Pseudocode IDE（可运行伪代码 + 显示官方PDF指南）
-  - 支持：DECLARE、INPUT、FOR/TO/NEXT（含 NEXT i）、IF/ELSE、CASE、WHILE、REPEAT、PROCEDURE/FUNCTION/CALL/RETURN、MIDSTRING、RAND
-  - 规则：变量与数组必须先 DECLARE，未声明即报错
-  - 输入可在编一编页面按行提供（对应 INPUT）
+  - 编一编：通过标签页嵌入 Pseudocode、Programming、Assembly Language 三个在线工具
   - 玩一玩：小游戏中心
   - 拜一拜：个人履历展示页
 
@@ -30,8 +27,8 @@
 ## 新增路由
 
 - `GET /learn`：学一学子页面
-- `GET /code`：编一编（伪代码 IDE）
-- `POST /api/code/run`：执行伪代码
+- `GET /code`：编一编（三个在线 iframe 工具标签页）
+- `POST /api/code/run`：执行内置伪代码运行器
 - `GET /profile`：拜一拜（个人履历）
 
 ## 快速启动
@@ -41,11 +38,6 @@ python app.py
 ```
 
 默认地址：<http://127.0.0.1:8000>
-
-
-## 文档放置路径
-
-- 官方伪代码指南 PDF：`static/docs/caie-pseudocode-guide.pdf`
 
 
 ## 拜一拜（Cyber Blessing）
