@@ -2,11 +2,33 @@
 <html lang="{{ 'en' if lang == 'en' else 'zh-CN' }}">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ 'Code Lab' if lang=='en' else '编一编' }}</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
 <body class="portal-body"><div class="portal-page">
-<header class="portal-header card"><div><p class="neon-label">PSEUDOCODE IDE</p><h1>{{ 'Code Lab' if lang=='en' else '编一编 · 伪代码IDE' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
-<section class="card code-lab pseudo-wrapper">
-  <div class="pseudo-viewport">
-    <iframe src="https://pseudoeditor.com/app" class="pseudo-frame" title="PseudoEditor"></iframe>
+<header class="portal-header card"><div><p class="neon-label">CODE LAB</p><h1>{{ 'Code Lab' if lang=='en' else '编一编' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('portal', lang=lang) }}">{{ 'Back to Portal' if lang=='en' else '返回入口' }}</a></div></header>
+<section class="card code-lab iframe-lab">
+  <div class="iframe-tabs" role="tablist" aria-label="{{ 'Code Lab Tools' if lang=='en' else '编一编工具' }}">
+    <button type="button" class="active" role="tab" aria-selected="true" aria-controls="tool-pseudocode" data-tool="tool-pseudocode">Pseudocode</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="tool-programming" data-tool="tool-programming">Programming</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="tool-assembly" data-tool="tool-assembly">Assembly Language</button>
+  </div>
+  <div class="iframe-stack">
+    <iframe id="tool-pseudocode" class="tool-frame active" src="https://pseudoeditor.com/app" title="Pseudocode"></iframe>
+    <iframe id="tool-programming" class="tool-frame" src="https://www.programiz.com/python-programming/online-compiler/" title="Programming"></iframe>
+    <iframe id="tool-assembly" class="tool-frame" src="https://www.asmcode.pro/" title="Assembly Language"></iframe>
   </div>
 </section>
 </div>
+<script>
+  document.querySelectorAll('.iframe-tabs button').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.dataset.tool || '';
+      document.querySelectorAll('.iframe-tabs button').forEach((btn) => {
+        const selected = btn === tab;
+        btn.classList.toggle('active', selected);
+        btn.setAttribute('aria-selected', selected ? 'true' : 'false');
+      });
+      document.querySelectorAll('.tool-frame').forEach((frame) => {
+        frame.classList.toggle('active', frame.id === targetId);
+      });
+    });
+  });
+</script>
 </body></html>

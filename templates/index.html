@@ -19,49 +19,53 @@
     </header>
 
     <form class="filters card" method="get">
-      <div class="grid">
-        <label>
-          <span>{{ 'Subject' if lang == 'en' else '科目' }}</span>
-          <select name="subject" onchange="this.form.submit()">
-            {% for v in subjects %}
-            <option value="{{ v }}" {% if v == subject %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
-            {% endfor %}
-          </select>
-        </label>
-        <label>
-          <span>{{ 'Chapter' if lang == 'en' else '章节' }}</span>
-          <select name="chapter" onchange="this.form.submit()">
-            {% for v in chapters %}
-            <option value="{{ v }}" {% if v == chapter %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
-            {% endfor %}
-          </select>
-        </label>
-        <label>
-          <span>{{ 'Topic' if lang == 'en' else '主题' }}</span>
-          <select name="topic" onchange="this.form.submit()">
-            {% for v in topics %}
-            <option value="{{ v }}" {% if v == topic %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
-            {% endfor %}
-          </select>
-        </label>
-        <label>
-          <span>{{ 'Year' if lang == 'en' else '年份' }}</span>
-          <select name="year" onchange="this.form.submit()">
-            {% for v in years %}
-            <option value="{{ v }}" {% if v == year %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
-            {% endfor %}
-          </select>
-        </label>
+      <div class="filter-layout">
+        <div class="filter-selects">
+          <label>
+            <span>{{ 'Subject' if lang == 'en' else '科目' }}</span>
+            <select name="subject" onchange="this.form.submit()">
+              {% for v in subjects %}
+              <option value="{{ v }}" {% if v == subject %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            <span>{{ 'Chapter' if lang == 'en' else '章节' }}</span>
+            <select name="chapter" onchange="this.form.submit()">
+              {% for v in chapters %}
+              <option value="{{ v }}" {% if v == chapter %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            <span>{{ 'Topic' if lang == 'en' else '主题' }}</span>
+            <select name="topic" onchange="this.form.submit()">
+              {% for v in topics %}
+              <option value="{{ v }}" {% if v == topic %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            <span>{{ 'Year' if lang == 'en' else '年份' }}</span>
+            <select name="year" onchange="this.form.submit()">
+              {% for v in years %}
+              <option value="{{ v }}" {% if v == year %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        </div>
 
-        <label class="check"><input type="checkbox" name="only_unfinished" value="1" {% if only_unfinished %}checked{% endif %}> {{ 'Unfinished only' if lang == 'en' else '只看未完成' }}</label>
-        <label class="check"><input type="checkbox" name="only_favorite" value="1" {% if only_favorite %}checked{% endif %}> {{ 'Favorites only' if lang == 'en' else '只看收藏' }}</label>
+        <div class="filter-checks">
+          <label class="check"><input type="checkbox" name="only_unfinished" value="1" {% if only_unfinished %}checked{% endif %}> {{ 'Unfinished only' if lang == 'en' else '只看未完成' }}</label>
+          <label class="check"><input type="checkbox" name="only_favorite" value="1" {% if only_favorite %}checked{% endif %}> {{ 'Favorites only' if lang == 'en' else '只看收藏' }}</label>
+        </div>
 
         <input type="hidden" name="mode" value="{{ mode }}">
         <input type="hidden" name="lang" value="{{ lang }}">
         {% if selected %}<input type="hidden" name="selected_id" value="{{ selected.id }}">{% endif %}
-        <div class="actions">
+        <div class="actions filter-actions">
           <button type="submit">{{ 'Apply' if lang == 'en' else '应用筛选' }}</button>
-          <a class="secondary" href="{{ url_for('index', lang=lang) }}">{{ 'Reset' if lang == 'en' else '清空' }}</a>
+          <a class="secondary" href="{{ url_for('index', lang=lang) }}">{{ 'Reset Filters' if lang == 'en' else '清空筛选' }}</a>
         </div>
       </div>
     </form>
@@ -129,8 +133,7 @@
               {% if selected.source %} · {{ 'Source' if lang == 'en' else '来源' }}：{{ selected.source }}{% endif %}
             </div>
           </div>
-          <div class="pdf-inline-toolbar">
-            <button type="button" onclick="togglePdfFullscreen()">{{ "Fullscreen" if lang == "en" else "全屏阅读" }}</button>
+          <div class="pdf-inline-toolbar pdf-toolbar-right">
             <a class="secondary" href="{{ pdf_url }}#page={{ pdf_page }}" target="_blank" rel="noopener">{{ "Open in New Tab" if lang == "en" else "新标签打开" }}</a>
           </div>
           <iframe src="{{ pdf_url }}#page={{ pdf_page }}&toolbar=1&navpanes=0" class="pdf-frame" title="PDF Viewer"></iframe>
@@ -163,15 +166,6 @@
       });
       if (!res.ok) throw new Error(`toggle failed: ${res.status}`);
       window.location.reload();
-    }
-
-    async function togglePdfFullscreen() {
-      const el = document.getElementById("pdfViewerContainer");
-      if (!document.fullscreenElement) {
-        if (el.requestFullscreen) await el.requestFullscreen();
-      } else {
-        await document.exitFullscreen();
-      }
     }
 
     document.querySelectorAll('.toggle-btn').forEach((btn) => {

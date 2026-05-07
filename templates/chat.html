@@ -20,7 +20,7 @@
   </form>
 </section>
 
-<section class="card learn-subpage" style="margin-bottom:14px;">
+<section class="card chat-message-section">
   <h2>{{ 'Inbox' if lang=='en' else '收件箱' }}</h2>
   <div class="reply-list message-scroll">
     {% for msg in inbox %}
@@ -35,7 +35,7 @@
   </div>
 </section>
 
-<section class="card learn-subpage">
+<section class="card chat-message-section">
   <h2>{{ 'Sent' if lang=='en' else '已发送' }}</h2>
   <div class="reply-list message-scroll">
     {% for msg in sent %}
