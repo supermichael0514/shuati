@@ -20,7 +20,10 @@
       </a>
       {% endfor %}
     </aside>
-    <div>
+    <div class="pdf-panel">
+      <div class="pdf-inline-toolbar pdf-toolbar-right">
+        <a class="secondary" href="{{ selected_doc.url }}" target="_blank" rel="noopener">{{ "Open in New Tab" if lang == "en" else "新标签打开" }}</a>
+      </div>
       <iframe class="pdf-frame" src="{{ selected_doc.url }}#toolbar=1&navpanes=0"></iframe>
     </div>
   </div>

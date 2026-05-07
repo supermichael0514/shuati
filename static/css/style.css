@@ -30,6 +30,28 @@ body{
   gap:12px;
   align-items:end;
 }
+.filter-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) max-content max-content;
+  gap:12px;
+  align-items:end;
+}
+.filter-selects{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.filter-selects select{width:100%}
+.filter-checks,.filter-actions{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.filter-actions button,.filter-actions .secondary{
+  width:100%;
+  text-align:center;
+  white-space:nowrap;
+}
 label span{display:block;margin-bottom:6px;font-size:13px;color:var(--muted)}
 select, textarea, button, .secondary{
   border:1px solid var(--line);
@@ -38,7 +60,7 @@ select, textarea, button, .secondary{
   padding:10px 12px;
   font-size:14px;
 }
-.check{display:flex;gap:8px;align-items:center;height:42px}
+.check{display:flex;gap:8px;align-items:center;min-height:42px;white-space:nowrap}
 .actions{display:flex;gap:10px}
 button,.secondary{
   cursor:pointer;
@@ -107,6 +129,9 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .info .title{font-size:20px;font-weight:800;margin-bottom:6px}
 .info .meta{font-size:14px;color:var(--muted)}
 .pdf-inline-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pdf-toolbar-right{justify-content:flex-end}
+.pdf-panel{display:flex;flex-direction:column;gap:8px;min-height:0;width:100%}
+.pdf-section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
 .pdf-frame{
   width:100%;
   height:auto;
@@ -132,6 +157,9 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 }
 @media (max-width: 900px){
   .grid{grid-template-columns:repeat(2, minmax(140px,1fr))}
+  .filter-layout{grid-template-columns:1fr}
+  .filter-selects{grid-template-columns:repeat(2, minmax(140px,1fr))}
+  .filter-checks,.filter-actions{flex-direction:row;flex-wrap:wrap}
   .layout{grid-template-columns:1fr}
 }
 
@@ -219,6 +247,7 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .learn-sidebar h2{margin-top:0}
 .learn-sidebar{overflow:auto;min-height:0}
 .learn-sub-layout > div{min-height:0;display:flex}
+.learn-sub-layout .pdf-panel{height:100%}
 .learn-sub-layout .pdf-frame{height:100%}
 .chapter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
 .placeholder-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
@@ -243,8 +272,8 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .forum-post-head{display:flex;justify-content:space-between;gap:10px}
 .forum-post h3{margin:8px 0 0}
 .reply-list{display:flex;flex-direction:column;gap:8px;margin:12px 0}
-.message-scroll{max-height:246px;overflow-y:auto;padding-right:4px}
-.reply-item{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#f8fafc}
+.message-scroll{max-height:208px;overflow-y:auto;padding-right:4px}
+.reply-item{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#f8fafc;min-height:64px}
 .announcement-item{width:100%;text-align:left;display:block}
 .reply-item .record-meta{margin-left:8px}
 .reply-form{display:flex;gap:8px}
@@ -324,8 +353,6 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 #gameHost{min-height:420px}
 
 
-#pdfViewerContainer:fullscreen{padding:8px;border-radius:0}
-#pdfViewerContainer:fullscreen .pdf-frame{height:calc(100vh - 120px);border-radius:8px}
 .code-lab{padding:16px;display:flex;flex-direction:column;gap:10px}
 .pseudo-viewport{width:100%;height:80vh;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff}
 .pseudo-frame{width:100%;height:1200px;border:0;background:#fff;transform:translateY(-150px)}
@@ -356,9 +383,9 @@ button:hover,.secondary:hover,.mode-tabs a:hover,.record:hover{border-color:#93c
 .guide-panel .pdf-frame{height:70vh}
 
 .mine-board{display:grid;gap:1px;background:#cbd5e1;padding:8px;border-radius:12px;width:max-content;max-width:100%;overflow:auto;border:1px solid #e2e8f0}
-.mine-cell{width:24px;height:24px;padding:0;border:1px solid #dbe4f0;background:#f8fafc;font-size:12px;border-radius:4px;color:#334155}
-.mine-cell:hover{background:#f1f5f9}
-.mine-cell.open{background:#ffffff;border-color:#e2e8f0;font-weight:600}
+.mine-cell{width:24px;height:24px;padding:0;border:1px solid #93c5fd;background:#bfdbfe;font-size:12px;border-radius:4px;color:#1e3a8a;box-shadow:inset 0 -2px 0 rgba(37,99,235,.18)}
+.mine-cell:hover{background:#dbeafe}
+.mine-cell.open{background:#f8fafc;border-color:#cbd5e1;color:#334155;font-weight:600;box-shadow:inset 0 0 0 1px rgba(148,163,184,.22)}
 
 .hanoi-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;min-height:320px}
 .hanoi-rod{display:flex;flex-direction:column-reverse;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#f8fafc;cursor:pointer}
