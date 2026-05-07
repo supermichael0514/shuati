@@ -8,5 +8,14 @@
     <iframe src="https://pseudoeditor.com/app" class="pseudo-frame" title="PseudoEditor"></iframe>
   </div>
 </section>
+<section class="card guide-panel">
+  <div class="pdf-section-head">
+    <h2>{{ 'Pseudocode Guide' if lang=='en' else '伪代码指南' }}</h2>
+    <div class="pdf-inline-toolbar pdf-toolbar-right">
+      <a class="secondary" href="{{ url_for('static', filename='docs/caie-pseudocode-guide.pdf') }}" target="_blank" rel="noopener">{{ "Open in New Tab" if lang == "en" else "新标签打开" }}</a>
+    </div>
+  </div>
+  <iframe class="pdf-frame" src="{{ url_for('static', filename='docs/caie-pseudocode-guide.pdf') }}#toolbar=1&navpanes=0" title="{{ 'Pseudocode Guide PDF' if lang=='en' else '伪代码指南 PDF' }}"></iframe>
+</section>
 </div>
 </body></html>
