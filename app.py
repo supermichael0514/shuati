@@ -456,6 +456,21 @@ def unique_values(df, col):
     return [FILTER_ALL] + vals
 
 
+def selected_filter_values(name):
+    values = list(
+        dict.fromkeys(v.strip() for v in request.args.getlist(name) if v.strip())
+    )
+    if not values:
+        return [FILTER_ALL]
+    return values
+
+
+def apply_multi_filter(df, col, values):
+    if FILTER_ALL in values:
+        return df
+    return df[df[col].isin(values)]
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     lang = get_lang()
@@ -673,10 +688,10 @@ def index():
     all_df = load_index()
     progress = load_progress(current_username())
 
-    subject = request.args.get("subject", FILTER_ALL)
-    chapter = request.args.get("chapter", FILTER_ALL)
-    topic = request.args.get("topic", FILTER_ALL)
-    year = request.args.get("year", FILTER_ALL)
+    subject = selected_filter_values("subject")
+    chapter = selected_filter_values("chapter")
+    topic = selected_filter_values("topic")
+    year = selected_filter_values("year")
     mode = request.args.get("mode", "question")
     selected_id = request.args.get("selected_id", "")
 
@@ -685,20 +700,16 @@ def index():
 
     df = all_df.copy()
 
-    if subject != FILTER_ALL:
-        df = df[df["subject"] == subject]
+    df = apply_multi_filter(df, "subject", subject)
     chapter_options_df = df.copy()
 
-    if chapter != FILTER_ALL:
-        df = df[df["chapter"] == chapter]
+    df = apply_multi_filter(df, "chapter", chapter)
     topic_options_df = df.copy()
 
-    if topic != FILTER_ALL:
-        df = df[df["topic"] == topic]
+    df = apply_multi_filter(df, "topic", topic)
     year_options_df = df.copy()
 
-    if year != FILTER_ALL:
-        df = df[df["year"] == year]
+    df = apply_multi_filter(df, "year", year)
 
     records = [merge_record(row, progress) for _, row in df.iterrows()]
     if only_unfinished:
