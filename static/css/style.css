@@ -42,6 +42,7 @@ body{
   gap:12px;
 }
 .filter-selects select{width:100%}
+.filter-selects select[multiple]{min-height:118px}
 .filter-checks,.filter-actions{
   display:flex;
   flex-direction:column;

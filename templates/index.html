@@ -23,33 +23,33 @@
         <div class="filter-selects">
           <label>
             <span>{{ 'Subject' if lang == 'en' else '科目' }}</span>
-            <select name="subject" onchange="this.form.submit()">
+            <select name="subject" multiple size="4">
               {% for v in subjects %}
-              <option value="{{ v }}" {% if v == subject %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
+              <option value="{{ v }}" {% if v in subject %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
               {% endfor %}
             </select>
           </label>
           <label>
             <span>{{ 'Chapter' if lang == 'en' else '章节' }}</span>
-            <select name="chapter" onchange="this.form.submit()">
+            <select name="chapter" multiple size="4">
               {% for v in chapters %}
-              <option value="{{ v }}" {% if v == chapter %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
+              <option value="{{ v }}" {% if v in chapter %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
               {% endfor %}
             </select>
           </label>
           <label>
             <span>{{ 'Topic' if lang == 'en' else '主题' }}</span>
-            <select name="topic" onchange="this.form.submit()">
+            <select name="topic" multiple size="4">
               {% for v in topics %}
-              <option value="{{ v }}" {% if v == topic %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
+              <option value="{{ v }}" {% if v in topic %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
               {% endfor %}
             </select>
           </label>
           <label>
             <span>{{ 'Year' if lang == 'en' else '年份' }}</span>
-            <select name="year" onchange="this.form.submit()">
+            <select name="year" multiple size="4">
               {% for v in years %}
-              <option value="{{ v }}" {% if v == year %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
+              <option value="{{ v }}" {% if v in year %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
               {% endfor %}
             </select>
           </label>
