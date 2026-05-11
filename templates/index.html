@@ -21,38 +21,32 @@
     <form class="filters card" method="get">
       <div class="filter-layout">
         <div class="filter-selects">
+          {% for name, label_zh, label_en, values, selected_values in [
+            ('subject', '科目', 'Subject', subjects, subject),
+            ('chapter', '章节', 'Chapter', chapters, chapter),
+            ('topic', '主题', 'Topic', topics, topic),
+            ('year', '年份', 'Year', years, year)
+          ] %}
           <label>
-            <span>{{ 'Subject' if lang == 'en' else '科目' }}</span>
-            <select name="subject" multiple size="4">
-              {% for v in subjects %}
-              <option value="{{ v }}" {% if v in subject %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
-              {% endfor %}
-            </select>
+            <span>{{ label_en if lang == 'en' else label_zh }}</span>
+            <div class="multi-select" data-multi-select>
+              <button type="button" class="multi-select-toggle" aria-haspopup="true" aria-expanded="false">
+                <span data-summary
+                      data-all-label="{{ 'All' if lang == 'en' else filter_all }}"
+                      data-placeholder="{{ 'Select' if lang == 'en' else '请选择' }}"></span>
+                <span class="multi-select-arrow">▾</span>
+              </button>
+              <div class="multi-select-menu">
+                {% for v in values %}
+                <label class="multi-option">
+                  <input type="checkbox" name="{{ name }}" value="{{ v }}" data-all-option="{{ 'true' if v == filter_all else 'false' }}" {% if v in selected_values %}checked{% endif %}>
+                  <span>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</span>
+                </label>
+                {% endfor %}
+              </div>
+            </div>
           </label>
-          <label>
-            <span>{{ 'Chapter' if lang == 'en' else '章节' }}</span>
-            <select name="chapter" multiple size="4">
-              {% for v in chapters %}
-              <option value="{{ v }}" {% if v in chapter %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
-              {% endfor %}
-            </select>
-          </label>
-          <label>
-            <span>{{ 'Topic' if lang == 'en' else '主题' }}</span>
-            <select name="topic" multiple size="4">
-              {% for v in topics %}
-              <option value="{{ v }}" {% if v in topic %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
-              {% endfor %}
-            </select>
-          </label>
-          <label>
-            <span>{{ 'Year' if lang == 'en' else '年份' }}</span>
-            <select name="year" multiple size="4">
-              {% for v in years %}
-              <option value="{{ v }}" {% if v in year %}selected{% endif %}>{{ v if v != filter_all else ('All' if lang == 'en' else filter_all) }}</option>
-              {% endfor %}
-            </select>
-          </label>
+          {% endfor %}
         </div>
 
         <div class="filter-checks">
@@ -176,6 +170,60 @@
           console.error(err);
           alert('{{ "Operation failed, please retry." if lang == "en" else "操作失败，请重试。" }}');
         }
+      });
+    });
+
+    document.querySelectorAll('[data-multi-select]').forEach((multiSelect) => {
+      const toggle = multiSelect.querySelector('.multi-select-toggle');
+      const summary = multiSelect.querySelector('[data-summary]');
+      const checkboxes = Array.from(multiSelect.querySelectorAll('input[type="checkbox"]'));
+      const allCheckbox = checkboxes.find((box) => box.dataset.allOption === 'true');
+      const itemCheckboxes = checkboxes.filter((box) => box !== allCheckbox);
+
+      function updateSummary() {
+        const selectedItems = itemCheckboxes.filter((box) => box.checked);
+        if (allCheckbox && allCheckbox.checked) {
+          summary.textContent = summary.dataset.allLabel || '';
+        } else if (selectedItems.length === 0) {
+          summary.textContent = summary.dataset.placeholder || '';
+        } else if (selectedItems.length <= 2) {
+          summary.textContent = selectedItems.map((box) => box.nextElementSibling.textContent.trim()).join(', ');
+        } else {
+          summary.textContent = `${selectedItems.length} {{ 'selected' if lang == 'en' else '项已选' }}`;
+        }
+      }
+
+      toggle.addEventListener('click', () => {
+        const willOpen = !multiSelect.classList.contains('open');
+        document.querySelectorAll('[data-multi-select].open').forEach((openSelect) => {
+          if (openSelect !== multiSelect) {
+            openSelect.classList.remove('open');
+            openSelect.querySelector('.multi-select-toggle').setAttribute('aria-expanded', 'false');
+          }
+        });
+        multiSelect.classList.toggle('open', willOpen);
+        toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      });
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+          if (checkbox === allCheckbox) {
+            checkboxes.forEach((box) => { box.checked = checkbox.checked; });
+          } else if (allCheckbox) {
+            allCheckbox.checked = itemCheckboxes.length > 0 && itemCheckboxes.every((box) => box.checked);
+          }
+          updateSummary();
+        });
+      });
+
+      updateSummary();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (event.target.closest('[data-multi-select]')) return;
+      document.querySelectorAll('[data-multi-select].open').forEach((multiSelect) => {
+        multiSelect.classList.remove('open');
+        multiSelect.querySelector('.multi-select-toggle').setAttribute('aria-expanded', 'false');
       });
     });
 

@@ -42,7 +42,46 @@ body{
   gap:12px;
 }
 .filter-selects select{width:100%}
-.filter-selects select[multiple]{min-height:118px}
+.multi-select{position:relative}
+.multi-select-toggle{
+  width:100%;
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  text-align:left;
+  font-weight:400;
+}
+.multi-select-arrow{font-size:12px;color:var(--muted)}
+.multi-select.open .multi-select-arrow{transform:rotate(180deg)}
+.multi-select-menu{
+  display:none;
+  position:absolute;
+  z-index:20;
+  top:calc(100% + 6px);
+  left:0;
+  right:0;
+  max-height:240px;
+  overflow:auto;
+  padding:6px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fff;
+  box-shadow:0 12px 30px rgba(15,23,42,.12);
+}
+.multi-select.open .multi-select-menu{display:block}
+.multi-option{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 6px;
+  border-radius:8px;
+  font-size:14px;
+  color:var(--text);
+}
+.multi-option:hover{background:#eff6ff}
+.multi-option input{margin:0}
 .filter-checks,.filter-actions{
   display:flex;
   flex-direction:column;

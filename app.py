@@ -457,10 +457,12 @@ def unique_values(df, col):
 
 
 def selected_filter_values(name):
-    values = [v.strip() for v in request.args.getlist(name) if v.strip()]
-    if not values or FILTER_ALL in values:
+    values = list(
+        dict.fromkeys(v.strip() for v in request.args.getlist(name) if v.strip())
+    )
+    if not values:
         return [FILTER_ALL]
-    return list(dict.fromkeys(values))
+    return values
 
 
 def apply_multi_filter(df, col, values):
