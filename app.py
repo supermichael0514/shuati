@@ -30,7 +30,7 @@ PDF_BASE = BASE_DIR / "pdfs"
 PROGRESS_FILE = BASE_DIR / "progress_web.json"
 DB_FILE = BASE_DIR / "app.db"
 SLIDES_DIR = BASE_DIR / "static" / "learn" / "slides"
-FILES_DIR = BASE_DIR / "static" / "learn" / "files"
+DOCS_DIR = BASE_DIR / "static" / "learn" / "docs"
 ANIMATIONS_DIR = BASE_DIR / "static" / "learn" / "animations"
 CONTENT_DIR = BASE_DIR / "content"
 
@@ -199,6 +199,11 @@ def ensure_db_initialized():
         init_db()
         _db_inited = True
 
+
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory(app.static_folder, "favicon.png", mimetype="image/png")
+
 def login_required(view_func):
     @wraps(view_func)
     def wrapped(*args, **kwargs):
@@ -284,6 +289,21 @@ def load_section_items(filename: str):
             }
         )
     return [it for it in items if it["title"]]
+
+
+def load_latest_announcement():
+    items = load_section_items("announcements.json")
+    if not items:
+        return None
+
+    def sort_key(item):
+        try:
+            parsed_date = datetime.fromisoformat(item["date"])
+        except ValueError:
+            parsed_date = datetime.min
+        return (parsed_date, item["title"])
+
+    return max(items, key=sort_key)
 
 
 def has_unread_messages(username: str):
@@ -539,6 +559,7 @@ def login():
         session["user_id"] = user["id"]
         session["username"] = user["username"]
         session["lang"] = lang
+        session["show_latest_announcement"] = True
         next_url = normalize_next_url(request.args.get("next") or request.form.get("next", ""))
         return redirect(next_url or url_for("portal", lang=lang))
 
@@ -560,11 +581,15 @@ def logout():
 def portal():
     lang = get_lang()
     username = current_username()
+    latest_announcement = None
+    if session.pop("show_latest_announcement", False):
+        latest_announcement = load_latest_announcement()
     return render_template(
         "portal.html",
         lang=lang,
         current_user=username,
         has_unread_messages=has_unread_messages(username),
+        latest_announcement=latest_announcement,
     )
 
 
@@ -903,7 +928,12 @@ def learn_announcements_page():
 @login_required
 def learn_files_page():
     lang = get_lang()
-    docs = list_files_with_suffix(FILES_DIR, ".pdf")
+    chapter_map = list_chapter_files(DOCS_DIR, ".pdf")
+    chapters = list(chapter_map.keys())
+    selected_chapter = request.args.get("chapter", "").strip()
+    if chapters and selected_chapter not in chapter_map:
+        selected_chapter = chapters[0]
+    docs = chapter_map.get(selected_chapter, []) if selected_chapter else []
     selected = request.args.get("file", "").strip()
     selected_doc = None
     if docs:
@@ -912,6 +942,8 @@ def learn_files_page():
         "learn_files.html",
         lang=lang,
         current_user=current_username(),
+        chapters=chapters,
+        selected_chapter=selected_chapter,
         docs=docs,
         selected_doc=selected_doc,
     )
