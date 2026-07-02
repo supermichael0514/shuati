@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ 'Learning Hub Portal' if lang == 'en' else '学习平台入口' }}</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="portal-body">
@@ -53,11 +54,29 @@
 
       <div class="contact-box">
         <h3>{{ 'Contact' if lang == 'en' else '联系方式' }}</h3>
+        <p>{{ 'Website: supermichael0514.com' if lang == 'en' else '主页：supermichael0514.com' }}</p>
         <p>{{ 'Email: supermichael0514@163.com' if lang == 'en' else '邮箱：supermichael0514@163.com' }}</p>
-        <p>{{ 'WeChat: supermichael0514' if lang == 'en' else '微信：supermichael0514' }}</p>
         <p>{{ 'RedNote: MichaelCao_0514' if lang == 'en' else '小红书：计算机老师迈克曹' }}</p>
       </div>
     </footer>
   </div>
+  {% if latest_announcement %}
+  <div id="loginAnnouncementModal" class="blessing-modal" hidden>
+    <div class="blessing-modal-card">
+      <h3>{{ latest_announcement.title }}</h3>
+      <p class="record-meta">{{ latest_announcement.date }}</p>
+      <p>{{ latest_announcement.content or latest_announcement.summary }}</p>
+      <button type="button" id="closeLoginAnnouncement" class="secondary">{{ 'Close' if lang=='en' else '关闭' }}</button>
+    </div>
+  </div>
+  <script>
+  const loginAnnouncementModal = document.getElementById('loginAnnouncementModal');
+  loginAnnouncementModal.hidden = false;
+  document.getElementById('closeLoginAnnouncement').onclick = () => loginAnnouncementModal.hidden = true;
+  loginAnnouncementModal.onclick = (event) => {
+    if (event.target === loginAnnouncementModal) loginAnnouncementModal.hidden = true;
+  };
+  </script>
+  {% endif %}
 </body>
 </html>

@@ -3,19 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ 'Official Files' if lang=='en' else '看文件' }}</title>
+  <title>{{ 'Documents' if lang=='en' else '看文档' }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="portal-body"><div class="portal-page">
-<header class="portal-header card"><div><p class="neon-label">LEARN · FILES</p><h1>{{ 'Official Files' if lang=='en' else '看文件' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
+<header class="portal-header card"><div><p class="neon-label">LEARN · DOCUMENTS</p><h1>{{ 'Documents' if lang=='en' else '看文档' }}</h1></div><div class="portal-actions"><a class="secondary" href="{{ url_for('learn_page', lang=lang) }}">{{ 'Back to Learn' if lang=='en' else '返回学一学' }}</a></div></header>
 
 <section class="card learn-subpage">
+  {% if chapters %}
+  <div class="chapter-tabs">
+    {% for chapter in chapters %}
+    <a class="secondary {{ 'active' if chapter == selected_chapter else '' }}" href="{{ url_for('learn_files_page', lang=lang, chapter=chapter) }}">{{ chapter }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
   {% if docs %}
   <div class="learn-sub-layout">
     <aside class="learn-sidebar">
-      <h2>{{ 'Official Document List' if lang=='en' else '官方文档列表' }}</h2>
+      <h2>{{ 'Document List' if lang=='en' else '文档列表' }}</h2>
       {% for item in docs %}
-      <a class="record {{ 'active' if selected_doc and selected_doc.name == item.name else '' }}" href="{{ url_for('learn_files_page', lang=lang, file=item.name) }}">
+      <a class="record {{ 'active' if selected_doc and selected_doc.name == item.name else '' }}" href="{{ url_for('learn_files_page', lang=lang, chapter=selected_chapter, file=item.name) }}">
         <div class="record-title">{{ item.name }}</div>
       </a>
       {% endfor %}
@@ -28,7 +35,7 @@
     </div>
   </div>
   {% else %}
-  <div class="empty big">{{ 'No official PDF yet. Put files into static/learn/files first.' if lang=='en' else '暂时没有官方 PDF，请先放到 static/learn/files。' }}</div>
+  <div class="empty big">{{ 'No document PDF yet. Put files into category folders under static/learn/docs.' if lang=='en' else '暂时没有文档 PDF，请放到 static/learn/docs/分类名/ 目录。' }}</div>
   {% endif %}
 </section>
 </div></body></html>
